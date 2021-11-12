@@ -1,23 +1,22 @@
 // NOTE: This config is copied from ACM
 const colors = require("tailwindcss/colors");
-const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   mode: "jit",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  purge: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/*.{js,ts,jsx,tsx}",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      display: ['"Darker Grotesque"'],
-      body: ['"Darker Grotesque"'],
-      sans: ['"Darker Grotesque"'],
-      serif: ['"Darker Grotesque"'],
-      microcopy: ['"Caveat"'],
+      primary: ["'Manrope'"],
+      secondary: ['"Kalam"'],
     },
     fontSize: {
-      xs: ".75rem",
-      sm: ".875rem",
-      tiny: ".875rem",
+      xs: ".75rem", // 12px
+      sm: ".875rem", // 14px
       base: "1rem", // 16px
       lg: "1.125rem", // 18px
       xl: "1.25rem", // 20px
@@ -27,8 +26,8 @@ module.exports = {
       "4xl": "2rem", // 32px
       "5xl": "2.5rem", // 40px
       "6xl": "3rem", // 48px
-      "7xl": "4rem", // 64px
-      "8xl": "5.5rem", // 88px
+      "7xl": "3.5rem", // 56px
+      "8xl": "4rem", // 64px
     },
     spacing: {
       0: "0",
@@ -56,22 +55,20 @@ module.exports = {
       160: "160px",
       226: "226px",
     },
-    maxWidth: {
-      224: "224px",
-      274: "274px",
-    },
-    minWidth: {
-      32: "32px",
-      64: "64px",
-    },
-    maxHeight: {},
+    // maxWidth: {
+    // },
+    // minWidth: {
+    //   32: "32px",
+    //   64: "64px",
+    // },
+    // maxHeight: {},
     container: {
       center: true,
     },
     extend: {
-      screens: {
-        "2xl": "1408px",
-      },
+      // screens: {
+      //   "2xl": "1408px",
+      // },
       lineHeight: {
         // 1 rem === 16px
         11: "2.75rem",
@@ -89,30 +86,48 @@ module.exports = {
         23: "5.75rem",
         24: "6rem",
       },
-      maxHeight: {
-        861: "861px",
-      },
+      // maxHeight: {
+      //   861: "861px",
+      // },
       colors: {
-        green: {
-          dark: "#2C614F",
-          default: "#8EB1A6",
-          light: "#DFEAE7",
+        blue: {
+          extraDark: "#172B4D",
+          dark: "#1D3A6A",
+          default: "#0065FF",
+          light: "#70A9FF",
+          extraLight: "#F5F9FF",
         },
         orange: {
-          dark: "#DF5A2A",
-          bright: "#DF5A2A",
-          default: "#FFB59B",
-          light: "#FFB59B",
+          extraDark: "#CC6D00",
+          dark: "#FF8600",
+          default: "#FFA033",
+          light: "#FFF2EA",
+          extraLight: "#FFF2EA",
         },
-        beige: {
-          creme: "#F5F2E3",
-          sand: "#F6F5F0",
+        green: {
+          extraDark: "#1F855A",
+          dark: "#36B37E",
+          default: "#57D9A3",
+          light: "#ACECD1",
+          extraLight: "#E3FCEF",
         },
+        grey: {
+          dark: "#B2B2B2",
+          default: "#E5E5E5",
+          light: "#F9F9F9",
+        },
+        red: "#412378",
+        yellow: "#412378",
         white: colors.white,
+        black: colors.black,
       },
-      scale: {
-        "-1": "-1",
+      boxShadow: {
+        light: "0px 4px 40px rgba(23, 43, 77, 0.04)",
+        dark: "0px 4px 40px rgba(23, 43, 77, 0.08)",
       },
+      // scale: {
+      //   "-1": "-1",
+      // },
     },
   },
 };

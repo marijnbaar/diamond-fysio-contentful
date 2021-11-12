@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-8 py-3 font-primary font-lg font-bold text-white leading-8 bg-orange-dark duration-300;
+  }
+}
