@@ -5,6 +5,25 @@
 
 @layer components {
   .btn {
-    @apply px-8 py-3 font-primary font-lg font-bold text-white leading-8 bg-orange-dark duration-300;
+    @apply font-primary font-bold leading-8 rounded-lg;
+  }
+  .btn--large {
+    @apply btn px-5 py-2 text-lg;
+  }
+  .btn--small {
+    @apply btn px-3 py-1;
+  }
+  .btn-primary {
+    @apply btn--large text-white bg-orange-dark;
+  }
+  .btn-primary--small {
+    @apply btn--small text-white bg-orange-dark;
+  }
+
+  .btn-primary--negative {
+    @apply btn--large bg-white text-orange-dark;
+  }
+  .btn-primary--negative--small {
+    @apply btn--small bg-white text-orange-dark;
   }
 }
