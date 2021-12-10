@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Button from "../components/button";
+import HomepageHeader from "../components/HomepageHeader";
 
 const Home = ({}) => {
   return (
@@ -12,13 +13,7 @@ const Home = ({}) => {
       </Head>
 
       <main>
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <Button text="test" type="primary" />
-        <Button text="test" type="primary" negative />
-        <Button text="test" type="primary" small />
-        <Button text="test" type="primary" small negative />
+        <HomepageHeader/>
       </main>
 
       <footer></footer>
