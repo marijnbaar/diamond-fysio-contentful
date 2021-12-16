@@ -38,42 +38,6 @@ module.exports = {
       "7xl": "3.5rem", // 56px
       "8xl": "4rem", // 64px
     },
-    spacing: {
-      0: "0",
-      1: "8px",
-      2: "12px",
-      2.5: "14px",
-      3: "16px",
-      3.5: "18px",
-      4: "24px",
-      5: "32px", // spacing column width
-      5.5: "36px",
-      6: "40px",
-      7: "48px",
-      8: "56px",
-      9: "64px",
-      10: "72px",
-      11: "80px",
-      12: "88px",
-      13: "96px",
-      13.5: "98px",
-      14: "104px",
-      15: "112px",
-      26: "184px",
-      120: "120px",
-      160: "160px",
-      226: "226px",
-    },
-    // maxWidth: {
-    // },
-    // minWidth: {
-    //   32: "32px",
-    //   64: "64px",
-    // },
-    // maxHeight: {},
-    container: {
-      center: true,
-    },
     extend: {
       // screens: {
       //   "2xl": "1408px",
@@ -95,9 +59,6 @@ module.exports = {
         23: "5.75rem",
         24: "6rem",
       },
-      // maxHeight: {
-      //   861: "861px",
-      // },
       colors: {
         blue: {
           extraDark: "#172B4D",
@@ -134,9 +95,10 @@ module.exports = {
         light: "0px 4px 40px rgba(23, 43, 77, 0.04)",
         dark: "0px 4px 40px rgba(23, 43, 77, 0.08)",
       },
-      // scale: {
-      //   "-1": "-1",
-      // },
     },
+
   },
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
