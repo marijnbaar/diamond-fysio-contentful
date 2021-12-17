@@ -36,8 +36,9 @@ class Team extends Component {
         const { data } = response;
         this.setState({
           loading: false,
-          team: data ? data.team.title : []
+          team: data ? data.teamMemberCollection.items : []
         });
+        console.log('hi', data.teamMemberCollection.items)
       })
       .catch(error => {
         this.setState({
@@ -55,18 +56,18 @@ class Team extends Component {
     if (this.state.error) {
       return this.state.error;
     }
-
+    
     if (!this.state.team.length) {
       return "no team defined";
     }
 
     const { team } = this.state;
-
+    console.log('last', this.state.team)
     return (
       <div className="App">
         {team.map(team => {
           return (
-            <div className="team" key={team.title}>
+            <div className="team" key={team.name}>
               {/* {team.cover && (
                 <img
                   className="team__cover"
@@ -75,7 +76,7 @@ class Team extends Component {
                 />
               )} */}
               <div className="team__container">
-                <h2 className="team__title">hi{team.title}</h2>
+                <h2>{team.name}</h2>
               </div>
             </div>
           );
