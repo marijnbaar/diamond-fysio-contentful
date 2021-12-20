@@ -17,22 +17,22 @@
 const callouts = [
     {
       name: 'Desk and Office',
-      description: 'Work from home accessories',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
+      description: 'Dry needling',
+      imageSrc: 'https://ucb56a75a4d13adac3a105b64340.previews.dropboxusercontent.com/p/thumb/ABblUiwlKOK5rmDxeHo-kYIpt-wBfCaOKBMzKKCd-pVv-1fTjEH7xI0ZIiqHj7n0IcVR56742iPI_8Q9zOhAPW-5Jyb34R7ETS7HDUowCKqSf8YAECaF0Rlwa8LrJCzWZM_hOB8esCWHxFQWQ5P3cBJTMdWYH65vM_9_DYW-QH_9_3j5Q2k-EkjsQ5HMH7adxgmTs148vSS0NzfxSzv7jMyhMsyWEIHmeqEUmhQJhFXlRQaRppMm5FuvwMSzYDk5kkSnziTqpMl4qOAM5gEeYefXJdrJDZ832BbvCSiln9NWZJqBRM_l6gfk4MzKbJ2LFjrtW4HRi1nKKIZguvbDdqJnGyrvSHkORH_IphizxdwwcQqaetAp9LY3m8VzrD9xCsw/p.jpeg',
       imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
       href: '#',
     },
     {
       name: 'Self-Improvement',
-      description: 'Journals and note-taking',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
+      description: 'Shockwave',
+      imageSrc: 'https://uc04f965e698e7fa8a25cd5e3125.previews.dropboxusercontent.com/p/thumb/ABbj6z1hxgqN9_DNFobu0GOflMn9iKZFIRS74QYpiqiHsRCdyuWPZgPZsGiri8SR9ENkBgAk8n3AN0LuQ_FGAyMU5REY6Z-Yeyheb-So7XmvKT7i7m9pqu4egPESrzG07hr3aMM6HNdn6a3q7es29ByV5RkS_banuQlDD2kcrak_CKcy4Orj0jrZB92-ONTPqN5kyGfcGC3aeGVLII-Byqq_XF6SJ6OvOyGh3TVuV6muRHUBLaHiaeUoAwQlIBAKHbGfwaNAypeTRRPOqHKQ3Y-dWOKtAdu4TC9W1jIMez8OTqaqV3rkx6uvgSIw56nktvVXtYOcD2t4aWc3gwPEbNv_1_2bOne1KSQ2WSQa677oORnp5SjtPYkmhOExRUpmryE/p.jpeg',
       imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
       href: '#',
     },
     {
       name: 'Travel',
-      description: 'Daily commute essentials',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
+      description: 'Pilates',
+      imageSrc: 'https://ucbe50b3a73d4e1b0953926983f8.previews.dropboxusercontent.com/p/thumb/ABbCdYAN7ddn_EsziYrEx54U76pzc50cJs4bilCniZFzuWLgMflzcJkHgBmz3xg9zZ6tTuTelWdxcHkCHpVOvNoDaLniehMqK198ztHE5B99U9fJws9Byu-WltHjrG10We7_cpLTQ8hHovgZdEmXuQcY1SHOot1swG0MpSUSoC5VSZl9E8ZZ007pBnINabaHM31wtUJSiNqoNY5xhX1OCeFN5e8HVKdGKZ8UzXLzYtxGMLAXEyxsOiOBKhmUxcorXywHddRut_-7FXqivY6ApedljmzVmPPUsevEoxryWT-Uc9kYoZo9ODLIBjaipGewQ_qIRH-A7wn6Noq5AxQ8qfV7L0nfHUUiZ9YDQDZ56YwOZ-gxwsuctATMLE17AmzGzLk/p.jpeg',
       imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
       href: '#',
     },

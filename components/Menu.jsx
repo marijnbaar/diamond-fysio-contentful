@@ -81,15 +81,15 @@ function classNames(...classes) {
 
 export default function Menu() {
   return (
-    <Popover className="relative bg-white">
+    <Popover className="z-30 relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <span className="sr-only">Workflow</span>
               <img
-                className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                className="h-14 w-auto sm:h-10"
+                src="https://ucea83a2e499bd4d30a85e11f6c2.previews.dropboxusercontent.com/p/thumb/ABaC5HISAYbeBFrtJHnQsWVCVpBYTQCh-Ftc7supgFoC2xA20omqk21X5zbPI2CYhIwmCsrFqoo85LPrj85XzqbgVi7Njmlb5cH97gMSBVf9mPcbT-9QGNQ3HKSNNQCEsbp7TVTAvOvIXQU96UfsCUOe7H17Kqd82O9QgXy2D56qO7pkM8Bb-ci2ZSu30WRfWCjrMXtbNzfG_MmADW2qXKTQX7DqU1DPFYeHe6NoBTon4lh1MwrMIxkAbfeuD7N4e-zZt1vQvbtANwc_bh7bbmrDYfGNsHw58Y788G8mdT5tE4ARUrik28RBeNrYb4sUkJFdpKmuw6x3fmKLCH-UFN3nDQ8XCC8-uxcQDGiESiaB_eyfIZmtnNBo-d1aR_uN6wM/p.png"
                 alt=""
               />
             </a>
@@ -107,7 +107,7 @@ export default function Menu() {
                   <Popover.Button
                     className={classNames(
                       open ? 'text-gray-900' : 'text-gray-500',
-                      'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                      'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-beige'
                     )}
                   >
                     <span>Solutions</span>
@@ -138,7 +138,7 @@ export default function Menu() {
                               href={item.href}
                               className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                             >
-                              <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                              <item.icon className="flex-shrink-0 h-6 w-6 text-beige" aria-hidden="true" />
                               <div className="ml-4">
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
@@ -179,7 +179,7 @@ export default function Menu() {
                   <Popover.Button
                     className={classNames(
                       open ? 'text-gray-900' : 'text-gray-500',
-                      'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                      'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-beige'
                     )}
                   >
                     <span>More</span>
@@ -210,7 +210,7 @@ export default function Menu() {
                               href={item.href}
                               className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                             >
-                              <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                              <item.icon className="flex-shrink-0 h-6 w-6 text-beige" aria-hidden="true" />
                               <div className="ml-4">
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
@@ -232,7 +232,7 @@ export default function Menu() {
                             </ul>
                           </div>
                           <div className="mt-5 text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                            <a href="#" className="font-medium text-beige hover:text-indigo-500">
                               {' '}
                               View all posts <span aria-hidden="true">&rarr;</span>
                             </a>
@@ -251,7 +251,7 @@ export default function Menu() {
             </a> */}
             <a
               href="#"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-indigo-700"
             >
               Afspraak maken
             </a>
@@ -275,7 +275,7 @@ export default function Menu() {
                 <div>
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    src="https://ucea83a2e499bd4d30a85e11f6c2.previews.dropboxusercontent.com/p/thumb/ABaC5HISAYbeBFrtJHnQsWVCVpBYTQCh-Ftc7supgFoC2xA20omqk21X5zbPI2CYhIwmCsrFqoo85LPrj85XzqbgVi7Njmlb5cH97gMSBVf9mPcbT-9QGNQ3HKSNNQCEsbp7TVTAvOvIXQU96UfsCUOe7H17Kqd82O9QgXy2D56qO7pkM8Bb-ci2ZSu30WRfWCjrMXtbNzfG_MmADW2qXKTQX7DqU1DPFYeHe6NoBTon4lh1MwrMIxkAbfeuD7N4e-zZt1vQvbtANwc_bh7bbmrDYfGNsHw58Y788G8mdT5tE4ARUrik28RBeNrYb4sUkJFdpKmuw6x3fmKLCH-UFN3nDQ8XCC8-uxcQDGiESiaB_eyfIZmtnNBo-d1aR_uN6wM/p.png"
                     alt="Workflow"
                   />
                 </div>
@@ -294,7 +294,7 @@ export default function Menu() {
                       href={item.href}
                       className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
                     >
-                      <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                      <item.icon className="flex-shrink-0 h-6 w-6 text-beige" aria-hidden="true" />
                       <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
                     </a>
                   ))}
@@ -329,7 +329,7 @@ export default function Menu() {
                 </a>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?{' '}
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                  <a href="#" className="text-beige hover:text-indigo-500">
                     Sign in
                   </a>
                 </p>

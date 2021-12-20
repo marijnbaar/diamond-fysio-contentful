@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { spaceId, accessToken, query } from "../lib/contentful";
-
-
-
 class Team extends Component {
   constructor() {
     super();
@@ -38,7 +35,6 @@ class Team extends Component {
           loading: false,
           team: data ? data.teamMemberCollection.items : []
         });
-        console.log('hi', data.teamMemberCollection.items)
       })
       .catch(error => {
         this.setState({
@@ -62,7 +58,6 @@ class Team extends Component {
     }
 
     const { team } = this.state;
-    console.log('last', this.state.team)
     return (
       <div className="App">
         {team.map(team => {
