@@ -1,0 +1,39 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@900&display=swap');
+
+
+@layer base {
+  @font-face {
+    font-family: Euclid;
+    src: url(/fonts/Euclid-Circular/Euclid-Circular-B-Bold.ttf), format('ttf')
+  }
+}
+
+@layer components {
+  .btn {
+    @apply font-primary font-bold leading-8 rounded-lg;
+  }
+  .btn--large {
+    @apply btn px-5 py-2 text-lg;
+  }
+  .btn--small {
+    @apply btn px-3 py-1;
+  }
+  .btn-primary {
+    @apply btn--large text-white bg-orange-dark;
+  }
+  .btn-primary--small {
+    @apply btn--small text-white bg-orange-dark;
+  }
+
+  .btn-primary--negative {
+    @apply btn--large bg-white text-orange-dark;
+  }
+  .btn-primary--negative--small {
+    @apply btn--small bg-white text-orange-dark;
+  }
+}
