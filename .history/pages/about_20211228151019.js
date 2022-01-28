@@ -3,7 +3,7 @@ import Menu from '../components/menu';
 
 
 export default function about() {
-    console.log('hi', process.env)
+    ('hi', process.env)
 
     return (
         <div className='cover'>
