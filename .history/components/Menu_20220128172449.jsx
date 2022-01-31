@@ -6,17 +6,15 @@ import {
   CalendarIcon,
   MenuIcon,
   PhoneIcon,
-  ClipboardList,
+  ShieldCheckIcon,
   SupportIcon,
   XIcon,
   SparklesIcon,
   EmojiHappyIcon,
   MicrophoneIcon,
   HeartIcon,
-  CurrencyEuroIcon,
-  LibraryIcon,
 } from '@heroicons/react/outline'
-import { ChevronDownIcon, HandIcon, StatusOnlineIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon, HandIcon, StatusOnlineIcon, UsersIcon } from '@heroicons/react/solid'
 
 const specialisaties = [
   {
@@ -63,25 +61,24 @@ const callsToAction = [
 ]
 const resources = [
   {
-    name: 'De praktijk',
-    // description: 'Get all of your questions answered in our forums or contact support.',
+    name: 'Help Center',
+    description: 'Get all of your questions answered in our forums or contact support.',
     href: '#',
-    icon: LibraryIcon,
+    icon: SupportIcon,
   },
   {
-    name: 'Ons team',
-    // description: 'Learn how to maximize our platform to get the most out of it.',
+    name: 'Guides',
+    description: 'Learn how to maximize our platform to get the most out of it.',
     href: '#',
-    icon: UserGroupIcon,
+    icon: BookmarkAltIcon,
   },
   {
-    name: 'Contact',
-    // description: 'See what meet-ups and other events we might be planning near you.',
+    name: 'Events',
+    description: 'See what meet-ups and other events we might be planning near you.',
     href: '#',
     icon: CalendarIcon,
   },
-  { name: 'Tarieven', href: '#', icon: CurrencyEuroIcon },
-  // { name: 'Huisregels', href: '#', icon: ClipboardList },
+  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
 ]
 const recentPosts = [
   { id: 1, name: 'Boost your conversion rate', href: '#' },
@@ -230,6 +227,26 @@ export default function Menu() {
                             </a>
                           ))}
                         </div>
+                        {/* <div className="px-5 py-5 bg-gray-50 sm:px-8 sm:py-8">
+                          <div>
+                            <h3 className="text-sm tracking-wide font-medium text-gray-500 uppercase">Recent Posts</h3>
+                            <ul role="list" className="mt-4 space-y-4">
+                              {recentPosts.map((post) => (
+                                <li key={post.id} className="text-base truncate">
+                                  <a href={post.href} className="font-medium text-gray-900 hover:text-gray-700">
+                                    {post.name}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="mt-5 text-sm">
+                            <a href="#" className="font-medium text-beige hover:text-indigo-500">
+                              {' '}
+                              View all posts <span aria-hidden="true">&rarr;</span>
+                            </a>
+                          </div>
+                        </div> */}
                       </div>
                     </Popover.Panel>
                   </Transition>

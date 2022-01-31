@@ -33,7 +33,7 @@ const Home = ( ) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Menu/>
-      <Header />
+      <HeaderDark />
         <Homepage/>
       <footer></footer>
     </div>

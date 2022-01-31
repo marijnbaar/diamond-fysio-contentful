@@ -111,11 +111,14 @@ const footerNavigation = {
   solutions: [
     { name: 'De praktijk', href: '#' },
     { name: 'Ons team', href: '#' },
-  ],
-  support: [
     { name: 'Contact', href: '#' },
     { name: 'Tarieven', href: '#' },
-    { name: 'AVG', href: '#' },
+  ],
+  support: [
+    { name: 'Pricing', href: '#' },
+    { name: 'Documentation', href: '#' },
+    { name: 'Guides', href: '#' },
+    { name: 'API Status', href: '#' },
   ],
   social: [
     {
@@ -333,7 +336,6 @@ export default function Homepage() {
                   </div>
                 </div>
                 <div className="md:grid md:grid-cols-2 md:gap-8">
-                  
                 </div>
               </div>
             </div>

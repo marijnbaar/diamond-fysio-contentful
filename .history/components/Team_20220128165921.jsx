@@ -11,7 +11,7 @@ const people = [
         name: 'Menno de Vries',
         role: 'Manueel therapeut',
         imageUrl:
-          'https://fysiodiamondfactory.nl/wp-content/uploads/2021/05/Menno-cirkel-Rahi.png',
+          'https://fysiodiamondfactory.nl/wp-content/uploads/elementor/thumbs/menno-new-juni-p80m4vl6rqho4jmpyyrjj2ow6dfd7e6nbiclffo19k.png',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -35,7 +35,7 @@ const people = [
         name: 'Ton Willemsen',
         role: 'Podologie',
         imageUrl:
-          'https://fysiodiamondfactory.nl/wp-content/uploads/2021/04/Ton-new.png',
+          'https://fysiodiamondfactory.nl/wp-content/uploads/2021/04/ton-imageedit__5974097598.png',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -51,7 +51,7 @@ const people = [
         name: 'Laslo Gèleng',
         role: 'Fysiotherapeut',
         imageUrl:
-          'https://fysiodiamondfactory.nl/wp-content/uploads/2021/05/laszlo-new-3.png',
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -75,7 +75,7 @@ const people = [
         name: 'Otger Spinnewijn',
         role: 'Receptionist',
         imageUrl:
-          'https://fysiodiamondfactory.nl/wp-content/uploads/2021/05/Otger-cirkel-los.png',
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -83,7 +83,7 @@ const people = [
         name: 'Hakima',
         role: 'Interieurverzorgster',
         imageUrl:
-          'https://fysiodiamondfactory.nl/wp-content/uploads/2021/05/Hakima-new.png',
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -144,7 +144,7 @@ export default function Team() {
                     <div className="space-y-2">
                       <div className="text-lg leading-6 font-medium space-y-1">
                         <h3>{person.name}</h3>
-                        <p className="text-teal-500">{person.role}</p>
+                        <p className="text-indigo-600">{person.role}</p>
                       </div>
                       <ul role="list" className="flex justify-center space-x-5">
                         <li>

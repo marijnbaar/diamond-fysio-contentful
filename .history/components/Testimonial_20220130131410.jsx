@@ -38,7 +38,7 @@ export default function Testimonial() {
               <footer className="mt-6">
                 <p className="text-base font-medium text-white">Iva Lesic</p>
                 <p className="text-base font-medium text-cyan-100">
-                  Fysiotherapeut
+                  Manueel therapeut, Diamond Factory
                 </p>
               </footer>
             </blockquote>

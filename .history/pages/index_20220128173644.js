@@ -3,7 +3,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Information from "../components/Information"
 import Menu from "../components/Menu";
-import HeaderDark from '../components/HeaderDark'
+import Specialisations from "../components/Specialisations";
 import { createClient } from "contentful";
 import Homepage from "../components/Homepage"
 
@@ -33,7 +33,7 @@ const Home = ( ) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Menu/>
-      <Header />
+      <HeaderDark />
         <Homepage/>
       <footer></footer>
     </div>
