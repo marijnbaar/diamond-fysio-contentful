@@ -58,13 +58,13 @@ const blogPosts = [
     category: { name: 'Article', href: '#' },
     imageUrl:
       'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
-    preview:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.',
-    author: {
-      name: 'Regi Severins',
-      imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
+    // preview:
+    //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.',
+    // author: {
+    //   name: 'Regi Severins',
+    //   imageUrl:
+    //     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    //   href: '#',
     },
     readingLength: '6 min',
   },
@@ -109,13 +109,28 @@ const blogPosts = [
 ]
 const footerNavigation = {
   solutions: [
-    { name: 'De praktijk', href: '#' },
-    { name: 'Ons team', href: '#' },
+    { name: 'Marketing', href: '#' },
+    { name: 'Analytics', href: '#' },
+    { name: 'Commerce', href: '#' },
+    { name: 'Insights', href: '#' },
   ],
   support: [
-    { name: 'Contact', href: '#' },
-    { name: 'Tarieven', href: '#' },
-    { name: 'AVG', href: '#' },
+    { name: 'Pricing', href: '#' },
+    { name: 'Documentation', href: '#' },
+    { name: 'Guides', href: '#' },
+    { name: 'API Status', href: '#' },
+  ],
+  company: [
+    { name: 'About', href: '#' },
+    { name: 'Blog', href: '#' },
+    { name: 'Jobs', href: '#' },
+    { name: 'Press', href: '#' },
+    { name: 'Partners', href: '#' },
+  ],
+  legal: [
+    { name: 'Claim', href: '#' },
+    { name: 'Privacy', href: '#' },
+    { name: 'Terms', href: '#' },
   ],
   social: [
     {
@@ -308,7 +323,7 @@ export default function Homepage() {
               <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
                 <div className="md:grid md:grid-cols-2 md:gap-8">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">De praktijk</h3>
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3>
                     <ul role="list" className="mt-4 space-y-4">
                       {footerNavigation.solutions.map((item) => (
                         <li key={item.name}>
@@ -333,7 +348,30 @@ export default function Homepage() {
                   </div>
                 </div>
                 <div className="md:grid md:grid-cols-2 md:gap-8">
-                  
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                    <ul role="list" className="mt-4 space-y-4">
+                      {footerNavigation.company.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-12 md:mt-0">
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+                    <ul role="list" className="mt-4 space-y-4">
+                      {footerNavigation.legal.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

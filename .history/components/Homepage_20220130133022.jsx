@@ -111,11 +111,14 @@ const footerNavigation = {
   solutions: [
     { name: 'De praktijk', href: '#' },
     { name: 'Ons team', href: '#' },
-  ],
-  support: [
     { name: 'Contact', href: '#' },
     { name: 'Tarieven', href: '#' },
-    { name: 'AVG', href: '#' },
+  ],
+  support: [
+    { name: 'Pricing', href: '#' },
+    { name: 'Documentation', href: '#' },
+    { name: 'Guides', href: '#' },
+    { name: 'API Status', href: '#' },
   ],
   social: [
     {
@@ -333,7 +336,30 @@ export default function Homepage() {
                   </div>
                 </div>
                 <div className="md:grid md:grid-cols-2 md:gap-8">
-                  
+                  {/* <div>
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                    <ul role="list" className="mt-4 space-y-4">
+                      {footerNavigation.company.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-12 md:mt-0">
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+                    <ul role="list" className="mt-4 space-y-4">
+                      {footerNavigation.legal.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -144,7 +144,7 @@ export default function Team() {
                     <div className="space-y-2">
                       <div className="text-lg leading-6 font-medium space-y-1">
                         <h3>{person.name}</h3>
-                        <p className="text-teal-500">{person.role}</p>
+                        <p className="text-indigo-600">{person.role}</p>
                       </div>
                       <ul role="list" className="flex justify-center space-x-5">
                         <li>

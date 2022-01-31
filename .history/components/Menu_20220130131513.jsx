@@ -69,7 +69,7 @@ const resources = [
     icon: LibraryIcon,
   },
   {
-    name: 'Ons team',
+    name: 'Het team',
     // description: 'Learn how to maximize our platform to get the most out of it.',
     href: '#',
     icon: UserGroupIcon,
