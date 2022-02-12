@@ -125,6 +125,7 @@ const footerNavigation = {
 }
 
 export default function Homepage(teamMembers) {
+  console.log(teamMembers)
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
@@ -210,7 +211,7 @@ export default function Homepage(teamMembers) {
           </div>
 
           <Testimonial/>
-          <Team teamMembers={teamMembers}/>
+          <Team/>
 
           {/* CTA Section */}
           <div className="relative bg-gray-900">

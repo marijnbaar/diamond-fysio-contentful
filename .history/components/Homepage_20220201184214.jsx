@@ -15,7 +15,39 @@ import {
 import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/solid'
 
 
-
+const features = [
+  {
+    name: 'Push to Deploy',
+    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi vitae lobortis.',
+    icon: CloudUploadIcon,
+  },
+  {
+    name: 'SSL Certificates',
+    description: 'Qui aut temporibus nesciunt vitae dicta repellat sit dolores pariatur. Temporibus qui illum aut.',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Simple Queues',
+    description: 'Rerum quas incidunt deleniti quaerat suscipit mollitia. Amet repellendus ut odit dolores qui.',
+    icon: RefreshIcon,
+  },
+  {
+    name: 'Advanced Security',
+    description: 'Ullam laboriosam est voluptatem maxime ut mollitia commodi. Et dignissimos suscipit perspiciatis.',
+    icon: ShieldCheckIcon,
+  },
+  {
+    name: 'Powerful API',
+    description:
+      'Ab a facere voluptatem in quia corrupti veritatis aliquam. Veritatis labore quaerat ipsum quaerat id.',
+    icon: CogIcon,
+  },
+  {
+    name: 'Database Backups',
+    description: 'Quia qui et est officia cupiditate qui consectetur. Ratione similique et impedit ea ipsum et.',
+    icon: ServerIcon,
+  },
+]
 const blogPosts = [
   {
     id: 1,
@@ -124,12 +156,12 @@ const footerNavigation = {
   ],
 }
 
-export default function Homepage(teamMembers) {
+export default function Homepage() {
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
         <main>
-          <div className="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-32">
+          <div className="relative bg-gray-50 pt-1 sm:pt-24 lg:pt-32">
             <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
               <div>
                 <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">Fysiopraktijk in Amsterdam</h2>
@@ -210,7 +242,7 @@ export default function Homepage(teamMembers) {
           </div>
 
           <Testimonial/>
-          <Team teamMembers={teamMembers}/>
+          <Team/>
 
           {/* CTA Section */}
           <div className="relative bg-gray-900">

@@ -83,8 +83,8 @@ const people = [
 
 
   
-export default function Team( teamMembers ) {
-  console.log(teamMembers)
+export default function Team( teamMember ) {
+  console.log(teamMember)
     return (
       <div className="bg-white">
         <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
@@ -100,9 +100,6 @@ export default function Team( teamMembers ) {
               role="list"
               className="mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl"
             >
-              {/* {teamMembers.map((member) => (
-                <p>{member.name}</p>
-              ))} */}
               {people.map((person) => (
                 <li key={person.name}>
                   <div className="space-y-6">
