@@ -24,8 +24,8 @@ export async function getStaticProps() {
 
 
 
-const Home = ( teamMembers ) => {
-  console.log('home', teamMembers)
+const Home = ( teamMember ) => {
+  console.log(teamMember)
   return (
     <div>
       <Head>
@@ -35,7 +35,7 @@ const Home = ( teamMembers ) => {
       </Head>
       <Menu/>
       <Header />
-        <Homepage teamMembers={teamMembers}/>
+        <Homepage teamMember={teamMember}/>
       <footer></footer>
     </div>
   );
