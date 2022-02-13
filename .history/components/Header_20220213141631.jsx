@@ -2,7 +2,7 @@
 
 export default function Header() {
   return (
-    <div className="mt-[92px] relative bg-gray-900 overflow-hidden">
+    <div className="mt-[92px] relative bg-gray-800 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 pb-8 bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:h-[35vw] lg:pb-28 xl:pb-32">
           
