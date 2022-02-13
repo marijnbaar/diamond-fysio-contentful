@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import Team from './Team'
 import Testimonial from './Testimonial'
