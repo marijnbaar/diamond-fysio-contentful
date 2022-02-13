@@ -15,7 +15,7 @@ export default function Header() {
                 <span className="block text-white xl:inline">Welkom bij</span>{' '}
                 <span className="block text-teal-500 xl:inline">Diamond fysio</span>
               </h1>
-              <p className="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                 Fysiopraktijk in Amsterdam.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
