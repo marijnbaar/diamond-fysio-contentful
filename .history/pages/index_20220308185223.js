@@ -5,7 +5,6 @@ import Menu from "../components/Menu";
 import HeaderDark from "../components/HeaderDark";
 import { createClient } from "contentful";
 import Homepage from "../components/Homepage";
-import HighLight from "../components/Highlight";
 
 export async function getStaticProps() {
   const client = createClient({
@@ -32,7 +31,6 @@ const Home = (teamMembers) => {
       </Head>
       <Menu />
       <Header />
-      <HighLight />
       <Homepage teamMembers={teamMembers} />
       <footer></footer>
     </div>
