@@ -48,7 +48,7 @@ module.exports = {
         "login-background":
           "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('/src/assets/img/background-1920x1280.jpg')",
         "landing-background":
-          "linear-gradient(rgba(0,0,0, 0.25), rgba(0,0,0, 0.25)), url(https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)",
+          "linear-gradient(rgba(0,0,0, 0.95), rgba(0,0,0, 0.95)), url(https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)",
         "pointed-background":
           "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('https://fysiodiamondfactory.nl/wp-content/uploads/2022/01/point.jpeg')",
       }),
