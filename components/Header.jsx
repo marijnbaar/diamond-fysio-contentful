@@ -1,6 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
 
-export default function Header() {
+import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
+
+const Header = ({ title, info }) => {
   return (
     <div className="relative pt-16 pb-32 flex content-center items-center justify-center h-screen">
       <div className="bg-landing-background bg-cover bg-center absolute top-0 w-full h-full" />
@@ -8,15 +10,17 @@ export default function Header() {
         <div className="items-center flex flex-wrap">
           <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
             <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                <span className="block text-white xl:inline">Welkom bij</span>{" "}
-                <span className="block text-teal-500 xl:inline">
-                  Diamond fysio
-                </span>
-              </h1>
-              <p className="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Fysiopraktijk in Amsterdam.
-              </p>
+              {title?.json ? (
+                <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                  {setRichtTextToReactComponents(title.json)}
+                </h1>
+              ) : null}
+
+              {info?.json ? (
+                <div className="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                  {setRichtTextToReactComponents(info.json)}
+                </div>
+              ) : null}
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <a
@@ -41,4 +45,5 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};
+export default Header;

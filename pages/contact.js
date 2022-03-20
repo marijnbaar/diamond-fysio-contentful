@@ -12,7 +12,7 @@
     theme: {
       extend: {
         colors: {
-          'warm-gray': colors.warmGray,
+          'warm-gray': colors.stone,
           teal: colors.teal,
         },
       },
