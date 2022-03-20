@@ -1,17 +1,6 @@
-import { Popover, Transition } from '@headlessui/react';
 import Team from './Team';
 import Testimonial from './Testimonial';
-import {
-  CloudUploadIcon,
-  CogIcon,
-  LockClosedIcon,
-  MenuIcon,
-  RefreshIcon,
-  ServerIcon,
-  ShieldCheckIcon,
-  XIcon
-} from '@heroicons/react/outline';
-import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/solid';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 
 const blogPosts = [
   {

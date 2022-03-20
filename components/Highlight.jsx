@@ -19,9 +19,8 @@ export default function HighLight() {
             />
             <blockquote className="mt-6 text-white">
               <p className="text-xl font-medium sm:text-2xl">
-                Workflow has completely transformed how we interact with
-                customers. We've seen record bookings, higher customer
-                satisfaction, and reduced churn.
+                Workflow has completely transformed how we interact with customers. We&#39;ve seen
+                record bookings, higher customer satisfaction, and reduced churn.
               </p>
               <footer className="mt-6">
                 <p className="flex flex-col font-medium">

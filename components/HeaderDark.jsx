@@ -14,19 +14,6 @@
   }
   ```
 */
-import {
-  AnnotationIcon,
-  ChatAlt2Icon,
-  ChatAltIcon,
-  DocumentReportIcon,
-  HeartIcon,
-  InboxIcon,
-  PencilAltIcon,
-  QuestionMarkCircleIcon,
-  ReplyIcon,
-  TrashIcon,
-  UsersIcon
-} from '@heroicons/react/outline';
 
 // const solutions = [
 //   {

@@ -25,25 +25,25 @@
   ```
 */
 
-import { MailIcon, MenuIcon, PhoneIcon, XIcon } from "@heroicons/react/outline";
+import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 
 const offices = [
   {
     id: 1,
-    city: "Los Angeles",
-    address: ["4556 Brendan Ferry", "Los Angeles, CA 90210"],
+    city: 'Los Angeles',
+    address: ['4556 Brendan Ferry', 'Los Angeles, CA 90210']
   },
   {
     id: 2,
-    city: "New York",
-    address: ["886 Walter Streets", "New York, NY 12345"],
+    city: 'New York',
+    address: ['886 Walter Streets', 'New York, NY 12345']
   },
   {
     id: 3,
-    city: "Toronto",
-    address: ["7363 Cynthia Pass", "Toronto, ON N3Y 4H8"],
+    city: 'Toronto',
+    address: ['7363 Cynthia Pass', 'Toronto, ON N3Y 4H8']
   },
-  { id: 4, city: "London", address: ["114 Cobble Lane", "London N1 2EF"] },
+  { id: 4, city: 'London', address: ['114 Cobble Lane', 'London N1 2EF'] }
 ];
 
 export default function Example() {
@@ -58,23 +58,16 @@ export default function Example() {
                 Get in touch
               </h1>
               <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl">
-                Vel nunc non ut montes, viverra tempor. Proin lectus nibh
-                phasellus morbi non morbi. In elementum urna ut volutpat.
-                Sagittis et vel et fermentum amet consequat.
+                Vel nunc non ut montes, viverra tempor. Proin lectus nibh phasellus morbi non morbi.
+                In elementum urna ut volutpat. Sagittis et vel et fermentum amet consequat.
               </p>
             </div>
           </div>
         </div>
 
         {/* Contact section */}
-        <section
-          className="relative bg-white"
-          aria-labelledby="contact-heading"
-        >
-          <div
-            className="absolute w-full h-1/2 bg-warm-gray-50"
-            aria-hidden="true"
-          />
+        <section className="relative bg-white" aria-labelledby="contact-heading">
+          <div className="absolute w-full h-1/2 bg-warm-gray-50" aria-hidden="true" />
           {/* Decorative dot pattern */}
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -186,12 +179,10 @@ export default function Example() {
                       </defs>
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-white">
-                    Contact information
-                  </h3>
+                  <h3 className="text-lg font-medium text-white">Contact information</h3>
                   <p className="mt-6 text-base text-teal-50 max-w-3xl">
-                    Nullam risus blandit ac aliquam justo ipsum. Quam mauris
-                    volutpat massa dictumst amet. Sapien tortor lacus arcu.
+                    Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst
+                    amet. Sapien tortor lacus arcu.
                   </p>
                   <dl className="mt-8 space-y-6">
                     <dt>
@@ -268,9 +259,7 @@ export default function Example() {
 
                 {/* Contact form */}
                 <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                  <h3 className="text-lg font-medium text-warm-gray-900">
-                    Send us a message
-                  </h3>
+                  <h3 className="text-lg font-medium text-warm-gray-900">Send us a message</h3>
                   <form
                     action="#"
                     method="POST"
@@ -335,10 +324,7 @@ export default function Example() {
                         >
                           Phone
                         </label>
-                        <span
-                          id="phone-optional"
-                          className="text-sm text-warm-gray-500"
-                        >
+                        <span id="phone-optional" className="text-sm text-warm-gray-500">
                           Optional
                         </span>
                       </div>
@@ -377,10 +363,7 @@ export default function Example() {
                         >
                           Message
                         </label>
-                        <span
-                          id="message-max"
-                          className="text-sm text-warm-gray-500"
-                        >
+                        <span id="message-max" className="text-sm text-warm-gray-500">
                           Max. 500 characters
                         </span>
                       </div>
@@ -391,7 +374,7 @@ export default function Example() {
                           rows={4}
                           className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-warm-gray-300 rounded-md"
                           aria-describedby="message-max"
-                          defaultValue={""}
+                          defaultValue={''}
                         />
                       </div>
                     </div>
@@ -413,23 +396,17 @@ export default function Example() {
         {/* Contact grid */}
         <section aria-labelledby="offices-heading">
           <div className="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h2
-              id="offices-heading"
-              className="text-3xl font-extrabold text-warm-gray-900"
-            >
+            <h2 id="offices-heading" className="text-3xl font-extrabold text-warm-gray-900">
               Our offices
             </h2>
             <p className="mt-6 text-lg text-warm-gray-500 max-w-3xl">
-              Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate
-              id malesuada non. Cras aliquet purus dui laoreet diam sed lacus,
-              fames.
+              Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non.
+              Cras aliquet purus dui laoreet diam sed lacus, fames.
             </p>
             <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
               {offices.map((office) => (
                 <div key={office.id}>
-                  <h3 className="text-lg font-medium text-warm-gray-900">
-                    {office.city}
-                  </h3>
+                  <h3 className="text-lg font-medium text-warm-gray-900">{office.city}</h3>
                   <p className="mt-2 text-base text-warm-gray-500">
                     {office.address.map((line) => (
                       <span key={line} className="block">

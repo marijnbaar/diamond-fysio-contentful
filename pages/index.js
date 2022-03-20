@@ -17,8 +17,7 @@ export const getStaticProps = async ({ preview = false }) => {
   };
 };
 
-const Home = (teamMembers) => {
-  console.log('home', teamMembers);
+const Home = (data) => {
   return (
     <div>
       <Head>
