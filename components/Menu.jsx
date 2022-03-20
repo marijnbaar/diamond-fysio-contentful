@@ -1,96 +1,99 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
+import { Fragment } from 'react';
+import { Popover, Transition } from '@headlessui/react';
 import {
-  BookmarkAltIcon,
   CalendarIcon,
   MenuIcon,
   PhoneIcon,
-  ClipboardList,
-  SupportIcon,
   XIcon,
   SparklesIcon,
   EmojiHappyIcon,
   MicrophoneIcon,
   HeartIcon,
   CurrencyEuroIcon,
-  LibraryIcon,
-} from '@heroicons/react/outline'
-import { ChevronDownIcon, HandIcon, StatusOnlineIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/solid'
+  LibraryIcon
+} from '@heroicons/react/outline';
+import {
+  ChevronDownIcon,
+  HandIcon,
+  StatusOnlineIcon,
+  UserGroupIcon,
+  UsersIcon
+} from '@heroicons/react/solid';
 
 const specialisaties = [
   {
     name: 'Oefentherapie',
     description: 'Leer een gezonde houding aan',
     href: '#',
-    icon: EmojiHappyIcon,
+    icon: EmojiHappyIcon
   },
   {
     name: 'Manuele therapie',
     description: 'Mobilisatie en manipulatie',
     href: '#',
-    icon: HandIcon,
+    icon: HandIcon
   },
-  { name: 'Dry needling', description: "Behandeling myofasciale pijn met een accupunctuurnaald", href: '#', icon: SparklesIcon },
+  {
+    name: 'Dry needling',
+    description: 'Behandeling myofasciale pijn met een accupunctuurnaald',
+    href: '#',
+    icon: SparklesIcon
+  },
   {
     name: 'Shockwave',
-    description: "Natuurlijk herstel met drukgolven",
+    description: 'Natuurlijk herstel met drukgolven',
     href: '#',
-    icon: StatusOnlineIcon,
+    icon: StatusOnlineIcon
   },
   {
     name: 'Pilates',
     description: 'Verbeter je bewegingspatronen',
     href: '#',
-    icon: UsersIcon,
+    icon: UsersIcon
   },
   {
     name: 'Podologie',
     description: 'Optimaliseer de conditie van je voeten',
     href: '#',
-    icon: HeartIcon,
+    icon: HeartIcon
   },
   {
     name: 'Vocal massage',
     description: 'Verminder stijve spieren',
     href: '#',
-    icon: MicrophoneIcon,
-  },
-]
+    icon: MicrophoneIcon
+  }
+];
 const callsToAction = [
   // { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Afspraak maken', href: '#', icon: PhoneIcon },
-]
+  { name: 'Afspraak maken', href: '#', icon: PhoneIcon }
+];
 const resources = [
   {
     name: 'De praktijk',
     // description: 'Get all of your questions answered in our forums or contact support.',
     href: '#',
-    icon: LibraryIcon,
+    icon: LibraryIcon
   },
   {
     name: 'Ons team',
     // description: 'Learn how to maximize our platform to get the most out of it.',
     href: '#',
-    icon: UserGroupIcon,
+    icon: UserGroupIcon
   },
   {
     name: 'Contact',
     // description: 'See what meet-ups and other events we might be planning near you.',
     href: '#',
-    icon: CalendarIcon,
+    icon: CalendarIcon
   },
-  { name: 'Tarieven', href: '#', icon: CurrencyEuroIcon },
+  { name: 'Tarieven', href: '#', icon: CurrencyEuroIcon }
   // { name: 'Huisregels', href: '#', icon: ClipboardList },
-]
-const recentPosts = [
-  { id: 1, name: 'Boost your conversion rate', href: '#' },
-  { id: 2, name: 'How to use search engine optimization to drive traffic to your site', href: '#' },
-  { id: 3, name: 'Improve your customer experience', href: '#' },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Menu() {
@@ -152,7 +155,10 @@ export default function Menu() {
                               href={item.href}
                               className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                             >
-                              <item.icon className="flex-shrink-0 h-6 w-6 text-beige" aria-hidden="true" />
+                              <item.icon
+                                className="flex-shrink-0 h-6 w-6 text-beige"
+                                aria-hidden="true"
+                              />
                               <div className="ml-4">
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
@@ -167,7 +173,10 @@ export default function Menu() {
                                 href={item.href}
                                 className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
                               >
-                                <item.icon className="flex-shrink-0 h-6 w-6 text-gray-400" aria-hidden="true" />
+                                <item.icon
+                                  className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                  aria-hidden="true"
+                                />
                                 <span className="ml-3">{item.name}</span>
                               </a>
                             </div>
@@ -183,7 +192,6 @@ export default function Menu() {
             <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Ons team
             </a>
-            
 
             <Popover className="relative">
               {({ open }) => (
@@ -222,7 +230,10 @@ export default function Menu() {
                               href={item.href}
                               className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                             >
-                              <item.icon className="flex-shrink-0 h-6 w-6 text-beige" aria-hidden="true" />
+                              <item.icon
+                                className="flex-shrink-0 h-6 w-6 text-beige"
+                                aria-hidden="true"
+                              />
                               <div className="ml-4">
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
@@ -257,7 +268,10 @@ export default function Menu() {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <Popover.Panel focus className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <Popover.Panel
+          focus
+          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+        >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
@@ -328,5 +342,5 @@ export default function Menu() {
         </Popover.Panel>
       </Transition>
     </Popover>
-  )
+  );
 }
