@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Menu from '../components/Menu';
 import Homepage from '../components/Homepage';
 import { getPage } from '../lib/query/getData';
+import HighLight from '../components/Highlight';
 
 export const getStaticProps = async ({ preview = false }) => {
   const pageData = (await getPage('Homepage', undefined, preview)) ?? [];
@@ -16,7 +17,8 @@ export const getStaticProps = async ({ preview = false }) => {
   };
 };
 
-const Home = (data) => {
+const Home = (teamMembers) => {
+  console.log('home', teamMembers);
   return (
     <div>
       <Head>
@@ -26,6 +28,7 @@ const Home = (data) => {
       </Head>
       <Menu />
       <Header />
+      <HighLight />
       <Homepage {...data} />
       <footer></footer>
     </div>
