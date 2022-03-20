@@ -6,7 +6,7 @@ export default function Header() {
       <div className="bg-landing-background bg-cover bg-center absolute top-0 w-full h-full" />
       <div className="container max-w-8xl relative mx-auto">
         <div className="items-center flex flex-wrap">
-          <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+          <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto mt-2 text-center">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
                 <span className="block text-white xl:inline">Welkom bij</span>{" "}

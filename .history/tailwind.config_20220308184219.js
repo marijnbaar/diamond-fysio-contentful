@@ -48,9 +48,9 @@ module.exports = {
         "login-background":
           "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('/src/assets/img/background-1920x1280.jpg')",
         "landing-background":
-          "linear-gradient(rgba(0,0,0, 0.25), rgba(0,0,0, 0.25)), url(https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)",
+          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url(https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)",
         "pointed-background":
-          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('https://fysiodiamondfactory.nl/wp-content/uploads/2022/01/point.jpeg')",
+          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('/src/assets/img/background-1920x1080.jpg')",
       }),
 
       // screens: {
@@ -74,8 +74,6 @@ module.exports = {
         24: "6rem",
       },
       colors: {
-        "warm-gray": colors.warmGray,
-        teal: colors.teal,
         blue: {
           extraDark: "#172B4D",
           dark: "#1D3A6A",
@@ -125,8 +123,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/aspect-ratio"),
-    require("@tailwindcss/forms"),
-  ],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

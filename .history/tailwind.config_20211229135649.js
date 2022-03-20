@@ -21,8 +21,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Euclid: ["Euclid"],
-      },
+        'Euclid': ['Euclid']
+      }
     },
     fontFamily: {
       primary: ["'Manrope'"],
@@ -44,15 +44,6 @@ module.exports = {
       "8xl": "4rem", // 64px
     },
     extend: {
-      backgroundImage: () => ({
-        "login-background":
-          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('/src/assets/img/background-1920x1280.jpg')",
-        "landing-background":
-          "linear-gradient(rgba(0,0,0, 0.25), rgba(0,0,0, 0.25)), url(https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)",
-        "pointed-background":
-          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('https://fysiodiamondfactory.nl/wp-content/uploads/2022/01/point.jpeg')",
-      }),
-
       // screens: {
       //   "2xl": "1408px",
       // },
@@ -74,8 +65,6 @@ module.exports = {
         24: "6rem",
       },
       colors: {
-        "warm-gray": colors.warmGray,
-        teal: colors.teal,
         blue: {
           extraDark: "#172B4D",
           dark: "#1D3A6A",
@@ -108,15 +97,15 @@ module.exports = {
         black: colors.black,
         beige: "#BAC9C2",
         teal: {
-          100: "#e6fffa",
-          200: "#b2f5ea",
-          300: "#81e6d9",
-          400: "#4fd1c5",
-          500: "#38b2ac",
-          600: "#319795",
-          700: "#2c7a7b",
-          800: "#285e61",
-          900: "#234e52",
+          100: '#e6fffa',
+          200: '#b2f5ea',
+          300: '#81e6d9',
+          400: '#4fd1c5',
+          500: '#38b2ac',
+          600: '#319795',
+          700: '#2c7a7b',
+          800: '#285e61',
+          900: '#234e52',
         },
       },
       boxShadow: {
@@ -124,9 +113,9 @@ module.exports = {
         dark: "0px 4px 40px rgba(23, 43, 77, 0.08)",
       },
     },
+
   },
   plugins: [
-    require("@tailwindcss/aspect-ratio"),
-    require("@tailwindcss/forms"),
+    require('@tailwindcss/aspect-ratio'),
   ],
 };
