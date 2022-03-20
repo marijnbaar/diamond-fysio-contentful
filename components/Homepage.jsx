@@ -110,8 +110,7 @@ const footerNavigation = {
   ]
 };
 
-export default function Homepage({ title }) {
-  console.log(title);
+export default function Homepage() {
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
@@ -119,6 +118,9 @@ export default function Homepage({ title }) {
           <div className="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-10">
             <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
               <div>
+                {/* {data.title.hasOwnProperty('json')
+                  ? setRichtTextToReactComponents(data.title.json)
+                  : null} */}
                 <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
                   Fysiopraktijk in Amsterdam
                 </h2>
