@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    // "next/babel",
+    "eslint:recommended",
+    "plugin:promise/recommended",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 13
+  }
 }
