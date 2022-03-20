@@ -14,12 +14,12 @@ export const getStaticProps = async ({ preview = false }) => {
   };
 };
 
-const Home = ({ componentsCollection }) => {
+const Home = ({ components }) => {
   return (
     <div>
-      <ComponentList components={componentsCollection.items} />
+      <ComponentList components={components} />
       <HighLight />
-      <Homepage {...componentsCollection.items[0]} />
+      <Homepage />
     </div>
   );
 };
