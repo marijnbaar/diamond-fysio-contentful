@@ -2,11 +2,10 @@
 
 export default function Header() {
   return (
-    <div className="relative pt-16 pb-32 flex content-center items-center justify-center h-screen">
-      <div className="bg-landing-background bg-cover bg-center absolute top-0 w-full h-full" />
-      <div className="container max-w-8xl relative mx-auto">
-        <div className="items-center flex flex-wrap">
-          <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+    <div className="mt-2 relative bg-gray-900 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="relative z-10 pb-8 bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:h-[35vw] lg:pb-28 xl:pb-32">
+          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-0 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
                 <span className="block text-white xl:inline">Welkom bij</span>{" "}
@@ -36,8 +35,15 @@ export default function Header() {
                 </div>
               </div>
             </div>
-          </div>
+          </main>
         </div>
+      </div>
+      <div className="lg:absolute lg:inset-y-0 lg:-right-14 lg:w-1/2 z-20">
+        <img
+          className="h-56 w-full object-cover object-top sm:h-96 md:h-96 lg:w-full lg:h-full"
+          src="https://fysiodiamondfactory.nl/wp-content/uploads/2022/01/point.jpeg"
+          alt=""
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-import { Popover, Transition } from "@headlessui/react";
-import Team from "./Team";
-import Testimonial from "./Testimonial";
+import { Popover, Transition } from '@headlessui/react'
+import Team from './Team'
+import Testimonial from './Testimonial'
 import {
   CloudUploadIcon,
   CogIcon,
@@ -10,82 +10,84 @@ import {
   ServerIcon,
   ShieldCheckIcon,
   XIcon,
-} from "@heroicons/react/outline";
-import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/solid";
+} from '@heroicons/react/outline'
+import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/solid'
+
+
 
 const blogPosts = [
   {
     id: 1,
-    title: "Shockwave",
-    href: "#",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    category: { name: "Article", href: "#" },
+    title: 'Shockwave',
+    href: '#',
+    date: 'Mar 16, 2020',
+    datetime: '2020-03-16',
+    category: { name: 'Article', href: '#' },
     imageUrl:
-      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
+      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
     preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.',
     author: {
-      name: "Regi Severins",
+      name: 'Regi Severins',
       imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      href: '#',
     },
-    readingLength: "6 min",
+    readingLength: '6 min',
   },
   {
     id: 2,
-    title: "Dry Needling",
-    href: "#",
-    date: "Mar 10, 2020",
-    datetime: "2020-03-10",
-    category: { name: "Video", href: "#" },
+    title: 'Dry Needling',
+    href: '#',
+    date: 'Mar 10, 2020',
+    datetime: '2020-03-10',
+    category: { name: 'Video', href: '#' },
     imageUrl:
-      "https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
+      'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
     preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.',
     author: {
-      name: "Brenna Goyette",
+      name: 'Brenna Goyette',
       imageUrl:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
+        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      href: '#',
     },
-    readingLength: "4 min",
+    readingLength: '4 min',
   },
   {
     id: 3,
-    title: "Improve your customer experience",
-    href: "#",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    category: { name: "Case Study", href: "#" },
+    title: 'Improve your customer experience',
+    href: '#',
+    date: 'Feb 12, 2020',
+    datetime: '2020-02-12',
+    category: { name: 'Case Study', href: '#' },
     imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
+      'https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
     preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.',
     author: {
-      name: "Daniela Metz",
+      name: 'Daniela Metz',
       imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
+        'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      href: '#',
     },
-    readingLength: "11 min",
+    readingLength: '11 min',
   },
-];
+]
 const footerNavigation = {
   solutions: [
-    { name: "De praktijk", href: "#" },
-    { name: "Ons team", href: "#" },
+    { name: 'De praktijk', href: '#' },
+    { name: 'Ons team', href: '#' },
   ],
   support: [
-    { name: "Contact", href: "#" },
-    { name: "Tarieven", href: "#" },
-    { name: "AVG", href: "#" },
+    { name: 'Contact', href: '#' },
+    { name: 'Tarieven', href: '#' },
+    { name: 'AVG', href: '#' },
   ],
   social: [
     {
-      name: "Facebook",
-      href: "#",
+      name: 'Facebook',
+      href: '#',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -97,8 +99,8 @@ const footerNavigation = {
       ),
     },
     {
-      name: "Instagram",
-      href: "#",
+      name: 'Instagram',
+      href: '#',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -110,8 +112,8 @@ const footerNavigation = {
       ),
     },
     {
-      name: "Twitter",
-      href: "#",
+      name: 'Twitter',
+      href: '#',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -119,26 +121,23 @@ const footerNavigation = {
       ),
     },
   ],
-};
+}
 
 export default function Homepage(teamMembers) {
   return (
     <div className="bg-white">
       <div className="relative overflow-hidden">
         <main>
-          <div className="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-10">
+          <div className="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-32">
             <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
               <div>
-                <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
-                  Fysiopraktijk in Amsterdam
-                </h2>
+                <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">Fysiopraktijk in Amsterdam</h2>
                 <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
                   {/* No server? No problem. */}
                 </p>
                 <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-                  Phasellus lorem quam molestie id quisque diam aenean nulla in.
-                  Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-                  condimentum id viverra nulla.
+                  Phasellus lorem quam molestie id quisque diam aenean nulla in. Accumsan in quis quis nunc, ullamcorper
+                  malesuada. Eleifend condimentum id viverra nulla.
                 </p>
               </div>
               <div className="mt-12 -mb-1 sm:-mb-24 lg:-mb-80">
@@ -150,71 +149,48 @@ export default function Homepage(teamMembers) {
               </div>
             </div>
           </div>
+          
+
 
           {/* Blog section */}
           <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
             <div className="relative">
               <div className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-                <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
-                  Waar wij in uitblinken
-                </h2>
+                <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">Waar wij in uitblinken</h2>
                 <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
                   Onze specialisaties
                 </p>
                 <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
-                  Als praktijk hebben we therapeuten met uiteenlopende
-                  specialicaties die nauw met elkaar samenwerken. Van pilates
-                  tot vocal massages, in een moderne praktijk in Amsterdam.
+                  Als praktijk hebben we therapeuten met uiteenlopende specialicaties die nauw met elkaar samenwerken. Van pilates tot vocal massages, in een moderne praktijk in Amsterdam.
                 </p>
               </div>
               <div className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
                 {blogPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="flex flex-col rounded-lg shadow-lg overflow-hidden"
-                  >
+                  <div key={post.id} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-48 w-full object-cover"
-                        src={post.imageUrl}
-                        alt=""
-                      />
+                      <img className="h-48 w-full object-cover" src={post.imageUrl} alt="" />
                     </div>
                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                       <div className="flex-1">
                         <p className="text-sm font-medium text-cyan-600">
-                          <a
-                            href={post.category.href}
-                            className="hover:underline"
-                          >
+                          <a href={post.category.href} className="hover:underline">
                             {post.category.name}
                           </a>
                         </p>
                         <a href={post.href} className="block mt-2">
-                          <p className="text-xl font-semibold text-gray-900">
-                            {post.title}
-                          </p>
-                          <p className="mt-3 text-base text-gray-500">
-                            {post.preview}
-                          </p>
+                          <p className="text-xl font-semibold text-gray-900">{post.title}</p>
+                          <p className="mt-3 text-base text-gray-500">{post.preview}</p>
                         </a>
                       </div>
                       <div className="mt-6 flex items-center">
                         <div className="flex-shrink-0">
                           <a href={post.author.href}>
-                            <img
-                              className="h-10 w-10 rounded-full"
-                              src={post.author.imageUrl}
-                              alt={post.author.name}
-                            />
+                            <img className="h-10 w-10 rounded-full" src={post.author.imageUrl} alt={post.author.name} />
                           </a>
                         </div>
                         <div className="ml-3">
                           <p className="text-sm font-medium text-gray-900">
-                            <a
-                              href={post.author.href}
-                              className="hover:underline"
-                            >
+                            <a href={post.author.href} className="hover:underline">
                               {post.author.name}
                             </a>
                           </p>
@@ -232,8 +208,8 @@ export default function Homepage(teamMembers) {
             </div>
           </div>
 
-          <Testimonial />
-          <Team teamMembers={teamMembers} />
+          <Testimonial/>
+          <Team teamMembers={teamMembers}/>
 
           {/* CTA Section */}
           <div className="relative bg-gray-900">
@@ -253,14 +229,9 @@ export default function Homepage(teamMembers) {
                 <h2 className="text-base font-semibold uppercase tracking-wider text-gray-300">
                   Van Red-Cord tot Pilates
                 </h2>
-                <p className="mt-2 text-white text-3xl font-extrabold tracking-tight sm:text-4xl">
-                  Een nieuwe manier van bewegen
-                </p>
+                <p className="mt-2 text-white text-3xl font-extrabold tracking-tight sm:text-4xl">Een nieuwe manier van bewegen</p>
                 <p className="mt-3 text-lg text-gray-300">
-                  Veel van onze therapeuten hebben een dans-achtergrond, en
-                  helpen je graag bij het aanleren van nieuwe bewegingspatronen.
-                  Klachten kunnen verminderen als je andere spiergroepen traint
-                  sterker te worden.
+                  Veel van onze therapeuten hebben een dans-achtergrond, en helpen je graag bij het aanleren van nieuwe bewegingspatronen. Klachten kunnen verminderen als je andere spiergroepen traint sterker te worden.
                 </p>
                 <div className="mt-8">
                   <div className="inline-flex rounded-md shadow">
@@ -269,10 +240,7 @@ export default function Homepage(teamMembers) {
                       className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50"
                     >
                       Lees meer
-                      <ExternalLinkIcon
-                        className="-mr-1 ml-3 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
+                      <ExternalLinkIcon className="-mr-1 ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
                     </a>
                   </div>
                 </div>
@@ -293,16 +261,11 @@ export default function Homepage(teamMembers) {
                   alt="Diamond fysio"
                 />
                 <p className="text-gray-500 text-base">
-                  Onze therapeuten helpen je bij klachten die je hinderen bij
-                  dagelijkse activiteiten.
+                  Onze therapeuten helpen je bij klachten die je hinderen bij dagelijkse activiteiten.
                 </p>
                 <div className="flex space-x-6">
                   {footerNavigation.social.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="text-gray-400 hover:text-gray-500"
-                    >
+                    <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
                       <span className="sr-only">{item.name}</span>
                       <item.icon className="h-6 w-6" aria-hidden="true" />
                     </a>
@@ -312,16 +275,11 @@ export default function Homepage(teamMembers) {
               <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
                 <div className="md:grid md:grid-cols-2 md:gap-8">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                      De praktijk
-                    </h3>
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">De praktijk</h3>
                     <ul role="list" className="mt-4 space-y-4">
                       {footerNavigation.solutions.map((item) => (
                         <li key={item.name}>
-                          <a
-                            href={item.href}
-                            className="text-base text-gray-500 hover:text-gray-900"
-                          >
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
                             {item.name}
                           </a>
                         </li>
@@ -329,16 +287,11 @@ export default function Homepage(teamMembers) {
                     </ul>
                   </div>
                   <div className="mt-12 md:mt-0">
-                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                      Support
-                    </h3>
+                    <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Support</h3>
                     <ul role="list" className="mt-4 space-y-4">
                       {footerNavigation.support.map((item) => (
                         <li key={item.name}>
-                          <a
-                            href={item.href}
-                            className="text-base text-gray-500 hover:text-gray-900"
-                          >
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
                             {item.name}
                           </a>
                         </li>
@@ -346,17 +299,17 @@ export default function Homepage(teamMembers) {
                     </ul>
                   </div>
                 </div>
-                <div className="md:grid md:grid-cols-2 md:gap-8"></div>
+                <div className="md:grid md:grid-cols-2 md:gap-8">
+                  
+                </div>
               </div>
             </div>
             <div className="mt-12 border-t border-gray-200 py-8">
-              <p className="text-base text-gray-400 xl:text-center">
-                &copy; 2022, Diamond Fysio Amsterdam. All rights reserved.
-              </p>
+              <p className="text-base text-gray-400 xl:text-center">&copy; 2022, Diamond Fysio Amsterdam. All rights reserved.</p>
             </div>
           </div>
         </footer>
       </div>
     </div>
-  );
+  )
 }

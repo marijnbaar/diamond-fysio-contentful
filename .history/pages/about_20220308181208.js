@@ -10,7 +10,7 @@ export default function about() {
         src="https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
         alt=""
       />
-      <div className="relative bg-white rounded p-4 w-9/12 lg:h-80 z-20 lg:bottom-32 mx-auto">
+      <div className="relative bg-blue-100 rounded w-9/12 lg:h-80 z-20 lg:bottom-32 mx-auto">
         <h1 className="font-Euclid text-4xl">Hi</h1>
       </div>
     </div>
