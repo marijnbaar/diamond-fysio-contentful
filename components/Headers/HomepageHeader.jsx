@@ -1,8 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
 
-import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
+import setRichtTextToReactComponents from '../../lib/helpers/setRichTextToReactComponents';
+import Button from '../Button';
+import createSlug from '../../lib/helpers/createSlug';
 
-const Header = ({ title, info }) => {
+const HomepageHeader = ({ title, info, buttonCollection }) => {
   return (
     <div className="relative pt-16 pb-32 flex content-center items-center justify-center h-screen">
       <div className="bg-landing-background bg-cover bg-center absolute top-0 w-full h-full" />
@@ -21,23 +23,20 @@ const Header = ({ title, info }) => {
                   {setRichtTextToReactComponents(info.json)}
                 </div>
               ) : null}
-              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div className="rounded-md shadow">
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-beige hover:bg-gray-400 md:py-4 md:text-lg md:px-10"
-                  >
-                    Over ons
-                  </a>
-                </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-teal-100 bg-teal-500 hover:bg-teal-400 md:py-4 md:text-lg md:px-10"
-                  >
-                    Afspraak maken
-                  </a>
-                </div>
+              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-3">
+                {buttonCollection.items.map((btn, i) => (
+                  <Button
+                    key={i}
+                    title={btn.title}
+                    type={btn.type}
+                    internal_link={
+                      btn.internalLink &&
+                      createSlug(btn.internalLink.slug, btn.internalLink.__typename)
+                    }
+                    external_link={btn.externalLink}
+                    extra_classes="sm:w-auto"
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -46,4 +45,4 @@ const Header = ({ title, info }) => {
     </div>
   );
 };
-export default Header;
+export default HomepageHeader;
