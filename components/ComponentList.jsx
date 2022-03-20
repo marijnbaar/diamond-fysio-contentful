@@ -1,7 +1,7 @@
 import Header from './Header';
 
-const ComponentList = ({ components }) => {
-  return components.map((component) => {
+const ComponentList = ({ components }) =>
+  components.map((component) => {
     if (component.sys.id) {
       switch (component.__typename) {
         case 'HeaderHomepage': {
@@ -10,6 +10,5 @@ const ComponentList = ({ components }) => {
       }
     }
   });
-};
 
 export default ComponentList;
