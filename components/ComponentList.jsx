@@ -1,4 +1,5 @@
 import HomepageHeader from './Headers/HomepageHeader';
+import Highlight from './Highlight';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -6,6 +7,9 @@ const ComponentList = ({ components }) =>
       switch (component.__typename) {
         case 'HeaderHomepage': {
           return <HomepageHeader key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'Highlight': {
+          return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }
