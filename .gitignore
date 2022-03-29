@@ -35,8 +35,4 @@ yarn-error.log*
 .yarnrc
 .history
 .yarn
-<<<<<<< HEAD
 .env
-=======
-.env
->>>>>>> feature/structure
