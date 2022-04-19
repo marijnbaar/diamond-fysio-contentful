@@ -1,5 +1,6 @@
 import HomepageHeader from './Headers/HomepageHeader';
 import Highlight from './Highlight';
+import Specialisations from './Specialisations';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -10,6 +11,9 @@ const ComponentList = ({ components }) =>
         }
         case 'Highlight': {
           return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'SpecialisationHomeOverview': {
+          return <Specialisations key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }

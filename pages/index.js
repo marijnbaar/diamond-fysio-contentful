@@ -18,7 +18,7 @@ const Home = ({ components }) => {
   return (
     <div>
       <ComponentList components={components} />
-      {/* <HighLight /> */}
+      {/* <HighLight / > */}
       <Homepage />
     </div>
   );
