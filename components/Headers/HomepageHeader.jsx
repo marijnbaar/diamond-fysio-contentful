@@ -1,5 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
-
 import setRichtTextToReactComponents from '../../lib/helpers/setRichTextToReactComponents';
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
