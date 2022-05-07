@@ -24,7 +24,6 @@ export default function Specialisations({
               key={specialisation.id}
               className="flex flex-col rounded-lg shadow-lg overflow-hidden"
             >
-              {console.log(specialisation)}
               {specialisation.image && (
                 <div className="flex-shrink-0">
                   <img
