@@ -11,7 +11,7 @@ const HomepageHeader = ({ title, info, buttonCollection }) => {
           <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
             <div className="sm:text-center lg:text-left">
               {title?.json ? (
-                <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                <h1 className="text-4xl tracking-tight font-manrope font-extrabold text-white sm:text-5xl md:text-6xl">
                   {setRichtTextToReactComponents(title.json)}
                 </h1>
               ) : null}

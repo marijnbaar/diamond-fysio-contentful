@@ -18,7 +18,10 @@ module.exports = {
   theme: {
     fontFamily: {
       primary: ["'Manrope'"],
-      secondary: ['"Kalam"']
+      secondary: ['"Kalam"'],
+      sans: ["'Manrope'"],
+      serif: ["'Manrope'"],
+      microcopy: ['"Kalam"']
     },
     fontSize: {
       xs: '.75rem', // 12px
@@ -37,7 +40,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        Euclid: ['Euclid']
+        Euclid: ['Euclid'],
+        manrope: ['Manrope, sans-serif']
       },
       backgroundImage: () => ({
         'login-background':
