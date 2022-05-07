@@ -1,4 +1,4 @@
-export default function Testimonial() {
+export default function Testimonial({ name, profession, image, quote }) {
   return (
     <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative">
       <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
@@ -8,8 +8,8 @@ export default function Testimonial() {
             <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
               <img
                 className="object-cover lg:h-full lg:w-full"
-                src="https://fysiodiamondfactory.nl/wp-content/uploads/2021/05/iva-probleem-678x1024.jpg"
-                alt=""
+                src={image.url && image.url}
+                alt={image.alt && image.alt}
               />
             </div>
           </div>
@@ -26,14 +26,11 @@ export default function Testimonial() {
                 >
                   <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                 </svg>
-                <p className="mt-6 text-2xl font-medium text-white">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed urna nulla vitae
-                  laoreet augue. Amet feugiat est integer dolor auctor adipiscing nunc urna, sit.
-                </p>
+                <p className="mt-6 text-2xl font-medium text-white">{quote && quote}</p>
               </div>
               <footer className="mt-6">
-                <p className="text-base font-medium text-white">Iva Lesic</p>
-                <p className="text-base font-medium text-cyan-100">Fysiotherapeut</p>
+                <p className="text-base font-medium text-white">{name && name}</p>
+                <p className="text-base font-medium text-cyan-100">{profession && profession}</p>
               </footer>
             </blockquote>
           </div>

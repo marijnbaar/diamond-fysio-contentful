@@ -4,7 +4,6 @@ import ComponentList from '../components/ComponentList';
 
 export const getStaticProps = async ({ preview = false }) => {
   const pageData = (await getPage('Homepage', undefined, preview)) ?? [];
-  //   console.log(pageData);
   return {
     props: {
       ...pageData,
@@ -14,6 +13,7 @@ export const getStaticProps = async ({ preview = false }) => {
 };
 
 const Home = ({ components }) => {
+  console.log(components);
   return (
     <div>
       <ComponentList components={components} />
