@@ -2,6 +2,7 @@ import HomepageHeader from './Headers/HomepageHeader';
 import Highlight from './Highlight';
 import Specialisations from './Specialisations';
 import Info from './Info';
+import Testimonial from './Testimonial';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -18,6 +19,9 @@ const ComponentList = ({ components }) =>
         }
         case 'Info': {
           return <Info key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'Testimonial': {
+          return <Testimonial key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }
