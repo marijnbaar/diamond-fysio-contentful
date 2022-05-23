@@ -13,7 +13,6 @@ export const getStaticProps = async ({ preview = false }) => {
 };
 
 const Home = ({ components }) => {
-  console.log(components);
   return (
     <div>
       <ComponentList components={components} />

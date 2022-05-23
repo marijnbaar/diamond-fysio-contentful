@@ -12,9 +12,11 @@ export default function Info({ title, subtitle, description, image }) {
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
             {title}
           </p>
-          <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-            {description && setRichtTextToReactComponents(description.json)}
-          </p>
+          <div>
+            <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
+              {description && setRichtTextToReactComponents(description.json)}
+            </p>
+          </div>
         </div>
         <div className="mt-12 -mb-1 sm:-mb-24 lg:-mb-40 h-full">
           <img
