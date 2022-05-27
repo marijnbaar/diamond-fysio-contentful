@@ -5,6 +5,8 @@ import Info from './Info';
 import Testimonial from './Testimonial';
 import Team from './Team';
 import CTA from './CTA';
+import Teammember from './Teammember';
+import Collaborations from './Collaborations';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -31,8 +33,11 @@ const ComponentList = ({ components }) =>
         case 'Cta': {
           return <CTA key={component.sys.id} id={component.sys.id} {...component} />;
         }
-        case 'TeamMember': {
-          return <Team key={component.sys.id} id={component.sys.id} {...component} />;
+        case 'TeampageOverview': {
+          return <Teammember key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'Collaborations': {
+          return <Collaborations key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }
