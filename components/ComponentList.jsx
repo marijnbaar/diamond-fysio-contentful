@@ -7,6 +7,7 @@ import Team from './Team';
 import CTA from './CTA';
 import Teammember from './Teammember';
 import Collaborations from './Collaborations';
+import TeampageHeader from './Headers/TeampageHeader';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -14,6 +15,9 @@ const ComponentList = ({ components }) =>
       switch (component.__typename) {
         case 'HeaderHomepage': {
           return <HomepageHeader key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'HeaderTeampage': {
+          return <TeampageHeader key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Highlight': {
           return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
