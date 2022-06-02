@@ -1,6 +1,5 @@
 import React from 'react';
 function TeampageHeader({ title, description }) {
-  console.log(description);
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:mt-24">
