@@ -8,6 +8,8 @@ import CTA from './CTA';
 import Teammember from './Teammember';
 import Collaborations from './Collaborations';
 import TeampageHeader from './Headers/TeampageHeader';
+import SpecialisationHeader from './Headers/SpecialisationpageHeader';
+import Specialisation from './Specialisation';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -18,6 +20,11 @@ const ComponentList = ({ components }) =>
         }
         case 'HeaderTeampage': {
           return <TeampageHeader key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'HeaderSpecialisationpage': {
+          return (
+            <SpecialisationHeader key={component.sys.id} id={component.sys.id} {...component} />
+          );
         }
         case 'Highlight': {
           return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
@@ -42,6 +49,9 @@ const ComponentList = ({ components }) =>
         }
         case 'Collaborations': {
           return <Collaborations key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'Specialisation': {
+          return <Specialisation key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }
