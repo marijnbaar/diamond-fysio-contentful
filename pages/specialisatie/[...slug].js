@@ -38,7 +38,6 @@ export const getStaticPaths = async () => {
   `;
 
   const pagePaths = (await getPageSlugs(querySlugs, '')) ?? [];
-  console.log('test', pagePaths);
   return {
     paths: pagePaths,
     fallback: false
