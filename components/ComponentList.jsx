@@ -1,6 +1,5 @@
 import HomepageHeader from './Headers/HomepageHeader';
 import Highlight from './Highlight';
-import Specialisations from './Specialisations';
 import Info from './Info';
 import Testimonial from './Testimonial';
 import Team from './Team';
@@ -10,6 +9,7 @@ import Collaborations from './Collaborations';
 import TeampageHeader from './Headers/TeampageHeader';
 import SpecialisationHeader from './Headers/SpecialisationpageHeader';
 import Specialisation from './Specialisation';
+import Slideshow from './SlideshowSpecialisations/SlideShow';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -30,7 +30,7 @@ const ComponentList = ({ components }) =>
           return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'SpecialisationHomeOverview': {
-          return <Specialisations key={component.sys.id} id={component.sys.id} {...component} />;
+          return <Slideshow key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Info': {
           return <Info key={component.sys.id} id={component.sys.id} {...component} />;
