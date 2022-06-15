@@ -144,4 +144,24 @@
   .btn-primary--negative--small {
     @apply btn--small bg-white text-orange-dark;
   }
+  .slick-prev:before {
+    background-color: blue !important;
+    width: 46px;
+    height: 46px;
+    content: '' !important;
+    position: absolute;
+    top: -11px;
+    left: -31px;
+    background-image: url('http://lorempixel.com/50/50');
+  }
+
+  .slideshow-slick .slick-dots {
+    @apply rounded-t-lg rounded-b-lg;
+  }
+  .slideshow-slick .slick-dots li.slick-active button {
+    @apply bg-teal-400;
+  }
+  .slideshow-slick .slick-dots li button {
+    @apply w-full h-full p-1 mt-2 before:hidden bg-teal-500 rounded-full;
+  }
 }

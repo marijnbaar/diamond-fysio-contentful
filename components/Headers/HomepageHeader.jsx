@@ -23,17 +23,19 @@ const HomepageHeader = ({ title, info, buttonCollection }) => {
               ) : null}
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-3">
                 {buttonCollection.items.map((btn, i) => (
-                  <Button
-                    key={i}
-                    title={btn.title}
-                    type={btn.type}
-                    internal_link={
-                      btn.internalLink &&
-                      createSlug(btn.internalLink.slug, btn.internalLink.__typename)
-                    }
-                    external_link={btn.externalLink}
-                    extra_classes="sm:w-auto"
-                  />
+                  <div className="my-2" key={i}>
+                    <Button
+                      key={i}
+                      title={btn.title}
+                      type={btn.type}
+                      internal_link={
+                        btn.internalLink &&
+                        createSlug(btn.internalLink.slug, btn.internalLink.__typename)
+                      }
+                      external_link={btn.externalLink}
+                      extra_classes="sm:w-auto"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
