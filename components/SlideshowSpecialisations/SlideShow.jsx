@@ -70,7 +70,7 @@ const Slideshow = ({
                 title={specialisation.title}
                 subtitle={specialisation.subtitle}
                 href={specialisation}
-                description={specialisation.description.json}
+                description={specialisation.shortDescription}
                 button={specialisation.button}
               />
             ))}
