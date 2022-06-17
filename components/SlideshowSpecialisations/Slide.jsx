@@ -1,5 +1,4 @@
 // import Image from 'next/image';
-import setRichtTextToReactComponents from '../../lib/helpers/setRichTextToReactComponents';
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
 
@@ -20,9 +19,7 @@ const Slide = ({ key, image, imageUrl, imageAlt, title, subtitle, href, descript
           </p>
           <a href={href} className="block mt-2">
             <p className="text-xl font-semibold text-gray-900">{title}</p>
-            <p className="mt-3 text-base text-gray-500">
-              {description && setRichtTextToReactComponents(description)}
-            </p>
+            <p className="mt-3 text-base text-gray-500">{description && description}</p>
           </a>
           {button && (
             <div className="mt-9 mb-4">
