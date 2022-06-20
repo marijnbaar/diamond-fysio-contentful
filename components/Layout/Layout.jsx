@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Navigation from './Navigation';
 // import PreviewBar from './PreviewBar';
 // import Navigation from './Navigation';
-// import Footer from './Footer';
+import Footer from '../Footer';
 // preview, navigation
 const Layout = ({ footer, meta, children, navigation }) => {
   return (
@@ -18,7 +18,11 @@ const Layout = ({ footer, meta, children, navigation }) => {
       </Head>
       {navigation ? <Navigation navigation={navigation} /> : null}
       <main>{children}</main>
-      {footer ? <footer>{/* <Footer footer={footer} />{' '} */}</footer> : null}
+      {
+        // footer ?
+        <footer>{<Footer footer={footer} />}</footer>
+        // : null
+      }
     </>
   );
 };

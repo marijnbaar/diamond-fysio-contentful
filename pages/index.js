@@ -1,4 +1,3 @@
-import Homepage from '../components/Homepage';
 import { getPage } from '../lib/query/getData';
 import ComponentList from '../components/ComponentList';
 
@@ -16,7 +15,6 @@ const Home = ({ components }) => {
   return (
     <div>
       <ComponentList components={components} />
-      <Homepage />
     </div>
   );
 };
