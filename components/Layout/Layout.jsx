@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import Menu from '../Menu';
+import Navigation from './Navigation';
 // import PreviewBar from './PreviewBar';
 // import Navigation from './Navigation';
 // import Footer from './Footer';
 // preview, navigation
-const Layout = ({ footer, meta, children }) => {
+const Layout = ({ footer, meta, children, navigation }) => {
   return (
     <>
       <Head>
@@ -16,8 +16,7 @@ const Layout = ({ footer, meta, children }) => {
         ) : null}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* {navigation ? <Menu /> : null} */}
-      <Menu />
+      {navigation ? <Navigation navigation={navigation} /> : null}
       <main>{children}</main>
       {footer ? <footer>{/* <Footer footer={footer} />{' '} */}</footer> : null}
     </>

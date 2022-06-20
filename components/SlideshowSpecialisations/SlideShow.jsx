@@ -3,13 +3,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slide from './Slide';
 
-const Slideshow = ({
-  title,
-  subtitle,
-  description,
-  buttonCollection,
-  specialisationCollection
-}) => {
+const Slideshow = ({ title, subtitle, description, specialisationCollection }) => {
   const settings = {
     dots: true,
     fade: false,
@@ -44,7 +38,6 @@ const Slideshow = ({
       }
     ]
   };
-  console.log('test', buttonCollection, specialisationCollection);
   return (
     <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
       <div className="relative">

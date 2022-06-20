@@ -1,74 +1,28 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
+import createSlug from '../../lib/helpers/createSlug';
+import Link from 'next/link';
 import {
   CalendarIcon,
   MenuIcon,
   PhoneIcon,
   XIcon,
-  SparklesIcon,
-  EmojiHappyIcon,
-  MicrophoneIcon,
-  HeartIcon,
+  // SparklesIcon,
+  // EmojiHappyIcon,
+  // MicrophoneIcon,
+  // HeartIcon,
   CurrencyEuroIcon,
   LibraryIcon
 } from '@heroicons/react/outline';
 import {
   ChevronDownIcon,
-  HandIcon,
-  StatusOnlineIcon,
-  UserGroupIcon,
-  UsersIcon
+  // HandIcon,
+  // StatusOnlineIcon,
+  UserGroupIcon
+  // UsersIcon
 } from '@heroicons/react/solid';
 
-const specialisaties = [
-  {
-    name: 'Oefentherapie',
-    description: 'Leer een gezonde houding aan',
-    href: '#',
-    icon: EmojiHappyIcon
-  },
-  {
-    name: 'Manuele therapie',
-    description: 'Mobilisatie en manipulatie',
-    href: '#',
-    icon: HandIcon
-  },
-  {
-    name: 'Dry needling',
-    description: 'Behandeling myofasciale pijn met een accupunctuurnaald',
-    href: '#',
-    icon: SparklesIcon
-  },
-  {
-    name: 'Shockwave',
-    description: 'Natuurlijk herstel met drukgolven',
-    href: '#',
-    icon: StatusOnlineIcon
-  },
-  {
-    name: 'Pilates',
-    description: 'Verbeter je bewegingspatronen',
-    href: '#',
-    icon: UsersIcon
-  },
-  {
-    name: 'Podologie',
-    description: 'Optimaliseer de conditie van je voeten',
-    href: '#',
-    icon: HeartIcon
-  },
-  {
-    name: 'Vocal massage',
-    description: 'Verminder stijve spieren',
-    href: '#',
-    icon: MicrophoneIcon
-  }
-];
-const callsToAction = [
-  // { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Afspraak maken', href: '#', icon: PhoneIcon }
-];
 const resources = [
   {
     name: 'De praktijk',
@@ -96,7 +50,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Menu() {
+export default function Navigation({ navigation }) {
+  console.log(navigation);
   return (
     <Popover className="z-30 fixed top-0 bg-white w-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -149,38 +104,65 @@ export default function Menu() {
                     <Popover.Panel className="absolute z-20 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                          {specialisaties.map((item) => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                            >
-                              <item.icon
-                                className="flex-shrink-0 h-6 w-6 text-beige"
-                                aria-hidden="true"
-                              />
-                              <div className="ml-4">
-                                <p className="text-base font-medium text-gray-900">{item.name}</p>
-                                <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-                              </div>
-                            </a>
-                          ))}
+                          {navigation &&
+                            navigation.navigatieSubmenu[0].menuItems.map((menuItem) =>
+                              menuItem.internalLink || menuItem.externalLink ? (
+                                <Link
+                                  key={menuItem.sys.id}
+                                  href={
+                                    menuItem.internalLink
+                                      ? createSlug(
+                                          menuItem.internalLink.slug,
+                                          menuItem.internalLink.__typename
+                                        )
+                                      : menuItem.externalLink
+                                  }
+                                >
+                                  <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <div className="ml-4">
+                                      <a className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {menuItem.title && menuItem.title}
+                                      </a>
+                                      <p className="mt-1 text-sm text-gray-500">
+                                        {menuItem.description && menuItem.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              ) : (
+                                <div key={menuItem.sys.id} className="cursor-not-allowed">
+                                  {menuItem.title && menuItem.title}
+                                </div>
+                              )
+                            )}
                         </div>
                         <div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
-                          {callsToAction.map((item) => (
-                            <div key={item.name} className="flow-root">
-                              <a
-                                href={item.href}
-                                className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
-                              >
-                                <item.icon
-                                  className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                  aria-hidden="true"
-                                />
-                                <span className="ml-3">{item.name}</span>
-                              </a>
+                          {navigation.knop && (
+                            <div key={navigation.knop.title} className="flow-root">
+                              <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                                <Link
+                                  href={
+                                    navigation.knop.internalLink
+                                      ? createSlug(
+                                          navigation.knop.internalLink.slug,
+                                          navigation.knop.internalLink.__typename
+                                        )
+                                      : navigation.knop.externalLink
+                                  }
+                                >
+                                  <div className="flex cursor-pointer w-auto">
+                                    <PhoneIcon
+                                      className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                    <a className="text-base font-medium text-gray-400 hover:text-gray-500 ml-4">
+                                      {navigation.knop.title && navigation.knop.title}
+                                    </a>
+                                  </div>
+                                </Link>
+                              </div>
                             </div>
-                          ))}
+                          )}
                         </div>
                       </div>
                     </Popover.Panel>
@@ -189,9 +171,24 @@ export default function Menu() {
               )}
             </Popover>
 
-            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Ons team
-            </a>
+            {navigation.menuItems &&
+              navigation.menuItems.map((item) => (
+                <div key={item.title} className="flow-root">
+                  <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                    <Link
+                      href={
+                        item.internalLink
+                          ? createSlug(item.internalLink.slug, item.internalLink.__typename)
+                          : item.externalLink
+                      }
+                    >
+                      <a className="text-base font-medium text-gray-500 hover:text-gray-700">
+                        {item.title && item.title}
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              ))}
 
             <Popover className="relative">
               {({ open }) => (
@@ -249,12 +246,26 @@ export default function Menu() {
             </Popover>
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <a
-              href="#"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-400"
-            >
-              Afspraak maken
-            </a>
+            {navigation.knop && (
+              <div key={navigation.knop.title} className="flow-root">
+                <div className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-400">
+                  <Link
+                    href={
+                      navigation.knop.internalLink
+                        ? createSlug(
+                            navigation.knop.internalLink.slug,
+                            navigation.knop.internalLink.__typename
+                          )
+                        : navigation.knop.externalLink
+                    }
+                  >
+                    <a className="text-base font-medium ">
+                      {navigation.knop.title && navigation.knop.title}
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -291,28 +302,61 @@ export default function Menu() {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {specialisaties.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="-m-3 p-1 flex items-center rounded-md hover:bg-gray-50"
-                    >
-                      <item.icon className="flex-shrink-0 h-6 w-6 text-beige" aria-hidden="true" />
-                      <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
-                    </a>
-                  ))}
+                  {navigation &&
+                    navigation.navigatieSubmenu[0].menuItems.map((menuItem) =>
+                      menuItem.internalLink || menuItem.externalLink ? (
+                        <Link
+                          key={menuItem.sys.id}
+                          href={
+                            menuItem.internalLink
+                              ? createSlug(
+                                  menuItem.internalLink.slug,
+                                  menuItem.internalLink.__typename
+                                )
+                              : menuItem.externalLink
+                          }
+                        >
+                          <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <div className="ml-4">
+                              <a className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                                {menuItem.title && menuItem.title}
+                              </a>
+                              <p className="mt-1 text-sm text-gray-500">
+                                {menuItem.description && menuItem.description}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      ) : (
+                        <div key={menuItem.sys.id} className="cursor-not-allowed">
+                          {menuItem.title && menuItem.title}
+                        </div>
+                      )
+                    )}
                 </nav>
               </div>
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Ons team
-                </a>
+                {navigation.menuItems &&
+                  navigation.menuItems.map((item) => (
+                    <div key={item.title} className="flow-root">
+                      <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                        <Link
+                          href={
+                            item.internalLink
+                              ? createSlug(item.internalLink.slug, item.internalLink.__typename)
+                              : item.externalLink
+                          }
+                        >
+                          <a className="text-base font-medium text-gray-500 hover:text-gray-700">
+                            {item.title && item.title}
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
 
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Docs
-                </a>
                 {resources.map((item) => (
                   <a
                     key={item.name}
@@ -324,12 +368,26 @@ export default function Menu() {
                 ))}
               </div>
               <div>
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-400"
-                >
-                  Afspraak maken
-                </a>
+                {navigation.knop && (
+                  <div key={navigation.knop.title} className="flow-root">
+                    <div className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-400">
+                      <Link
+                        href={
+                          navigation.knop.internalLink
+                            ? createSlug(
+                                navigation.knop.internalLink.slug,
+                                navigation.knop.internalLink.__typename
+                              )
+                            : navigation.knop.externalLink
+                        }
+                      >
+                        <a className="text-base font-medium text-gray-400 hover:text-gray-500 ml-4">
+                          {navigation.knop.title && navigation.knop.title}
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

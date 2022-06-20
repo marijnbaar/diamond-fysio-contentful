@@ -4,10 +4,10 @@ import Layout from '../components/Layout/Layout';
 function MyApp({ Component, pageProps }) {
   return (
     <Layout
-    // navigation={pageProps.navigation}
-    // footer={pageProps.footer}
-    // meta={pageProps.meta_data}
-    // preview={pageProps.preview}
+      navigation={pageProps.navigation}
+      // footer={pageProps.footer}
+      // meta={pageProps.meta_data}
+      // preview={pageProps.preview}
     >
       <Component {...pageProps} />
     </Layout>
