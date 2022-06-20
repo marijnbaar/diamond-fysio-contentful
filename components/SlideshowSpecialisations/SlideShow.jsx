@@ -54,19 +54,20 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
         </div>
         <div className="mt-12 mx-auto max-w-md px-4 sm:max-w-lg sm:px-6 lg:px-8 lg:max-w-7xl slideshow-slick">
           <Slider {...settings}>
-            {specialisationCollection.items.map((specialisation, i) => (
-              <Slide
-                key={i}
-                image={specialisation.image}
-                imageUrl={specialisation.image.url}
-                imageAlt={specialisation.image.alt}
-                title={specialisation.title}
-                subtitle={specialisation.subtitle}
-                href={specialisation}
-                description={specialisation.shortDescription}
-                button={specialisation.button}
-              />
-            ))}
+            {specialisationCollection &&
+              specialisationCollection.items.map((specialisation, i) => (
+                <Slide
+                  key={i}
+                  image={specialisation.image}
+                  imageUrl={specialisation.image.url}
+                  imageAlt={specialisation.image.alt}
+                  title={specialisation.title}
+                  subtitle={specialisation.subtitle}
+                  href={specialisation}
+                  description={specialisation.shortDescription}
+                  button={specialisation.button}
+                />
+              ))}
           </Slider>
         </div>
       </div>
