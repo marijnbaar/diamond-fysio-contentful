@@ -1,5 +1,6 @@
 import HomepageHeader from './HomepageHeader';
 import TeampageHeader from './TeampageHeader';
+import AboutpageHeader from './AboutpageHeader';
 
 const HeaderList = (headerProps) => {
   switch (headerProps.__typename) {
@@ -8,6 +9,9 @@ const HeaderList = (headerProps) => {
     }
     case 'Teampage': {
       return <TeampageHeader {...headerProps} />;
+    }
+    case 'Aboutpage': {
+      return <AboutpageHeader {...headerProps} />;
     }
 
     default:

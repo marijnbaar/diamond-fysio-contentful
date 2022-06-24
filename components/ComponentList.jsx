@@ -10,6 +10,8 @@ import TeampageHeader from './Headers/TeampageHeader';
 import SpecialisationHeader from './Headers/SpecialisationpageHeader';
 import Specialisation from './Specialisation';
 import Slideshow from './SlideshowSpecialisations/SlideShow';
+import AboutInformation from './AboutInformation';
+import AboutpageHeader from './Headers/AboutpageHeader';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -20,6 +22,9 @@ const ComponentList = ({ components }) =>
         }
         case 'HeaderTeampage': {
           return <TeampageHeader key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'HeaderAboutpage': {
+          return <AboutpageHeader key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'HeaderSpecialisationpage': {
           return (
@@ -52,6 +57,9 @@ const ComponentList = ({ components }) =>
         }
         case 'Specialisation': {
           return <Specialisation key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'AboutComponent': {
+          return <AboutInformation key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }

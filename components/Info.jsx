@@ -21,8 +21,8 @@ export default function Info({ title, subtitle, description, image }) {
         <div className="mt-12 -mb-1 sm:-mb-24 lg:-mb-40 h-full">
           <img
             className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
-            src={image.url}
-            alt=""
+            src={image && image.url}
+            alt={image && image.description}
           />
         </div>
       </div>
