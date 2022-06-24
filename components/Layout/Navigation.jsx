@@ -51,20 +51,19 @@ function classNames(...classes) {
 }
 
 export default function Navigation({ navigation }) {
-  console.log(navigation);
   return (
     <Popover className="z-30 fixed top-0 bg-white w-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
-              <span className="sr-only">Workflow</span>
+          <div className="flex justify-start lg:w-0 lg:flex-1 cursor-pointer">
+            <span className="sr-only">Diamond fysio</span>
+            <Link href="/">
               <img
-                className="h-14 w-auto sm:h-10"
-                src="https://ucea83a2e499bd4d30a85e11f6c2.previews.dropboxusercontent.com/p/thumb/ABaC5HISAYbeBFrtJHnQsWVCVpBYTQCh-Ftc7supgFoC2xA20omqk21X5zbPI2CYhIwmCsrFqoo85LPrj85XzqbgVi7Njmlb5cH97gMSBVf9mPcbT-9QGNQ3HKSNNQCEsbp7TVTAvOvIXQU96UfsCUOe7H17Kqd82O9QgXy2D56qO7pkM8Bb-ci2ZSu30WRfWCjrMXtbNzfG_MmADW2qXKTQX7DqU1DPFYeHe6NoBTon4lh1MwrMIxkAbfeuD7N4e-zZt1vQvbtANwc_bh7bbmrDYfGNsHw58Y788G8mdT5tE4ARUrik28RBeNrYb4sUkJFdpKmuw6x3fmKLCH-UFN3nDQ8XCC8-uxcQDGiESiaB_eyfIZmtnNBo-d1aR_uN6wM/p.png"
-                alt=""
+                className="h-14"
+                src={navigation.logo && navigation.logo.url}
+                alt={navigation.logo.description && navigation.logo.description}
               />
-            </a>
+            </Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
@@ -287,11 +286,14 @@ export default function Navigation({ navigation }) {
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://ucea83a2e499bd4d30a85e11f6c2.previews.dropboxusercontent.com/p/thumb/ABaC5HISAYbeBFrtJHnQsWVCVpBYTQCh-Ftc7supgFoC2xA20omqk21X5zbPI2CYhIwmCsrFqoo85LPrj85XzqbgVi7Njmlb5cH97gMSBVf9mPcbT-9QGNQ3HKSNNQCEsbp7TVTAvOvIXQU96UfsCUOe7H17Kqd82O9QgXy2D56qO7pkM8Bb-ci2ZSu30WRfWCjrMXtbNzfG_MmADW2qXKTQX7DqU1DPFYeHe6NoBTon4lh1MwrMIxkAbfeuD7N4e-zZt1vQvbtANwc_bh7bbmrDYfGNsHw58Y788G8mdT5tE4ARUrik28RBeNrYb4sUkJFdpKmuw6x3fmKLCH-UFN3nDQ8XCC8-uxcQDGiESiaB_eyfIZmtnNBo-d1aR_uN6wM/p.png"
-                    alt="Workflow"
-                  />
+                  <Link href="/">
+                    <span className="sr-only">Diamond fysio</span>
+                    <img
+                      className="h-14"
+                      src={navigation.logo && navigation.logo.url}
+                      alt={navigation.logo.description && navigation.logo.description}
+                    />
+                  </Link>
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">

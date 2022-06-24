@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Layout
       navigation={pageProps.navigation}
-      // footer={pageProps.footer}
+      footer={pageProps.footer}
       // meta={pageProps.meta_data}
       // preview={pageProps.preview}
     >
