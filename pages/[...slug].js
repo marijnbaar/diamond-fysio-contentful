@@ -19,6 +19,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const slug = `/${params.slug.join('/')}`;
   const modelId = await getTypeName(slug, preview, queryAllPages);
   const pageData = (await getPage(modelId, slug, preview)) ?? [];
+  console.log('j', pageData);
   return {
     props: {
       ...pageData,

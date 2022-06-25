@@ -1,6 +1,6 @@
 import HomepageHeader from './HomepageHeader';
 import TeampageHeader from './TeampageHeader';
-import AboutpageHeader from './AboutpageHeader';
+import AboutpageHeader from './GenericpageHeader';
 
 const HeaderList = (headerProps) => {
   switch (headerProps.__typename) {
