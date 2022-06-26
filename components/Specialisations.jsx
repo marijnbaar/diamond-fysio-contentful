@@ -1,4 +1,4 @@
-import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export default function Specialisations({
   title,
@@ -28,7 +28,7 @@ export default function Specialisations({
                 {specialisation.image && (
                   <div className="flex-shrink-0">
                     <img
-                      className=" h-56 w-full object-cover"
+                      className="h-56 w-full object-cover"
                       src={specialisation.image.url}
                       alt={specialisation.image.alt && specialisation.image.alt}
                     />
@@ -43,10 +43,10 @@ export default function Specialisations({
                     </p>
                     <a href={specialisation} className="block mt-2">
                       <p className="text-xl font-semibold text-gray-900">{specialisation.title}</p>
-                      <p className="mt-3 text-base text-gray-500">
+                      <div className="prose mt-3 text-base text-gray-500">
                         {specialisation.description &&
-                          setRichtTextToReactComponents(specialisation.description.json)}
-                      </p>
+                          documentToReactComponents(specialisation.description.json)}
+                      </div>
                     </a>
                   </div>
                 </div>

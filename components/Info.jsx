@@ -1,5 +1,4 @@
-import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
-// import Image from 'next/image';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export default function Info({ title, subtitle, description, image }) {
   return (
@@ -13,8 +12,8 @@ export default function Info({ title, subtitle, description, image }) {
             {title}
           </p>
           <div>
-            <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-              {description && setRichtTextToReactComponents(description.json)}
+            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+              {description && documentToReactComponents(description.json)}
             </p>
           </div>
         </div>

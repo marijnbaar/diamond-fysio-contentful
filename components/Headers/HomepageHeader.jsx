@@ -1,6 +1,6 @@
-import setRichtTextToReactComponents from '../../lib/helpers/setRichTextToReactComponents';
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const HomepageHeader = ({ title, info, buttonCollection }) => {
   return (
@@ -11,14 +11,13 @@ const HomepageHeader = ({ title, info, buttonCollection }) => {
           <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
             <div className="sm:text-center lg:text-left">
               {title?.json ? (
-                <h1 className="text-4xl tracking-tight font-manrope font-extrabold text-white sm:text-5xl md:text-6xl">
-                  {setRichtTextToReactComponents(title.json)}
+                <h1 className="prose text-4xl tracking-tight font-manrope font-extrabold text-white sm:text-5xl md:text-6xl">
+                  {documentToReactComponents(title.json)}
                 </h1>
               ) : null}
-
               {info?.json ? (
-                <div className="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  {setRichtTextToReactComponents(info.json)}
+                <div className="prose mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                  {documentToReactComponents(info.json)}
                 </div>
               ) : null}
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-3">

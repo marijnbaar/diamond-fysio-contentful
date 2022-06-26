@@ -1,4 +1,4 @@
-import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export default function Text({ title, subtitle, description, longDescription }) {
   return (
@@ -14,15 +14,15 @@ export default function Text({ title, subtitle, description, longDescription }) 
             </p>
           </div>
           <div>
-            <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-              {description && setRichtTextToReactComponents(description.json)}
+            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+              {description && documentToReactComponents(description.json)}
             </p>
           </div>
         </div>
         <div className="mt-10">
           <div>
-            <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-              {longDescription && setRichtTextToReactComponents(longDescription.json)}
+            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+              {longDescription && documentToReactComponents(longDescription.json)}
             </p>
           </div>
         </div>
