@@ -14,14 +14,14 @@ export default function Text({ title, subtitle, description, longDescription }) 
             </p>
           </div>
           <div>
-            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+            <p className="prose mt-5 mx-auto text-gray-500">
               {description && documentToReactComponents(description.json)}
             </p>
           </div>
         </div>
         <div className="mt-10">
           <div>
-            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+            <p className="prose mt-5 mx-auto text-gray-500">
               {longDescription && documentToReactComponents(longDescription.json)}
             </p>
           </div>
