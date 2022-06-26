@@ -1,6 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-export default function SpecialisationHeader({ title, description, descriptionRichText, image }) {
+export default function SpecialisationHeader({ title, descriptionRichText, image }) {
   return (
     <div className="relative bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -20,13 +20,9 @@ export default function SpecialisationHeader({ title, description, descriptionRi
               <h1 className="text-4xl tracking-tight font-manrope font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                 <span className="block xl:inline">{title && title}</span>
               </h1>
-              {descriptionRichText ? (
+              {descriptionRichText && (
                 <p className="prose mt-3 text-base font-manrope text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                   {documentToReactComponents(descriptionRichText.json)}
-                </p>
-              ) : (
-                <p className="mt-3 text-base font-manrope text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  {description && description}
                 </p>
               )}
             </div>
