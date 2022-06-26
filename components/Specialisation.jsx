@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const Specialisation = ({ image, description, subtitle }) => {
   return (
@@ -12,7 +12,7 @@ const Specialisation = ({ image, description, subtitle }) => {
             flex flex-col lg:grid lg:grid-cols-12 z-10 relative"
           >
             <div className="order-3 lg:translate-y-0 order-0 lg:order-none lg:col-span-5 relative">
-              <div className="z-10 h-[580px] xl-[355px] w-full relative">
+              <div className="z-10 h-full xl-[355px] w-full relative">
                 {image && (
                   <Image src={image.url} alt={image.description} layout="fill" objectFit="cover" />
                 )}
@@ -24,8 +24,8 @@ const Specialisation = ({ image, description, subtitle }) => {
               </h2>
 
               {description && (
-                <p className="pb-4 mt-2 lg:pb-24 text-base text-gray-500">
-                  {setRichtTextToReactComponents(description.json)}
+                <p className="prose pb-4 mt-2 lg:pb-24 text-base text-gray-500">
+                  {documentToReactComponents(description.json)}
                 </p>
               )}
             </div>

@@ -1,4 +1,4 @@
-import setRichtTextToReactComponents from '../lib/helpers/setRichTextToReactComponents';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import {
   AnnotationIcon,
@@ -46,8 +46,8 @@ export default function AboutInformation({ title, subtitle, description }) {
             {title}
           </p>
           <div>
-            <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-              {description && setRichtTextToReactComponents(description.json)}
+            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+              {description && documentToReactComponents(description.json)}
             </p>
           </div>
         </div>
