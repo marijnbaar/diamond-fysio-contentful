@@ -1,6 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-export default function Text({ title, subtitle, description, longDescription }) {
+export default function Text({ title, subtitle, description }) {
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,13 +16,6 @@ export default function Text({ title, subtitle, description, longDescription }) 
           <div>
             <p className="prose mt-5 mx-auto text-gray-500">
               {description && documentToReactComponents(description.json)}
-            </p>
-          </div>
-        </div>
-        <div className="mt-10">
-          <div>
-            <p className="prose mt-5 mx-auto text-gray-500">
-              {longDescription && documentToReactComponents(longDescription.json)}
             </p>
           </div>
         </div>
