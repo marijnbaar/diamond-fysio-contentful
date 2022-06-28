@@ -15,8 +15,8 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
           dots: true
         }
@@ -24,9 +24,9 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1
         }
       },
       {
@@ -52,7 +52,7 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
             {description && description}
           </p>
         </div>
-        <div className="mt-12 mx-auto max-w-md px-4 sm:max-w-lg sm:px-6 lg:px-8 lg:max-w-7xl slideshow-slick">
+        <div className="mt-12 mx-auto max-w-md px-4 sm:max-w-lg sm:px-1 lg:px-8 lg:max-w-7xl slideshow-slick">
           <Slider {...settings}>
             {specialisationCollection &&
               specialisationCollection.items.map((specialisation, i) => (
