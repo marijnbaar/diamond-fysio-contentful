@@ -54,8 +54,8 @@ const SlideshowTestimonials = ({ image, testimonialCollection }) => {
               </div>
             </div>
           </div>
-          <div className="mt-12 lg:m-0 lg:col-span-2 lg:pl-8">
-            <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
+          <div className="mt-12 lg:m-2 lg:col-span-2 lg:pl-8">
+            <div className="mx-auto max-w-md px-8 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
               <Slider {...settings}>
                 {testimonialCollection.items.map((testimonial, i) => (
                   <TestimonialSlide
