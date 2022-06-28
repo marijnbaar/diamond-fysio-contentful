@@ -1,7 +1,6 @@
 import HomepageHeader from './Headers/HomepageHeader';
 import Highlight from './Highlight';
 import Info from './Info';
-import Testimonial from './Testimonial';
 import Team from './Team';
 import CTA from './CTA';
 import Teammember from './Teammember';
@@ -10,6 +9,7 @@ import TeampageHeader from './Headers/TeampageHeader';
 import SpecialisationHeader from './Headers/SpecialisationpageHeader';
 import Specialisation from './Specialisation';
 import Slideshow from './SlideshowSpecialisations/SlideShow';
+import SlideshowTestimonials from './SlideshowTestimonials/SlideShow';
 import AboutInformation from './AboutInformation';
 import GenericpageHeader from './Headers/GenericpageHeader';
 import Text from './Text';
@@ -44,11 +44,13 @@ const ComponentList = ({ components }) =>
         case 'SpecialisationHomeOverview': {
           return <Slideshow key={component.sys.id} id={component.sys.id} {...component} />;
         }
+        case 'TestimonialHomeOverview': {
+          return (
+            <SlideshowTestimonials key={component.sys.id} id={component.sys.id} {...component} />
+          );
+        }
         case 'Info': {
           return <Info key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'Testimonial': {
-          return <Testimonial key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'TeamOverview': {
           return <Team key={component.sys.id} id={component.sys.id} {...component} />;
