@@ -4,7 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 const HomepageHeader = ({ title, info, buttonCollection }) => {
   return (
-    <div className="relative pt-16 pb-32 flex content-center items-center justify-center h-screen">
+    <div className="relative mt-20 lg:mt-0 pt-16 pb-11 lg:p-0 flex content-center items-center justify-center h-5/6 lg:h-screen">
       <div className="bg-landing-background bg-cover bg-center absolute top-0 w-full h-full" />
       <div className="container max-w-8xl relative mx-auto">
         <div className="items-center flex flex-wrap">

@@ -98,7 +98,8 @@ module.exports = {
         grey: {
           dark: '#B2B2B2',
           default: '#E5E5E5',
-          light: '#F9F9F9'
+          light: '#F9F9F9',
+          lightGreen: '#c5cec8'
         },
         red: '#412378',
         yellow: '#412378',
