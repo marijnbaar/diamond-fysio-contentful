@@ -13,6 +13,7 @@ import SlideshowTestimonials from './SlideshowTestimonials/SlideShow';
 import AboutInformation from './AboutInformation';
 import GenericpageHeader from './Headers/GenericpageHeader';
 import Text from './Text';
+import Appointment from './Appointment';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -72,6 +73,9 @@ const ComponentList = ({ components }) =>
         }
         case 'Text': {
           return <Text key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'AppointmentCardOverview': {
+          return <Appointment key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }

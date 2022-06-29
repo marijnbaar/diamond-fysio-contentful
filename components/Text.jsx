@@ -4,8 +4,8 @@ export default function Text({ title, subtitle, description }) {
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:text-left">
-          <div className="lg:text-center">
+        <div>
+          <div className="text-center">
             <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
               {subtitle}
             </h2>
