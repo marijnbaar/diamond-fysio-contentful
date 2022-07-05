@@ -27,26 +27,24 @@
 
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 
-const offices = [
-  {
-    id: 1,
-    city: 'Los Angeles',
-    address: ['4556 Brendan Ferry', 'Los Angeles, CA 90210']
-  },
-  {
-    id: 2,
-    city: 'New York',
-    address: ['886 Walter Streets', 'New York, NY 12345']
-  },
-  {
-    id: 3,
-    city: 'Toronto',
-    address: ['7363 Cynthia Pass', 'Toronto, ON N3Y 4H8']
-  },
-  { id: 4, city: 'London', address: ['114 Cobble Lane', 'London N1 2EF'] }
-];
-
 export default function Example() {
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+
+    const formData = {};
+
+    Array.from(e.currentTarget.elements).forEach((field) => {
+      if (!field.name) return;
+      formData[field.name] = field.value;
+    });
+
+    console.log(formData);
+
+    await fetch('/api/mail', {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    });
+  }
   return (
     <div className="bg-white">
       <main className="overflow-hidden">
@@ -264,10 +262,11 @@ export default function Example() {
                     action="#"
                     method="POST"
                     className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+                    onSubmit={handleOnSubmit}
                   >
                     <div>
                       <label
-                        htmlFor="first-name"
+                        htmlFor="firstname"
                         className="block text-sm font-medium text-warm-gray-900"
                       >
                         First name
@@ -275,8 +274,8 @@ export default function Example() {
                       <div className="mt-1">
                         <input
                           type="text"
-                          name="first-name"
-                          id="first-name"
+                          name="firstname"
+                          id="firstname"
                           autoComplete="given-name"
                           className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
@@ -284,7 +283,7 @@ export default function Example() {
                     </div>
                     <div>
                       <label
-                        htmlFor="last-name"
+                        htmlFor="lastname"
                         className="block text-sm font-medium text-warm-gray-900"
                       >
                         Last name
@@ -292,8 +291,8 @@ export default function Example() {
                       <div className="mt-1">
                         <input
                           type="text"
-                          name="last-name"
-                          id="last-name"
+                          name="lastname"
+                          id="lastname"
                           autoComplete="family-name"
                           className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                         />
@@ -389,33 +388,6 @@ export default function Example() {
                   </form>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact grid */}
-        <section aria-labelledby="offices-heading">
-          <div className="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h2 id="offices-heading" className="text-3xl font-extrabold text-warm-gray-900">
-              Our offices
-            </h2>
-            <p className="mt-6 text-lg text-warm-gray-500 max-w-3xl">
-              Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non.
-              Cras aliquet purus dui laoreet diam sed lacus, fames.
-            </p>
-            <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-              {offices.map((office) => (
-                <div key={office.id}>
-                  <h3 className="text-lg font-medium text-warm-gray-900">{office.city}</h3>
-                  <p className="mt-2 text-base text-warm-gray-500">
-                    {office.address.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </p>
-                </div>
-              ))}
             </div>
           </div>
         </section>
