@@ -25,9 +25,13 @@
   ```
 */
 
+import ReCAPTCHA from 'react-google-recaptcha';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
+import react from 'react';
 
 export default function Example() {
+  const reRef = react.createRef();
+
   async function handleOnSubmit(e) {
     e.preventDefault();
 
@@ -37,12 +41,15 @@ export default function Example() {
       if (!field.name) return;
       formData[field.name] = field.value;
     });
-
-    console.log(formData);
+    const token = await reRef.current.executeAsync();
+    reRef.current.reset();
 
     await fetch('/api/mail', {
       method: 'POST',
-      body: JSON.stringify(formData)
+      body: JSON.stringify({
+        formData,
+        token
+      })
     });
   }
   return (
@@ -312,6 +319,7 @@ export default function Example() {
                           type="email"
                           autoComplete="email"
                           className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
+                          required
                         />
                       </div>
                     </div>
@@ -376,6 +384,13 @@ export default function Example() {
                           defaultValue={''}
                         />
                       </div>
+                    </div>
+                    <div className="justify-end">
+                      <ReCAPTCHA
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                        size="invisible"
+                        ref={reRef}
+                      />
                     </div>
                     <div className="sm:col-span-2 sm:flex sm:justify-end">
                       <button
