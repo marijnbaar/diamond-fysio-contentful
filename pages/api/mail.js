@@ -18,7 +18,7 @@ async function validateHuman(token) {
 export default async function handler(req, res) {
   const body = JSON.parse(req.body);
 
-  const human = await validateHuman(body.token);
+  const human = await validateHuman(req.token);
   if (!human) {
     res.status(400);
     res.json({ errors: 'You must be human to fill in this form' });

@@ -46,10 +46,8 @@ export default function Example() {
 
     await fetch('/api/mail', {
       method: 'POST',
-      body: JSON.stringify({
-        formData,
-        token
-      })
+      body: JSON.stringify(formData),
+      token: JSON.stringify(token)
     });
   }
   return (
