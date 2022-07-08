@@ -14,6 +14,7 @@ import AboutInformation from './AboutInformation';
 import GenericpageHeader from './Headers/GenericpageHeader';
 import Text from './Text';
 import Appointment from './Appointment';
+import Contact from './Contact';
 
 const ComponentList = ({ components }) =>
   components.map((component) => {
@@ -70,6 +71,9 @@ const ComponentList = ({ components }) =>
         }
         case 'AboutComponent': {
           return <AboutInformation key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'ContactComponent': {
+          return <Contact key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Text': {
           return <Text key={component.sys.id} id={component.sys.id} {...component} />;
