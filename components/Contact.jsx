@@ -29,7 +29,14 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 import react from 'react';
 
-export default function Example() {
+export default function Contact({
+  title,
+  description,
+  subtitle,
+  contactDescription,
+  phonenumber,
+  email
+}) {
   const reRef = react.createRef();
 
   async function handleOnSubmit(e) {
@@ -58,11 +65,10 @@ export default function Example() {
           <div className="py-24 lg:py-32">
             <div className="relative z-10 max-w-7xl mx-auto pl-4 pr-8 sm:px-6 lg:px-8">
               <h1 className="text-4xl font-extrabold tracking-tight text-warm-gray-900 sm:text-5xl lg:text-6xl">
-                Get in touch
+                {title && title}
               </h1>
               <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl">
-                Vel nunc non ut montes, viverra tempor. Proin lectus nibh phasellus morbi non morbi.
-                In elementum urna ut volutpat. Sagittis et vel et fermentum amet consequat.
+                {description && description}
               </p>
             </div>
           </div>
@@ -71,12 +77,11 @@ export default function Example() {
         {/* Contact section */}
         <section className="relative bg-white" aria-labelledby="contact-heading">
           <div className="absolute w-full h-1/2 bg-warm-gray-50" aria-hidden="true" />
-          {/* Decorative dot pattern */}
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-7">
             <div className="relative bg-white shadow-xl">
               <h2 id="contact-heading" className="sr-only">
-                Contact us
+                {subtitle && subtitle}
               </h2>
 
               <div className="grid grid-cols-1 lg:grid-cols-3">
@@ -182,10 +187,9 @@ export default function Example() {
                       </defs>
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-white">Contact information</h3>
+                  <h3 className="text-lg font-medium text-white">{subtitle && subtitle}</h3>
                   <p className="mt-6 text-base text-teal-50 max-w-3xl">
-                    Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst
-                    amet. Sapien tortor lacus arcu.
+                    {contactDescription && contactDescription}
                   </p>
                   <dl className="mt-8 space-y-6">
                     <dt>
@@ -196,7 +200,7 @@ export default function Example() {
                         className="flex-shrink-0 w-6 h-6 text-teal-200"
                         aria-hidden="true"
                       />
-                      <span className="ml-3">+1 (555) 123-4567</span>
+                      <span className="ml-3">{phonenumber && phonenumber}</span>
                     </dd>
                     <dt>
                       <span className="sr-only">Email</span>
@@ -206,7 +210,7 @@ export default function Example() {
                         className="flex-shrink-0 w-6 h-6 text-teal-200"
                         aria-hidden="true"
                       />
-                      <span className="ml-3">support@workcation.com</span>
+                      <span className="ml-3">{email && email}</span>
                     </dd>
                   </dl>
                   <ul role="list" className="mt-8 flex space-x-12">
@@ -258,6 +262,16 @@ export default function Example() {
                       </a>
                     </li>
                   </ul>
+                  <div className=" p-4 mt-8">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.432796832136!2d4.9049229732259505!3d52.362571890779066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6095f2e60b59d%3A0xad61fcbb485f6074!2sFysio%20Diamond%20Factory!5e0!3m2!1snl!2sus!4v1657196883469!5m2!1snl!2sus"
+                      width="270"
+                      height="350"
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
                 </div>
 
                 {/* Contact form */}
