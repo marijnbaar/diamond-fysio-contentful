@@ -18,48 +18,31 @@ const MyLink = forwardRef((props, ref) => {
 
 MyLink.displayName = 'MyLink';
 
-import {
-  CalendarIcon,
-  MenuIcon,
-  PhoneIcon,
-  XIcon,
-  // SparklesIcon,
-  // EmojiHappyIcon,
-  // MicrophoneIcon,
-  // HeartIcon,
-  CurrencyEuroIcon,
-  LibraryIcon
-} from '@heroicons/react/outline';
-import {
-  ChevronDownIcon,
-  // HandIcon,
-  // StatusOnlineIcon,
-  UserGroupIcon
-  // UsersIcon
-} from '@heroicons/react/solid';
+import { MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/solid';
 
-const resources = [
-  {
-    name: 'De praktijk',
-    // description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
-    icon: LibraryIcon
-  },
-  {
-    name: 'Ons team',
-    // description: 'Learn how to maximize our platform to get the most out of it.',
-    href: '#',
-    icon: UserGroupIcon
-  },
-  {
-    name: 'Contact',
-    // description: 'See what meet-ups and other events we might be planning near you.',
-    href: '#',
-    icon: CalendarIcon
-  },
-  { name: 'Tarieven', href: '#', icon: CurrencyEuroIcon }
-  // { name: 'Huisregels', href: '#', icon: ClipboardList },
-];
+// const resources = [
+//   {
+//     name: 'De praktijk',
+//     // description: 'Get all of your questions answered in our forums or contact support.',
+//     href: '#',
+//     icon: LibraryIcon
+//   },
+//   {
+//     name: 'Ons team',
+//     // description: 'Learn how to maximize our platform to get the most out of it.',
+//     href: '#',
+//     icon: UserGroupIcon
+//   },
+//   {
+//     name: 'Contact',
+//     // description: 'See what meet-ups and other events we might be planning near you.',
+//     href: '#',
+//     icon: CalendarIcon
+//   },
+//   { name: 'Tarieven', href: '#', icon: CurrencyEuroIcon }
+//   // { name: 'Huisregels', href: '#', icon: ClipboardList },
+// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -185,25 +168,6 @@ export default function Navigation({ navigation }) {
               )}
             </Popover>
 
-            {navigation.menuItems &&
-              navigation.menuItems.map((item) => (
-                <div key={item.title} className="flow-root">
-                  <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
-                    <MyLink
-                      href={
-                        item.internalLink
-                          ? createSlug(item.internalLink.slug, item.internalLink.__typename)
-                          : item.externalLink
-                      }
-                    >
-                      <a className="text-base font-medium text-gray-500 hover:text-gray-700">
-                        {item.title && item.title}
-                      </a>
-                    </MyLink>
-                  </div>
-                </div>
-              ))}
-
             <Popover className="relative">
               {({ open }) => (
                 <>
@@ -232,32 +196,66 @@ export default function Navigation({ navigation }) {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute z-20 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+                    <Popover className="absolute z-20 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                          {resources.map((item) => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                            >
-                              <item.icon
-                                className="flex-shrink-0 h-6 w-6 text-beige"
-                                aria-hidden="true"
-                              />
-                              <div className="ml-4">
-                                <p className="text-base font-medium text-gray-900">{item.name}</p>
-                                <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-                              </div>
-                            </a>
-                          ))}
+                          {navigation &&
+                            navigation.navigatieSubmenu[1].menuItems.map((menuItem) =>
+                              menuItem.internalLink || menuItem.externalLink ? (
+                                <MyLink
+                                  key={menuItem.sys.id}
+                                  href={
+                                    menuItem.internalLink
+                                      ? createSlug(
+                                          menuItem.internalLink.slug,
+                                          menuItem.internalLink.__typename
+                                        )
+                                      : menuItem.externalLink
+                                  }
+                                >
+                                  <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <div className="ml-4">
+                                      <a className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                                        {menuItem.title && menuItem.title}
+                                      </a>
+                                      <p className="mt-1 text-sm text-gray-500">
+                                        {menuItem.description && menuItem.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </MyLink>
+                              ) : (
+                                <div key={menuItem.sys.id} className="cursor-not-allowed">
+                                  {menuItem.title && menuItem.title}
+                                </div>
+                              )
+                            )}
                         </div>
                       </div>
-                    </Popover.Panel>
+                    </Popover>
                   </Transition>
                 </>
               )}
             </Popover>
+
+            {navigation.menuItems &&
+              navigation.menuItems.map((item) => (
+                <div key={item.title} className="flow-root">
+                  <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                    <MyLink
+                      href={
+                        item.internalLink
+                          ? createSlug(item.internalLink.slug, item.internalLink.__typename)
+                          : item.externalLink
+                      }
+                    >
+                      <a className="text-base font-medium text-gray-500 hover:text-gray-700">
+                        {item.title && item.title}
+                      </a>
+                    </MyLink>
+                  </div>
+                </div>
+              ))}
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             {navigation.knop && (
@@ -374,15 +372,30 @@ export default function Navigation({ navigation }) {
                     </div>
                   ))}
 
-                {resources.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                {navigation &&
+                  navigation.navigatieSubmenu[1].menuItems.map((menuItem) =>
+                    menuItem.internalLink || menuItem.externalLink ? (
+                      <MyLink
+                        key={menuItem.sys.id}
+                        href={
+                          menuItem.internalLink
+                            ? createSlug(
+                                menuItem.internalLink.slug,
+                                menuItem.internalLink.__typename
+                              )
+                            : menuItem.externalLink
+                        }
+                      >
+                        <a className="text-base font-medium text-gray-900 hover:text-gray-700">
+                          {menuItem.title && menuItem.title}
+                        </a>
+                      </MyLink>
+                    ) : (
+                      <div key={menuItem.sys.id} className="cursor-not-allowed">
+                        {menuItem.title && menuItem.title}
+                      </div>
+                    )
+                  )}
               </div>
               <div>
                 {navigation.knop && (
@@ -398,7 +411,7 @@ export default function Navigation({ navigation }) {
                             : navigation.knop.externalLink
                         }
                       >
-                        <a className="text-base font-medium text-gray-400 hover:text-gray-500 ml-4">
+                        <a className="text-base font-medium text-white hover:text-gray-500 ml-4">
                           {navigation.knop.title && navigation.knop.title}
                         </a>
                       </MyLink>
