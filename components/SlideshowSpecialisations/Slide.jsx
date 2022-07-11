@@ -2,7 +2,7 @@
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
 
-const Slide = ({ key, image, imageUrl, imageAlt, title, description, button }) => {
+const Slide = ({ key, image, imageUrl, imageAlt, title, description, button, subtitle }) => {
   return (
     <div key={key} className="m-2 flex flex-col rounded-lg shadow-lg overflow-hidden">
       {image && (
@@ -13,7 +13,7 @@ const Slide = ({ key, image, imageUrl, imageAlt, title, description, button }) =
       <div className="flex-1 bg-white p-4 lg:p-6 flex flex-col justify-between">
         <div className="flex-1 ">
           <p className="text-sm font-medium text-cyan-600">
-            <p className="hover:underline">{title}</p>
+            <p className="hover:underline">{subtitle}</p>
           </p>
           <div className="block break-words mt-2">
             <p className="text-xl font-semibold text-gray-900">{title && title}</p>
