@@ -38,7 +38,7 @@ export default function Specialisations({
                   <div className="flex-1">
                     <p className="text-sm font-medium text-cyan-600">
                       <a href={specialisation.subtitle} className="hover:underline">
-                        {specialisation.title}
+                        {specialisation.subtitle}
                       </a>
                     </p>
                     <a href={specialisation} className="block mt-2">
