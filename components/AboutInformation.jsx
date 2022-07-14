@@ -14,9 +14,9 @@ export default function AboutInformation({ title, subtitle, description, aboutFe
             {title}
           </p>
           <div>
-            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+            <div className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
               {description && documentToReactComponents(description.json)}
-            </p>
+            </div>
           </div>
         </div>
         <div className="mt-10">

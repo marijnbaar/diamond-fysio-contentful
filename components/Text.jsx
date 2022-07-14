@@ -14,9 +14,9 @@ export default function Text({ title, subtitle, description }) {
             </p>
           </div>
           <div>
-            <p className="prose mt-5 mx-auto text-gray-500">
+            <div className="prose mt-5 mx-auto text-gray-500">
               {description && documentToReactComponents(description.json)}
-            </p>
+            </div>
           </div>
         </div>
       </div>

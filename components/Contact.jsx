@@ -292,7 +292,7 @@ export default function Contact({
                       height="350"
                       allowFullScreen=""
                       loading="lazy"
-                      referrerpolicy="no-referrer-when-downgrade"
+                      referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                   </div>
                 </div>

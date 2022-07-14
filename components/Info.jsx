@@ -12,9 +12,9 @@ export default function Info({ title, subtitle, description, image }) {
             {title}
           </p>
           <div>
-            <p className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
+            <div className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
               {description && documentToReactComponents(description.json)}
-            </p>
+            </div>
           </div>
         </div>
         <div className="mt-12 -mb-1 sm:-mb-24 lg:-mb-40 h-full">

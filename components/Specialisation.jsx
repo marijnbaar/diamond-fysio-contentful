@@ -24,9 +24,9 @@ const Specialisation = ({ image, description, subtitle }) => {
               </h2>
 
               {description && (
-                <p className="prose pb-4 mt-2 lg:pb-24 text-base text-gray-500">
+                <div className="prose pb-4 mt-2 lg:pb-24 text-base text-gray-500">
                   {documentToReactComponents(description.json)}
-                </p>
+                </div>
               )}
             </div>
           </div>
