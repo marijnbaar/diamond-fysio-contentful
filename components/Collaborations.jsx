@@ -14,13 +14,14 @@ export default function Collaborations({ title, subtitle, logoCollection }) {
         </div>
         <div className="mt-5 lg:mt-12 flex flex-col flex-wrap justify-center lg:flex-row mb-24 lg:mb-6 h-full">
           {logoCollection &&
-            logoCollection.items.map((logo) => (
-              <img
-                key={logo.id}
-                className=" h-28 w-96 bg-white p-4 my-4 bg-cover rounded-lg shadow-xl object-contain m-auto ring-1 ring-black ring-opacity-5"
-                src={logo.url}
-                alt={logo.description}
-              />
+            logoCollection.items.map((logo, id) => (
+              <div key={id}>
+                <img
+                  className=" h-28 w-96 bg-white p-4 my-4 bg-cover rounded-lg shadow-xl object-contain m-auto ring-1 ring-black ring-opacity-5"
+                  src={logo.url}
+                  alt={logo.description}
+                />
+              </div>
             ))}
         </div>
       </div>

@@ -6,9 +6,9 @@ import { forwardRef } from 'react';
 import Link from 'next/link';
 
 const MyLink = forwardRef((props, ref) => {
-  let { key, href, children, ...rest } = props;
+  let { href, children, ...rest } = props;
   return (
-    <Link key={key} href={href}>
+    <Link href={href}>
       <a ref={ref} {...rest}>
         {children}
       </a>
@@ -117,9 +117,9 @@ export default function Navigation({ navigation }) {
                                 >
                                   <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
                                     <div className="ml-4">
-                                      <a className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                                      <div className="text-base font-medium text-gray-900 hover:bg-gray-50">
                                         {menuItem.title && menuItem.title}
-                                      </a>
+                                      </div>
                                       <p className="mt-1 text-sm text-gray-500">
                                         {menuItem.description && menuItem.description}
                                       </p>
@@ -152,9 +152,9 @@ export default function Navigation({ navigation }) {
                                       className="flex-shrink-0 h-6 w-6 text-gray-400"
                                       aria-hidden="true"
                                     />
-                                    <a className="text-base font-medium text-gray-400 hover:text-gray-500 ml-4">
+                                    <div className="text-base font-medium text-gray-400 hover:text-gray-500 ml-4">
                                       {navigation.knop.title && navigation.knop.title}
-                                    </a>
+                                    </div>
                                   </div>
                                 </MyLink>
                               </div>
@@ -215,9 +215,9 @@ export default function Navigation({ navigation }) {
                                 >
                                   <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
                                     <div className="ml-4">
-                                      <a className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                                      <div className="text-base font-medium text-gray-900 hover:bg-gray-50">
                                         {menuItem.title && menuItem.title}
-                                      </a>
+                                      </div>
                                       <p className="mt-1 text-sm text-gray-500">
                                         {menuItem.description && menuItem.description}
                                       </p>
@@ -249,9 +249,9 @@ export default function Navigation({ navigation }) {
                           : item.externalLink
                       }
                     >
-                      <a className="text-base font-medium text-gray-500 hover:text-gray-700">
+                      <div className="text-base font-medium text-gray-500 hover:text-gray-700">
                         {item.title && item.title}
-                      </a>
+                      </div>
                     </MyLink>
                   </div>
                 </div>
@@ -271,9 +271,9 @@ export default function Navigation({ navigation }) {
                         : navigation.knop.externalLink
                     }
                   >
-                    <a className="text-base font-medium ">
+                    <div className="text-base font-medium ">
                       {navigation.knop.title && navigation.knop.title}
-                    </a>
+                    </div>
                   </MyLink>
                 </div>
               </div>
@@ -333,9 +333,9 @@ export default function Navigation({ navigation }) {
                         >
                           <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
                             <div className="ml-4">
-                              <a className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                              <p className="text-base font-medium text-gray-900 hover:bg-gray-50">
                                 {menuItem.title && menuItem.title}
-                              </a>
+                              </p>
                               <p className="mt-1 text-sm text-gray-500">
                                 {menuItem.description && menuItem.description}
                               </p>
@@ -364,9 +364,9 @@ export default function Navigation({ navigation }) {
                               : item.externalLink
                           }
                         >
-                          <a className="text-base font-medium text-gray-500 hover:text-gray-700">
+                          <div className="text-base font-medium text-gray-500 hover:text-gray-700">
                             {item.title && item.title}
-                          </a>
+                          </div>
                         </MyLink>
                       </div>
                     </div>
@@ -386,9 +386,9 @@ export default function Navigation({ navigation }) {
                             : menuItem.externalLink
                         }
                       >
-                        <a className="text-base font-medium text-gray-900 hover:text-gray-700">
+                        <div className="text-base font-medium text-gray-900 hover:text-gray-700">
                           {menuItem.title && menuItem.title}
-                        </a>
+                        </div>
                       </MyLink>
                     ) : (
                       <div key={menuItem.sys.id} className="cursor-not-allowed">
@@ -411,9 +411,9 @@ export default function Navigation({ navigation }) {
                             : navigation.knop.externalLink
                         }
                       >
-                        <a className="text-base font-medium text-white hover:text-gray-500 ml-4">
+                        <div className="text-base font-medium text-white hover:text-gray-500 ml-4">
                           {navigation.knop.title && navigation.knop.title}
-                        </a>
+                        </div>
                       </MyLink>
                     </div>
                   </div>
