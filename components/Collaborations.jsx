@@ -2,7 +2,7 @@
 
 export default function Collaborations({ title, subtitle, logoCollection }) {
   return (
-    <div className="relative bg-gray-50 py-7 lg:pt-5 lg:pb-24 xl:pb-32">
+    <div className="relative bg-gray-50 py-7 lg:pt-9 lg:pb-24 xl:pb-32">
       <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
