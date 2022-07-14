@@ -1,6 +1,7 @@
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 
 export default function Team({ title, description, teamMemberCollection }) {
   function classNames(...classes) {
@@ -34,65 +35,83 @@ export default function Team({ title, description, teamMemberCollection }) {
                         />
                       )}
                       <div className="space-y-2 p-6 flex flex-col justify-between">
-                        <div className="text-lg leading-6 font-medium space-y-1">
+                        <div className="text-lg leading-6 font-medium">
                           <h3>{person.name}</h3>
-                          <p className="text-teal-500">{person.role}</p>
-                          <Popover>
-                            {({ open }) => (
-                              <>
-                                <Popover.Button
-                                  className={classNames(
-                                    open ? 'text-gray-900' : 'text-gray-500',
-                                    'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-beige'
-                                  )}
-                                >
-                                  <span>Lees meer</span>
-                                  <ChevronDownIcon
+                          <p className="text-teal-500 text-sm">{person.role}</p>
+                          <div className="my-4">
+                            <Popover>
+                              {({ open }) => (
+                                <>
+                                  <Popover.Button
                                     className={classNames(
-                                      open ? 'text-gray-600' : 'text-gray-400',
-                                      'ml-2 h-5 w-5 group-hover:text-gray-500'
+                                      open ? 'text-gray-900' : 'text-gray-500',
+                                      'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-beige'
                                     )}
-                                    aria-hidden="true"
-                                  />
-                                </Popover.Button>
-                                <Popover.Panel>
-                                  <p className="mt-3 text-base text-left text-gray-500">
-                                    {person.descriptionHomepage &&
-                                      documentToReactComponents(person.descriptionHomepage.json)}
-                                  </p>
-                                </Popover.Panel>
-                              </>
-                            )}
-                          </Popover>
+                                  >
+                                    <span>Lees meer</span>
+                                    <ChevronDownIcon
+                                      className={classNames(
+                                        open ? 'text-gray-600' : 'text-gray-400',
+                                        'ml-2 h-5 w-5 group-hover:text-gray-500'
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                  </Popover.Button>
+                                  <Popover.Panel>
+                                    <p className="mt-3 text-base text-left text-gray-500 leading-8">
+                                      {person.descriptionHomepage &&
+                                        documentToReactComponents(person.descriptionHomepage.json)}
+                                    </p>
+                                  </Popover.Panel>
+                                </>
+                              )}
+                            </Popover>
+                          </div>
                         </div>
-                        <ul role="list" className="flex justify-center space-x-5">
+                        <ul role="list" className="flex justify-center my-auto space-x-4">
                           <li>
                             {person.emailAddress && (
                               <a
-                                href={person.emailAddress}
+                                href={`mailto:${person.emailAddress}`}
                                 className="text-gray-400 hover:text-gray-500"
+                                target="_blank"
+                                rel="noreferrer"
                               >
-                                <span className="sr-only">Twitter</span>
-                                <svg
-                                  className="w-5 h-5"
+                                <span className="sr-only">Email</span>
+                                <MailIcon
+                                  className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
                                   aria-hidden="true"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-                                </svg>
+                                />
                               </a>
                             )}
                           </li>
                           <li>
-                            {person.linkedinUrl && (
+                            {person.phoneNumber && (
                               <a
-                                href={person.linkedinUrl}
+                                href={`https://api.whatsapp.com/send?phone=${person.phoneNumber}`}
                                 className="text-gray-400 hover:text-gray-500"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span className="sr-only">Phone number</span>
+                                <PhoneIcon
+                                  className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                              </a>
+                            )}
+                          </li>
+                          <li>
+                            {person.linkedInUrl && (
+                              <a
+                                href={person.linkedInUrl}
+                                className="text-gray-400 hover:text-gray-500"
+                                target="_blank"
+                                rel="noreferrer"
                               >
                                 <span className="sr-only">LinkedIn</span>
                                 <svg
-                                  className="w-5 h-5"
+                                  className="w-6 h-6"
                                   aria-hidden="true"
                                   fill="currentColor"
                                   viewBox="0 0 20 20"

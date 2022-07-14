@@ -26,7 +26,12 @@ export default function Footer({ footer }) {
             />
             <p className="text-gray-500 text-base">{footer.description && footer.description}</p>
             <div className="flex space-x-6">
-              <a href={footer.facebookLink} className="text-gray-400 hover:text-gray-500">
+              <a
+                href={footer.facebookLink}
+                className="text-gray-400 hover:text-gray-500"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <span className="sr-only">Facebook</span>
                 <div className="h-6 w-6" aria-hidden="true">
                   <svg fill="currentColor" viewBox="0 0 24 24">
@@ -38,7 +43,12 @@ export default function Footer({ footer }) {
                   </svg>
                 </div>
               </a>
-              <a href={footer.instagramLink} className="text-gray-400 hover:text-gray-500">
+              <a
+                href={footer.instagramLink}
+                className="text-gray-400 hover:text-gray-500"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <span className="sr-only">Instagram</span>
                 <div className="h-6 w-6" aria-hidden="true">
                   <svg fill="currentColor" viewBox="0 0 24 24">
@@ -50,7 +60,12 @@ export default function Footer({ footer }) {
                   </svg>
                 </div>
               </a>
-              <a href={footer.linkedInLink} className="text-gray-400 hover:text-gray-500 pt-1">
+              <a
+                href={footer.linkedInLink}
+                className="text-gray-400 hover:text-gray-500 pt-1"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <span className="sr-only">LinkedIn</span>
                 <div className="h-6 w-6" aria-hidden="true">
                   <svg
