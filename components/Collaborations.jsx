@@ -2,7 +2,7 @@
 
 export default function Collaborations({ title, subtitle, logoCollection }) {
   return (
-    <div className="relative bg-gray-50 py-7 lg:pt-9 lg:pb-24 xl:pb-32">
+    <div className="relative bg-gray-50 py-7 lg:pt-9 lg:pb-11 xl:pb-24">
       <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
@@ -17,7 +17,7 @@ export default function Collaborations({ title, subtitle, logoCollection }) {
             logoCollection.items.map((logo, id) => (
               <div key={id}>
                 <img
-                  className=" h-28 w-96 bg-white p-4 my-4 bg-cover rounded-lg shadow-xl object-contain m-auto ring-1 ring-black ring-opacity-5"
+                  className=" h-28 w-54 bg-white p-4 my-2 mx-auto lg:m-4 bg-cover rounded-lg shadow-xl object-contain justify-between ring-1 ring-black ring-opacity-5"
                   src={logo.url}
                   alt={logo.description}
                 />

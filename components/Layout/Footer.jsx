@@ -1,14 +1,19 @@
-const footerNavigation = {
-  solutions: [
-    { name: 'De praktijk', href: '#' },
-    { name: 'Ons team', href: '#' }
-  ],
-  support: [
-    { name: 'Contact', href: '#' },
-    { name: 'Tarieven', href: '#' },
-    { name: 'AVG', href: '#' }
-  ]
-};
+import Link from 'next/link';
+import createSlug from '../../lib/helpers/createSlug';
+import { forwardRef } from 'react';
+
+const MyLink = forwardRef((props, ref) => {
+  let { href, children, ...rest } = props;
+  return (
+    <Link href={href}>
+      <a ref={ref} {...rest}>
+        {children}
+      </a>
+    </Link>
+  );
+});
+
+MyLink.displayName = 'MyLink';
 
 export default function Footer({ footer }) {
   return (
@@ -94,13 +99,40 @@ export default function Footer({ footer }) {
                   De praktijk
                 </h3>
                 <ul role="list" className="mt-4 space-y-4">
-                  {footerNavigation.solutions.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
+                  {footer.footerSubmenu &&
+                    footer.footerSubmenu[0].menuItems.map((menuItem) =>
+                      menuItem.internalLink || menuItem.externalLink ? (
+                        <MyLink
+                          key={menuItem.sys.id}
+                          href={
+                            menuItem.internalLink
+                              ? createSlug(
+                                  menuItem.internalLink.slug,
+                                  menuItem.internalLink.__typename
+                                )
+                              : menuItem.externalLink
+                          }
+                        >
+                          <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <div className="ml-4">
+                              <div className="text-base font-medium text-gray-500 hover:text-gray-900">
+                                {menuItem.title && menuItem.title}
+                              </div>
+                              <p className="mt-1 text-sm text-gray-500">
+                                {menuItem.description && menuItem.description}
+                              </p>
+                            </div>
+                          </div>
+                        </MyLink>
+                      ) : (
+                        <div
+                          key={menuItem.sys.id}
+                          className="text-gray-500 hover:text-gray-900 cursor-not-allowed"
+                        >
+                          {menuItem.title && menuItem.title}
+                        </div>
+                      )
+                    )}
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
@@ -108,13 +140,40 @@ export default function Footer({ footer }) {
                   Support
                 </h3>
                 <ul role="list" className="mt-4 space-y-4">
-                  {footerNavigation.support.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
+                  {footer.footerSubmenu &&
+                    footer.footerSubmenu[1].menuItems.map((menuItem) =>
+                      menuItem.internalLink || menuItem.externalLink ? (
+                        <MyLink
+                          key={menuItem.sys.id}
+                          href={
+                            menuItem.internalLink
+                              ? createSlug(
+                                  menuItem.internalLink.slug,
+                                  menuItem.internalLink.__typename
+                                )
+                              : menuItem.externalLink
+                          }
+                        >
+                          <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <div className="ml-4">
+                              <div className="text-base font-medium text-gray-500 hover:text-gray-900">
+                                {menuItem.title && menuItem.title}
+                              </div>
+                              <p className="mt-1 text-sm text-gray-500">
+                                {menuItem.description && menuItem.description}
+                              </p>
+                            </div>
+                          </div>
+                        </MyLink>
+                      ) : (
+                        <div
+                          key={menuItem.sys.id}
+                          className="text-gray-500 hover:text-gray-900 cursor-not-allowed"
+                        >
+                          {menuItem.title && menuItem.title}
+                        </div>
+                      )
+                    )}
                 </ul>
               </div>
             </div>

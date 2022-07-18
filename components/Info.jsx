@@ -19,7 +19,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
           </div>
         </div>
         <div className="z-40 mt-12 sm:-mb-24 lg:mb-0 h-full">
-          <div className="flex flex-wrap flex-column h-[395px] sm:h-[320px] lg:h-[460px] justify-between px-6 md:px-0 overflow-hidden">
+          <div className="flex flex-wrap flex-column h-[435px] sm:h-[320px] lg:h-[460px] justify-between px-6 md:px-0 overflow-hidden">
             {instagramPosts &&
               instagramPosts.data.map((image, id) =>
                 image.media_type === 'IMAGE' ? (
@@ -38,7 +38,10 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                     </Link>
                   </div>
                 ) : (
-                  <div className="relative m-2 lg:m-4 h-52 w-52 bg-black overflow-hidden mx-auto rounded-sm">
+                  <div
+                    key={id}
+                    className="relative m-2 lg:m-4 h-52 w-52 bg-black overflow-hidden mx-auto rounded-sm"
+                  >
                     <Link href={image.permalink} isExternal>
                       <a target="_blank">
                         <video src={image.media_url} controls={true} className="h-48 w-52" />
