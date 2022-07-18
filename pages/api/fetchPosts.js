@@ -1,6 +1,6 @@
 export async function loadPosts() {
   // Call an external API endpoint to get posts
-  const secret = process.env.INSTAGRAM_API_KEY;
+  const secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
 
   const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${secret}`;
   const res = await fetch(url);
