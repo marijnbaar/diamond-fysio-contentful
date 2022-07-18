@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['images.ctfassets.net']
+    domains: ['www.instagram.com', 'images.ctfassets.net', 'instagram.com']
   }
 };
