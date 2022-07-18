@@ -16,8 +16,8 @@ import Text from './Text';
 import Appointment from './Appointment';
 import Contact from './Contact';
 
-const ComponentList = (props) =>
-  props.components.map((component) => {
+const ComponentList = ({ components }) =>
+  components.map((component) => {
     if (component.sys.id) {
       switch (component.__typename) {
         case 'HeaderHomepage': {
@@ -52,14 +52,7 @@ const ComponentList = (props) =>
           );
         }
         case 'Info': {
-          return (
-            <Info
-              key={component.sys.id}
-              id={component.sys.id}
-              {...component}
-              instagramPosts={props.instagramPosts}
-            />
-          );
+          return <Info key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'TeamOverview': {
           return <Team key={component.sys.id} id={component.sys.id} {...component} />;
