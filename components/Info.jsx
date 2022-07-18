@@ -52,10 +52,10 @@ export default function Info({ title, subtitle, description }) {
                     </Link>
                   </div>
                 ) : (
-                  <div className="relative m-2 lg:m-4 h-52 w-52 overflow-hidden mx-auto rounded-sm">
+                  <div className="relative m-2 lg:m-4 h-52 w-52 bg-black overflow-hidden mx-auto rounded-sm">
                     <Link href={image.permalink} isExternal>
                       <a target="_blank">
-                        <iframe src={image.media_url} controls={true} className="h-52 w-52" />
+                        <video src={image.media_url} controls={true} className="h-48 w-52" />
                       </a>
                     </Link>
                   </div>
