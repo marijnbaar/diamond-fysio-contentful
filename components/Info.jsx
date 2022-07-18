@@ -33,11 +33,11 @@ export default function Info({ title, subtitle, description }) {
           </div>
         </div>
         <div className="z-40 mt-12 sm:-mb-24 lg:mb-0 h-full">
-          <div className="flex flex-wrap flex-column h-[375px] sm:h-[320px] lg:h-[480px] justify-between sm:px-6">
+          <div className="flex flex-wrap flex-column h-[395px] sm:h-[320px] lg:h-[460px] justify-between px-6 md:px-0 overflow-hidden">
             {instagramPosts &&
               instagramPosts.data.map((image, id) =>
                 image.media_type === 'IMAGE' ? (
-                  <div key={id} className="relative m-2 lg:m-4 h-52 w-52 rounded-sm">
+                  <div key={id} className="relative m-2 lg:m-4 h-52 w-52 mx-auto rounded-sm">
                     <Link href={image.permalink} isExternal>
                       <a target="_blank">
                         <Image
@@ -52,7 +52,7 @@ export default function Info({ title, subtitle, description }) {
                     </Link>
                   </div>
                 ) : (
-                  <div className="relative m-2 lg:m-2 pb-3 h-52 w-52 overflow-hidden rounded-sm">
+                  <div className="relative m-2 lg:m-4 h-52 w-52 overflow-hidden mx-auto rounded-sm">
                     <Link href={image.permalink} isExternal>
                       <a target="_blank">
                         <iframe src={image.media_url} controls={true} className="h-52 w-52" />
