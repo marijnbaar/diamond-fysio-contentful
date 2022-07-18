@@ -36,6 +36,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.33.0",
     "react-instafeed": "^1.0.0",
+    "react-player": "^2.10.1",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "use-abortable-fetch": "^3.0.3"
