@@ -1,22 +1,8 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
-// import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Info({ title, subtitle, description, instagramPosts }) {
-  // const [instagramPosts, setData] = useState(null);
-
-  // useEffect(() => {
-  //   fetch('/api/fetchPosts')
-  //     .then((res) => res.json())
-  //     .then((instagramPosts) => {
-  //       return setData(instagramPosts);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, []);
-
   return (
     <div className="bg-gray-50 -mt-11 -z-10 pt-16 sm:pt-24 lg:pt-10">
       <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
