@@ -1,6 +1,7 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Info({ title, subtitle, description }) {
   const [instagramPosts, setData] = useState(null);
@@ -17,7 +18,7 @@ export default function Info({ title, subtitle, description }) {
   }, []);
 
   return (
-    <div className="relative bg-gray-50 -mt-11 -z-10 pt-16 sm:pt-24 lg:pt-10">
+    <div className="bg-gray-50 -mt-11 -z-10 pt-16 sm:pt-24 lg:pt-10">
       <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
@@ -32,18 +33,23 @@ export default function Info({ title, subtitle, description }) {
           </div>
         </div>
         <div className="z-40 mt-12 sm:-mb-24 lg:mb-0 h-full">
-          <div className="grid grid-cols-6 space-x-2 relative">
+          <div className="flex flex-wrap flex-column h-[375px] sm:h-[280px] lg:h-96 justify-between justify-items-center p-4">
             {instagramPosts &&
               instagramPosts.data.map((image, id) =>
                 image.media_type === 'IMAGE' ? (
-                  <div key={id} className="relative h-12 w-12">
-                    <Image
-                      src={image.media_url}
-                      alt={image.caption}
-                      unoptimized="true"
-                      layout="fill"
-                      // objectFit="cover"
-                    />
+                  <div key={id} className="relative m-2 lg:m-4 h-40 w-40 rounded-sm">
+                    <Link href={image.permalink} isExternal>
+                      <a target="_blank">
+                        <Image
+                          src={image.media_url}
+                          alt={image.caption}
+                          unoptimized="true"
+                          layout="fill"
+                          objectFit="cover"
+                          className="filter grayscale hover:filter-none cursor-pointer"
+                        />
+                      </a>
+                    </Link>
                   </div>
                 ) : (
                   []
