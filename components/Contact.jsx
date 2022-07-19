@@ -27,7 +27,7 @@
 
 // import ReCAPTCHA from 'react-google-recaptcha';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
-import react from 'react';
+// import react from 'react';
 
 export default function Contact({
   title,
@@ -40,7 +40,7 @@ export default function Contact({
   facebookLink,
   instagramLink
 }) {
-  const reRef = react.createRef();
+  // const reRef = react.createRef();
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -52,7 +52,7 @@ export default function Contact({
       formData[field.name] = field.value;
     });
     // const token = await reRef.current.executeAsync();
-    reRef.current.reset();
+    // reRef.current.reset();
 
     await fetch('/api/mail', {
       method: 'POST',
