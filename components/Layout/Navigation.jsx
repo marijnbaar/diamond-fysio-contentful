@@ -21,29 +21,6 @@ MyLink.displayName = 'MyLink';
 import { MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 
-// const resources = [
-//   {
-//     name: 'De praktijk',
-//     // description: 'Get all of your questions answered in our forums or contact support.',
-//     href: '#',
-//     icon: LibraryIcon
-//   },
-//   {
-//     name: 'Ons team',
-//     // description: 'Learn how to maximize our platform to get the most out of it.',
-//     href: '#',
-//     icon: UserGroupIcon
-//   },
-//   {
-//     name: 'Contact',
-//     // description: 'See what meet-ups and other events we might be planning near you.',
-//     href: '#',
-//     icon: CalendarIcon
-//   },
-//   { name: 'Tarieven', href: '#', icon: CurrencyEuroIcon }
-//   // { name: 'Huisregels', href: '#', icon: ClipboardList },
-// ];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -249,9 +226,9 @@ export default function Navigation({ navigation }) {
                           : item.externalLink
                       }
                     >
-                      <div className="text-base font-medium text-gray-500 hover:text-gray-700">
+                      <a className="text-base font-medium text-gray-500 hover:text-gray-700">
                         {item.title && item.title}
-                      </div>
+                      </a>
                     </MyLink>
                   </div>
                 </div>
