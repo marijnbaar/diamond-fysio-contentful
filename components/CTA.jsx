@@ -1,4 +1,5 @@
 import { ExternalLinkIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 
 export default function CTA({ title, subtitle, description, image }) {
   return (
@@ -20,13 +21,10 @@ export default function CTA({ title, subtitle, description, image }) {
           <p className="mt-3 text-lg text-gray-300">{description && description}</p>
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">
-              <a
-                href="#"
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50"
-              >
-                Lees meer
+              <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
+                <Link href="/about">Lees meer</Link>
                 <ExternalLinkIcon className="-mr-1 ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
-              </a>
+              </div>
             </div>
           </div>
         </div>
