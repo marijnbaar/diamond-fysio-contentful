@@ -1,12 +1,18 @@
 import { ExternalLinkIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CTA({ title, subtitle, description, image }) {
   return (
     <div className="relative bg-gray-900">
-      <div className="relative h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
+      <div className="relative h-56 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
         {image && (
-          <img className="w-full h-full object-cover" src={image.url} alt={image.description} />
+          <Image
+            className="w-full h-full object-cover"
+            layout="fill"
+            src={image.url}
+            alt={image.description}
+          />
         )}
         <div aria-hidden="true" className="absolute inset-0 mix-blend-multiply" />
       </div>
