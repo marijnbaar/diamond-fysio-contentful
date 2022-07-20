@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import Image from 'next/image';
 
 function Teammember({ teamMemberCollection }) {
   function classNames(...classes) {
@@ -21,12 +22,14 @@ function Teammember({ teamMemberCollection }) {
                   className="flex flex-col rounded-lg shadow-lg overflow-hidden"
                 >
                   {person.image && (
-                    <div className="flex-shrink-0">
-                      <img
-                        className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-                        src={person.image.url}
-                        alt={person.image.alt && person.image.alt}
-                      />
+                    <div className="flex-shrink-0 mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 relative">
+                      {person.image && (
+                        <Image
+                          src={person.image.url}
+                          alt={person.image.description}
+                          layout="fill"
+                        />
+                      )}
                     </div>
                   )}
                   <div className="flex-1 bg-white p-6 flex flex-col justify-between">

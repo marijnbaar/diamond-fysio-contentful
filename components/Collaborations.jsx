@@ -1,4 +1,4 @@
-// import Image from 'next/image';
+import Image from 'next/image';
 
 export default function Collaborations({ title, subtitle, logoCollection }) {
   return (
@@ -15,12 +15,18 @@ export default function Collaborations({ title, subtitle, logoCollection }) {
         <div className="mt-5 lg:mt-12 flex flex-col flex-wrap justify-center lg:flex-row mb-24 lg:mb-6 h-full">
           {logoCollection &&
             logoCollection.items.map((logo, id) => (
-              <div key={id}>
-                <img
-                  className=" h-28 w-54 bg-white p-4 my-2 mx-auto lg:m-4 bg-cover rounded-lg shadow-xl object-contain justify-between ring-1 ring-black ring-opacity-5"
-                  src={logo.url}
-                  alt={logo.description}
-                />
+              <div
+                key={id}
+                className="relative h-28 w-56 bg-white p-4 my-2 mx-auto lg:m-4 bg-cover rounded-lg shadow-xl object-contain justify-between ring-1 ring-black ring-opacity-5"
+              >
+                {logo && (
+                  <Image
+                    layout="fill"
+                    className="w-full h-full object-contain p-4"
+                    src={logo.url}
+                    alt={logo.description}
+                  />
+                )}
               </div>
             ))}
         </div>

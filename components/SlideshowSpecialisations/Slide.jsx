@@ -1,13 +1,23 @@
 // import Image from 'next/image';
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
+import Image from 'next/image';
 
-const Slide = ({ key, image, imageUrl, imageAlt, title, description, button, subtitle }) => {
+const Slide = ({ key, image, title, description, button, subtitle }) => {
   return (
     <div key={key} className="m-2 flex flex-col rounded-lg shadow-lg overflow-hidden">
       {image && (
         <div className="flex-shrink-0">
-          <img className="h-56 w-full object-cover" src={imageUrl} alt={imageAlt} />
+          <div className="h-56 w-full relative">
+            {image && (
+              <Image
+                layout="fill"
+                className="w-full h-full object-cover"
+                src={image.url}
+                alt={image.description}
+              />
+            )}
+          </div>
         </div>
       )}
       <div className="flex-1 bg-white p-4 lg:p-6 flex flex-col justify-between">
