@@ -1,11 +1,25 @@
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Image from 'next/image';
 
-const HomepageHeader = ({ title, info, buttonCollection }) => {
+const HomepageHeader = ({ title, info, buttonCollection, image }) => {
   return (
     <div className="relative mt-20 lg:mt-0 pt-16 pb-11 lg:p-0 flex content-center items-center justify-center h-5/6 lg:h-screen">
-      <div className="bg-landing-background bg-cover bg-center absolute top-0 w-full h-full" />
+      <div className="bg-cover bg-center absolute top-0 w-full h-full">
+        {image && (
+          <Image
+            className="w-full h-full object-cover"
+            layout="fill"
+            src={image.url}
+            alt={image.description}
+          />
+        )}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 mix-blend-multiply bg-gradient-to-r from-gray-500 to-gray-100"
+        />
+      </div>
       <div className="container max-w-8xl relative mx-auto">
         <div className="items-center flex flex-wrap">
           <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
