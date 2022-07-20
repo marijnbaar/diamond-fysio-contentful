@@ -1,7 +1,7 @@
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
+import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/outline';
 
 export default function Team({ title, description, teamMemberCollection }) {
   function classNames(...classes) {
@@ -95,6 +95,22 @@ export default function Team({ title, description, teamMemberCollection }) {
                               >
                                 <span className="sr-only">Phone number</span>
                                 <PhoneIcon
+                                  className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                              </a>
+                            )}
+                          </li>
+                          <li>
+                            {person.website && (
+                              <a
+                                href={person.website}
+                                className="text-gray-400 hover:text-gray-500"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span className="sr-only">Website</span>
+                                <GlobeAltIcon
                                   className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
                                   aria-hidden="true"
                                 />
