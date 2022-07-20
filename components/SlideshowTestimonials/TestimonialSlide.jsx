@@ -1,4 +1,6 @@
-const TestimonialSlide = ({ key, name, profession, quote, imageUrl, imageAlt }) => {
+import Image from 'next/image';
+
+const TestimonialSlide = ({ key, name, profession, quote, image }) => {
   return (
     <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative px-11">
       <div
@@ -8,11 +10,16 @@ const TestimonialSlide = ({ key, name, profession, quote, imageUrl, imageAlt }) 
         <div className="relative lg:-my-8">
           <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:p-0 lg:h-full">
             <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
-              <img
-                className="z-20 object-cover lg:h-full lg:w-full"
-                src={imageUrl && imageUrl}
-                alt={imageAlt && imageAlt}
-              />
+              <div className="h-full w-full relative">
+                {image && (
+                  <Image
+                    layout="fill"
+                    className="z-20 w-full h-full object-cover"
+                    src={image.url}
+                    alt={image.description}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
