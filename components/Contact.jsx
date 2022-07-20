@@ -299,7 +299,9 @@ export default function Contact({
 
                 {/* Contact form */}
                 <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                  <h3 className="text-lg font-medium text-warm-gray-900">Send us a message</h3>
+                  <h3 className="text-lg font-medium text-warm-gray-900">
+                    Neem contact met ons op
+                  </h3>
                   <form
                     action="#"
                     method="POST"
@@ -311,7 +313,7 @@ export default function Contact({
                         htmlFor="firstname"
                         className="block text-sm font-medium text-warm-gray-900"
                       >
-                        First name
+                        Voornaam
                       </label>
                       <div className="mt-1">
                         <input
@@ -328,7 +330,7 @@ export default function Contact({
                         htmlFor="lastname"
                         className="block text-sm font-medium text-warm-gray-900"
                       >
-                        Last name
+                        Achternaam
                       </label>
                       <div className="mt-1">
                         <input
@@ -364,7 +366,7 @@ export default function Contact({
                           htmlFor="phone"
                           className="block text-sm font-medium text-warm-gray-900"
                         >
-                          Phone
+                          Telefoonnummer
                         </label>
                         <span id="phone-optional" className="text-sm text-warm-gray-500">
                           Optional
@@ -386,7 +388,7 @@ export default function Contact({
                         htmlFor="subject"
                         className="block text-sm font-medium text-warm-gray-900"
                       >
-                        Subject
+                        Onderwerp
                       </label>
                       <div className="mt-1">
                         <input
@@ -403,10 +405,10 @@ export default function Contact({
                           htmlFor="message"
                           className="block text-sm font-medium text-warm-gray-900"
                         >
-                          Message
+                          Bericht
                         </label>
                         <span id="message-max" className="text-sm text-warm-gray-500">
-                          Max. 500 characters
+                          Max. 500 karakters
                         </span>
                       </div>
                       <div className="mt-1">
@@ -432,7 +434,7 @@ export default function Contact({
                         type="submit"
                         className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
                       >
-                        Submit
+                        Verzend
                       </button>
                     </div>
                   </form>
