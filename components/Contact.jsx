@@ -25,9 +25,9 @@
   ```
 */
 
-// import ReCAPTCHA from 'react-google-recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
-// import react from 'react';
+import react from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Link from 'next/link';
 
@@ -42,7 +42,7 @@ export default function Contact({
   facebookLink,
   instagramLink
 }) {
-  // const reRef = react.createRef();
+  const reRef = react.createRef();
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -53,13 +53,13 @@ export default function Contact({
       if (!field.name) return;
       formData[field.name] = field.value;
     });
-    // const token = await reRef.current.executeAsync();
-    // reRef.current.reset();
+    const token = await reRef.current.executeAsync();
+    reRef.current.reset();
 
     await fetch('/api/mail', {
       method: 'POST',
-      body: JSON.stringify(formData)
-      // token: JSON.stringify(token)
+      body: JSON.stringify(formData),
+      token: JSON.stringify(token)
     });
   }
   return (
@@ -432,11 +432,11 @@ export default function Contact({
                       </div>
                     </div>
                     <div className="justify-end">
-                      {/* <ReCAPTCHA
+                      <ReCAPTCHA
                         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                         size="invisible"
                         ref={reRef}
-                      /> */}
+                      />
                     </div>
                     <div className="sm:col-span-2 sm:flex sm:justify-end">
                       <button
