@@ -29,6 +29,7 @@
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 // import react from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Link from 'next/link';
 
 export default function Contact({
   title,
@@ -194,6 +195,13 @@ export default function Contact({
                   <h3 className="text-lg font-medium text-white">{subtitle && subtitle}</h3>
                   <p className="mt-6 text-base text-teal-50 max-w-3xl">
                     {contactDescription && documentToReactComponents(contactDescription.json)}
+                  </p>
+                  <p className="mt-6 text-base text-white max-w-3xl">
+                    Je kunt ook rechtstreeks contact opnemen met je therapeut (deze gegevens vind je{' '}
+                    <Link className="hover:text-gray-500 text-gray-300" href="/">
+                      op de homepagina
+                    </Link>
+                    ). Mailen kan altijd - heeft het spoed, stuur dan een appje.
                   </p>
                   <dl className="mt-8 space-y-6">
                     <dt>
