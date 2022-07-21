@@ -1,13 +1,10 @@
-import { Popover } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 
 export default function Team({ title, description, teamMemberCollection }) {
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
-  }
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
@@ -40,37 +37,23 @@ export default function Team({ title, description, teamMemberCollection }) {
                       <div className="text-lg leading-6 font-medium">
                         <h3>{person.name}</h3>
                         <p className="text-teal-500 text-sm">{person.role}</p>
+                        <p className="mt-3 text-base text-center text-gray-500 leading-8">
+                          {person.descriptionHomepage &&
+                            documentToReactComponents(person.descriptionHomepage.json)}
+                        </p>
                         <div className="my-4">
-                          <Popover>
-                            {({ open }) => (
-                              <>
-                                <Popover.Button
-                                  className={classNames(
-                                    open ? 'text-gray-900' : 'text-gray-500',
-                                    'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-beige'
-                                  )}
-                                >
-                                  <span>Lees meer</span>
-                                  <ChevronDownIcon
-                                    className={classNames(
-                                      open ? 'text-gray-600' : 'text-gray-400',
-                                      'ml-2 h-5 w-5 group-hover:text-gray-500'
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                </Popover.Button>
-                                <Popover.Panel>
-                                  <p className="mt-3 text-base text-left text-gray-500 leading-8">
-                                    {person.descriptionHomepage &&
-                                      documentToReactComponents(person.descriptionHomepage.json)}
-                                  </p>
-                                </Popover.Panel>
-                              </>
-                            )}
-                          </Popover>
+                          <div className="inline-flex rounded-md shadow">
+                            <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
+                              <Link href="/team">Lees meer</Link>
+                              <ExternalLinkIcon
+                                className="-mr-1 ml-3 h-5 w-5 text-gray-400"
+                                aria-hidden="true"
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <ul role="list" className="flex justify-center my-auto space-x-4">
+                      <ul role="list" className="flex justify-center my-auto space-x-2">
                         <li>
                           {person.emailAddress && (
                             <a
@@ -97,7 +80,7 @@ export default function Team({ title, description, teamMemberCollection }) {
                             >
                               <span className="sr-only">Phone number</span>
                               <PhoneIcon
-                                className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                                className="flex-shrink-0 ml-1 w-6 h-6 text-gray-400 hover:text-gray-500"
                                 aria-hidden="true"
                               />
                             </a>
@@ -129,7 +112,7 @@ export default function Team({ title, description, teamMemberCollection }) {
                             >
                               <span className="sr-only">LinkedIn</span>
                               <svg
-                                className="w-6 h-6"
+                                className="flex-shrink-0 w-6 h-6"
                                 aria-hidden="true"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"

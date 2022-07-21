@@ -28,6 +28,7 @@
 // import ReCAPTCHA from 'react-google-recaptcha';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 // import react from 'react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export default function Contact({
   title,
@@ -65,7 +66,7 @@ export default function Contact({
       <main className="overflow-hidden">
         {/* Header */}
         <div className="bg-warm-gray-50">
-          <div className="py-24 lg:py-32">
+          <div className="py-24 lg:pt-32 lg:pb-20">
             <div className="relative z-10 max-w-7xl mx-auto pl-4 pr-8 sm:px-6 lg:px-8">
               <h1 className="text-4xl font-extrabold tracking-tight text-warm-gray-900 sm:text-5xl lg:text-6xl">
                 {title && title}
@@ -192,7 +193,7 @@ export default function Contact({
                   </div>
                   <h3 className="text-lg font-medium text-white">{subtitle && subtitle}</h3>
                   <p className="mt-6 text-base text-teal-50 max-w-3xl">
-                    {contactDescription && contactDescription}
+                    {contactDescription && documentToReactComponents(contactDescription.json)}
                   </p>
                   <dl className="mt-8 space-y-6">
                     <dt>
