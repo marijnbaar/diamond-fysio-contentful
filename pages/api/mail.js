@@ -43,7 +43,7 @@ export default async function handler(req, res) {
     html: message.replace(/rn/g, '<br>')
   };
 
-  mail.send(data).catch((error) => {
+  await mail.send(data).catch((error) => {
     console.error(error);
   });
   res.status(200).json({ status: 'Ok' });
