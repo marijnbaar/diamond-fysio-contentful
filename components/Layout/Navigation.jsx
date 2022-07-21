@@ -4,6 +4,7 @@ import { Popover, Transition } from '@headlessui/react';
 import createSlug from '../../lib/helpers/createSlug';
 import { forwardRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const MyLink = forwardRef((props, ref) => {
   let { href, children, ...rest } = props;
@@ -33,11 +34,16 @@ export default function Navigation({ navigation }) {
           <div className="flex justify-start lg:w-0 lg:flex-1 cursor-pointer">
             <span className="sr-only">Diamond fysio</span>
             <Link href="/">
-              <img
-                className="h-14"
-                src={navigation.logo && navigation.logo.url}
-                alt={navigation.logo.description && navigation.logo.description}
-              />
+              <div className="z-10 h-14 w-14 relative">
+                {navigation.logo && (
+                  <Image
+                    src={navigation.logo && navigation.logo.url}
+                    alt={navigation.logo.description && navigation.logo.description}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                )}
+              </div>
             </Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
@@ -278,11 +284,16 @@ export default function Navigation({ navigation }) {
                 <div>
                   <span className="sr-only">Diamond fysio</span>
                   <Link href="/">
-                    <img
-                      className="h-14"
-                      src={navigation.logo && navigation.logo.url}
-                      alt={navigation.logo.description && navigation.logo.description}
-                    />
+                    <div className="z-10 h-14 w-14 relative">
+                      {navigation.logo && (
+                        <Image
+                          src={navigation.logo && navigation.logo.url}
+                          alt={navigation.logo.description && navigation.logo.description}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      )}
+                    </div>
                   </Link>
                 </div>
                 <div className="-mr-2">

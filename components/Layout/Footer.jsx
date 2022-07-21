@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import createSlug from '../../lib/helpers/createSlug';
 import { forwardRef } from 'react';
+import Image from 'next/image';
 
 const MyLink = forwardRef((props, ref) => {
   let { href, children, ...rest } = props;
@@ -24,11 +25,16 @@ export default function Footer({ footer }) {
       <div className="max-w-md mx-auto pt-12 px-4 sm:max-w-7xl sm:px-6 lg:pt-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <img
-              className="h-14"
-              src={footer.logo && footer.logo.url}
-              alt={footer.logo.description && footer.logo.description}
-            />
+            <div className="z-10 h-14 w-14 relative">
+              {footer.logo && (
+                <Image
+                  src={footer.logo && footer.logo.url}
+                  alt={footer.logo.description && footer.logo.description}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              )}
+            </div>
             <p className="text-gray-500 text-base">{footer.description && footer.description}</p>
             <div className="flex space-x-6">
               <a
