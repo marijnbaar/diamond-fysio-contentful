@@ -14,7 +14,7 @@ import AboutInformation from './AboutInformation';
 import GenericpageHeader from './Headers/GenericpageHeader';
 import Text from './Text';
 import Appointment from './Appointment';
-import Contact from './Contact';
+import Contact from './Contact/Contact';
 
 const ComponentList = (props) =>
   props.components.map((component) => {

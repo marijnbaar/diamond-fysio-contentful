@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 export default function Highlight({ info }) {
   return (
     <div className="bg-gray-50 py-6 lg:py-24">
