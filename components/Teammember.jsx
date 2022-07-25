@@ -2,6 +2,7 @@ import React from 'react';
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 function Teammember({ teamMemberCollection }) {
   function classNames(...classes) {
@@ -34,16 +35,10 @@ function Teammember({ teamMemberCollection }) {
                   )}
                   <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                     <div className="flex-1">
-                      <div className="text-sm font-small flex flex-row flex-wrap text-white">
-                        {person.specialisationTagsCollection.items.map((specialisation) => (
-                          <div
-                            key={specialisation.tag}
-                            className="bg-beige hover:bg-gray-400 p-1 m-1 rounded"
-                          >
-                            {specialisation.tag}
-                          </div>
-                        ))}
-                      </div>
+                      <p className="mt-3 text-base text-center text-gray-500 leading-8">
+                        {person.descriptionHomepage &&
+                          documentToReactComponents(person.descriptionHomepage.json)}
+                      </p>
                       <div className="block mt-2">
                         <p className="text-xl font-semibold text-gray-900 mb-2">{person.name}</p>
                         <Popover>
