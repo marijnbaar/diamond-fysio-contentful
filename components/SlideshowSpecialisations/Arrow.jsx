@@ -1,19 +1,30 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/fontawesome-svg-core';
 
-const SlideshowArrow = ({ className, to, onClick }) => {
+const SampleNextArrow = function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
   return (
-    <div>
-      <button
-        type="button"
-        onClick={onClick}
-        className={`button button--text button--icon ${className}`}
-        aria-label={to}
-      >
-        <FontAwesomeIcon icon="fa-solid fa-chevron-left" ic={to} />
-      </button>
-    </div>
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: '#38b2ac', 'border-radius': '2px' }}
+      onClick={onClick}
+    />
   );
 };
 
-export default SlideshowArrow;
+const SamplePrevArrow = function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'block',
+        background: '#38b2ac',
+        'border-radius': '2px'
+      }}
+      onClick={onClick}
+    />
+  );
+};
+
+export { SampleNextArrow, SamplePrevArrow };
