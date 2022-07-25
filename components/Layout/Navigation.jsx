@@ -34,7 +34,7 @@ export default function Navigation({ navigation }) {
           <div className="flex justify-start lg:w-0 lg:flex-1 cursor-pointer">
             <span className="sr-only">Diamond fysio</span>
             <Link href="/">
-              <div className="z-10 h-16 w-16 relative">
+              <div className="h-16 w-16 relative">
                 {navigation.logo && (
                   <Image
                     src={navigation.logo && navigation.logo.url}
@@ -233,9 +233,9 @@ export default function Navigation({ navigation }) {
                           : item.externalLink
                       }
                     >
-                      <a className="text-base font-medium text-gray-500 hover:text-gray-700">
+                      <div className="text-base font-medium text-gray-500 hover:text-gray-700">
                         {item.title && item.title}
-                      </a>
+                      </div>
                     </MyLink>
                   </div>
                 </div>
@@ -275,10 +275,7 @@ export default function Navigation({ navigation }) {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <Popover.Group
-          focus
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-        >
+        <Popover.Group className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">

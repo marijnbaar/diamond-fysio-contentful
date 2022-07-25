@@ -5,7 +5,7 @@ const SampleNextArrow = function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: 'block', background: '#38b2ac', 'border-radius': '2px' }}
+      style={{ ...style, display: 'block', background: '#38b2ac', borderRadius: '2px' }}
       onClick={onClick}
     />
   );
