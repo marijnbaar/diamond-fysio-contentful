@@ -34,13 +34,14 @@ export default function Navigation({ navigation }) {
           <div className="flex justify-start lg:w-0 lg:flex-1 cursor-pointer">
             <span className="sr-only">Diamond fysio</span>
             <Link href="/">
-              <div className="z-10 h-14 w-14 relative">
+              <div className="z-10 h-16 w-16 relative">
                 {navigation.logo && (
                   <Image
                     src={navigation.logo && navigation.logo.url}
                     alt={navigation.logo.description && navigation.logo.description}
                     layout="fill"
                     objectFit="cover"
+                    quality="100"
                   />
                 )}
               </div>
@@ -284,13 +285,14 @@ export default function Navigation({ navigation }) {
                 <div>
                   <span className="sr-only">Diamond fysio</span>
                   <Link href="/">
-                    <div className="z-10 h-14 w-14 relative">
+                    <div className="z-10 h-16 w-16 relative">
                       {navigation.logo && (
                         <Image
                           src={navigation.logo && navigation.logo.url}
                           alt={navigation.logo.description && navigation.logo.description}
                           layout="fill"
                           objectFit="cover"
+                          quality="100"
                         />
                       )}
                     </div>

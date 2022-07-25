@@ -15,6 +15,7 @@ import GenericpageHeader from './Headers/GenericpageHeader';
 import Text from './Text';
 import Appointment from './Appointment';
 import Contact from './Contact/Contact';
+import Thankyou from './Thankyou';
 
 const ComponentList = (props) =>
   props.components.map((component) => {
@@ -87,6 +88,9 @@ const ComponentList = (props) =>
         }
         case 'AppointmentCardOverview': {
           return <Appointment key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'ThankyouComponent': {
+          return <Thankyou key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }

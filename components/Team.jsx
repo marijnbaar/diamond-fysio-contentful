@@ -36,7 +36,18 @@ export default function Team({ title, description, teamMemberCollection }) {
                     <div className="space-y-2 p-6 flex flex-col justify-between relative">
                       <div className="text-lg leading-6 font-medium">
                         <h3>{person.name}</h3>
-                        <p className="text-teal-500 text-sm">{person.role}</p>
+                        <div className="flex-1">
+                          <div className="text-sm font-small flex flex-row flex-wrap text-white">
+                            {person.specialisationTagsCollection.items.map((specialisation) => (
+                              <div
+                                key={specialisation.tag}
+                                className="bg-beige hover:bg-gray-400 p-1 m-1 rounded"
+                              >
+                                {specialisation.tag}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                         <p className="mt-3 text-base text-center text-gray-500 leading-8">
                           {person.descriptionHomepage &&
                             documentToReactComponents(person.descriptionHomepage.json)}
