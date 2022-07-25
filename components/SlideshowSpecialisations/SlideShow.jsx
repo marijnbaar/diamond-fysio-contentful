@@ -39,7 +39,7 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
     ]
   };
   return (
-    <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
+    <div className="relative bg-gray-50 py-16 sm:py-24 lg:pb-32 lg:pt-11">
       <div className="relative">
         <div className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
           <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
