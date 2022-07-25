@@ -1,12 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 // import ReCAPTCHA from 'react-google-recaptcha';
-import react, { useState } from 'react';
+import { useState } from 'react';
 import Thanks from './Thanks';
 
 export default function Contactform() {
   const [success, setSuccess] = useState(false);
 
-  const reRef = react.createRef();
+  // const reRef = react.createRef();
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -17,13 +17,13 @@ export default function Contactform() {
       if (!field.name) return;
       formData[field.name] = field.value;
     });
-    const token = await reRef.current.executeAsync();
-    reRef.current.reset();
+    // const token = await reRef.current.executeAsync();
+    // reRef.current.reset();
 
     const res = await fetch('/api/mail', {
       method: 'POST',
-      body: JSON.stringify(formData),
-      token: JSON.stringify(token)
+      body: JSON.stringify(formData)
+      // token: JSON.stringify(token)
     });
     if (res.status === 200) {
       console.log('Great job!', "You've passed the challenge!", 'success');
