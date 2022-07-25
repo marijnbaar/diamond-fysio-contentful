@@ -36,7 +36,7 @@ export default async function handler(req, res) {
   const { subject } = body;
 
   const data = {
-    to: 'regi@fysiodiamondfactory.com',
+    to: 'info@fysiodiamondfactory.com',
     from: 'info@fysiodiamondfactory.com',
     subject: `${subject}`,
     text: message,

@@ -5,7 +5,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 const Specialisation = ({ image, description, subtitle }) => {
   return (
     <>
-      <div className=" bg-grey-light relative">
+      <div className="bg-grey-light relative">
         <div className="mx-auto">
           <div
             className="lg:gap-y-11 pt-6'

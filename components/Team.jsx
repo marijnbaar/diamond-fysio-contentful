@@ -1,4 +1,3 @@
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,21 +36,17 @@ export default function Team({ title, description, teamMemberCollection }) {
                       <div className="text-lg leading-6 font-medium">
                         <h3>{person.name}</h3>
                         <div className="flex-1">
-                          <div className="text-sm font-small flex flex-row flex-wrap text-white">
+                          <div className="text-sm font-small cursor-default flex flex-row flex-wrap text-white">
                             {person.specialisationTagsCollection.items.map((specialisation) => (
                               <div
                                 key={specialisation.tag}
-                                className="bg-beige hover:bg-gray-400 p-1 m-1 rounded"
+                                className="bg-teal-500 hover:bg-teal-400 p-1 m-1 rounded"
                               >
                                 {specialisation.tag}
                               </div>
                             ))}
                           </div>
                         </div>
-                        <p className="mt-3 text-base text-center text-gray-500 leading-8">
-                          {person.descriptionHomepage &&
-                            documentToReactComponents(person.descriptionHomepage.json)}
-                        </p>
                         <div className="my-4">
                           <div className="inline-flex rounded-md shadow">
                             <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
