@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 import react, { useState } from 'react';
 import Thanks from './Thanks';
 
@@ -143,11 +143,11 @@ export default function Contactform() {
             </div>
           </div>
           <div className="justify-end">
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
               size="invisible"
               ref={reRef}
-            />
+            /> */}
           </div>
           <div className="sm:col-span-2 sm:flex sm:justify-end">
             <button
