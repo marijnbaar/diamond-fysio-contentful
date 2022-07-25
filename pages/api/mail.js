@@ -36,8 +36,8 @@ export default async function handler(req, res) {
   const { subject } = body;
 
   const data = {
-    to: 'info@fysiodiamondfactory.com',
-    from: 'regi.severins@fysiodiamondfactory.com',
+    to: 'regi@fysiodiamondfactory.com',
+    from: 'info@fysiodiamondfactory.com',
     subject: `${subject}`,
     text: message,
     html: message.replace(/rn/g, '<br>')
