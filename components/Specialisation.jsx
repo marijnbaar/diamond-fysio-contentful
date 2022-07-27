@@ -8,7 +8,7 @@ const Specialisation = ({ image, description, subtitle }) => {
       <div className="bg-grey-light relative">
         <div className="mx-auto">
           <div
-            className="lg:gap-y-11 pt-6'
+            className="lg:gap-y-11
             flex flex-col lg:grid lg:grid-cols-12 z-10 relative"
           >
             <div className="order-3 lg:translate-y-0 order-0 lg:order-none lg:col-span-5 relative">
