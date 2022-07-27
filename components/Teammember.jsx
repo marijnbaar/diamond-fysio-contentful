@@ -35,12 +35,13 @@ function Teammember({ teamMemberCollection }) {
                   )}
                   <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                     <div className="flex-1">
-                      <p className="mt-3 text-base text-center text-gray-500 leading-8">
+                      <p className="text-xl font-semibold text-gray-900 mb-1">{person.name}</p>
+                      <p className="text-teal-500 text-sm">{person.role}</p>
+                      <p className="mt-2 text-base text-center text-gray-500 leading-8">
                         {person.descriptionHomepage &&
                           documentToReactComponents(person.descriptionHomepage.json)}
                       </p>
                       <div className="block mt-2">
-                        <p className="text-xl font-semibold text-gray-900 mb-2">{person.name}</p>
                         <Popover>
                           {({ open }) => (
                             <>
