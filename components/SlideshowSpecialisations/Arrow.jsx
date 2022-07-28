@@ -20,7 +20,7 @@ const SamplePrevArrow = function SamplePrevArrow(props) {
         ...style,
         display: 'block',
         background: '#38b2ac',
-        'border-radius': '2px'
+        borderRadius: '2px'
       }}
       onClick={onClick}
     />
