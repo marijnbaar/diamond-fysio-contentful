@@ -31,6 +31,7 @@
     "next-fonts": "^1.5.1",
     "nodemailer": "^6.7.5",
     "react": "17.0.2",
+    "react-cookie-consent": "^7.6.0",
     "react-dom": "17.0.2",
     "react-feed": "^0.0.1-alpha.5",
     "react-google-recaptcha": "^2.1.0",
