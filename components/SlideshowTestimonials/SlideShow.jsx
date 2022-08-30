@@ -2,6 +2,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import TestimonialSlide from './TestimonialSlide';
+import { SampleNextArrow, SamplePrevArrow } from './Arrow';
 
 const SlideshowTestimonials = ({ testimonialCollection }) => {
   const settings = {
@@ -11,6 +12,8 @@ const SlideshowTestimonials = ({ testimonialCollection }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
