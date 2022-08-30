@@ -11,7 +11,7 @@ const SampleNextArrow = function SampleNextArrow(props) {
         ...style
       }}
     >
-      <ChevronRightIcon className="text-gray-600  cursor-pointer absolute -right-11 top-56 h-11 w-11 hover:text-gray-500" />
+      <ChevronRightIcon className="text-white  cursor-pointer absolute -right-11 top-56 h-11 w-11 hover:text-gray-200" />
     </div>
   );
 };
@@ -26,7 +26,7 @@ const SamplePrevArrow = function SamplePrevArrow(props) {
         ...style
       }}
     >
-      <ChevronLeftIcon className="text-gray-600 absolute cursor-pointer -left-11 top-56 h-11 w-11 hover:text-gray-500" />
+      <ChevronLeftIcon className="text-white absolute cursor-pointer -left-11 top-56 h-11 w-11 hover:text-gray-200" />
     </div>
   );
 };

@@ -144,16 +144,6 @@
   .btn-primary--negative--small {
     @apply btn--small bg-white text-orange-dark;
   }
-  .slick-prev:before {
-    background-color: blue !important;
-    width: 46px;
-    height: 46px;
-    content: '' !important;
-    position: absolute;
-    top: -11px;
-    left: -31px;
-    background-image: url('http://lorempixel.com/50/50');
-  }
 
   .slideshow-slick .slick-dots {
     @apply rounded-t-lg rounded-b-lg;
