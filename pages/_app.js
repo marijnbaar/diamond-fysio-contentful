@@ -14,11 +14,11 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <CookieConsent
         debug={true}
-        style={{ padding: '0px 240px ', background: 'white', color: 'rgb(107 114 128 )' }}
+        style={{ padding: '10px', background: 'white', color: 'rgb(107 114 128 )' }}
         buttonStyle={{
           color: 'white',
           backgroundColor: 'rgb(20 184 166)',
-          marginTop: '20px',
+          marginTop: '10px',
           padding: '12px 32px',
           borderRadius: '0.25rem'
         }}
@@ -27,10 +27,10 @@ function MyApp({ Component, pageProps }) {
       >
         <p>
           Deze site gebruikt cookies om de gebruikservaring te optimaliseren en webverkeer te
-          analyseren.{' '}
+          analyseren.
           <Link href="/privacy-policy">
-            <a className="text-gray-400 hover:text-beige">Lees hier meer</a>
-          </Link>{' '}
+            <a className="text-gray-400 hover:text-beige"> Lees hier meer </a>
+          </Link>
           over hoe wij cookies gebruiken. Ga je akkoord met het gebruik van cookies? Klik dan op
           &quot;Accepteren&quot;.
         </p>
