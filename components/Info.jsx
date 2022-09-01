@@ -32,7 +32,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                           unoptimized="true"
                           layout="fill"
                           objectFit="cover"
-                          className="filter grayscale hover:filter-none cursor-pointer rounded"
+                          className="cursor-pointer rounded"
                         />
                       </a>
                     </Link>

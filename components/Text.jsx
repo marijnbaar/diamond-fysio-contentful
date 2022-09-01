@@ -9,7 +9,7 @@ export default function Text({ title, subtitle, description }) {
             <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
               {subtitle}
             </h2>
-            <p className=" mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+            <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
               {title}
             </p>
           </div>
