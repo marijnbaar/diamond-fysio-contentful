@@ -16,6 +16,7 @@ import Text from './Text';
 import Appointment from './Appointment';
 import Contact from './Contact/Contact';
 import Thankyou from './Thankyou';
+import Teammemberpage from './Teammemberpage';
 
 const ComponentList = (props) =>
   props.components.map((component) => {
@@ -94,6 +95,9 @@ const ComponentList = (props) =>
         }
         case 'CookieComponent': {
           return <Text key={component.sys.id} id={component.sys.id} {...component} />;
+        }
+        case 'TeamMember': {
+          return <Teammemberpage key={component.sys.id} id={component.sys.id} {...component} />;
         }
       }
     }

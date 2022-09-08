@@ -6,6 +6,8 @@ import { SampleNextArrow, SamplePrevArrow } from './Arrow';
 
 const Slideshow = ({ title, subtitle, description, specialisationCollection }) => {
   const settings = {
+    autoplay: true,
+    autoplaySpeed: 4000,
     dots: true,
     fade: false,
     infinite: true,

@@ -19,7 +19,7 @@ export default function Contact({
       <main className="overflow-hidden">
         {/* Header */}
         <div className="bg-warm-gray-50">
-          <div className="pt-32 pb-20">
+          <div className="pt-32 pb-16">
             <div className="relative z-10 max-w-7xl mx-auto pl-4 pr-8 sm:px-6 lg:px-8">
               <h1 className="text-4xl font-extrabold tracking-tight text-warm-gray-900 sm:text-5xl lg:text-6xl">
                 {title && title}
