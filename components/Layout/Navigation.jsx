@@ -282,7 +282,7 @@ export default function Navigation({ navigation }) {
                 <div>
                   <span className="sr-only">Diamond fysio</span>
                   <Link href="/">
-                    <div className="z-10 h-16 w-16 relative">
+                    <div className="z-10 h-11 w-11 relative">
                       {navigation.logo && (
                         <Image
                           src={navigation.logo && navigation.logo.url}
@@ -296,7 +296,7 @@ export default function Navigation({ navigation }) {
                   </Link>
                 </div>
                 <div className="-mr-2">
-                  <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
+                  <Popover.Button className="bg-white rounded-md p-6 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
                     <span className="sr-only">Close menu</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
@@ -318,7 +318,7 @@ export default function Navigation({ navigation }) {
                               : menuItem.externalLink
                           }
                         >
-                          <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+                          <div className="-m-4 p-2 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
                             <div className="ml-4">
                               <p className="text-base font-medium text-gray-900 hover:bg-gray-50">
                                 {menuItem.title && menuItem.title}
@@ -338,12 +338,12 @@ export default function Navigation({ navigation }) {
                 </nav>
               </div>
             </div>
-            <div className="py-6 px-5 space-y-6">
-              <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+            <div className="py-4 px-5 space-y-6">
+              <div className="grid grid-cols-2 gap-y-2 gap-x-8">
                 {navigation.menuItems &&
                   navigation.menuItems.map((item) => (
                     <div key={item.title} className="flow-root">
-                      <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                      <div className="-m-3 p-4 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
                         <MyLink
                           href={
                             item.internalLink
