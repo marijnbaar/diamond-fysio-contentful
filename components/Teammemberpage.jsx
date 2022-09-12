@@ -13,7 +13,8 @@ export default function Teammember({
   phoneNumber,
   specialisationTagsCollection,
   location,
-  descriptionHomepage
+  descriptionHomepage,
+  quote
 }) {
   return (
     <div className="bg-white">
@@ -42,14 +43,14 @@ export default function Teammember({
 
         <div className="relative mx-auto max-w-5xl pt-16 sm:px-6 overflow-hidden">
           <div className="bg-slate-50 mt-11 rounded-3xl lg:grid lg:grid-cols-6">
-            <div className="absolute z-10 mx-auto -mt-11 lg:mt-11 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 lg:h-72 lg:w-72">
+            <div className="absolute z-10 mx-auto -mt-11 md:-mt-14 lg:-mt-20 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 ">
               {image && (
                 <div className="absolute inset-0 h-full w-full object-cover">
                   {image && <Image src={image.url} alt={image.description} layout="fill" />}
                 </div>
               )}
             </div>
-            <div className="lg:col-span-4 px-4 pt-24 pb-6 sm:px-10 sm:pt-16 md:pt-20 lg:px-20 lg:pt-32">
+            <div className="lg:col-span-4 px-4 pt-24 sm:px-10 sm:pt-16 md:pt-20 lg:px-20 lg:pt-32">
               <h2
                 className="inline-flex items-center rounded-full py-1 px-4 mr-2 text-teal-500 hover:text-teal-400 ring-1 ring-inset ring-teal-500"
                 id="author-title"
@@ -62,14 +63,14 @@ export default function Teammember({
                 {name && name}
               </span>
               <p className="mt-1 font-display text-5xl font-extrabold tracking-tight text-slate-900 sm:text-6xl">
-                &lsquo;Dit is een quote waarin ik iets over mijn beroep zeg&lsquo;
+                {quote && quote}
               </p>
               <p className="mt-2 text-lg tracking-tight text-slate-700">
                 {description && description}
               </p>
             </div>
-            <div className="lg:col-span-2 relative pb-10 sm:px-4 lg:px-2 lg:pt-64 bg-slate-50 rounded-3xl">
-              <div className="relative lg:absolute lg:bottom-4 px-4">
+            <div className="lg:col-span-2 relative pb-10 sm:px-4 lg:px-2 bg-slate-50 rounded-3xl">
+              <div className="relative lg:absolute -bottom-11 px-4">
                 <h2
                   className="inline-flex items-center rounded-full py-1 px-4 text-teal-500 hover:text-teal-400 -ml-2"
                   id="author-title"
@@ -97,7 +98,7 @@ export default function Teammember({
                 <div className="mt-2 text-base text-left font-medium pl-2 tracking-tight text-gray-500 leading-8">
                   {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
                 </div>
-                <div className="mt-4 text-sm font-small cursor-default flex flex-row flex-wrap text-teal-500">
+                <div className="mt-2 text-sm font-small cursor-default flex flex-row flex-wrap text-teal-500">
                   {specialisationTagsCollection.items.map((specialisation) => (
                     <div
                       key={specialisation.tag}
@@ -109,25 +110,9 @@ export default function Teammember({
                 </div>
               </div>
             </div>
-            <div className="pb-10 pl-8 lg:pl-16 bg-slate-50 rounded-3xl">
-              <div className="pl-2 lg:pl-4 mt-8 inline-flex items-center">
+            <div className="pb-10 pl-4 lg:pl-16 bg-slate-50 rounded-3xl">
+              <div className="md:pl-0 mt-8 inline-flex items-center">
                 <ul role="list" className="flex justify-center my-auto space-x-2">
-                  <li>
-                    {emailAddress && (
-                      <a
-                        href={`mailto:${emailAddress}`}
-                        className="text-gray-400 hover:text-gray-500"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <span className="sr-only">Email</span>
-                        <MailIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                      </a>
-                    )}
-                  </li>
                   <li>
                     {phoneNumber && (
                       <a
@@ -138,23 +123,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Phone number</span>
                         <PhoneIcon
-                          className="flex-shrink-0 ml-2 w-6 h-6 text-gray-400 hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                      </a>
-                    )}
-                  </li>
-                  <li>
-                    {website && (
-                      <a
-                        href={website}
-                        className="text-gray-400 hover:text-gray-500"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <span className="sr-only">Website</span>
-                        <GlobeAltIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500 md:ml-2"
                           aria-hidden="true"
                         />
                       </a>
@@ -181,6 +150,38 @@ export default function Teammember({
                             clipRule="evenodd"
                           />
                         </svg>
+                      </a>
+                    )}
+                  </li>
+                  <li>
+                    {emailAddress && (
+                      <a
+                        href={`mailto:${emailAddress}`}
+                        className="text-gray-400 hover:text-gray-500"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span className="sr-only">Email</span>
+                        <MailIcon
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    )}
+                  </li>
+                  <li>
+                    {website && (
+                      <a
+                        href={website}
+                        className="text-gray-400 hover:text-gray-500"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span className="sr-only">Website</span>
+                        <GlobeAltIcon
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          aria-hidden="true"
+                        />
                       </a>
                     )}
                   </li>
