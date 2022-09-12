@@ -1,14 +1,15 @@
-import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
-import Link from 'next/link';
+import MyLink from 'next/link';
 import { ExternalLinkIcon } from '@heroicons/react/solid';
+import createSlug from '../lib/helpers/createSlug';
 
 export default function Team({ title, description, teamMemberCollection }) {
+  console.log(teamMemberCollection);
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-11">
       <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
         <div className="space-y-12">
-          <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
+          <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl mb-24">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
             <p className="text-xl text-gray-500">{description}</p>
           </div>
@@ -36,104 +37,27 @@ export default function Team({ title, description, teamMemberCollection }) {
                       <div className="text-lg leading-6 font-medium">
                         <h3 className="mb-1">{person.name}</h3>
                         <p className="text-teal-500 text-sm">{person.role}</p>
-                        <div className="flex-1">
-                          <div className="mt-2 text-sm font-small cursor-default flex flex-row flex-wrap text-white">
-                            {person.specialisationTagsCollection.items.map((specialisation) => (
-                              <div
-                                key={specialisation.tag}
-                                className="bg-teal-500 hover:bg-teal-400 p-1 m-1 rounded"
-                              >
-                                {specialisation.tag}
+                        {person.link && (
+                          <MyLink
+                            key={person.link.sys.id}
+                            href={createSlug(person.link.slug, person.link.__typename)}
+                          >
+                            <div className="my-4 cursor-pointer">
+                              <div className="inline-flex rounded-md shadow">
+                                <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
+                                  <p className="text-base font-medium text-gray-900 hover:bg-gray-50">
+                                    Lees meer
+                                  </p>
+                                  <ExternalLinkIcon
+                                    className="-mr-1 ml-3 h-5 w-5 text-gray-400"
+                                    aria-hidden="true"
+                                  />
+                                </div>
                               </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="my-4">
-                          <div className="inline-flex rounded-md shadow">
-                            <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
-                              <Link href="/team">Lees meer</Link>
-                              <ExternalLinkIcon
-                                className="-mr-1 ml-3 h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                              />
                             </div>
-                          </div>
-                        </div>
+                          </MyLink>
+                        )}
                       </div>
-                      <ul role="list" className="flex justify-center my-auto space-x-2">
-                        <li>
-                          {person.emailAddress && (
-                            <a
-                              href={`mailto:${person.emailAddress}`}
-                              className="text-gray-400 hover:text-gray-500"
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <span className="sr-only">Email</span>
-                              <MailIcon
-                                className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
-                                aria-hidden="true"
-                              />
-                            </a>
-                          )}
-                        </li>
-                        <li>
-                          {person.phoneNumber && (
-                            <a
-                              href={`https://api.whatsapp.com/send?phone=${person.phoneNumber}`}
-                              className="text-gray-400 hover:text-gray-500"
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <span className="sr-only">Phone number</span>
-                              <PhoneIcon
-                                className="flex-shrink-0 ml-1 w-6 h-6 text-gray-400 hover:text-gray-500"
-                                aria-hidden="true"
-                              />
-                            </a>
-                          )}
-                        </li>
-                        <li>
-                          {person.website && (
-                            <a
-                              href={person.website}
-                              className="text-gray-400 hover:text-gray-500"
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <span className="sr-only">Website</span>
-                              <GlobeAltIcon
-                                className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
-                                aria-hidden="true"
-                              />
-                            </a>
-                          )}
-                        </li>
-                        <li>
-                          {person.linkedInUrl && (
-                            <a
-                              href={person.linkedInUrl}
-                              className="text-gray-400 hover:text-gray-500"
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <span className="sr-only">LinkedIn</span>
-                              <svg
-                                className="flex-shrink-0 w-6 h-6"
-                                aria-hidden="true"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </a>
-                          )}
-                        </li>
-                      </ul>
                     </div>
                   </li>
                 </div>

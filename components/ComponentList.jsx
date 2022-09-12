@@ -3,7 +3,6 @@ import Highlight from './Highlight';
 import Info from './Info';
 import Team from './Team';
 import CTA from './CTA';
-import Teammember from './Teammember';
 import Collaborations from './Collaborations';
 import TeampageHeader from './Headers/TeampageHeader';
 import SpecialisationHeader from './Headers/SpecialisationpageHeader';
@@ -70,7 +69,7 @@ const ComponentList = (props) =>
           return <CTA key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'TeampageOverview': {
-          return <Teammember key={component.sys.id} id={component.sys.id} {...component} />;
+          return <Team key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Collaborations': {
           return <Collaborations key={component.sys.id} id={component.sys.id} {...component} />;
