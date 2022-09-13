@@ -4,7 +4,6 @@ import { ExternalLinkIcon } from '@heroicons/react/solid';
 import createSlug from '../lib/helpers/createSlug';
 
 export default function Team({ title, description, teamMemberCollection }) {
-  console.log(teamMemberCollection);
   return (
     <div className="bg-white mt-11">
       <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
