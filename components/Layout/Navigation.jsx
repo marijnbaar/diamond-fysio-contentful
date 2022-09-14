@@ -42,6 +42,7 @@ export default function Navigation({ navigation }) {
                     layout="fill"
                     objectFit="cover"
                     quality="100"
+                    priority="true"
                   />
                 )}
               </div>
@@ -290,6 +291,7 @@ export default function Navigation({ navigation }) {
                           layout="fill"
                           objectFit="cover"
                           quality="100"
+                          priority="true"
                         />
                       )}
                     </div>
