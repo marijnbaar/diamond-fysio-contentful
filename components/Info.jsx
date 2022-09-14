@@ -20,7 +20,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
         </div>
         <div className="z-40 mt-12 sm:mb-11 lg:mb-0 h-full">
           <div className="flex flex-wrap flex-column h-[435px] sm:h-[220px] lg:h-[240px] justify-between px-6 md:px-0 overflow-hidden">
-            {instagramPosts.data &&
+            {instagramPosts &&
               instagramPosts.data.map((image, id) =>
                 image.media_type === 'IMAGE' ? (
                   <div key={id} className="relative m-2 lg:m-4 h-52 w-52 mx-auto rounded">
