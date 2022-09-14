@@ -10,7 +10,7 @@ export async function loadPosts() {
 }
 
 export default async function handler(req, res) {
-  // API logic
+  // API logic comes here
   const response = await loadPosts();
   res.json(response);
   res.json({ message: 'The response is ok!' });
