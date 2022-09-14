@@ -13,6 +13,7 @@ const HomepageHeader = ({ title, info, buttonCollection, image }) => {
             layout="fill"
             src={image.url}
             alt={image.description}
+            priority="true"
           />
         )}
         <div
