@@ -95,7 +95,7 @@ export default function Teammember({
                     </span>
                   )}
                 </h2>
-                <div className="mt-2 text-base text-left font-medium pl-2 tracking-tight text-gray-500 leading-8">
+                <div className="mt-3 text-base text-left font-medium pl-2 tracking-tight text-gray-500 leading-8">
                   {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
                 </div>
                 <div className="mt-2 text-sm font-small cursor-default flex flex-row flex-wrap text-teal-500">
