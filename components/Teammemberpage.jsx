@@ -75,7 +75,7 @@ export default function Teammember({
                 </div>
               )}
             </div>
-            <div className="lg:col-span-4 px-4 pt-24 sm:px-10 sm:pt-16 md:pt-20 lg:px-20 lg:pt-32">
+            <div className="lg:col-span-4 px-4 md:px-8 pt-24 sm:px-10 sm:pt-16 md:pt-20 lg:px-20 lg:pt-32">
               <h2
                 className="inline-flex items-center rounded-full py-1 px-4 mr-2 text-teal-500 hover:text-teal-400 ring-1 ring-inset ring-teal-500"
                 id="author-title"
@@ -133,11 +133,11 @@ export default function Teammember({
                 </div>
               </div>
             </div>
-            <div className="pb-10 pl-4 lg:pl-16 bg-slate-50 rounded-3xl">
-              <div className="md:pl-2 mt-8 inline-flex items-center">
+            <div className="pb-10 pl-4 md:pl-8 lg:pl-20 bg-slate-50 rounded-3xl">
+              <div className="mt-8 inline-flex items-center">
                 <ul role="list" className="flex justify-center my-auto space-x-2">
-                  <li>
-                    {phoneNumber && (
+                  {phoneNumber && (
+                    <li>
                       <a
                         href={`https://api.whatsapp.com/send?phone=${phoneNumber}`}
                         className="text-gray-400 hover:text-gray-500"
@@ -150,10 +150,10 @@ export default function Teammember({
                           aria-hidden="true"
                         />
                       </a>
-                    )}
-                  </li>
-                  <li>
-                    {linkedInUrl && (
+                    </li>
+                  )}
+                  {linkedInUrl && (
+                    <li>
                       <a
                         href={linkedInUrl}
                         className="text-gray-400 hover:text-gray-500"
@@ -162,7 +162,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">LinkedIn</span>
                         <svg
-                          className="flex-shrink-0 w-6 h-6"
+                          className="flex-shrink-0 w-6 h-6 md:mx-1"
                           aria-hidden="true"
                           fill="currentColor"
                           viewBox="0 0 20 20"
@@ -174,10 +174,10 @@ export default function Teammember({
                           />
                         </svg>
                       </a>
-                    )}
-                  </li>
-                  <li>
-                    {emailAddress && (
+                    </li>
+                  )}
+                  {emailAddress && (
+                    <li>
                       <a
                         href={`mailto:${emailAddress}`}
                         className="text-gray-400 hover:text-gray-500"
@@ -186,14 +186,14 @@ export default function Teammember({
                       >
                         <span className="sr-only">Email</span>
                         <MailIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500 lg:ml-1"
                           aria-hidden="true"
                         />
                       </a>
-                    )}
-                  </li>
-                  <li>
-                    {website && (
+                    </li>
+                  )}
+                  {website && (
+                    <li>
                       <a
                         href={website}
                         className="text-gray-400 hover:text-gray-500"
@@ -202,12 +202,12 @@ export default function Teammember({
                       >
                         <span className="sr-only">Website</span>
                         <GlobeAltIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500 lg:ml-1 ml-5"
                           aria-hidden="true"
                         />
                       </a>
-                    )}
-                  </li>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
