@@ -46,7 +46,14 @@ export default function Teammember({
             <div className="absolute z-10 mx-auto -mt-11 md:-mt-14 lg:-mt-20 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 ">
               {image && (
                 <div className="absolute inset-0 h-full w-full object-cover">
-                  {image && <Image src={image.url} alt={image.description} layout="fill" />}
+                  {image && (
+                    <Image
+                      src={image.url}
+                      alt={image.description}
+                      layout="fill"
+                      className="filter grayscale hover:filter-none"
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -62,7 +69,7 @@ export default function Teammember({
               <span className="mt-2 block text-teal-500 font-display text-5xl font-extrabold tracking-tight sm:text-6xl">
                 {name && name}
               </span>
-              <p className="mt-1 font-display text-5xl font-extrabold tracking-tight text-slate-900 sm:text-6xl">
+              <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-slate-900">
                 {quote && quote}
               </p>
               <p className="mt-2 text-lg tracking-tight text-slate-700">

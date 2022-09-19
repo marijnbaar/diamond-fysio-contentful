@@ -5,7 +5,7 @@ import createSlug from '../lib/helpers/createSlug';
 
 export default function Team({ title, description, teamMemberCollection }) {
   return (
-    <div className="bg-white mt-11">
+    <div className="bg-white mt-20 lg:mt-11">
       <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
         <div className="space-y-12">
           <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl mb-24">
@@ -29,6 +29,7 @@ export default function Team({ title, description, teamMemberCollection }) {
                           src={person.image.url}
                           alt={person.image.description}
                           layout="fill"
+                          className="filter grayscale hover:filter-none"
                         />
                       )}
                     </div>
