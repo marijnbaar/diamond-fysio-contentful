@@ -96,7 +96,7 @@ export default function Teammember({
               </div>
             </div>
             <div className="lg:col-span-2 relative pb-10 sm:px-4 lg:px-2 bg-slate-50 rounded-3xl">
-              <div className="relative lg:absolute -bottom-11 px-4">
+              <div className="relative lg:absolute -bottom-2 lg:bottom-12 px-4">
                 <h2
                   className="inline-flex items-center rounded-full py-1 px-4 text-teal-500 hover:text-teal-400 -ml-2"
                   id="author-title"
@@ -134,7 +134,7 @@ export default function Teammember({
               </div>
             </div>
             <div className="pb-10 pl-4 lg:pl-16 bg-slate-50 rounded-3xl">
-              <div className="md:pl-0 mt-8 inline-flex items-center">
+              <div className="md:pl-2 mt-8 inline-flex items-center">
                 <ul role="list" className="flex justify-center my-auto space-x-2">
                   <li>
                     {phoneNumber && (
