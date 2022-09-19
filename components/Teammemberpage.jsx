@@ -1,21 +1,39 @@
 import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 
 export default function Teammember({
   name,
   role,
   image,
-  description,
   emailAddress,
   linkedInUrl,
   website,
   phoneNumber,
   specialisationTagsCollection,
   location,
-  descriptionHomepage,
+  descriptionTeampage,
   quote
 }) {
+  const RICHTEXT_OPTIONS = {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        return (
+          <p className="mt-3 text-base text-left font-medium tracking-tight text-gray-500 leading-8">
+            {children}
+          </p>
+        );
+      },
+      [INLINES.HYPERLINK]: (node, children) => {
+        return (
+          <a href={node.data.uri} target="_blank" rel="noreferrer">
+            <span className="text-cyan-600 hover:text-gray-400">{children}</span>
+          </a>
+        );
+      }
+    }
+  };
   return (
     <div className="bg-white">
       <section
@@ -72,9 +90,10 @@ export default function Teammember({
               <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-slate-900">
                 {quote && quote}
               </p>
-              <p className="mt-2 text-lg tracking-tight text-slate-700">
-                {description && description}
-              </p>
+              <div className="mt-2 text-lg tracking-tight">
+                {descriptionTeampage &&
+                  documentToReactComponents(descriptionTeampage.json, RICHTEXT_OPTIONS)}
+              </div>
             </div>
             <div className="lg:col-span-2 relative pb-10 sm:px-4 lg:px-2 bg-slate-50 rounded-3xl">
               <div className="relative lg:absolute -bottom-11 px-4">
@@ -102,9 +121,6 @@ export default function Teammember({
                     </span>
                   )}
                 </h2>
-                <div className="mt-3 text-base text-left font-medium pl-2 tracking-tight text-gray-500 leading-8">
-                  {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
-                </div>
                 <div className="mt-2 text-sm font-small cursor-default flex flex-row flex-wrap text-teal-500">
                   {specialisationTagsCollection.items.map((specialisation) => (
                     <div
