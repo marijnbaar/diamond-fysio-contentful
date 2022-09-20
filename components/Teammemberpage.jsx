@@ -95,10 +95,10 @@ export default function Teammember({
                   documentToReactComponents(descriptionTeampage.json, RICHTEXT_OPTIONS)}
               </div>
             </div>
-            <div className="lg:col-span-2 relative pb-10 sm:px-4 lg:px-2 bg-slate-50 rounded-3xl">
-              <div className="relative lg:absolute -bottom-2 lg:bottom-12 px-4">
+            <div className="lg:col-span-2 relative py-4 lg:pb-10 px-4  sm:px-10 md:px-8 lg:px-2 bg-slate-50 rounded-3xl">
+              <div className="relative lg:absolute -bottom-2 lg:bottom-12">
                 <h2
-                  className="inline-flex items-center rounded-full py-1 px-4 text-teal-500 hover:text-teal-400 -ml-2"
+                  className="inline-flex items-center rounded-full py-1 text-teal-500 hover:text-teal-400"
                   id="author-title"
                 >
                   {location && (
@@ -125,7 +125,7 @@ export default function Teammember({
                   {specialisationTagsCollection.items.map((specialisation) => (
                     <div
                       key={specialisation.tag}
-                      className="opacity-80 ring-1 ring-inset ring-teal-500 hover:text-teal-400 p-2 px-4 m-1 rounded-full"
+                      className="opacity-80 ring-1 ring-inset ring-teal-500 hover:text-teal-400 p-2 lg:px-4 mr-1 my-1 rounded-full"
                     >
                       {specialisation.tag}
                     </div>
@@ -133,7 +133,7 @@ export default function Teammember({
                 </div>
               </div>
             </div>
-            <div className="pb-10 pl-4 md:pl-8 lg:pl-20 bg-slate-50 rounded-3xl">
+            <div className="pb-10 pl-4 sm:pl-10 md:pl-8 lg:pl-20 bg-slate-50 rounded-3xl">
               <div className="mt-8 inline-flex items-center">
                 <ul role="list" className="flex justify-center my-auto space-x-2">
                   {phoneNumber && (
@@ -146,7 +146,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Phone number</span>
                         <PhoneIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500 md:ml-2"
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>
@@ -162,7 +162,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">LinkedIn</span>
                         <svg
-                          className="flex-shrink-0 w-6 h-6 md:mx-1"
+                          className="flex-shrink-0 w-6 h-6"
                           aria-hidden="true"
                           fill="currentColor"
                           viewBox="0 0 20 20"
@@ -186,7 +186,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Email</span>
                         <MailIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500 lg:ml-1"
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>
@@ -202,7 +202,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Website</span>
                         <GlobeAltIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500 lg:ml-1 ml-5"
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>
