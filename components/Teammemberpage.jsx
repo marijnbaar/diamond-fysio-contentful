@@ -14,16 +14,20 @@ export default function Teammember({
   specialisationTagsCollection,
   location,
   descriptionTeampage,
+  descriptionHomepage,
   quote
 }) {
   const RICHTEXT_OPTIONS = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         return (
-          <p className="mt-3 text-base text-left font-medium tracking-tight text-gray-500 leading-8">
+          <p className="text-base text-left font-medium tracking-tight text-gray-500 leading-8">
             {children}
           </p>
         );
+      },
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return <h3 className="mt-4 text-2xl font-extrabold text-gray-500">{children}</h3>;
       },
       [INLINES.HYPERLINK]: (node, children) => {
         return (
@@ -61,7 +65,7 @@ export default function Teammember({
 
         <div className="relative mx-auto max-w-5xl pt-16 sm:px-6 overflow-hidden">
           <div className="bg-slate-50 mt-11 rounded-3xl lg:grid lg:grid-cols-6">
-            <div className="absolute z-10 mx-auto -mt-11 md:-mt-14 lg:-mt-20 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 ">
+            <div className="absolute z-10 mx-auto -mt-11 md:-mt-14 lg:-mt-28 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 ">
               {image && (
                 <div className="absolute inset-0 h-full w-full object-cover">
                   {image && (
@@ -90,13 +94,13 @@ export default function Teammember({
               <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-slate-900">
                 {quote && quote}
               </p>
-              <div className="mt-2 text-lg tracking-tight">
+              <div className="text-lg tracking-tight">
                 {descriptionTeampage &&
                   documentToReactComponents(descriptionTeampage.json, RICHTEXT_OPTIONS)}
               </div>
             </div>
-            <div className="lg:col-span-2 relative py-4 lg:pb-10 px-4  sm:px-10 md:px-8 lg:px-2 bg-slate-50 rounded-3xl">
-              <div className="relative lg:absolute -bottom-2 lg:bottom-12">
+            <div className="flex lg:col-span-2 relative py-4 lg:pb-10 px-4 sm:px-10 md:px-8 lg:px-2 bg-slate-50 rounded-3xl">
+              <div className="relative lg:pt-48">
                 <h2
                   className="inline-flex items-center rounded-full py-1 text-teal-500 hover:text-teal-400"
                   id="author-title"
@@ -117,10 +121,13 @@ export default function Teammember({
                           d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"
                         />
                       </svg>
-                      {location && location}
+                      {location}
                     </span>
                   )}
                 </h2>
+                <div className="mt-2 text-base text-left font-medium pl-2 tracking-tight text-gray-500 leading-8">
+                  {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
+                </div>
                 <div className="mt-2 text-sm font-small cursor-default flex flex-row flex-wrap text-teal-500">
                   {specialisationTagsCollection.items.map((specialisation) => (
                     <div
