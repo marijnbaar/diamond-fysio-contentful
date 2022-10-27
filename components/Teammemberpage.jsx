@@ -1,7 +1,8 @@
-import { MailIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/outline';
+import { MailIcon, GlobeAltIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { BsWhatsapp } from 'react-icons/bs';
 
 export default function Teammember({
   name,
@@ -142,7 +143,7 @@ export default function Teammember({
             </div>
             <div className="pb-10 pl-4 sm:pl-10 md:pl-8 lg:pl-20 bg-slate-50 rounded-3xl">
               <div className="mt-8 inline-flex items-center">
-                <ul role="list" className="flex justify-center my-auto space-x-2">
+                <ul role="list" className="flex justify-center my-auto space-x-3">
                   {phoneNumber && (
                     <li>
                       <a
@@ -152,10 +153,14 @@ export default function Teammember({
                         rel="noreferrer"
                       >
                         <span className="sr-only">Phone number</span>
-                        <PhoneIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                        <BsWhatsapp
+                          className="flex-shrink-0 w-8 h-8 text-gray-400 hover:text-gray-500"
                           aria-hidden="true"
                         />
+                        {/* <PhoneIcon
+                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          aria-hidden="true"
+                        /> */}
                       </a>
                     </li>
                   )}
@@ -169,7 +174,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">LinkedIn</span>
                         <svg
-                          className="flex-shrink-0 w-6 h-6"
+                          className="flex-shrink-0 w-8 h-8"
                           aria-hidden="true"
                           fill="currentColor"
                           viewBox="0 0 20 20"
@@ -193,7 +198,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Email</span>
                         <MailIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-8 h-8 text-gray-400 hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>
@@ -209,7 +214,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Website</span>
                         <GlobeAltIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-8 h-8 text-gray-400 hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>
