@@ -149,7 +149,7 @@ export default function Contact({
                     {contactDescription && documentToReactComponents(contactDescription.json)}
                   </div>
                   <p className="mt-6 text-base text-white max-w-3xl">
-                    Je kunt ook rechtstreeks contact opnemen met je therapeut (deze gegevens vind je{' '}
+                    Je kunt ook rechtstreeks contact opnemen met je therapeut (deze gegevens vind je
                     <Link className="hover:text-gray-500 text-gray-300" href="/">
                       op de homepagina
                     </Link>

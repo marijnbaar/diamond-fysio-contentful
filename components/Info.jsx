@@ -13,7 +13,6 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
             {title}
           </p>
-
           <div className="prose mt-5 max-w-prose mx-auto text-xl text-gray-500">
             {description && documentToReactComponents(description.json)}
           </div>
@@ -38,20 +37,22 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                     </Link>
                   </div>
                 ) : (
-                  <div
-                    key={id}
-                    className="relative m-2 lg:m-4 h-52 w-52 bg-black overflow-hidden mx-auto rounded"
-                  >
-                    <Link href={image.permalink} isExternal>
-                      <a target="_blank">
-                        <video
-                          src={image.media_url}
-                          controls={true}
-                          className="h-48 w-52 rounded"
-                        />
-                      </a>
-                    </Link>
-                  </div>
+                  []
+                  // for displaying video's, comment this code back in
+                  // <div
+                  //   key={id}
+                  //   className="relative m-2 lg:m-4 h-52 w-52 bg-black overflow-hidden mx-auto rounded"
+                  // >
+                  //   <Link href={image.permalink} isExternal>
+                  //     <a target="_blank">
+                  //       <video
+                  //         src={image.media_url}
+                  //         controls={true}
+                  //         className="h-48 w-52 rounded"
+                  //       />
+                  //     </a>
+                  //   </Link>
+                  // </div>
                 )
               )}
           </div>
