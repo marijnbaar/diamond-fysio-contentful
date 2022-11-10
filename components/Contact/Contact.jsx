@@ -178,7 +178,7 @@ export default function Contact({
                           rel="noreferrer"
                         >
                           <MailIcon
-                            className="flex-shrink-0 w-6 h-6 text-teal-200"
+                            className="flex-shrink-0 w-6 h-6 text-gmail"
                             aria-hidden="true"
                           />
                           <span className="ml-3">{email && email}</span>
@@ -186,14 +186,14 @@ export default function Contact({
                       )}
                     </dd>
                   </dl>
-                  <div role="list" className="mt-8 flex space-x-6">
+                  <div role="list" className="mt-8 flex">
                     <a
-                      className="text-teal-200 hover:text-teal-100"
+                      className="text-facebook mr-2 hover:text-teal-100"
                       href={facebookLink}
                       rel="noreferrer"
                     >
                       <span className="sr-only">Facebook</span>
-                      <div className="h-6 w-6" aria-hidden="true">
+                      <div className="mr-2 h-6 w-6" aria-hidden="true">
                         <svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                           <path
                             fillRule="evenodd"
@@ -205,12 +205,12 @@ export default function Contact({
                     </a>
                     <a
                       href={linkedInLink}
-                      className="text-teal-200 hover:text-teal-100 pt-1"
+                      className="text-linkedin hover:text-teal-100 pt-1"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <span className="sr-only">LinkedIn</span>
-                      <div className="h-6 w-6" aria-hidden="true">
+                      <div className="mr-1 h-6 w-6" aria-hidden="true">
                         <svg
                           aria-hidden="true"
                           focusable="false"
@@ -229,7 +229,7 @@ export default function Contact({
                       </div>
                     </a>
                     <a
-                      className="text-teal-200 hover:text-teal-100"
+                      className="text-instagram hover:text-teal-100"
                       href={instagramLink}
                       target="_blank"
                       rel="noreferrer"
@@ -246,7 +246,7 @@ export default function Contact({
                       </div>
                     </a>
                   </div>
-                  <div className=" p-4 mt-8">
+                  <div className="p-4 mt-8">
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.432796832136!2d4.9049229732259505!3d52.362571890779066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6095f2e60b59d%3A0xad61fcbb485f6074!2sFysio%20Diamond%20Factory!5e0!3m2!1snl!2sus!4v1657196883469!5m2!1snl!2sus"
                       width="270"
