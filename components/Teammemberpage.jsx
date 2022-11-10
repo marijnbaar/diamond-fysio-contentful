@@ -154,13 +154,9 @@ export default function Teammember({
                       >
                         <span className="sr-only">Phone number</span>
                         <BsWhatsapp
-                          className="flex-shrink-0 w-8 h-8 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-8 h-8 text-whatsapp-light hover:text-whatsapp-dark"
                           aria-hidden="true"
                         />
-                        {/* <PhoneIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 hover:text-gray-500"
-                          aria-hidden="true"
-                        /> */}
                       </a>
                     </li>
                   )}
@@ -168,7 +164,7 @@ export default function Teammember({
                     <li>
                       <a
                         href={linkedInUrl}
-                        className="text-gray-400 hover:text-gray-500"
+                        className="text-linkedin hover:text-gray-500"
                         target="_blank"
                         rel="noreferrer"
                       >
@@ -198,7 +194,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Email</span>
                         <MailIcon
-                          className="flex-shrink-0 w-8 h-8 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-8 h-8 text-gmail hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>
@@ -214,7 +210,7 @@ export default function Teammember({
                       >
                         <span className="sr-only">Website</span>
                         <GlobeAltIcon
-                          className="flex-shrink-0 w-8 h-8 text-gray-400 hover:text-gray-500"
+                          className="flex-shrink-0 w-8 h-8 text-web hover:text-gray-500"
                           aria-hidden="true"
                         />
                       </a>

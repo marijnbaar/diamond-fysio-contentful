@@ -22,7 +22,7 @@ export default function SpecialisationHeader({ title, descriptionRichText, image
                 <span className="block xl:inline">{title && title}</span>
               </h1>
               {descriptionRichText && (
-                <div className="prose mt-3 text-base font-manrope text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                <div className="prose mt-3 text-base font-manrope text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:-mx-4">
                   {documentToReactComponents(descriptionRichText.json)}
                 </div>
               )}

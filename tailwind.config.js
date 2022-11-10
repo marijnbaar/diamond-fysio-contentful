@@ -74,6 +74,15 @@ module.exports = {
       },
       colors: {
         stone: colors.teal,
+        facebook: '#3b5998',
+        whatsapp: {
+          dark: '#075E54',
+          light: '#25D366'
+        },
+        web: '#005A9C',
+        instagram: '#8a3ab9',
+        linkedin: '#0e76a8',
+        gmail: '#DB4437',
         blue: {
           extraDark: '#172B4D',
           dark: '#1D3A6A',
