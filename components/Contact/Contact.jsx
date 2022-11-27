@@ -1,7 +1,7 @@
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Link from 'next/link';
 import Contactform from './Contactform';
+import { BLOCKS } from '@contentful/rich-text-types';
 
 export default function Contact({
   title,
@@ -14,6 +14,20 @@ export default function Contact({
   facebookLink,
   instagramLink
 }) {
+  const RICHTEXT_OPTIONS = {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        return (
+          <p className="text-base text-left font-medium tracking-tight max-w-xs text-white leading-8">
+            {children}
+          </p>
+        );
+      },
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return <h3 className="mt-4 text-lg font-medium text-white">{children}</h3>;
+      }
+    }
+  };
   return (
     <div className="bg-white">
       <main className="overflow-hidden">
@@ -146,15 +160,9 @@ export default function Contact({
                   </div>
                   <h3 className="text-lg font-medium text-white">{subtitle && subtitle}</h3>
                   <div className="mt-6 text-base text-teal-50 max-w-3xl">
-                    {contactDescription && documentToReactComponents(contactDescription.json)}
+                    {contactDescription &&
+                      documentToReactComponents(contactDescription.json, RICHTEXT_OPTIONS)}
                   </div>
-                  <p className="mt-6 text-base text-white max-w-3xl">
-                    Je kunt ook rechtstreeks contact opnemen met je therapeut (deze gegevens vind je
-                    <Link className="hover:text-gray-500 text-gray-300" href="/">
-                      op de homepagina
-                    </Link>
-                    ). Mailen kan altijd - heeft het spoed, stuur dan een appje.
-                  </p>
                   <dl className="mt-8 space-y-6">
                     <dt>
                       <span className="sr-only">Phone number</span>
