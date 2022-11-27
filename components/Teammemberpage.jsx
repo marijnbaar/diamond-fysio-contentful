@@ -16,7 +16,8 @@ export default function Teammember({
   location,
   descriptionTeampage,
   descriptionHomepage,
-  quote
+  quote,
+  contact
 }) {
   const RICHTEXT_OPTIONS = {
     renderNode: {
@@ -101,7 +102,7 @@ export default function Teammember({
               </div>
             </div>
             <div className="flex lg:col-span-2 relative py-4 lg:pb-10 px-4 sm:px-10 md:px-8 lg:px-2 bg-slate-50 rounded-3xl">
-              <div className="relative lg:pt-48">
+              <div className="relative lg:pt-48 flex flex-col">
                 <h2
                   className="inline-flex items-center rounded-full py-1 text-teal-500 hover:text-teal-400"
                   id="author-title"
@@ -126,10 +127,7 @@ export default function Teammember({
                     </span>
                   )}
                 </h2>
-                <div className="mt-2 text-base text-left font-medium pl-2 tracking-tight text-gray-500 leading-8">
-                  {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
-                </div>
-                <div className="mt-2 text-sm font-small cursor-default flex flex-row flex-wrap text-teal-500">
+                <div className="mt-2 text-sm font-small cursor-default flex flex-row lg:order-3 flex-wrap text-teal-500">
                   {specialisationTagsCollection.items.map((specialisation) => (
                     <div
                       key={specialisation.tag}
@@ -139,9 +137,15 @@ export default function Teammember({
                     </div>
                   ))}
                 </div>
+                <div className="mt-2 text-base text-left font-medium lg:pl-2 lg:order-2 tracking-tight text-gray-500 leading-8">
+                  {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
+                </div>
               </div>
             </div>
-            <div className="pb-10 pl-4 sm:pl-10 md:pl-8 lg:pl-20 bg-slate-50 rounded-3xl">
+            <div className="pb-10 pl-4 sm:pl-10 md:pl-8 lg:pl-20 bg-slate-50 lg:col-span-4">
+              <div className="text-lg tracking-tight w-full">
+                {contact && documentToReactComponents(contact.json, RICHTEXT_OPTIONS)}
+              </div>
               <div className="mt-8 inline-flex items-center">
                 <ul role="list" className="flex justify-center my-auto space-x-3">
                   {phoneNumber && (
