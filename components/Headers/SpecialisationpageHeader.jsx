@@ -16,13 +16,13 @@ export default function SpecialisationHeader({ title, descriptionRichText, image
             <polygon points="50,0 100,0 50,100 0,100" />
           </svg>
 
-          <main className=" mt-36 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:mt-28">
+          <main className="mt-36 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight font-manrope font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span className="block xl:inline">{title && title}</span>
-              </h1>
+              <h3 className="text-2xl tracking-tight font-manrope font-extrabold text-gray-900 sm:text-4xl md:text-5xl">
+                {title && title}
+              </h3>
               {descriptionRichText && (
-                <div className="prose mt-3 text-base font-manrope text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:-mx-4">
+                <div className="prose mt-3 text-base font-manrope text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:-mx-2">
                   {documentToReactComponents(descriptionRichText.json)}
                 </div>
               )}

@@ -159,7 +159,7 @@ export default function Contact({
                     </svg>
                   </div>
                   <h3 className="text-lg font-medium text-white">{subtitle && subtitle}</h3>
-                  <div className="mt-6 text-base text-teal-50 max-w-3xl">
+                  <div className="mt-2 text-base text-teal-50 max-w-3xl">
                     {contactDescription &&
                       documentToReactComponents(contactDescription.json, RICHTEXT_OPTIONS)}
                   </div>
