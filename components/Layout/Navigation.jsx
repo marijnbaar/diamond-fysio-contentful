@@ -5,6 +5,8 @@ import createSlug from '../../lib/helpers/createSlug';
 import { forwardRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/solid';
 
 const MyLink = forwardRef((props, ref) => {
   let { href, children, ...rest } = props;
@@ -18,9 +20,6 @@ const MyLink = forwardRef((props, ref) => {
 });
 
 MyLink.displayName = 'MyLink';
-
-import { MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
