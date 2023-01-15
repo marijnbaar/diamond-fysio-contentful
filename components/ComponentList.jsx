@@ -3,7 +3,6 @@ import Highlight from './Highlight';
 import Info from './Info';
 import Team from './Team';
 import CTA from './CTA';
-import Collaborations from './Collaborations';
 import TeampageHeader from './Headers/TeampageHeader';
 import SpecialisationHeader from './Headers/SpecialisationpageHeader';
 import Specialisation from './Specialisation';
@@ -16,6 +15,7 @@ import Appointment from './Appointment';
 import Contact from './Contact/Contact';
 import Thankyou from './Thankyou';
 import Teammemberpage from './Teammemberpage';
+import SlideshowCollaborations from './SlideshowCollaborations/SlideShow';
 
 const ComponentList = (props) =>
   props.components.map((component) => {
@@ -72,7 +72,9 @@ const ComponentList = (props) =>
           return <Team key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Collaborations': {
-          return <Collaborations key={component.sys.id} id={component.sys.id} {...component} />;
+          return (
+            <SlideshowCollaborations key={component.sys.id} id={component.sys.id} {...component} />
+          );
         }
         case 'Specialisation': {
           return <Specialisation key={component.sys.id} id={component.sys.id} {...component} />;

@@ -1,8 +1,11 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 import Link from 'next/link';
+// import InstagramFeed from 'react-ig-feed';
 
 export default function Info({ title, subtitle, description, instagramPosts }) {
+  // const secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
+
   return (
     <div className="bg-gray-50 -mt-11 -z-10 pt-16 sm:pt-24 lg:pt-10 pb-11">
       <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
@@ -18,6 +21,13 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
           </div>
         </div>
         <div className="z-40 mt-12 sm:mb-11 lg:mb-0 h-full">
+          {/* <InstagramFeed
+            username="fysiodiamondfactory"
+            token={secret}
+            limit={1}
+            cols={2}
+            imageSize={'thumbnail'}
+          /> */}
           <div className="flex flex-wrap flex-column h-[435px] sm:h-[220px] lg:h-[240px] justify-between px-6 md:px-0 overflow-hidden">
             {instagramPosts &&
               instagramPosts.data.map(
