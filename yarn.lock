@@ -2742,6 +2742,13 @@ ignore@^5.1.4, ignore@^5.2.0:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.1.tgz#c2b1f76cb999ede1502f3a226a9310fdfe88d46c"
   integrity sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==
 
+immutability-helper@^2.6.6:
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.9.1.tgz#71c423ba387e67b6c6ceba0650572f2a2a6727df"
+  integrity sha512-r/RmRG8xO06s/k+PIaif2r5rGc3j4Yhc01jSBfwPCXDLYZwp/yxralI37Df1mwmuzcCsen/E/ITKcTEvc1PQmQ==
+  dependencies:
+    invariant "^2.2.0"
+
 import-fresh@^3.0.0, import-fresh@^3.2.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
@@ -2835,7 +2842,7 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-invariant@^2.2.4:
+invariant@^2.2.0, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -3412,7 +3419,7 @@ lodash.merge@^4.6.2:
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21:
+lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -4181,7 +4188,7 @@ prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.0, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.5.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -4306,6 +4313,11 @@ react-icons@^4.6.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
   integrity sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==
 
+react-ig-feed@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-ig-feed/-/react-ig-feed-1.7.0.tgz#55844aad8c86bc34bfd2589fecdd2101e99f24eb"
+  integrity sha512-eRnpdPaHfBihIEzJaQfXyOYTK9Mi7+QuEqjXmHeTwiSy0nI91t9gneioKPBWrcSn3zoW7ZGWXii2S3c7bQYlGw==
+
 react-instafeed@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-instafeed/-/react-instafeed-1.0.0.tgz#337f0c0087f4e5c012679c45062cadfaebe8e9f9"
@@ -4313,6 +4325,16 @@ react-instafeed@^1.0.0:
   dependencies:
     "@babel/runtime" "^7.2.0"
     instafeed-lite "^1.0.10"
+
+react-instagram-feed@^0.1.3-alpha:
+  version "0.1.3-alpha"
+  resolved "https://registry.yarnpkg.com/react-instagram-feed/-/react-instagram-feed-0.1.3-alpha.tgz#320737d919f3509e54ea2df5ba2280483bf27fa9"
+  integrity sha512-c+1rPLNv/IugtGrKtbqZG8vxctgomdiTUhHljt+LiuSGumXh2dhTD3L0DqB7jiQi0s7vGpQ/BjpZN5rXUhvPVg==
+  dependencies:
+    immutability-helper "^2.6.6"
+    lodash "^4.17.5"
+    prop-types "^15.6.1"
+    react "^16.3.1"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -4353,6 +4375,15 @@ react@17.0.2:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+react@^16.3.1:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 read-cache@^1.0.0:
   version "1.0.0"
