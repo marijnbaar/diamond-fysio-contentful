@@ -8,7 +8,7 @@ const Button = ({ title, type, internal_link, external_link, extra_classes = '' 
     <>
       {internal_link ? (
         <Link href={internal_link}>
-          <a className={btnType}>{title}</a>
+          <p className={btnType}>{title}</p>
         </Link>
       ) : (
         <a href={external_link} className={btnType}>

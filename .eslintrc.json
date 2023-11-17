@@ -1,5 +1,7 @@
 {
+  "plugins": ["jsx-a11y"],
   "extends": [
+    "plugin:jsx-a11y/recommended",
     "eslint:recommended",
     "plugin:promise/recommended",
     "next/core-web-vitals",

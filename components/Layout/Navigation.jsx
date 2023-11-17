@@ -8,13 +8,12 @@ import Image from 'next/image';
 import { MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 
-const MyLink = forwardRef((props, ref) => {
-  let { href, children, ...rest } = props;
+const MyLink = forwardRef(({ href, children, ...rest }, ref) => {
   return (
-    <Link href={href}>
-      <a ref={ref} {...rest}>
+    <Link href={href} passHref>
+      <div ref={ref} {...rest}>
         {children}
-      </a>
+      </div>
     </Link>
   );
 });

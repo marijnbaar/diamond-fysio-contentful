@@ -7,9 +7,9 @@ const MyLink = forwardRef((props, ref) => {
   let { href, children, ...rest } = props;
   return (
     <Link href={href}>
-      <a ref={ref} {...rest}>
+      <div ref={ref} {...rest}>
         {children}
-      </a>
+      </div>
     </Link>
   );
 });
@@ -105,7 +105,7 @@ export default function Footer({ footer }) {
                 <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
                   De praktijk
                 </h3>
-                <ul role="list" className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4">
                   {footer.footerSubmenu &&
                     footer.footerSubmenu[0].menuItems.map((menuItem) =>
                       menuItem.internalLink || menuItem.externalLink ? (
@@ -146,7 +146,7 @@ export default function Footer({ footer }) {
                 <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
                   Support
                 </h3>
-                <ul role="list" className="mt-4 space-y-4">
+                <ul className="mt-4 space-y-4">
                   {footer.footerSubmenu &&
                     footer.footerSubmenu[1].menuItems.map((menuItem) =>
                       menuItem.internalLink || menuItem.externalLink ? (
