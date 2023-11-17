@@ -35,7 +35,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                   image.media_type === 'IMAGE' ? (
                     <div key={id} className="relative m-2 lg:m-4 h-52 w-52 mx-auto rounded">
                       <Link href={image.permalink} isExternal>
-                        <a target="_blank">
+                        <p target="_blank">
                           <Image
                             src={image.media_url}
                             alt={image.caption}
@@ -44,7 +44,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                             objectFit="cover"
                             className="cursor-pointer rounded"
                           />
-                        </a>
+                        </p>
                       </Link>
                     </div>
                   ) : (
@@ -56,13 +56,13 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                 //     className="relative m-2 lg:m-4 h-52 w-52 bg-black overflow-hidden mx-auto rounded"
                 //   >
                 //     <Link href={image.permalink} isExternal>
-                //       <a target="_blank">
+                //       <p target="_blank">
                 //         <video
                 //           src={image.media_url}
                 //           controls={true}
                 //           className="h-48 w-52 rounded"
                 //         />
-                //       </a>
+                //       </p>
                 //     </Link>
                 //   </div>
                 // )

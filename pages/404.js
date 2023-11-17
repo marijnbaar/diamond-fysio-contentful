@@ -19,14 +19,14 @@ export default function FourOhFour() {
               </div>
               <div className="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
                 <Link href="/">
-                  <a className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                  <p className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
                     Go back home
-                  </a>
+                  </p>
                 </Link>
                 <Link href="/contact">
-                  <a className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-beige hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                  <p className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-beige hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
                     Contact
-                  </a>
+                  </p>
                 </Link>
               </div>
             </div>

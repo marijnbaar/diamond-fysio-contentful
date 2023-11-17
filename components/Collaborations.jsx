@@ -22,7 +22,7 @@ export default function Collaborations({ title, subtitle, logoCollection }) {
                 {logo && (
                   <Image
                     width={200}
-                    height={100}
+                    height="auto"
                     className="object-contain m-10 p-4"
                     src={logo.url}
                     alt={logo.description}

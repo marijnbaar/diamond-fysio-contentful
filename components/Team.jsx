@@ -12,10 +12,7 @@ export default function Team({ title, description, teamMemberCollection }) {
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
             <p className="text-xl text-gray-500">{description}</p>
           </div>
-          <ul
-            role="list"
-            className="mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl"
-          >
+          <ul className="mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl">
             {teamMemberCollection &&
               teamMemberCollection.items.map((person) => (
                 <div
@@ -30,6 +27,7 @@ export default function Team({ title, description, teamMemberCollection }) {
                           alt={person.image.description}
                           layout="fill"
                           className="filter grayscale hover:filter-none"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                         />
                       )}
                     </div>
