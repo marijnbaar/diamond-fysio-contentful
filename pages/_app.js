@@ -38,8 +38,9 @@ function MyApp({ Component, pageProps }) {
           <p>
             Deze site gebruikt cookies om de gebruikservaring te optimaliseren en webverkeer te
             analyseren.
-            <Link href="/privacy-policy">
-              <p className="text-gray-400 hover:text-beige"> Lees hier meer </p>
+            <Link href="/privacy-policy" className="text-gray-400 hover:text-beige">
+              {' '}
+              Lees hier meer{' '}
             </Link>
             over hoe wij cookies gebruiken. Ga je akkoord met het gebruik van cookies? Klik dan op
             &quot;Accepteren&quot;.
