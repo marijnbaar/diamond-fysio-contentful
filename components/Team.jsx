@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import MyLink from 'next/link';
 import { ExternalLinkIcon } from '@heroicons/react/solid';
 import createSlug from '../lib/helpers/createSlug';

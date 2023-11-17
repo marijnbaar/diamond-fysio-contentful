@@ -1,7 +1,7 @@
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const HomepageHeader = ({ title, info, buttonCollection, image }) => {
   return (

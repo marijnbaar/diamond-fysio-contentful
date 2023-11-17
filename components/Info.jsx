@@ -1,5 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 // import InstagramFeed from 'react-ig-feed';
 
@@ -34,7 +34,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                 (image, id) =>
                   image.media_type === 'IMAGE' ? (
                     <div key={id} className="relative m-2 lg:m-4 h-52 w-52 mx-auto rounded">
-                      <Link href={image.permalink} isExternal>
+                      <Link href={image.permalink}>
                         <p target="_blank">
                           <Image
                             src={image.media_url}
