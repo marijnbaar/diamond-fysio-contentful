@@ -33,20 +33,18 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
               instagramPosts.data.map(
                 (image, id) =>
                   image.media_type === 'IMAGE' ? (
-                    <div key={id} className="relative m-2 lg:m-4 h-52 w-52 mx-auto rounded">
-                      <Link href={image.permalink}>
-                        <p target="_blank">
-                          <Image
-                            src={image.media_url}
-                            alt={image.caption}
-                            unoptimized="true"
-                            layout="fill"
-                            objectFit="cover"
-                            className="cursor-pointer rounded"
-                          />
-                        </p>
-                      </Link>
-                    </div>
+                    <Link key={id} href={image.permalink}>
+                      <p className="relative m-2 lg:m-4 h-52 w-52 mx-auto rounded" target="_blank">
+                        <Image
+                          src={image.media_url}
+                          alt={image.caption}
+                          unoptimized="true"
+                          layout="fill"
+                          objectFit="cover"
+                          className="cursor-pointer rounded"
+                        />
+                      </p>
+                    </Link>
                   ) : (
                     []
                   )
