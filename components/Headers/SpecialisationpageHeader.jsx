@@ -1,5 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 export default function SpecialisationHeader({ title, descriptionRichText, image }) {
   return (

@@ -4,7 +4,7 @@ import { Popover, Transition } from '@headlessui/react';
 import createSlug from '../../lib/helpers/createSlug';
 import { forwardRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 

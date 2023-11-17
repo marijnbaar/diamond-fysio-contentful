@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const Specialisation = ({ image, description, subtitle }) => {

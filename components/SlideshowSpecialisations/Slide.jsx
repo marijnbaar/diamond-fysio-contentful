@@ -1,7 +1,7 @@
 // import Image from 'next/image';
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const Slide = ({ key, image, title, description, button, subtitle }) => {
   return (

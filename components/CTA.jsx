@@ -1,6 +1,6 @@
 import { ExternalLinkIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 export default function CTA({ title, subtitle, description, image }) {
   return (

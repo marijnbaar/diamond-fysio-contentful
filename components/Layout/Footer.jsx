@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import createSlug from '../../lib/helpers/createSlug';
 import { forwardRef } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const MyLink = forwardRef((props, ref) => {
   let { href, children, ...rest } = props;

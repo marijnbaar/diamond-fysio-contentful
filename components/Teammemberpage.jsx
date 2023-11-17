@@ -1,5 +1,5 @@
 import { MailIcon, GlobeAltIcon } from '@heroicons/react/outline';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { BsWhatsapp } from 'react-icons/bs';
