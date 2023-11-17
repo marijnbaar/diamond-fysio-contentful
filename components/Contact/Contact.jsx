@@ -256,6 +256,7 @@ export default function Contact({
                   </div>
                   <div className="p-4 mt-8">
                     <iframe
+                      title="maps"
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.432796832136!2d4.9049229732259505!3d52.362571890779066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6095f2e60b59d%3A0xad61fcbb485f6074!2sFysio%20Diamond%20Factory!5e0!3m2!1snl!2sus!4v1657196883469!5m2!1snl!2sus"
                       width="270"
                       height="350"

@@ -147,7 +147,7 @@ export default function Teammember({
                 {contact && documentToReactComponents(contact.json, RICHTEXT_OPTIONS)}
               </div>
               <div className="mt-8 inline-flex items-center">
-                <ul role="list" className="flex justify-center my-auto space-x-3">
+                <ul className="flex justify-center my-auto space-x-3">
                   {phoneNumber && (
                     <li>
                       <a
