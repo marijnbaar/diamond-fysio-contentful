@@ -2,7 +2,7 @@ import { ExternalLinkIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 import Image from 'next/legacy/image';
 
-export default function CTA({ title, subtitle, description, image }) {
+export default function CTA({ title, subtitle, description, image, button }) {
   return (
     <div className="relative bg-gray-900">
       <div className="relative h-56 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
@@ -28,8 +28,25 @@ export default function CTA({ title, subtitle, description, image }) {
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">
               <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
-                <Link href="/about">Lees meer</Link>
-                <ExternalLinkIcon className="-mr-1 ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                {button.externalLink ? (
+                  <>
+                    <a href={button.externalLink} target="_blank" rel="noopener noreferrer">
+                      Lees meer
+                    </a>
+                    <ExternalLinkIcon
+                      className="-mr-1 ml-3 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Link href="/about">Lees meer</Link>
+                    <ExternalLinkIcon
+                      className="-mr-1 ml-3 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
               </div>
             </div>
           </div>
