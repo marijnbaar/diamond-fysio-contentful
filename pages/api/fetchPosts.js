@@ -1,110 +1,81 @@
-// Function to refresh the access token
+import { cacheData, getCachedData } from '../../lib/cache';
+
+const INSTAGRAM_API_BASE = 'https://graph.instagram.com';
+const VERCEL_API_BASE = 'https://api.vercel.com/v9/projects';
+
+async function fetchWithErrorHandling(url, options = {}) {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(`API call failed: ${response.statusText}`);
+  }
+  return response.json();
+}
+
 async function refreshAccessToken(secret) {
-  const url = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${secret}`;
-
+  const url = `${INSTAGRAM_API_BASE}/refresh_access_token?grant_type=ig_refresh_token&access_token=${secret}`;
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Failed to refresh access token');
-    }
-    const responseData = await response.json();
-    const longLivedAccessToken = responseData.access_token;
-
-    return longLivedAccessToken;
+    const data = await fetchWithErrorHandling(url);
+    return data.access_token;
   } catch (error) {
-    console.error(error);
+    console.error('Failed to refresh access token:', error);
     return null;
   }
 }
 
-// Function to update Vercel environment variable
 async function sendNewTokentoVercel(longLivedAccessToken) {
+  const projectId = process.env.VERCEL_PROJECT_ID;
+  const envName = 'NEXT_PUBLIC_INSTAGRAM_API_KEY';
+  const headers = {
+    Authorization: `Bearer ${process.env.VERCEL_AUTH_TOKEN}`,
+    'Content-Type': 'application/json'
+  };
+
   try {
-    const projectId = process.env.VERCEL_PROJECT_ID;
-    const envName = 'NEXT_PUBLIC_INSTAGRAM_API_KEY';
-
-    console.log('Updating Vercel environment variable...');
-    console.log('Project ID:', projectId);
-
-    // First, get the existing environment variables
-    const getEnvUrl = `https://api.vercel.com/v9/projects/${projectId}/env`;
-    const getEnvResult = await fetch(getEnvUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.VERCEL_AUTH_TOKEN}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!getEnvResult.ok) {
-      throw new Error('Failed to fetch existing environment variables');
-    }
-
-    const envVars = await getEnvResult.json();
+    const getEnvUrl = `${VERCEL_API_BASE}/${projectId}/env`;
+    const envVars = await fetchWithErrorHandling(getEnvUrl, { headers });
     const existingVar = envVars.envs.find((env) => env.key === envName);
 
     if (!existingVar) {
       throw new Error('Environment variable not found');
     }
 
-    // Now update the existing variable
-    const updateUrl = `https://api.vercel.com/v9/projects/${projectId}/env/${existingVar.id}`;
-    const updateResult = await fetch(updateUrl, {
+    const updateUrl = `${VERCEL_API_BASE}/${projectId}/env/${existingVar.id}`;
+    const updateResult = await fetchWithErrorHandling(updateUrl, {
       method: 'PATCH',
-      body: JSON.stringify({ value: longLivedAccessToken }),
-      headers: {
-        Authorization: `Bearer ${process.env.VERCEL_AUTH_TOKEN}`,
-        'Content-Type': 'application/json'
-      }
+      headers,
+      body: JSON.stringify({ value: longLivedAccessToken })
     });
 
-    console.log('Vercel API response status:', updateResult.status);
-    console.log('Vercel API response status text:', updateResult.statusText);
-
-    const responseData = await updateResult.json();
-    console.log('Vercel API response data:', responseData);
-
-    if (!updateResult.ok) {
-      throw new Error(
-        `Failed to update environment variable: ${responseData.error?.message || 'Unknown error'}`
-      );
-    }
-
-    return {
-      success: true,
-      data: responseData
-    };
+    console.log('Vercel API response:', updateResult);
+    return { success: true, data: updateResult };
   } catch (error) {
     console.error('Error in sendNewTokentoVercel:', error);
-    return {
-      success: false,
-      error: error.message
-    };
+    return { success: false, error: error.message };
   }
 }
-
-// Function to load posts from Instagram API
-import { cacheData, getCachedData } from '../../lib/cache';
 
 export async function loadPosts() {
   const cachedPosts = await getCachedData('instagram_posts');
   if (cachedPosts) return cachedPosts;
 
-  let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
-  const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${secret}`;
-  const res = await fetch(url);
-  const feed = await res.json();
+  const secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
+  const url = `${INSTAGRAM_API_BASE}/me/media?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${secret}`;
 
-  await cacheData('instagram_posts', feed, 3600); // Cache for 1 hour
-  return feed;
+  try {
+    const feed = await fetchWithErrorHandling(url);
+    await cacheData('instagram_posts', feed, 3600); // Cache for 1 hour
+    return feed;
+  } catch (error) {
+    console.error('Failed to load posts:', error);
+    return null;
+  }
 }
 
-// New function to manually trigger token refresh (for testing)
 export async function manualTokenRefresh() {
   try {
-    let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
+    const secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
     console.log('Refreshing access token...');
-    let longLivedAccessToken = await refreshAccessToken(secret);
+    const longLivedAccessToken = await refreshAccessToken(secret);
 
     if (!longLivedAccessToken) {
       throw new Error('Failed to fetch long-lived access token');
