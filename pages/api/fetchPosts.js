@@ -1,6 +1,3 @@
-const fs = require('fs');
-require('dotenv').config(); // Load environment variables from .env file
-
 // Function to refresh the access token
 async function refreshAccessToken(secret) {
   const url = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${secret}`;
@@ -18,18 +15,6 @@ async function refreshAccessToken(secret) {
     console.error(error);
     return null;
   }
-}
-
-// Function to update the access token in the .env file
-async function updateAccessTokenInEnv(longLivedAccessToken) {
-  // Update .env file
-  const envFilePath = '.env';
-  const envContent = fs.readFileSync(envFilePath, 'utf8');
-  const updatedEnvContent = envContent.replace(
-    /^NEXT_PUBLIC_INSTAGRAM_API_KEY=.*/,
-    `"NEXT_PUBLIC_INSTAGRAM_API_KEY=${longLivedAccessToken}"`
-  );
-  fs.writeFileSync(envFilePath, updatedEnvContent);
 }
 
 // Function to update Vercel environment variable
@@ -100,7 +85,6 @@ async function sendNewTokentoVercel(longLivedAccessToken) {
 
 // Function to load posts from Instagram API
 export async function loadPosts() {
-  // Call an external API endpoint to get posts
   let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
 
   const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${secret}`;
@@ -108,43 +92,6 @@ export async function loadPosts() {
   const feed = await res.json();
 
   return feed;
-}
-
-// Modified scheduleLoadPosts function
-async function scheduleLoadPosts() {
-  const twentyDaysInMilliseconds = 20 * 24 * 60 * 60 * 1000;
-
-  async function checkAndRefreshToken() {
-    try {
-      const now = Date.now();
-      const lastRun = parseInt(fs.readFileSync('.lastrun', 'utf8') || '0');
-
-      if (now - lastRun >= twentyDaysInMilliseconds) {
-        console.log('Refreshing access token...');
-        let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
-        let longLivedAccessToken = await refreshAccessToken(secret);
-
-        if (!longLivedAccessToken) {
-          throw new Error('Failed to fetch long-lived access token');
-        }
-
-        await updateAccessTokenInEnv(longLivedAccessToken);
-        await sendNewTokentoVercel(longLivedAccessToken);
-
-        fs.writeFileSync('.lastrun', now.toString());
-        console.log('Access token refreshed and updated successfully.');
-      } else {
-        console.log('Token refresh not needed yet.');
-      }
-    } catch (error) {
-      console.error('Error in checkAndRefreshToken:', error);
-    }
-
-    // Schedule the next check
-    setTimeout(checkAndRefreshToken, 60 * 60 * 1000); // Check every hour
-  }
-
-  checkAndRefreshToken();
 }
 
 // New function to manually trigger token refresh (for testing)
@@ -158,17 +105,12 @@ export async function manualTokenRefresh() {
       throw new Error('Failed to fetch long-lived access token');
     }
 
-    console.log('Updating local .env file...');
-    await updateAccessTokenInEnv(longLivedAccessToken);
-
     console.log('Sending new token to Vercel...');
     const vercelResponse = await sendNewTokentoVercel(longLivedAccessToken);
 
-    fs.writeFileSync('.lastrun', Date.now().toString());
     return {
       success: true,
       message: 'Token refresh process completed',
-      localUpdate: 'Success',
       vercelUpdate: vercelResponse
     };
   } catch (error) {
@@ -180,5 +122,3 @@ export async function manualTokenRefresh() {
     };
   }
 }
-// Start the scheduling
-scheduleLoadPosts();
