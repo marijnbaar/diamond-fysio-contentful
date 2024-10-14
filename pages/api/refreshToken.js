@@ -1,14 +1,15 @@
 import { manualTokenRefresh } from './fetchPosts';
 
 export default async function handler(req, res) {
-  // Allow both GET and POST methods for debugging
   if (req.method === 'GET' || req.method === 'POST') {
-    // Check for a secret key to ensure the webhook is authorized
     const { authorization } = req.headers;
     const webhookSecret = process.env.WEBHOOK_SECRET;
 
+    console.log('Received authorization header:', authorization);
+    console.log('Expected authorization:', `Bearer ${webhookSecret}`);
+
     if (authorization !== `Bearer ${webhookSecret}`) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ error: 'Unauthorized', receivedAuth: authorization });
     }
 
     try {
