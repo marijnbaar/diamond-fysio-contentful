@@ -84,13 +84,18 @@ async function sendNewTokentoVercel(longLivedAccessToken) {
 }
 
 // Function to load posts from Instagram API
-export async function loadPosts() {
-  let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
+import { cacheData, getCachedData } from '../../lib/cache';
 
+export async function loadPosts() {
+  const cachedPosts = await getCachedData('instagram_posts');
+  if (cachedPosts) return cachedPosts;
+
+  let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
   const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${secret}`;
   const res = await fetch(url);
   const feed = await res.json();
 
+  await cacheData('instagram_posts', feed, 3600); // Cache for 1 hour
   return feed;
 }
 
