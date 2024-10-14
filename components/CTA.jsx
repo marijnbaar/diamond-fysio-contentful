@@ -8,10 +8,12 @@ export default function CTA({ title, subtitle, description, image, button }) {
       <div className="relative h-56 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
         {image && (
           <Image
-            className="w-full h-full object-cover"
-            layout="fill"
+            className="object-cover"
             src={image.url}
             alt={image.description}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={85}
           />
         )}
         <div aria-hidden="true" className="absolute inset-0 mix-blend-multiply" />
