@@ -11,8 +11,7 @@ export default function CTA({ title, subtitle, description, image, button }) {
             className="object-cover"
             src={image.url}
             alt={image.description}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            layout="fill"
             quality={85}
           />
         )}
