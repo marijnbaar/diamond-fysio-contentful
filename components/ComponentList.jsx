@@ -1,15 +1,12 @@
-import HomepageHeader from './Headers/HomepageHeader';
+import HeaderList from './Headers/Headerlist';
 import Highlight from './Highlight';
 import Info from './Info';
 import Team from './Team';
 import CTA from './CTA';
-import TeampageHeader from './Headers/TeampageHeader';
-import SpecialisationHeader from './Headers/SpecialisationpageHeader';
 import Specialisation from './Specialisation';
 import Slideshow from './SlideshowSpecialisations/SlideShow';
 import SlideshowTestimonials from './SlideshowTestimonials/SlideShow';
 import AboutInformation from './AboutInformation';
-import GenericpageHeader from './Headers/GenericpageHeader';
 import Text from './Text';
 import Appointment from './Appointment';
 import Contact from './Contact/Contact';
@@ -17,29 +14,19 @@ import Thankyou from './Thankyou';
 import Teammemberpage from './Teammemberpage';
 import SlideshowCollaborations from './SlideshowCollaborations/SlideShow';
 
-const ComponentList = (props) =>
-  props.components.map((component) => {
+const ComponentList = (props) => {
+  console.log('hi', props); // Add this line to log props
+  return props.components.map((component) => {
+    console.log(component.__typename);
     if (component.sys.id) {
       switch (component.__typename) {
-        case 'HeaderHomepage': {
-          return <HomepageHeader key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'HeaderTeampage': {
-          return <TeampageHeader key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'HeaderAboutpage': {
-          return <GenericpageHeader key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'HeaderPricingpage': {
-          return <GenericpageHeader key={component.sys.id} id={component.sys.id} {...component} />;
-        }
+        case 'HeaderSpecialisationpage':
+        case 'HeaderHomepage':
+        case 'HeaderAboutpage':
+        case 'HeaderTeampage':
+        case 'HeaderPricingpage':
         case 'HeaderHouserulespage': {
-          return <GenericpageHeader key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'HeaderSpecialisationpage': {
-          return (
-            <SpecialisationHeader key={component.sys.id} id={component.sys.id} {...component} />
-          );
+          return <HeaderList key={component.sys.id} header={component} />;
         }
         case 'Highlight': {
           return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
@@ -103,5 +90,6 @@ const ComponentList = (props) =>
       }
     }
   });
+};
 
 export default ComponentList;
