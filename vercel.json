@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "api/refreshToken.js": {
+      "runtime": "nodejs14.x"
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/refreshToken",
+      "schedule": "0 0 */49 * *"
+    }
+  ]
+}
+
