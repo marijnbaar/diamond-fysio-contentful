@@ -1,9 +1,9 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-// import Image from 'next/legacy/image';
-// import Link from 'next/link';
+import Image from 'next/legacy/image';
+import Link from 'next/link';
 // import InstagramFeed from 'react-ig-feed';
 
-export default function Info({ title, subtitle, description }) {
+export default function Info({ title, subtitle, description, instagramPosts }) {
   // const secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
 
   return (
@@ -28,8 +28,9 @@ export default function Info({ title, subtitle, description }) {
             cols={2}
             imageSize={'thumbnail'}
           /> */}
+
           <div className="flex flex-wrap flex-column h-[435px] sm:h-[220px] lg:h-[240px] justify-between px-6 md:px-0 overflow-hidden">
-            {/* {instagramPosts &&
+            {instagramPosts &&
               instagramPosts.data.map(
                 (image, id) =>
                   image.media_type === 'IMAGE' ? (
@@ -64,7 +65,7 @@ export default function Info({ title, subtitle, description }) {
                 //     </Link>
                 //   </div>
                 // )
-              )} */}
+              )}
           </div>
         </div>
       </div>

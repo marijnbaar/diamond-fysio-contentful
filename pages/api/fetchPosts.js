@@ -1,4 +1,4 @@
-import { cacheData, getCachedData } from '../../lib/cache';
+import { cacheData, getCachedData } from '../../lib/cache.js';
 
 const INSTAGRAM_API_BASE = 'https://graph.instagram.com';
 const VERCEL_API_BASE = 'https://api.vercel.com/v9/projects';

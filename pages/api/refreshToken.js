@@ -1,4 +1,4 @@
-import { manualTokenRefresh } from './fetchPosts';
+import { manualTokenRefresh } from './fetchPosts.js';
 
 export default async function handler(req, res) {
   if (req.method === 'GET' || req.method === 'POST') {
