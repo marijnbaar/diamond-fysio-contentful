@@ -40,7 +40,7 @@ export default function AboutInformation({ title, subtitle, description, aboutFe
                             feature.button.internalLink &&
                             createSlug(
                               feature.button.internalLink.slug,
-                              feature.button.internalLink.__typename
+                              feature.button.internalLink.pageType
                             )
                           }
                           external_link={feature.button.externalLink}

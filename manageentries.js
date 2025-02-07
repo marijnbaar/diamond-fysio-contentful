@@ -27,14 +27,24 @@ async function moveEntries(sourceContentTypeId, targetContentTypeId) {
     });
 
     for (const entry of entries.items) {
+      // Ensure the entry is not archived
+      if (entry.isArchived()) {
+        await entry.unarchive();
+      }
+
+      // Ensure the entry is published
+      if (!entry.isPublished()) {
+        await entry.publish();
+      }
+
+      // Prepare fields for the new entry
+      const newFields = {
+        ...entry.fields
+      };
+
       // Create a new entry in the target content type with the same data
       const newEntry = await environment.createEntry(targetContentTypeId, {
-        fields: {
-          ...entry.fields,
-          headerType: {
-            'en-US': 'HeaderPricingpage' // Set the headerType to HeaderPricingpage
-          }
-        }
+        fields: newFields
       });
 
       // Optionally, publish the new entry
@@ -42,7 +52,7 @@ async function moveEntries(sourceContentTypeId, targetContentTypeId) {
 
       // Optionally, delete the old entry
       await entry.unpublish();
-      await entry.delete();
+      //   await entry.delete();
 
       console.log(`Moved entry ${entry.sys.id} to new content type ${targetContentTypeId}`);
     }
@@ -52,4 +62,4 @@ async function moveEntries(sourceContentTypeId, targetContentTypeId) {
 }
 
 // Call the function with the correct content type IDs
-moveEntries('headerHomepage', 'headerPricingpage').catch(console.error); // Replace with your content type IDs
+moveEntries('specialisationpage', 'aboutpage').catch(console.error); // Replace with your content type IDs

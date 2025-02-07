@@ -15,9 +15,7 @@ import Teammemberpage from './Teammemberpage';
 import SlideshowCollaborations from './SlideshowCollaborations/SlideShow';
 
 const ComponentList = (props) => {
-  console.log('hi', props); // Add this line to log props
   return props.components.map((component) => {
-    console.log(component.__typename);
     if (component.sys.id) {
       switch (component.__typename) {
         case 'HeaderSpecialisationpage':

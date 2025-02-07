@@ -93,7 +93,7 @@ export default function Navigation({ navigation }) {
                                     menuItem.internalLink
                                       ? createSlug(
                                           menuItem.internalLink.slug,
-                                          menuItem.internalLink.__typename
+                                          menuItem.internalLink.pageType
                                         )
                                       : menuItem.externalLink
                                   }
@@ -125,7 +125,7 @@ export default function Navigation({ navigation }) {
                                     navigation.knop.internalLink
                                       ? createSlug(
                                           navigation.knop.internalLink.slug,
-                                          navigation.knop.internalLink.__typename
+                                          navigation.knop.internalLink.pageType
                                         )
                                       : navigation.knop.externalLink
                                   }
@@ -191,7 +191,7 @@ export default function Navigation({ navigation }) {
                                     menuItem.internalLink
                                       ? createSlug(
                                           menuItem.internalLink.slug,
-                                          menuItem.internalLink.__typename
+                                          menuItem.internalLink.pageType
                                         )
                                       : menuItem.externalLink
                                   }
@@ -228,7 +228,7 @@ export default function Navigation({ navigation }) {
                     <MyLink
                       href={
                         item.internalLink
-                          ? createSlug(item.internalLink.slug, item.internalLink.__typename)
+                          ? createSlug(item.internalLink.slug, item.internalLink.typeName)
                           : item.externalLink
                       }
                     >
@@ -249,7 +249,7 @@ export default function Navigation({ navigation }) {
                       navigation.knop.internalLink
                         ? createSlug(
                             navigation.knop.internalLink.slug,
-                            navigation.knop.internalLink.__typename
+                            navigation.knop.internalLink.pageType
                           )
                         : navigation.knop.externalLink
                     }
@@ -313,7 +313,7 @@ export default function Navigation({ navigation }) {
                             menuItem.internalLink
                               ? createSlug(
                                   menuItem.internalLink.slug,
-                                  menuItem.internalLink.__typename
+                                  menuItem.internalLink.pageType
                                 )
                               : menuItem.externalLink
                           }
@@ -347,7 +347,7 @@ export default function Navigation({ navigation }) {
                         <MyLink
                           href={
                             item.internalLink
-                              ? createSlug(item.internalLink.slug, item.internalLink.__typename)
+                              ? createSlug(item.internalLink.slug, item.internalLink.pageType)
                               : item.externalLink
                           }
                         >
@@ -366,10 +366,7 @@ export default function Navigation({ navigation }) {
                         key={menuItem.sys.id}
                         href={
                           menuItem.internalLink
-                            ? createSlug(
-                                menuItem.internalLink.slug,
-                                menuItem.internalLink.__typename
-                              )
+                            ? createSlug(menuItem.internalLink.slug, menuItem.internalLink.pageType)
                             : menuItem.externalLink
                         }
                       >
@@ -393,7 +390,7 @@ export default function Navigation({ navigation }) {
                           navigation.knop.internalLink
                             ? createSlug(
                                 navigation.knop.internalLink.slug,
-                                navigation.knop.internalLink.__typename
+                                navigation.knop.internalLink.pageType
                               )
                             : navigation.knop.externalLink
                         }

@@ -11,16 +11,16 @@ export default function FourOhFour() {
             <div className="sm:ml-6">
               <div className="sm:border-l sm:border-gray-200 sm:pl-6">
                 <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-                  Page not found
+                  Pagina niet gevonden
                 </h1>
                 <p className="mt-1 text-base text-gray-500">
-                  Please check the URL in the address bar and try again.
+                  Check de url in de browser, en probeer het opnieuw.
                 </p>
               </div>
               <div className="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
                 <Link href="/">
                   <p className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
-                    Go back home
+                    Ga terug naar home
                   </p>
                 </Link>
                 <Link href="/contact">

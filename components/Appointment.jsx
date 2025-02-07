@@ -49,7 +49,7 @@ export default function Appointment({
                                   appointmentCard.button.internalLink &&
                                   createSlug(
                                     appointmentCard.button.internalLink.slug,
-                                    appointmentCard.button.internalLink.__typename
+                                    appointmentCard.button.internalLink.pageType
                                   )
                                 }
                                 external_link={appointmentCard.button.externalLink}
