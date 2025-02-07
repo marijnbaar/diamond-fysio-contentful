@@ -115,7 +115,7 @@ export default function Footer({ footer }) {
                             menuItem.internalLink
                               ? createSlug(
                                   menuItem.internalLink.slug,
-                                  menuItem.internalLink.__typename
+                                  menuItem.internalLink.pageType
                                 )
                               : menuItem.externalLink
                           }
@@ -156,7 +156,7 @@ export default function Footer({ footer }) {
                             menuItem.internalLink
                               ? createSlug(
                                   menuItem.internalLink.slug,
-                                  menuItem.internalLink.__typename
+                                  menuItem.internalLink.pageType
                                 )
                               : menuItem.externalLink
                           }

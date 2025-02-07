@@ -44,7 +44,7 @@ const HomepageHeader = ({ title, info, buttonCollection, image }) => {
                       type={btn.type}
                       internal_link={
                         btn.internalLink &&
-                        createSlug(btn.internalLink.slug, btn.internalLink.__typename)
+                        createSlug(btn.internalLink.slug, btn.internalLink.pageType)
                       }
                       external_link={btn.externalLink}
                       extra_classes="sm:w-auto"

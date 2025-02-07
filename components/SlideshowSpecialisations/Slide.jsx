@@ -36,7 +36,7 @@ const Slide = ({ key, image, title, description, button, subtitle }) => {
                 type={button.type}
                 internal_link={
                   button.internalLink &&
-                  createSlug(button.internalLink.slug, button.internalLink.__typename)
+                  createSlug(button.internalLink.slug, button.internalLink.pageType)
                 }
                 external_link={button.externalLink}
                 extra_classes="sm:w-auto"

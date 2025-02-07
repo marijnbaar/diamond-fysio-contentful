@@ -37,7 +37,7 @@ export default function Team({ title, description, teamMemberCollection }) {
                         <p className="text-teal-500 text-sm">{person.role}</p>
                         {person.link && (
                           <MyLink
-                            key={person.link.sys.id}
+                            key={person.link.sys}
                             href={createSlug(person.link.slug, person.link.__typename)}
                           >
                             <div className="my-4 cursor-pointer">
