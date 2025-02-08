@@ -31,26 +31,38 @@ async function sendNewTokentoVercel(longLivedAccessToken) {
   };
 
   try {
-    const getEnvUrl = `${VERCEL_API_BASE}/${projectId}/env`;
-    const envVars = await fetchWithErrorHandling(getEnvUrl, { headers });
-    const existingVar = envVars.envs.find((env) => env.key === envName);
+    console.log('[sendNewTokentoVercel] Starting...');
+    console.log('[sendNewTokentoVercel] projectId:', projectId);
+    console.log('[sendNewTokentoVercel] envName:', envName);
 
+    const getEnvUrl = `${VERCEL_API_BASE}/${projectId}/env`;
+    console.log('[sendNewTokentoVercel] getEnvUrl:', getEnvUrl);
+
+    const envVars = await fetchWithErrorHandling(getEnvUrl, { headers });
+    console.log('[sendNewTokentoVercel] envVars:', envVars);
+
+    const existingVar = envVars.envs.find((env) => env.key === envName);
     if (!existingVar) {
+      console.error('[sendNewTokentoVercel] Variable not found:', envName);
       throw new Error('Environment variable not found');
     }
 
+    console.log('[sendNewTokentoVercel] found existingVar ID:', existingVar.id);
+
     const updateUrl = `${VERCEL_API_BASE}/${projectId}/env/${existingVar.id}`;
+    console.log('[sendNewTokentoVercel] updateUrl:', updateUrl);
+
     const updateResult = await fetchWithErrorHandling(updateUrl, {
       method: 'PATCH',
       headers,
       body: JSON.stringify({ value: longLivedAccessToken })
     });
+    console.log('[sendNewTokentoVercel] updateResult:', updateResult);
 
-    console.log('Vercel API response:', updateResult);
-    return { success: true, data: updateResult };
+    return updateResult;
   } catch (error) {
-    console.error('Error in sendNewTokentoVercel:', error);
-    return { success: false, error: error.message };
+    console.error('[sendNewTokentoVercel] Error:', error);
+    throw error;
   }
 }
 
