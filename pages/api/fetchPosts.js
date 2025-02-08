@@ -26,7 +26,7 @@ async function sendNewTokentoVercel(longLivedAccessToken) {
   const projectId = process.env.VERCEL_PROJECT_ID;
   const envName = 'NEXT_PUBLIC_INSTAGRAM_API_KEY';
   const headers = {
-    Authorization: `Bearer ${process.env.VERCEL_AUTH_TOKEN}`,
+    Authorization: `Bearer ${process.env.VERCEL_NEWAUTH_TOKEN}`,
     'Content-Type': 'application/json'
   };
 
