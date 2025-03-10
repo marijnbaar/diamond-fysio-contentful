@@ -12,7 +12,7 @@ import Contact from './Contact/Contact';
 import Thankyou from './Thankyou';
 import Teammemberpage from './Teammemberpage';
 import SlideshowCollaborations from './SlideshowCollaborations/SlideShow';
-import { OverviewList } from './OverviewList';
+import OverviewList from './OverviewList';
 
 const ComponentList = (props) => {
   return props.components.map((component) => {
