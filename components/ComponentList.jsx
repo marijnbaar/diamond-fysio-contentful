@@ -1,10 +1,8 @@
 import HeaderList from './Headers/Headerlist';
 import Highlight from './Highlight';
 import Info from './Info';
-import Team from './Team';
 import CTA from './CTA';
 import Specialisation from './Specialisation';
-import SlideshowTestimonials from './SlideshowTestimonials/SlideShow';
 import AboutInformation from './AboutInformation';
 import Text from './Text';
 import Appointment from './Appointment';
@@ -27,16 +25,12 @@ const ComponentList = (props) => {
           return <HeaderList key={component.sys.id} header={component} />;
         }
         case 'TeamOverview':
+        case 'TestimonialHomeOverview':
         case 'SpecialisationHomeOverview': {
           return <OverviewList key={component.sys.id} id={component.sys.id} overview={component} />;
         }
         case 'Highlight': {
           return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'TestimonialHomeOverview': {
-          return (
-            <SlideshowTestimonials key={component.sys.id} id={component.sys.id} {...component} />
-          );
         }
         case 'Info': {
           return (
@@ -50,9 +44,6 @@ const ComponentList = (props) => {
         }
         case 'Cta': {
           return <CTA key={component.sys.id} id={component.sys.id} {...component} />;
-        }
-        case 'TeampageOverview': {
-          return <Team key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Collaborations': {
           return (

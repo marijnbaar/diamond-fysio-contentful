@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import TestimonialSlide from './TestimonialSlide';
 import { SampleNextArrow, SamplePrevArrow } from './Arrow';
 
-const SlideshowTestimonials = ({ testimonialCollection }) => {
+const SlideshowTestimonials = ({ testimonialFeatureCollection }) => {
   const settings = {
     dots: true,
     fade: false,
@@ -46,7 +46,7 @@ const SlideshowTestimonials = ({ testimonialCollection }) => {
       <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative px-11">
         <div className="mx-auto">
           <Slider {...settings}>
-            {testimonialCollection.items.map((testimonial, i) => (
+            {testimonialFeatureCollection.items.map((testimonial, i) => (
               <TestimonialSlide
                 key={i}
                 image={testimonial.image}
