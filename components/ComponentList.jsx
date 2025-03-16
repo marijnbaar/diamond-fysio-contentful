@@ -68,9 +68,6 @@ const ComponentList = (props) => {
         case 'ThankyouComponent': {
           return <Thankyou key={component.sys.id} id={component.sys.id} {...component} />;
         }
-        case 'CookieComponent': {
-          return <Text key={component.sys.id} id={component.sys.id} {...component} />;
-        }
         case 'TeamMember': {
           return <Teammemberpage key={component.sys.id} id={component.sys.id} {...component} />;
         }
