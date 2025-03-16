@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Navigation from './Navigation';
 // import PreviewBar from './PreviewBar';
-// import Navigation from './Navigation';
 import Footer from './Footer';
+
 // preview, navigation
 const Layout = ({ footer, meta, children, navigation }) => {
   return (
@@ -14,7 +14,7 @@ const Layout = ({ footer, meta, children, navigation }) => {
             <meta name="description" content={meta[0].meta_description} />
           </>
         ) : null}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/logogrijs.png" />
       </Head>
       {navigation ? <Navigation navigation={navigation} /> : null}
       <main>{children}</main>

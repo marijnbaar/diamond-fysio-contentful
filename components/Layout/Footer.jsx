@@ -1,51 +1,83 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link';
 import createSlug from '../../lib/helpers/createSlug';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import Image from 'next/legacy/image';
+import CookieSettings from './CookieConsent';
 
-const MyLink = forwardRef((props, ref) => {
-  let { href, children, ...rest } = props;
+// Fix for the MyLink component - make it pass all props to Link component correctly
+const MyLink = forwardRef(({ href, children, ...rest }, ref) => {
   return (
-    <Link href={href}>
-      <div ref={ref} {...rest}>
+    <Link href={href} legacyBehavior>
+      <a ref={ref} {...rest}>
         {children}
-      </div>
+      </a>
     </Link>
   );
 });
 
 MyLink.displayName = 'MyLink';
 
+// Cookie Settings Component (now integrated into the Footer)
+
 export default function Footer({ footer }) {
+  const [showPrivacyInfo, setShowPrivacyInfo] = useState(false);
+
   return (
-    <footer className="bg-gray-50" aria-labelledby="footer-heading">
+    <footer className="bg-white border-t border-gray-200 relative" aria-labelledby="footer-heading">
+      {/* Back to top button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="absolute right-8 -top-6 bg-teal-500 text-white rounded-full p-3 shadow-md hover:bg-teal-600 transition-colors focus:outline-none"
+        aria-label="Back to top"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+      </button>
+
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-md mx-auto pt-12 px-4 sm:max-w-7xl sm:px-6 lg:pt-16 lg:px-8">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8 xl:col-span-1">
-            <div className="z-10 h-16 w-16 relative">
-              {footer.logo && (
-                <Image
-                  src={footer.logo && footer.logo.url}
-                  alt={footer.logo.description && footer.logo.description}
-                  layout="fill"
-                  objectFit="cover"
-                  quality="100"
-                />
-              )}
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        {/* Top section with main columns */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+          {/* Column 1: Logo and Description */}
+          <div className="md:col-span-1">
+            <div className="z-10 h-20 w-20 relative mb-6">
+              {/* Use the new logo image */}
+              <Image
+                src="/images/logo.jpg"
+                alt="Diamond Fysio Logo"
+                layout="fill"
+                objectFit="contain"
+                quality="100"
+              />
             </div>
-            <p className="text-gray-500 text-base">{footer.description && footer.description}</p>
-            <div className="flex space-x-6">
+            <p className="text-gray-500 text-base mb-6">
+              Onze therapeuten helpen je bij klachten die je hinderen bij dagelijkse activiteiten.
+            </p>
+            <div className="flex items-center space-x-6 mt-4">
               <a
-                href={footer.facebookLink}
-                className="text-gray-400 hover:text-gray-500"
+                href={footer.facebookLink || '#'}
+                className="text-gray-300 hover:text-gray-500"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Facebook"
               >
                 <span className="sr-only">Facebook</span>
-                <div className="h-6 w-6" aria-hidden="true">
+                <div className="h-8 w-8" aria-hidden="true">
                   <svg fill="currentColor" viewBox="0 0 24 24">
                     <path
                       fillRule="evenodd"
@@ -56,13 +88,14 @@ export default function Footer({ footer }) {
                 </div>
               </a>
               <a
-                href={footer.instagramLink}
-                className="text-gray-400 hover:text-gray-500"
+                href={footer.instagramLink || '#'}
+                className="text-gray-300 hover:text-gray-500"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Instagram"
               >
                 <span className="sr-only">Instagram</span>
-                <div className="h-6 w-6" aria-hidden="true">
+                <div className="h-8 w-8" aria-hidden="true">
                   <svg fill="currentColor" viewBox="0 0 24 24">
                     <path
                       fillRule="evenodd"
@@ -73,19 +106,20 @@ export default function Footer({ footer }) {
                 </div>
               </a>
               <a
-                href={footer.linkedInLink}
-                className="text-gray-400 hover:text-gray-500 pt-1"
+                href={footer.linkedInLink || '#'}
+                className="text-gray-300 hover:text-gray-500"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="LinkedIn"
               >
                 <span className="sr-only">LinkedIn</span>
-                <div className="h-6 w-6" aria-hidden="true">
+                <div className="h-8 w-8 flex items-center justify-center" aria-hidden="true">
                   <svg
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fab"
                     data-icon="linkedin-in"
-                    className="w-3.5"
+                    className="w-5"
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"
@@ -99,97 +133,131 @@ export default function Footer({ footer }) {
               </a>
             </div>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                  De praktijk
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  {footer.footerSubmenu &&
-                    footer.footerSubmenu[0].menuItems.map((menuItem) =>
-                      menuItem.internalLink || menuItem.externalLink ? (
-                        <MyLink
-                          key={menuItem.sys.id}
-                          href={
-                            menuItem.internalLink
-                              ? createSlug(
-                                  menuItem.internalLink.slug,
-                                  menuItem.internalLink.pageType
-                                )
-                              : menuItem.externalLink
-                          }
-                        >
-                          <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
-                            <div className="ml-4">
-                              <div className="text-base font-medium text-gray-500 hover:text-gray-900">
-                                {menuItem.title && menuItem.title}
-                              </div>
-                              <p className="mt-1 text-sm text-gray-500">
-                                {menuItem.description && menuItem.description}
-                              </p>
-                            </div>
-                          </div>
-                        </MyLink>
-                      ) : (
-                        <div
-                          key={menuItem.sys.id}
-                          className="text-gray-500 hover:text-gray-900 cursor-not-allowed"
-                        >
-                          {menuItem.title && menuItem.title}
-                        </div>
-                      )
-                    )}
-                </ul>
+
+          {/* Column 2: DE PRAKTIJK */}
+          <div className="md:col-span-1">
+            <h3 className="text-base font-medium text-gray-400 uppercase mb-4">
+              {(footer.footerSubmenu && footer.footerSubmenu[0]?.title) || 'DE PRAKTIJK'}
+            </h3>
+            <ul className="space-y-2">
+              {footer.footerSubmenu &&
+                footer.footerSubmenu[0]?.menuItems.map((menuItem) =>
+                  menuItem.internalLink || menuItem.externalLink ? (
+                    <li key={menuItem.sys.id}>
+                      <MyLink
+                        href={
+                          menuItem.internalLink
+                            ? createSlug(menuItem.internalLink.slug, menuItem.internalLink.pageType)
+                            : menuItem.externalLink
+                        }
+                        className="text-gray-600 hover:text-teal-500 transition-colors"
+                      >
+                        {menuItem.title && menuItem.title}
+                      </MyLink>
+                    </li>
+                  ) : (
+                    <li key={menuItem.sys.id} className="text-gray-600 cursor-not-allowed">
+                      {menuItem.title && menuItem.title}
+                    </li>
+                  )
+                )}
+            </ul>
+          </div>
+
+          {/* Column 3: SUPPORT */}
+          <div className="md:col-span-1">
+            <h3 className="text-base font-medium text-gray-400 uppercase mb-4">
+              {(footer.footerSubmenu && footer.footerSubmenu[1]?.title) || 'SUPPORT'}
+            </h3>
+            <ul className="space-y-2">
+              {footer.footerSubmenu &&
+                footer.footerSubmenu[1]?.menuItems.map((menuItem) =>
+                  menuItem.internalLink || menuItem.externalLink ? (
+                    <li key={menuItem.sys.id}>
+                      <MyLink
+                        href={
+                          menuItem.internalLink
+                            ? createSlug(menuItem.internalLink.slug, menuItem.internalLink.pageType)
+                            : menuItem.externalLink
+                        }
+                        className="text-gray-600 hover:text-teal-500 transition-colors"
+                      >
+                        {menuItem.title && menuItem.title}
+                      </MyLink>
+                    </li>
+                  ) : (
+                    <li key={menuItem.sys.id} className="text-gray-600 cursor-not-allowed">
+                      {menuItem.title && menuItem.title}
+                    </li>
+                  )
+                )}
+            </ul>
+          </div>
+
+          {/* Column 4: PRIVACY & GEGEVENSBESCHERMING */}
+          <div className="md:col-span-1">
+            <h3 className="text-base font-medium text-gray-400 uppercase mb-4">
+              PRIVACY & GEGEVENSBESCHERMING
+            </h3>
+            <div className="flex items-center mb-3">
+              <div className="text-teal-500 mr-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                  Support
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  {footer.footerSubmenu &&
-                    footer.footerSubmenu[1].menuItems.map((menuItem) =>
-                      menuItem.internalLink || menuItem.externalLink ? (
-                        <MyLink
-                          key={menuItem.sys.id}
-                          href={
-                            menuItem.internalLink
-                              ? createSlug(
-                                  menuItem.internalLink.slug,
-                                  menuItem.internalLink.pageType
-                                )
-                              : menuItem.externalLink
-                          }
-                        >
-                          <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
-                            <div className="ml-4">
-                              <div className="text-base font-medium text-gray-500 hover:text-gray-900">
-                                {menuItem.title && menuItem.title}
-                              </div>
-                              <p className="mt-1 text-sm text-gray-500">
-                                {menuItem.description && menuItem.description}
-                              </p>
-                            </div>
-                          </div>
-                        </MyLink>
-                      ) : (
-                        <div
-                          key={menuItem.sys.id}
-                          className="text-gray-500 hover:text-gray-900 cursor-not-allowed"
-                        >
-                          {menuItem.title && menuItem.title}
-                        </div>
-                      )
-                    )}
-                </ul>
+              <span className="text-sm text-gray-600">AVG / GDPR Compliant</span>
+            </div>
+            <button
+              onClick={() => setShowPrivacyInfo(!showPrivacyInfo)}
+              className="text-sm bg-teal-500 text-white py-2 px-4 rounded hover:bg-teal-600 transition-all duration-300 focus:outline-none"
+            >
+              Meer informatie
+            </button>
+            <div
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                showPrivacyInfo ? 'max-h-96 opacity-100 mt-3' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="p-4 bg-gray-100 rounded-md text-sm text-gray-600 shadow-sm">
+                <p>
+                  Diamond Fysio Amsterdam voldoet aan de eisen van de Algemene Verordening
+                  Gegevensbescherming (AVG/GDPR). Wij nemen uw privacy zeer serieus.
+                </p>
+                <p className="mt-2">
+                  <Link href="/privacy-policy" legacyBehavior>
+                    <a className="text-teal-600 hover:underline font-medium">
+                      Lees onze privacyverklaring
+                    </a>
+                  </Link>
+                </p>
               </div>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8"></div>
+          </div>
+
+          {/* Column 5: COOKIEBELEID */}
+          <div className="md:col-span-1">
+            <h3 className="text-base font-medium text-gray-400 uppercase mb-4">COOKIEBELEID</h3>
+            <p className="text-gray-600 text-sm mb-4">
+              Wij gebruiken cookies om uw ervaring op onze website te verbeteren. U kunt uw
+              cookie-voorkeuren hieronder aanpassen.
+            </p>
+            <CookieSettings />
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-200 py-8">
-          <p className="text-base text-gray-400 xl:text-center">
-            &copy; 2022, Diamond Fysio Amsterdam. All rights reserved.
+
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <p className="text-center text-gray-500 text-sm">
+            &copy; 2025, Diamond Fysio Amsterdam. All rights reserved.
           </p>
         </div>
       </div>
