@@ -309,7 +309,11 @@ export default function Navigation({ navigation }) {
 
             {/* Login Button */}
             <div className="flow-root">
-              <MyLink href="https://login.spotonmedics.nl/" target="_blank">
+              <MyLink
+                href="https://login.spotonmedics.nl/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <div className="flex items-center space-x-2 text-base font-medium text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md transition-colors duration-300">
                   <UserCircleIcon className="h-5 w-5" aria-hidden="true" />
                   <span>Login</span>
