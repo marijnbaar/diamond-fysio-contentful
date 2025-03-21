@@ -1,7 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-// import InstagramFeed from 'react-ig-feed';
 
 export default function Info({ title, subtitle, description, instagramPosts }) {
   // const secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;

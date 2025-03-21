@@ -1,45 +1,46 @@
-/* ./styles/globals.css */
+/* @tailwind base;
+@tailwind components; */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@layer base {
-  @font-face {
-    font-family: Euclid;
-    src: url(/fonts/Euclid-Circular/Euclid-Circular-B-Bold.ttf), format('ttf');
-  }
+@import 'tailwindcss';
+@import 'tailwindcss/utilities';
+
+:root {
+  --rounded-lg: 0.5rem;
+  --color-teal-400: #4fd1c5;
+  --color-teal-500: #38b2ac;
 }
 
-@layer components {
-  .btn {
-    @apply font-primary font-bold leading-8 rounded-lg;
-  }
-  .btn--large {
-    @apply btn px-5 py-2 text-lg;
-  }
-  .btn--small {
-    @apply btn px-3 py-1;
-  }
-  .btn-primary {
-    @apply btn--large text-white bg-orange-dark;
-  }
-  .btn-primary--small {
-    @apply btn--small text-white bg-orange-dark;
-  }
-  .btn-primary--negative {
-    @apply btn--large bg-white text-orange-dark;
-  }
-  .btn-primary--negative--small {
-    @apply btn--small bg-white text-orange-dark;
-  }
+@font-face {
+  font-family: Euclid;
+  src: url('/fonts/Euclid-Circular/Euclid-Circular-B-Bold.ttf') format('truetype');
+}
 
-  .slideshow-slick .slick-dots {
-    @apply rounded-t-lg rounded-b-lg;
-  }
-  .slideshow-slick .slick-dots li.slick-active button {
-    @apply bg-teal-400;
-  }
-  .slideshow-slick .slick-dots li button {
-    @apply w-full h-full p-1 mt-2 before:hidden bg-teal-500 rounded-full;
-  }
+/* Custom utility classes using standard CSS */
+.font-primary {
+  font-family: 'Manrope', sans-serif;
+}
+.font-secondary {
+  font-family: 'Kalam', cursive;
+}
+.font-microcopy {
+  font-family: 'Kalam', cursive;
+}
+
+/* Slick slider styles using CSS variables */
+.slideshow-slick .slick-dots {
+  border-radius: var(--rounded-lg) var(--rounded-lg) var(--rounded-lg) var(--rounded-lg);
+}
+.slideshow-slick .slick-dots li.slick-active button {
+  background-color: var(--color-teal-400);
+}
+.slideshow-slick .slick-dots li button {
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+  background-color: var(--color-teal-500);
+  border-radius: 9999px;
+}
+.slideshow-slick .slick-dots li button::before {
+  display: none;
 }

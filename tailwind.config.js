@@ -2,18 +2,16 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  mode: 'jit',
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './pages/*.{js,ts,jsx,tsx}',
-    './components/*.{js,ts,jsx,tsx}'
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   safelist: [
     'btn-primary',
     'btn-primary--small',
     'btn-primary--negative',
-    'btn-primary--negative--small'
+    'btn-primary--negative--small',
+    'font-primary',
+    'font-secondary',
+    'font-microcopy',
+    'rounded-t-lg' // added to preserve the built-in utility
   ],
   theme: {
     fontFamily: {
@@ -51,12 +49,7 @@ module.exports = {
         'pointed-background':
           "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('https://fysiodiamondfactory.nl/wp-content/uploads/2022/01/point.jpeg')"
       }),
-
-      // screens: {
-      //   "2xl": "1408px",
-      // },
       lineHeight: {
-        // 1 rem === 16px
         11: '2.75rem',
         12: '3rem',
         13: '3.25rem',
@@ -130,6 +123,42 @@ module.exports = {
       boxShadow: {
         light: '0px 4px 40px rgba(23, 43, 77, 0.04)',
         dark: '0px 4px 40px rgba(23, 43, 77, 0.08)'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
+        },
+        slideIn: {
+          '0%': { transform: 'translateX(-10px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' }
+        },
+        staggered: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '30%': { transform: 'translateY(0)', opacity: '0.5' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
+        },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.8' }
+        }
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.7s ease-in-out forwards',
+        slideUp: 'slideUp 0.8s ease-out forwards',
+        slideIn: 'slideIn 0.8s ease-out forwards',
+        staggered: 'staggered 1.2s ease-out forwards',
+        pulse: 'pulse 2s ease-in-out infinite'
+      },
+      transitionProperty: {
+        width: 'width',
+        height: 'height',
+        padding: 'padding',
+        borderWidth: 'borderWidth'
       }
     }
   },

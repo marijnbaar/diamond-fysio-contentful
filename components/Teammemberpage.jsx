@@ -23,18 +23,25 @@ export default function Teammember({
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         return (
-          <p className="text-base text-left font-medium tracking-tight text-gray-500 leading-8">
+          <p className="text-base text-left font-medium tracking-tight text-gray-600 leading-8 animate-fadeIn">
             {children}
           </p>
         );
       },
       [BLOCKS.HEADING_2]: (node, children) => {
-        return <h3 className="mt-4 text-2xl font-extrabold text-gray-500">{children}</h3>;
+        return (
+          <h3 className="mt-4 text-2xl font-extrabold text-gray-500 animate-fadeIn">{children}</h3>
+        );
       },
       [INLINES.HYPERLINK]: (node, children) => {
         return (
-          <a href={node.data.uri} target="_blank" rel="noreferrer">
-            <span className="text-cyan-600 hover:text-gray-400">{children}</span>
+          <a
+            href={node.data.uri}
+            target="_blank"
+            rel="noreferrer"
+            className="text-teal-600 hover:text-teal-800 border-b border-teal-200 hover:border-teal-600 transition-all duration-300"
+          >
+            {children}
           </a>
         );
       }
@@ -66,8 +73,8 @@ export default function Teammember({
         </div>
 
         <div className="relative mx-auto max-w-5xl pt-16 sm:px-6 overflow-hidden">
-          <div className="bg-slate-50 mt-11 rounded-3xl lg:grid lg:grid-cols-6">
-            <div className="absolute z-10 mx-auto -mt-11 md:-mt-14 lg:-mt-28 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 ">
+          <div className="bg-slate-50 mt-11 rounded-3xl lg:grid lg:grid-cols-6 shadow-lg animate-slideUp">
+            <div className="absolute z-10 mx-auto -mt-11 md:-mt-14 lg:-mt-28 h-44 w-44 right-0 overflow-hidden rounded-full bg-slate-200 md:float-right md:h-64 md:w-64 md:[shape-outside:circle(40%)] lg:mr-20 shadow-md transform transition duration-500 hover:scale-105">
               {image && (
                 <div className="absolute inset-0 h-full w-full object-cover">
                   {image && (
@@ -75,36 +82,36 @@ export default function Teammember({
                       src={image.url}
                       alt={image.description}
                       layout="fill"
-                      className="filter grayscale hover:filter-none"
+                      className="filter grayscale hover:filter-none transition-all duration-500"
                     />
                   )}
                 </div>
               )}
             </div>
-            <div className="lg:col-span-4 px-4 md:px-8 pt-24 sm:px-10 sm:pt-16 md:pt-20 lg:px-20 lg:pt-32">
+            <div className="lg:col-span-4 px-4 md:px-8 pt-24 sm:px-10 sm:pt-16 md:pt-20 lg:px-20 lg:pt-32 animate-fadeIn">
               <h2
-                className="inline-flex items-center rounded-full py-1 px-4 mr-2 text-teal-500 hover:text-teal-400 ring-1 ring-inset ring-teal-500"
+                className="inline-flex items-center rounded-full py-1 px-4 mr-2 text-teal-500 hover:text-teal-400 ring-1 ring-inset ring-teal-500 transition-all duration-300 hover:bg-teal-50"
                 id="author-title"
               >
                 <span className="text-base font-medium tracking-tight cursor-default">
                   {role && role}
                 </span>
               </h2>
-              <span className="mt-2 block text-teal-500 font-display text-5xl font-extrabold tracking-tight sm:text-6xl">
+              <span className="mt-2 block text-teal-500 font-display text-5xl font-extrabold tracking-tight sm:text-6xl animate-slideIn">
                 {name && name}
               </span>
-              <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-slate-900">
+              <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-slate-900 animate-fadeIn">
                 {quote && quote}
               </p>
-              <div className="text-lg tracking-tight">
+              <div className="text-lg tracking-tight mt-6">
                 {descriptionTeampage &&
                   documentToReactComponents(descriptionTeampage.json, RICHTEXT_OPTIONS)}
               </div>
             </div>
-            <div className="flex lg:col-span-2 relative py-4 lg:pb-10 px-4 sm:px-10 md:px-8 lg:px-2 bg-slate-50 rounded-3xl">
+            <div className="flex lg:col-span-2 relative py-4 lg:pb-10 px-4 sm:px-10 md:px-8 lg:px-2 bg-slate-50 rounded-3xl animate-slideIn">
               <div className="relative lg:pt-48 flex flex-col">
                 <h2
-                  className="inline-flex items-center rounded-full py-1 text-teal-500 hover:text-teal-400"
+                  className="inline-flex items-center rounded-full py-1 text-teal-500 hover:text-teal-400 transition-colors duration-300"
                   id="author-title"
                 >
                   {location && (
@@ -128,44 +135,48 @@ export default function Teammember({
                   )}
                 </h2>
                 <div className="mt-2 text-sm font-small cursor-default flex flex-row lg:order-3 flex-wrap text-teal-500">
-                  {specialisationTagsCollection.items.map((specialisation) => (
+                  {specialisationTagsCollection.items.map((specialisation, index) => (
                     <div
                       key={specialisation.tag}
-                      className="opacity-80 ring-1 ring-inset ring-teal-500 hover:text-teal-400 p-2 lg:px-4 mr-1 my-1 rounded-full"
+                      className="opacity-80 ring-1 ring-inset ring-teal-500 hover:text-teal-400 p-2 lg:px-4 mr-1 my-1 rounded-full hover:bg-teal-50 transition-all duration-300 animate-fadeIn"
+                      style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       {specialisation.tag}
                     </div>
                   ))}
                 </div>
-                <div className="mt-2 text-base text-left font-medium lg:pl-2 lg:order-2 tracking-tight text-gray-500 leading-8">
+                <div className="mt-4 text-base text-left font-medium lg:pl-2 lg:order-2 tracking-tight text-gray-600 leading-7 animate-staggered">
                   {descriptionHomepage && documentToReactComponents(descriptionHomepage.json)}
                 </div>
               </div>
             </div>
-            <div className="pb-10 pl-4 sm:pl-10 md:pl-8 lg:pl-20 bg-slate-50 lg:col-span-4">
+            <div className="pb-10 pl-4 sm:pl-10 md:pl-8 lg:pl-20 bg-slate-50 lg:col-span-4 animate-fadeIn">
               <div className="text-lg tracking-tight w-full">
                 {contact && documentToReactComponents(contact.json, RICHTEXT_OPTIONS)}
               </div>
               <div className="mt-8 inline-flex items-center">
-                <ul className="flex justify-center my-auto space-x-3">
+                <ul className="flex justify-center my-auto space-x-5">
                   {phoneNumber && (
-                    <li>
+                    <li className="animate-fadeIn hover:scale-110 transition-transform duration-300">
                       <a
                         href={`https://api.whatsapp.com/send?phone=${phoneNumber}`}
-                        className="text-gray-400 hover:text-gray-500"
+                        className="text-gray-400 hover:text-whatsapp-dark"
                         target="_blank"
                         rel="noreferrer"
                       >
                         <span className="sr-only">Phone number</span>
                         <BsWhatsapp
-                          className="flex-shrink-0 w-8 h-8 text-whatsapp-light hover:text-whatsapp-dark"
+                          className="flex-shrink-0 w-8 h-8 text-whatsapp-light"
                           aria-hidden="true"
                         />
                       </a>
                     </li>
                   )}
                   {linkedInUrl && (
-                    <li>
+                    <li
+                      className="animate-fadeIn hover:scale-110 transition-transform duration-300"
+                      style={{ animationDelay: '0.1s' }}
+                    >
                       <a
                         href={linkedInUrl}
                         className="text-linkedin hover:text-gray-500"
@@ -189,34 +200,34 @@ export default function Teammember({
                     </li>
                   )}
                   {emailAddress && (
-                    <li>
+                    <li
+                      className="animate-fadeIn hover:scale-110 transition-transform duration-300"
+                      style={{ animationDelay: '0.2s' }}
+                    >
                       <a
                         href={`mailto:${emailAddress}`}
-                        className="text-gray-400 hover:text-gray-500"
+                        className="text-gmail hover:text-red-600"
                         target="_blank"
                         rel="noreferrer"
                       >
                         <span className="sr-only">Email</span>
-                        <MailIcon
-                          className="flex-shrink-0 w-8 h-8 text-gmail hover:text-gray-500"
-                          aria-hidden="true"
-                        />
+                        <MailIcon className="flex-shrink-0 w-8 h-8" aria-hidden="true" />
                       </a>
                     </li>
                   )}
                   {website && (
-                    <li>
+                    <li
+                      className="animate-fadeIn hover:scale-110 transition-transform duration-300"
+                      style={{ animationDelay: '0.3s' }}
+                    >
                       <a
                         href={website}
-                        className="text-gray-400 hover:text-gray-500"
+                        className="text-web hover:text-blue-700"
                         target="_blank"
                         rel="noreferrer"
                       >
                         <span className="sr-only">Website</span>
-                        <GlobeAltIcon
-                          className="flex-shrink-0 w-8 h-8 text-web hover:text-gray-500"
-                          aria-hidden="true"
-                        />
+                        <GlobeAltIcon className="flex-shrink-0 w-8 h-8" aria-hidden="true" />
                       </a>
                     </li>
                   )}

@@ -16,35 +16,48 @@ mail.setApiKey(process.env.SENDGRID_API_KEY);
 // }
 
 export default async function handler(req, res) {
-  const body = JSON.parse(req.body);
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-  // const human = await validateHuman(req.token);
-  // if (!human) {
-  //   res.status(400);
-  //   res.json({ errors: 'You must be human to fill in this form' });
-  //   return;
-  // }
-  const message = `
-    First Name: ${body.firstname}rn
-    Last Name: ${body.lastname}rn
-    Email: ${body.email}rn
-    Phone: ${body.phone}rn
-    Subject: ${body.subject}rn
-    Message: ${body.message}
-    `;
+  try {
+    // In Next.js API routes, req.body is already parsed when content-type is application/json
+    const body = req.body;
 
-  const { subject } = body;
+    // const human = await validateHuman(req.token);
+    // if (!human) {
+    //   res.status(400);
+    //   res.json({ errors: 'You must be human to fill in this form' });
+    //   return;
+    // }
+    const message = `
+      First Name: ${body.firstname}\n
+      Last Name: ${body.lastname}\n
+      Email: ${body.email}\n
+      Phone: ${body.phone || 'Not provided'}\n
+      Subject: ${body.subject}\n
+      Message: ${body.message}
+      `;
 
-  const data = {
-    to: 'info@fysiodiamondfactory.nl',
-    from: 'info@fysiodiamondfactory.nl',
-    subject: `${subject}`,
-    text: message,
-    html: message.replace(/rn/g, '<br>')
-  };
+    const { subject } = body;
 
-  await mail.send(data).catch((error) => {
-    console.error(error);
-  });
-  res.status(200).json({ status: 'Ok' });
+    const data = {
+      to: 'info@fysiodiamondfactory.nl',
+      from: 'info@fysiodiamondfactory.nl',
+      subject: `${subject}`,
+      text: message,
+      html: message.replace(/\n/g, '<br>')
+    };
+
+    try {
+      await mail.send(data);
+      res.status(200).json({ status: 'Ok' });
+    } catch (error) {
+      console.error('Mail sending error:', error);
+      throw new Error(`Failed to send email: ${error.message}`);
+    }
+  } catch (error) {
+    console.error('API error:', error);
+    res.status(500).json({ error: 'Failed to send message' });
+  }
 }

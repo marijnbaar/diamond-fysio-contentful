@@ -82,15 +82,28 @@ export default function Contactform() {
         body: JSON.stringify(formData)
       });
 
+      const data = await res.json();
+
       if (res.status === 200) {
         setSuccess(true);
+        // Reset form after successful submission
+        setFormData({
+          firstname: '',
+          lastname: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
       } else {
         // Handle server error
         setErrors({
-          submit: 'Er is een fout opgetreden bij het verzenden. Probeer het later opnieuw.'
+          submit:
+            data.error || 'Er is een fout opgetreden bij het verzenden. Probeer het later opnieuw.'
         });
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       setErrors({
         submit: 'Er is een fout opgetreden bij het verzenden. Probeer het later opnieuw.'
       });
