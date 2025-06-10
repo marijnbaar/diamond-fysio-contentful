@@ -21,18 +21,15 @@
     "@sendgrid/mail": "^8.1.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "axios": "^1.8.4",
-    "codemod": "^0.18.4",
     "contentful": "^11.5.10",
     "contentful-management": "^11.48.1",
     "cookies-next": "^2.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "framer-motion": "^12.5.0",
-    "gatsby-cli": "^5.14.0",
     "graphql": "^16.10.0",
     "graphql-tag": "^2.12.6",
     "html-react-parser": "^5.2.2",
-    "markdown-styles": "^3.2.0",
     "next": "^15.2.3",
     "next-connect": "^1.0.0",
     "next-fonts": "^1.5.1",
@@ -41,16 +38,13 @@
     "react": "^19.0.0",
     "react-cookie-consent": "^9.0.0",
     "react-dom": "^19.0.0",
-    "react-feed": "^0.0.1-alpha.5",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.54.2",
     "react-icons": "^5.5.0",
-    "react-instafeed": "^1.0.0",
     "react-player": "^2.16.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
-    "use-abortable-fetch": "^3.0.3",
-    "vercel": "^41.4.1"
+    "use-abortable-fetch": "^3.0.3"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
@@ -67,12 +61,14 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "pretty-quick": "^4.1.1",
-    "tailwindcss": "^4.0.15"
+    "tailwindcss": "^4.0.15",
+    "vercel": "^42.3.0"
   },
   "overrides": {
     "prettier": "^3.5.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "path-to-regexp": "^6.3.0"
   },
   "engines": {
     "node": "^18.18.0 || ^19.8.0 || >=20.0.0"
@@ -82,5 +78,10 @@
   "main": "index.js",
   "repository": "git@github.com:marijnbaar/diamond-fysio-contentful.git",
   "author": "marijn.baar@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "resolutions": {
+    "path-to-regexp": "^6.3.0",
+    "undici": "^7.10.0",
+    "esbuild": "^0.25.5"
+  }
 }
