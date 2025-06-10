@@ -1,5 +1,5 @@
 import { getServerSideSitemap } from 'next-sitemap';
-import { getClient } from '../lib/query/getQuery';
+import getClient from '../lib/contentful';
 
 export const getServerSideProps = async (ctx) => {
   const client = getClient();
