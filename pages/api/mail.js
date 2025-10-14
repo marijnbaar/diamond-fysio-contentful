@@ -1,10 +1,6 @@
 const mail = require('@sendgrid/mail');
 
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-
-if (SENDGRID_API_KEY) {
-  mail.setApiKey(SENDGRID_API_KEY);
-}
+let isSendgridInitialized = false;
 
 // async function validateHuman(token) {
 //   const secret = process.env.RECAPTCHA_SECRET_KEY;
@@ -20,14 +16,22 @@ if (SENDGRID_API_KEY) {
 // }
 
 export default async function handler(req, res) {
+  const sendgridApiKey = process.env.SENDGRID_API_KEY;
+
+  if (!sendgridApiKey) {
+    console.error('Mail sending error: SENDGRID_API_KEY is not configured');
+    return res.status(500).json({ error: 'Mail service not configured' });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    if (!SENDGRID_API_KEY) {
-      console.error('Mail sending error: SENDGRID_API_KEY is not configured');
-      return res.status(500).json({ error: 'Mail service is currently unavailable' });
+
+    if (!isSendgridInitialized) {
+      mail.setApiKey(sendgridApiKey);
+      isSendgridInitialized = true;
     }
 
     // In Next.js API routes, req.body is already parsed when content-type is application/json
