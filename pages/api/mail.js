@@ -16,17 +16,18 @@ let isSendgridInitialized = false;
 // }
 
 export default async function handler(req, res) {
+  const sendgridApiKey = process.env.SENDGRID_API_KEY;
+
+  if (!sendgridApiKey) {
+    console.error('Mail sending error: SENDGRID_API_KEY is not configured');
+    return res.status(500).json({ error: 'Mail service not configured' });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const sendgridApiKey = process.env.SENDGRID_API_KEY;
-
-    if (!sendgridApiKey) {
-      console.error('Mail sending error: SENDGRID_API_KEY is not configured');
-      return res.status(500).json({ error: 'Mail service not configured' });
-    }
 
     if (!isSendgridInitialized) {
       mail.setApiKey(sendgridApiKey);
