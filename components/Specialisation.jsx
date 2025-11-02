@@ -8,7 +8,7 @@ const Specialisation = ({ image, description, subtitle }) => {
       <div className="bg-gray-50 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 lg:gap-8 lg:items-center">
-            <div className="lg:col-span-6 mb-8 lg:mb-0">
+            <div className="hidden lg:block lg:col-span-6 mb-8 lg:mb-0">
               <div className="z-10 h-64 sm:h-96 lg:h-[28rem] xl:h-[32rem] w-full relative rounded-xl overflow-hidden shadow-lg">
                 {image && (
                   <Image
