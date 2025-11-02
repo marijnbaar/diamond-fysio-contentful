@@ -1,4 +1,3 @@
-import React from 'react';
 import SpecialisationHeader from './SpecialisationpageHeader';
 import HomepageHeader from './HomepageHeader';
 import TeampageHeader from './TeampageHeader';

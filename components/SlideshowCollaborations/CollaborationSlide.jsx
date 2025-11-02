@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
@@ -14,7 +14,7 @@ const CollaborationSlide = ({ url, description }) => {
   return (
     <div className="mt-5 lg:mt-12 flex flex-col flex-wrap justify-center lg:flex-row mb-24 lg:mb-6 h-full">
       <motion.div
-        className={`relative bg-white p-4 mx-auto bg-cover rounded-lg shadow-xl justify-between transition-all duration-300 ${isHovered ? 'shadow-2xl' : ''}`}
+        className={`relative theme-card animate-card p-4 mx-auto bg-cover justify-between transition-all duration-300 ${isHovered ? 'shadow-lg' : ''}`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

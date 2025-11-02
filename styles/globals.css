@@ -1,8 +1,22 @@
-/* @tailwind base;
-@tailwind components; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import 'tailwindcss';
-@import 'tailwindcss/utilities';
+/* Global pointer cursor for interactive elements (in Tailwind layer) */
+@layer base {
+  button,
+  [role='button'],
+  .button,
+  .btn,
+  a[role='button'],
+  a.btn,
+  a[href].btn,
+  input[type='submit'],
+  input[type='button'],
+  label[for] {
+    cursor: pointer;
+  }
+}
 
 :root {
   --rounded-lg: 0.5rem;
@@ -13,6 +27,7 @@
 @font-face {
   font-family: Euclid;
   src: url('/fonts/Euclid-Circular/Euclid-Circular-B-Bold.ttf') format('truetype');
+  font-display: swap;
 }
 
 /* Custom utility classes using standard CSS */
@@ -43,4 +58,126 @@
 }
 .slideshow-slick .slick-dots li button::before {
   display: none;
+}
+
+html.dark body {
+  background-color: #111827; /* gray-900 */
+  color: #f3f4f6; /* gray-100 */
+}
+
+/* Global dark overrides for common Tailwind utility colors used across pages */
+html.dark .bg-white {
+  background-color: #111827 !important;
+}
+html.dark .bg-gray-50 {
+  background-color: #0f172a !important;
+}
+html.dark .bg-gray-100 {
+  background-color: #111827 !important;
+}
+html.dark .text-gray-900 {
+  color: #f3f4f6 !important;
+}
+html.dark .text-gray-800 {
+  color: #e5e7eb !important;
+}
+html.dark .text-gray-700 {
+  color: #d1d5db !important;
+}
+html.dark .text-gray-600 {
+  color: #9ca3af !important;
+}
+html.dark .border-gray-100,
+html.dark .ring-gray-100 {
+  border-color: #374151 !important;
+}
+html.dark .border-gray-200,
+html.dark .ring-gray-200 {
+  border-color: #4b5563 !important;
+}
+
+/* Typography defaults for Contentful rich text blocks without dark:prose-invert */
+html.dark .prose {
+  color: #e5e7eb;
+}
+html.dark .prose h1,
+html.dark .prose h2,
+html.dark .prose h3,
+html.dark .prose h4 {
+  color: #f3f4f6;
+}
+html.dark .prose a {
+  color: #22d3ee;
+}
+html.dark .prose blockquote {
+  color: #e5e7eb;
+  border-left-color: #22d3ee;
+}
+html.dark .prose code {
+  color: #93c5fd;
+}
+
+/* Centralized theme-aware card utility */
+@layer utilities {
+  .theme-card {
+    background-color: #ffffff; /* light bg */
+    border: 1px solid transparent; /* no visible border in light */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.08); /* shadow-md */
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+    will-change: transform, box-shadow;
+  }
+  .theme-card:hover {
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.12),
+      0 4px 6px -4px rgba(0, 0, 0, 0.08); /* shadow-lg */
+    transform: translateY(-4px);
+  }
+  .dark .theme-card {
+    background-color: #1f2937; /* gray-800 */
+    border-color: #374151; /* gray-700 */
+  }
+
+  /* subtle entrance animation for cards */
+  @keyframes cardFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-card {
+    animation: cardFadeUp 0.4s ease both;
+  }
+}
+
+/* Dark mode table overrides inside prose (pricing tables) */
+html.dark .prose table {
+  background: transparent !important;
+  border-color: #374151 !important;
+}
+html.dark .prose th {
+  background-color: #1f2937 !important;
+  color: #e5e7eb !important;
+  border-color: #374151 !important;
+}
+html.dark .prose td {
+  color: #e5e7eb !important;
+  border-color: #374151 !important;
+}
+html.dark .prose tbody tr:nth-child(odd) {
+  background-color: #0f172a !important;
+}
+html.dark .prose tbody tr:nth-child(even) {
+  background-color: #111827 !important;
+}
+html.dark .prose tbody tr:hover {
+  background-color: #1f2937 !important;
 }

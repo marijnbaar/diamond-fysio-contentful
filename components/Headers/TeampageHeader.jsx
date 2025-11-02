@@ -1,4 +1,3 @@
-import React from 'react';
 function TeampageHeader({ title, description }) {
   return (
     <div className="bg-white">

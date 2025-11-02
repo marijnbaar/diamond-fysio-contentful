@@ -1,7 +1,7 @@
-// NOTE: This config is copied from ACM
 const colors = require('tailwindcss/colors');
 
 module.exports = {
+  darkMode: 'class',
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   safelist: [
     'btn-primary',
@@ -11,7 +11,7 @@ module.exports = {
     'font-primary',
     'font-secondary',
     'font-microcopy',
-    'rounded-t-lg' // added to preserve the built-in utility
+    'rounded-t-lg'
   ],
   theme: {
     fontFamily: {
@@ -41,14 +41,6 @@ module.exports = {
         Euclid: ['Euclid'],
         manrope: ['Manrope, sans-serif']
       },
-      backgroundImage: () => ({
-        'login-background':
-          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('/src/assets/img/background-1920x1280.jpg')",
-        'landing-background':
-          'linear-gradient(rgba(0,0,0, 0.25), rgba(0,0,0, 0.25)), url(https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
-        'pointed-background':
-          "linear-gradient(rgba(0,0,0, 0.75), rgba(0,0,0, 0.75)), url('https://fysiodiamondfactory.nl/wp-content/uploads/2022/01/point.jpeg')"
-      }),
       lineHeight: {
         11: '2.75rem',
         12: '3rem',

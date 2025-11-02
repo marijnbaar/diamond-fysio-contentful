@@ -1,4 +1,3 @@
-import React from 'react';
 import Slideshow from './SlideshowSpecialisations/SlideShow';
 import Team from './Team';
 import SlideshowTestimonials from './SlideshowTestimonials/SlideShow';

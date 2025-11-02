@@ -1,37 +1,40 @@
 import ComponentList from '../components/ComponentList';
-import { getPageSlugs } from '../lib/query/getData';
 import { getPage } from '../lib/query/getData';
 import queryAllPages from '../lib/query/pages/allDynamicRoot';
 import { getTypeName } from '../lib/query/getData';
+import { normalizeLocale } from '../lib/helpers/normalizeLocale';
+import { loadPosts } from './api/fetchPosts';
 
 const Page = (pageProps) => {
   switch (pageProps.__typename) {
     default:
       return (
         <>
-          <ComponentList components={pageProps.components} />
+          <ComponentList
+            components={pageProps.components}
+            instagramPosts={pageProps.instagramPosts}
+          />
         </>
       );
   }
 };
 
-export const getStaticProps = async ({ params, preview = false }) => {
-  const slug = `/${params.slug.join('/')}`;
+export const getServerSideProps = async ({ params, preview = false, locale = 'nl' }) => {
+  const slug = Array.isArray(params?.slug) ? `/${params.slug.join('/')}` : '/';
   const modelId = await getTypeName(slug, preview, queryAllPages);
-  const pageData = (await getPage(modelId, slug, preview)) ?? [];
+  if (!modelId) {
+    return { notFound: true };
+  }
+  const cfLocale = normalizeLocale(locale) || undefined;
+  const translated = (await getPage(modelId, slug, preview, cfLocale)) ?? [];
+  const instagramPosts = await loadPosts();
+
   return {
     props: {
-      ...pageData,
-      preview: preview
+      ...translated,
+      preview: preview,
+      instagramPosts
     }
-  };
-};
-
-export const getStaticPaths = async () => {
-  const pagePaths = (await getPageSlugs(queryAllPages)) ?? [];
-  return {
-    paths: pagePaths,
-    fallback: false
   };
 };
 
