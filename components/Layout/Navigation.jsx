@@ -95,13 +95,13 @@ export default function Navigation({ navigation }) {
 
   return (
     <Popover
-      className={`z-30 fixed top-0 w-screen transition-all duration-300 ${
+      className={`z-30 fixed top-0 left-0 right-0 w-full transition-all duration-300 ${
         scrolled
           ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl backdrop-saturate-150 shadow-lg border-b border-gray-200/50 dark:border-gray-700/50'
           : 'bg-white/60 dark:bg-gray-900/60 backdrop-blur-lg backdrop-saturate-150'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1 cursor-pointer">
             <span className="sr-only">Diamond fysio</span>

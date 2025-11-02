@@ -23,7 +23,12 @@ export const getServerSideProps = async ({ params, preview = false, locale = 'nl
   const slug = Array.isArray(params?.slug) ? `/${params.slug.join('/')}` : '/';
   const modelId = await getTypeName(slug, preview, queryAllPages);
   if (!modelId) {
-    return { notFound: true };
+    // For 404, we need to ensure Next.js uses our custom 404 page
+    // Return 404 status but don't pass props - Next.js will render 404.js
+    return {
+      notFound: true
+      // Don't pass props here, Next.js will handle the 404 rendering
+    };
   }
   const cfLocale = normalizeLocale(locale) || undefined;
   const translated = (await getPage(modelId, slug, preview, cfLocale)) ?? [];
