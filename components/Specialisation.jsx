@@ -13,7 +13,12 @@ const Specialisation = ({ image, description, subtitle }) => {
                 {image && (
                   <Image
                     src={image.url}
-                    alt={image.description || 'Specialisatie afbeelding'}
+                    alt={
+                      image.description ||
+                      (subtitle
+                        ? `${subtitle} - Diamond Fysio Amsterdam`
+                        : 'Specialisatie behandeling bij Diamond Fysio')
+                    }
                     fill
                     className="object-cover object-center"
                     sizes="(max-width: 1024px) 100vw, 50vw"

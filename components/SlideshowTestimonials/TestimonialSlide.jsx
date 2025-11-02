@@ -16,7 +16,12 @@ const TestimonialSlide = ({ key, name, profession, quote, image }) => {
                     fill
                     className="z-20 w-full h-full object-cover"
                     src={image.url}
-                    alt={image.description || 'Foto van cliënt'}
+                    alt={
+                      image.description ||
+                      (name
+                        ? `Foto van ${name}, cliënt bij Diamond Fysio`
+                        : 'Foto van cliënt bij Diamond Fysio Amsterdam')
+                    }
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 )}

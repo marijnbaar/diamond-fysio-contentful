@@ -24,7 +24,7 @@ export default function Collaborations({ title, subtitle, logoCollection }) {
                     fill
                     className="object-contain m-10 p-4"
                     src={logo.url}
-                    alt={logo.description}
+                    alt={logo?.description || 'Samenwerkingspartner logo - Diamond Fysio Amsterdam'}
                     sizes="192px"
                   />
                 )}

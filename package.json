@@ -19,7 +19,15 @@
     "cf:locale:set-default": "tsx scripts/set-default-locale.ts",
     "instagram:token:update": "tsx scripts/update-instagram-token.ts",
     "instagram:token:refresh": "tsx scripts/update-instagram-token.ts --refresh",
-    "instagram:token:sync": "tsx scripts/sync-instagram-token.ts"
+    "instagram:token:sync": "tsx scripts/sync-instagram-token.ts",
+    "alt:generate": "tsx scripts/generate-alt-texts.ts",
+    "alt:generate:all": "tsx scripts/generate-alt-texts.ts --force",
+    "alt:generate:test": "tsx scripts/generate-alt-texts.ts --dryRun",
+    "alt:titles": "tsx scripts/generate-alt-texts.ts --titles",
+    "alt:titles:all": "tsx scripts/generate-alt-texts.ts --titles --force",
+    "alt:multilang": "tsx scripts/generate-alt-texts.ts --allLocales",
+    "alt:multilang:all": "tsx scripts/generate-alt-texts.ts --allLocales --titles --force",
+    "check:specialisation": "tsx scripts/check-specialisation-entry.ts"
   },
   "dependencies": {
     "@apollo/client": "3.13.5",

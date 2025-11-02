@@ -48,7 +48,7 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
   };
   return (
     <div
-      className="relative bg-gray-50 px-6 py-16 sm:py-24 lg:pb-32 lg:pt-11"
+      className="relative bg-gray-50 px-6 py-12 lg:py-16"
       role="region"
       aria-roledescription="carousel"
       aria-label="Specialisaties"
@@ -58,14 +58,14 @@ const Slideshow = ({ title, subtitle, description, specialisationCollection }) =
           <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
             {subtitle}
           </h2>
-          <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+          <p className="mt-3 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
             {title && title}
           </p>
-          <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
+          <p className="mt-4 mx-auto max-w-prose text-xl text-gray-500">
             {description && description}
           </p>
         </div>
-        <div className="mt-12 mx-auto max-w-md px-4 sm:max-w-lg sm:px-1 lg:px-8 lg:max-w-7xl slideshow-slick">
+        <div className="mt-8 mx-auto max-w-md px-4 sm:max-w-lg sm:px-1 lg:px-8 lg:max-w-7xl slideshow-slick">
           <Slider {...settings}>
             {specialisationCollection &&
               specialisationCollection.items.map((specialisation, i) => (

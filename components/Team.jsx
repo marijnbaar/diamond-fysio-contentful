@@ -8,10 +8,10 @@ export default function Team({ title, description, teamMemberCollection }) {
   const { locale } = useRouter();
   const readMore = locale === 'en' ? 'Read more' : 'Lees meer';
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 mt-20 lg:mt-11">
-      <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
+    <div className="bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-16">
         <div className="space-y-12">
-          <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl mb-24">
+          <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl mb-12">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-gray-900 dark:text-gray-100">
               {title}
             </h2>
@@ -33,7 +33,12 @@ export default function Team({ title, description, teamMemberCollection }) {
                       {person.image && (
                         <Image
                           src={person.image.url}
-                          alt={person.image.description}
+                          alt={
+                            person.image?.description ||
+                            (person.firstName && person.lastName
+                              ? `${person.firstName} ${person.lastName}, fysiotherapeut bij Diamond Fysio`
+                              : 'Teamlid bij Diamond Fysio Amsterdam')
+                          }
                           fill
                           className="filter grayscale group-hover:filter-none object-cover transition-all duration-500"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
