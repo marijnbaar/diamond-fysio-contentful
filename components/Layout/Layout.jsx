@@ -67,7 +67,7 @@ const Layout = ({ footer, meta, children, navigation, slug }) => {
         <link rel="icon" href="/images/logogrijs.png" />
       </Head>
       {navigation ? <Navigation navigation={navigation} /> : null}
-      <main className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors">
+      <main className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors w-full overflow-x-hidden">
         {children}
       </main>
       {footer ? <footer>{<Footer footer={footer} />}</footer> : null}
