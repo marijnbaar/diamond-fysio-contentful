@@ -16,7 +16,10 @@ export const getServerSideProps = async ({ preview = false, locale = 'nl' }) => 
     props: {
       ...translated,
       instagramPosts,
-      preview
+      preview,
+      slug: '/',
+      // Extract meta if it exists in the page data
+      meta: translated.meta || translated.meta_data || null
     }
   };
 };

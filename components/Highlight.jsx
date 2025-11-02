@@ -1,6 +1,6 @@
 export default function Highlight({ info }) {
   return (
-    <div className="bg-gray-50 py-6 lg:py-24">
+    <div className="bg-gray-50 py-12 lg:py-16">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 lg:-mt-44 mb-0">
         <div className="relative py-11 px-8 theme-card animate-card overflow-hidden lg:px-16 lg:grid lg:grid-cols-2 lg:gap-x-8">
           <div className="relative lg:col-span-2">

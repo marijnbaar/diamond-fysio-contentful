@@ -9,7 +9,7 @@ const GenericpageHeader = ({ image }) => {
             className="w-full h-full object-cover"
             fill
             src={image.url}
-            alt={image.description}
+            alt={image.description || 'Pagina header afbeelding - Diamond Fysio Amsterdam'}
           />
         )}
       </div>

@@ -32,6 +32,9 @@ function classNames(...classes) {
 }
 
 export default function Navigation({ navigation }) {
+  if (!navigation) {
+    return null;
+  }
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const router = useRouter();
@@ -94,8 +97,8 @@ export default function Navigation({ navigation }) {
     <Popover
       className={`z-30 fixed top-0 w-screen transition-all duration-300 ${
         scrolled
-          ? 'bg-white dark:bg-gray-800 backdrop-blur-md backdrop-saturate-150 shadow-md border-b border-gray-100 dark:border-gray-700'
-          : 'bg-white dark:bg-gray-800 backdrop-blur-sm backdrop-saturate-150'
+          ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl backdrop-saturate-150 shadow-lg border-b border-gray-200/50 dark:border-gray-700/50'
+          : 'bg-white/60 dark:bg-gray-900/60 backdrop-blur-lg backdrop-saturate-150'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -103,13 +106,13 @@ export default function Navigation({ navigation }) {
           <div className="flex justify-start lg:w-0 lg:flex-1 cursor-pointer">
             <span className="sr-only">Diamond fysio</span>
             <Link href="/">
-              <div className="h-16 w-16 relative">
+              <div className="h-10 w-10 sm:h-12 sm:w-12 relative transition-transform duration-300 hover:scale-110">
                 {navigation.logo && (
                   <Image
                     src={navigation.logo && navigation.logo.url}
-                    alt={navigation.logo.description && navigation.logo.description}
+                    alt={navigation.logo?.description || 'Diamond Fysio Amsterdam logo'}
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-md"
                     quality="100"
                     priority={true}
                   />
@@ -144,7 +147,7 @@ export default function Navigation({ navigation }) {
                       open
                         ? 'text-gray-900 dark:text-gray-100'
                         : 'text-gray-500 dark:text-gray-300',
-                      'group bg-transparent rounded-md inline-flex items-center text-base font-medium hover:text-teal-500 dark:hover:text-teal-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-colors duration-300 pb-1 border-b-2 border-transparent hover:border-teal-500 dark:hover:border-teal-400'
+                      'group bg-transparent rounded-lg px-3 py-2 inline-flex items-center text-base font-medium hover:text-teal-500 dark:hover:text-teal-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-all duration-300 pb-1 border-b-2 border-transparent hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white/10 dark:hover:bg-gray-800/30'
                     )}
                   >
                     <span>{navigation?.navigatieSubmenu?.[0]?.title || 'Specialisaties'}</span>
@@ -169,9 +172,12 @@ export default function Navigation({ navigation }) {
                     leaveTo="opacity-0 translate-y-1"
                   >
                     <Popover className="absolute z-20 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2 specialicaties-dropdown">
-                      <div className="rounded-xl shadow-xl border border-gray-100 overflow-hidden backdrop-blur-md">
-                        <div className="relative grid gap-6 bg-white dark:bg-gray-700 bg-opacity-95 dark:bg-opacity-95 px-5 py-6 sm:gap-8 sm:p-8 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg">
+                      <div className="rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 overflow-hidden backdrop-blur-xl bg-white/80 dark:bg-gray-800/80">
+                        <div className="relative grid gap-6 px-5 py-6 sm:gap-8 sm:p-8">
                           {navigation &&
+                            navigation.navigatieSubmenu &&
+                            navigation.navigatieSubmenu[0] &&
+                            navigation.navigatieSubmenu[0].menuItems &&
                             navigation.navigatieSubmenu[0].menuItems.map((menuItem) =>
                               menuItem.internalLink || menuItem.externalLink ? (
                                 <MyLink
@@ -185,9 +191,9 @@ export default function Navigation({ navigation }) {
                                       : menuItem.externalLink
                                   }
                                 >
-                                  <div className="-m-3 p-3 w-full flex items-start rounded-lg hover:bg-white/5 cursor-pointer transition-colors duration-200">
+                                  <div className="-m-3 p-3 w-full flex items-start rounded-xl hover:bg-teal-50/50 dark:hover:bg-teal-900/20 cursor-pointer transition-all duration-300 group/item">
                                     <div className="ml-4">
-                                      <div className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-500 dark:group-hover:text-teal-400">
+                                      <div className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover/item:text-teal-600 dark:group-hover/item:text-teal-400 transition-colors duration-300">
                                         {menuItem.title && menuItem.title}
                                       </div>
                                       <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
@@ -258,7 +264,7 @@ export default function Navigation({ navigation }) {
                       open
                         ? 'text-gray-900 dark:text-gray-100'
                         : 'text-gray-500 dark:text-gray-300',
-                      'group bg-transparent rounded-md inline-flex items-center text-base font-medium hover:text-teal-500 dark:hover:text-teal-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-colors duration-300 pb-1 border-b-2 border-transparent hover:border-teal-500 dark:hover:border-teal-400'
+                      'group bg-transparent rounded-lg px-3 py-2 inline-flex items-center text-base font-medium hover:text-teal-500 dark:hover:text-teal-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-all duration-300 pb-1 border-b-2 border-transparent hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white/10 dark:hover:bg-gray-800/30'
                     )}
                   >
                     <span>{navigation?.navigatieSubmenu?.[1]?.title || 'Over ons'}</span>
@@ -286,6 +292,9 @@ export default function Navigation({ navigation }) {
                       <div className="rounded-xl shadow-xl border border-gray-100 overflow-hidden backdrop-blur-md">
                         <div className="relative grid gap-6 bg-white dark:bg-gray-700 bg-opacity-95 dark:bg-opacity-95 px-5 py-6 sm:gap-8 sm:p-8 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg">
                           {navigation &&
+                            navigation.navigatieSubmenu &&
+                            navigation.navigatieSubmenu[1] &&
+                            navigation.navigatieSubmenu[1].menuItems &&
                             navigation.navigatieSubmenu[1].menuItems.map((menuItem) =>
                               menuItem.internalLink || menuItem.externalLink ? (
                                 <MyLink
@@ -301,7 +310,7 @@ export default function Navigation({ navigation }) {
                                 >
                                   <div className="-m-3 p-3 w-full flex items-start rounded-lg hover:bg-white/5 cursor-pointer">
                                     <div className="ml-4">
-                                      <div className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-500 dark:group-hover:text-teal-400">
+                                      <div className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover/item:text-teal-600 dark:group-hover/item:text-teal-400 transition-colors duration-300">
                                         {menuItem.title && menuItem.title}
                                       </div>
                                       <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
@@ -329,8 +338,8 @@ export default function Navigation({ navigation }) {
 
             {navigation.menuItems &&
               navigation.menuItems.map((item) => (
-                <div key={item.title} className="flow-root">
-                  <div className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-500 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors duration-200">
+                <Popover.Button key={item.title} as="div" className="flow-root">
+                  <div className="group bg-transparent rounded-lg px-3 py-2 inline-flex items-center text-base font-medium text-gray-500 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-all duration-300 pb-1 border-b-2 border-transparent hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white/10 dark:hover:bg-gray-800/30">
                     <MyLink
                       href={
                         item.internalLink
@@ -338,12 +347,10 @@ export default function Navigation({ navigation }) {
                           : item.externalLink
                       }
                     >
-                      <div className="text-base font-medium text-gray-500 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors duration-200">
-                        {item.title && item.title}
-                      </div>
+                      <span>{item.title && item.title}</span>
                     </MyLink>
                   </div>
-                </div>
+                </Popover.Button>
               ))}
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:flex-none space-x-3 min-w-0">
@@ -351,7 +358,7 @@ export default function Navigation({ navigation }) {
             {navigation.knop && (
               <div key={navigation.knop.title} className="flow-root flex-shrink-0">
                 <div
-                  className={`flex items-center justify-center ${currentLocale === 'en' ? 'px-5' : 'px-4'} py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-teal-500 to-cyan-600 dark:from-teal-600 dark:to-cyan-700 hover:from-teal-400 hover:to-cyan-500 dark:hover:from-teal-500 dark:hover:to-cyan-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-all duration-300`}
+                  className={`flex items-center justify-center ${currentLocale === 'en' ? 'px-5' : 'px-4'} h-9 border border-transparent rounded-lg shadow-lg text-sm font-medium text-white bg-gradient-to-r from-teal-500 to-cyan-600 dark:from-teal-600 dark:to-cyan-700 hover:from-teal-400 hover:to-cyan-500 dark:hover:from-teal-500 dark:hover:to-cyan-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95`}
                 >
                   <MyLink
                     href={
@@ -378,7 +385,7 @@ export default function Navigation({ navigation }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="flex items-center space-x-2 text-sm font-medium text-white bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 px-3 py-2 rounded-md transition-colors duration-300 shadow-sm whitespace-nowrap">
+                <div className="flex items-center justify-center space-x-2 h-9 text-sm font-medium text-white bg-gray-800/90 dark:bg-gray-700/90 backdrop-blur-sm hover:bg-gray-700 dark:hover:bg-gray-600 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg whitespace-nowrap hover:scale-105 active:scale-95">
                   <UserCircleIcon className="h-4 w-4" aria-hidden="true" />
                   <span>{t.login}</span>
                 </div>
@@ -386,7 +393,7 @@ export default function Navigation({ navigation }) {
             </div>
 
             {/* Language & Theme group - on the right */}
-            <div className="flex items-center space-x-2 pl-2 border-l border-gray-200 dark:border-gray-600 flex-shrink-0">
+            <div className="flex items-center space-x-2 pl-3 border-l border-gray-200/60 dark:border-gray-600/60 flex-shrink-0">
               {/* Locale toggle */}
               <button
                 onClick={() => {
@@ -443,7 +450,7 @@ export default function Navigation({ navigation }) {
                       {navigation.logo && (
                         <Image
                           src={navigation.logo && navigation.logo.url}
-                          alt={navigation.logo.description && navigation.logo.description}
+                          alt={navigation.logo?.description || 'Diamond Fysio Amsterdam logo'}
                           fill
                           className="object-cover"
                           quality="100"
@@ -463,6 +470,9 @@ export default function Navigation({ navigation }) {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {navigation &&
+                    navigation.navigatieSubmenu &&
+                    navigation.navigatieSubmenu[0] &&
+                    navigation.navigatieSubmenu[0].menuItems &&
                     navigation.navigatieSubmenu[0].menuItems.map((menuItem) =>
                       menuItem.internalLink || menuItem.externalLink ? (
                         <MyLink
@@ -545,7 +555,7 @@ export default function Navigation({ navigation }) {
                 {navigation.menuItems &&
                   navigation.menuItems.map((item) => (
                     <div key={item.title} className="flow-root">
-                      <div className="-m-3 p-4 w-full flex items-center justify-center rounded-md text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-white/5 dark:hover:bg-gray-700/50">
+                      <div className="-m-3 p-4 w-full flex items-center justify-center rounded-lg text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all duration-300 hover:text-teal-600 dark:hover:text-teal-400">
                         <MyLink
                           href={
                             item.internalLink

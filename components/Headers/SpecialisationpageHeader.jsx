@@ -48,7 +48,12 @@ export default function SpecialisationHeader({ title, descriptionRichText, image
                   className="object-cover"
                   fill
                   src={image.url}
-                  alt={image.description || 'Specialisatie afbeelding'}
+                  alt={
+                    image.description ||
+                    (title
+                      ? `${title} behandeling - Diamond Fysio Amsterdam`
+                      : 'Specialisatie behandeling bij Diamond Fysio')
+                  }
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />

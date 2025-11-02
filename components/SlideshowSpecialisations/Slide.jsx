@@ -14,7 +14,7 @@ const Slide = ({ key, image, title, description, button, subtitle }) => {
                 fill
                 className="w-full h-full object-cover"
                 src={image.url}
-                alt={image.description || 'Specialisatie afbeelding'}
+                alt={image.description || 'Specialisatie behandeling bij Diamond Fysio Amsterdam'}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             )}

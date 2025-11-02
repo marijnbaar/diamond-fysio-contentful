@@ -14,7 +14,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
     : [];
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 -mt-11 pt-16 sm:pt-24 lg:pt-10 pb-11">
+    <div className="bg-gray-50 dark:bg-gray-900 py-12 lg:py-16">
       <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-base font-semibold tracking-wider text-cyan-600 dark:text-cyan-400 uppercase">
@@ -110,7 +110,7 @@ export default function Info({ title, subtitle, description, instagramPosts }) {
                   >
                     <Image
                       src={image.media_url}
-                      alt={image.caption || 'Instagram post'}
+                      alt={image.caption || 'Instagram post van Diamond Fysio Amsterdam'}
                       unoptimized={true}
                       fill
                       className="rounded object-cover"

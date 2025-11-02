@@ -21,7 +21,7 @@ export default function CTA({ title, subtitle, description, image, button }) {
           <Image
             className="object-cover"
             src={image.url}
-            alt={image.description || 'CTA afbeelding'}
+            alt={image.description || 'Call-to-action afbeelding - Diamond Fysio Amsterdam'}
             fill
             quality={85}
             sizes="(max-width: 768px) 100vw, 50vw"

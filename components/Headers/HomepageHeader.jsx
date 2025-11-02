@@ -12,7 +12,10 @@ const HomepageHeader = ({ title, info, buttonCollection, image }) => {
             className="w-full h-full object-cover"
             fill
             src={image.url}
-            alt={image.description || 'Hero afbeelding'}
+            alt={
+              image.description ||
+              'Fysiotherapeut helpt patiënt in moderne Diamond Fysio praktijk in Amsterdam'
+            }
             sizes="100vw"
             priority
           />

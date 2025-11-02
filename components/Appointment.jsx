@@ -128,7 +128,7 @@ export default function Appointment({
     : 'Voor de volgende therapeuten kun je gemakkelijk een online afspraak maken:';
 
   return (
-    <section className="max-w-7xl mx-auto pt-32 pb-16 px-4 sm:px-6 relative">
+    <section className="max-w-7xl mx-auto py-12 lg:py-16 px-4 sm:px-6 relative">
       {/* Decoratieve elementen */}
       <div className="absolute top-20 right-10 w-64 h-64 bg-teal-100 rounded-full opacity-10 blur-3xl"></div>
       <div className="absolute bottom-20 left-10 w-72 h-72 bg-cyan-100 rounded-full opacity-10 blur-3xl"></div>

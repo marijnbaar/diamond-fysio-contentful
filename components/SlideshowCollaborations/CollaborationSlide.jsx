@@ -27,7 +27,7 @@ const CollaborationSlide = ({ url, description }) => {
           height={100}
           className="object-contain"
           src={url}
-          alt={description || 'Collaboration logo'}
+          alt={description || 'Samenwerkingspartner logo - Diamond Fysio Amsterdam'}
         />
         {description && (
           <motion.div
