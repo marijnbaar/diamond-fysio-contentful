@@ -62,11 +62,11 @@ export default function Teammember({
     }
   };
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
       <section
         id="author"
         aria-labelledby="author-title"
-        className="relative scroll-mt-14 lg:mt-16 pb-3 pt-8 sm:scroll-mt-32 sm:pb-16 sm:pt-10 lg:pt-16"
+        className="relative scroll-mt-14 lg:mt-16 pb-8 pt-8 sm:scroll-mt-32 sm:pb-16 sm:pt-10 lg:pt-16"
       >
         <div className="absolute inset-x-0 bottom-0 top-1/2 text-slate-900/10 dark:text-slate-100/10 [mask-image:linear-gradient(transparent,white)] dark:[mask-image:linear-gradient(transparent,gray-900)]">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full">
