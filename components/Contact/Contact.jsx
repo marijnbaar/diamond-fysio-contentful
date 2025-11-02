@@ -2,6 +2,7 @@ import { MailIcon, PhoneIcon, LocationMarkerIcon } from '@heroicons/react/outlin
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Contactform from './Contactform';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { useRouter } from 'next/router';
 
 export default function Contact({
   title,
@@ -14,6 +15,28 @@ export default function Contact({
   facebookLink,
   instagramLink
 }) {
+  const router = useRouter();
+  const locale = router?.locale || 'nl';
+  const isEn = locale === 'en';
+
+  // Localized strings
+  const t = {
+    contactHeader: isEn ? 'Get in touch' : 'Neem contact op',
+    defaultTitle: isEn ? 'Contact Us' : 'Contacteer Ons',
+    defaultDescription: isEn
+      ? "We would love to hear from you. Send us a message and we will get back to you as soon as possible. You can also contact your therapist directly (you can find this information on the homepage). You can always email - if it's urgent, send a text."
+      : 'We horen graag van u. Stuur ons een bericht en we nemen zo snel mogelijk contact met u op. Je kunt ook rechtstreeks contact opnemen met je therapeut (deze gegevens vind je op de homepagina). Mailen kan altijd - heeft het spoed, stuur een appje.',
+    defaultSubtitle: isEn ? 'Contact information' : 'Contactinformatie',
+    defaultContactSubtitle: isEn ? 'Contact details' : 'Contactgegevens',
+    defaultContactDescription: isEn
+      ? 'We are here to help and answer all your questions. We look forward to hearing from you.'
+      : 'Wij staan voor u klaar om te helpen en al uw vragen te beantwoorden. We kijken ernaar uit om van u te horen.',
+    phoneLabel: isEn ? 'Phone number' : 'Telefoonnummer',
+    emailLabel: isEn ? 'Email' : 'E-mail',
+    locationLabel: isEn ? 'Location' : 'Locatie',
+    phoneNumber: isEn ? 'Phone number' : 'Telefoonnummer',
+    characters: isEn ? 'characters' : 'karakters'
+  };
   const RICHTEXT_OPTIONS = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => {
@@ -31,22 +54,23 @@ export default function Contact({
 
   return (
     <div className="bg-gray-50">
-      <main className="overflow-hidden">
+      <main>
         {/* Header */}
-        <div className="bg-gradient-to-r from-gray-50 to-gray-100">
+        <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
           <div className="max-w-7xl mx-auto pt-36 pb-16 px-4 sm:px-6 lg:px-8">
             <div className="relative z-10">
-              <div className="max-w-3xl">
-                <span className="text-teal-600 font-semibold tracking-wide uppercase text-sm">
-                  Neem contact op
+              <div className="max-w-3xl pr-4">
+                <span className="text-teal-600 dark:text-teal-400 font-semibold tracking-wide uppercase text-sm">
+                  {t.contactHeader}
                 </span>
-                <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-                  {title || 'Contacteer Ons'}
+                <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
+                  {title || t.defaultTitle}
                 </h1>
-                <p className="mt-6 text-xl text-gray-500 max-w-3xl">
-                  {description ||
-                    'We horen graag van u. Stuur ons een bericht en we nemen zo snel mogelijk contact met u op.'}
-                </p>
+                <div className="mt-6">
+                  <p className="text-xl text-gray-500 dark:text-gray-300 break-words whitespace-normal overflow-visible">
+                    {description || t.defaultDescription}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -57,7 +81,7 @@ export default function Contact({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
             <div className="relative bg-white shadow-2xl rounded-xl overflow-hidden">
               <h2 id="contact-heading" className="sr-only">
-                {subtitle || 'Contactinformatie'}
+                {subtitle || t.defaultSubtitle}
               </h2>
 
               <div className="grid grid-cols-1 lg:grid-cols-3">
@@ -114,33 +138,32 @@ export default function Contact({
 
                   <div className="relative">
                     <h3 className="text-2xl font-bold text-white">
-                      {subtitle || 'Contactgegevens'}
+                      {subtitle || t.defaultContactSubtitle}
                     </h3>
                     <div className="mt-4 text-base text-teal-50 max-w-3xl">
                       {contactDescription ? (
                         documentToReactComponents(contactDescription.json, RICHTEXT_OPTIONS)
                       ) : (
                         <p className="text-base text-left font-medium tracking-wide max-w-xs text-white leading-7">
-                          Wij staan voor u klaar om te helpen en al uw vragen te beantwoorden. We
-                          kijken ernaar uit om van u te horen.
+                          {t.defaultContactDescription}
                         </p>
                       )}
                     </div>
 
                     <dl className="mt-8 space-y-6">
                       <dt>
-                        <span className="sr-only">Telefoonnummer</span>
+                        <span className="sr-only">{t.phoneLabel}</span>
                       </dt>
                       <dd className="flex text-base text-teal-50 items-center transition duration-300 hover:text-white">
                         <PhoneIcon
                           className="flex-shrink-0 w-6 h-6 text-teal-200"
                           aria-hidden="true"
                         />
-                        <span className="ml-3">{phonenumber || 'Telefoonnummer'}</span>
+                        <span className="ml-3">{phonenumber || t.phoneNumber}</span>
                       </dd>
 
                       <dt>
-                        <span className="sr-only">E-mail</span>
+                        <span className="sr-only">{t.emailLabel}</span>
                       </dt>
                       <dd className="flex text-base text-teal-50 items-center">
                         {email && (
@@ -160,7 +183,7 @@ export default function Contact({
                       </dd>
 
                       <dt>
-                        <span className="sr-only">Locatie</span>
+                        <span className="sr-only">{t.locationLabel}</span>
                       </dt>
                       <dd className="flex text-base text-teal-50 items-center">
                         <LocationMarkerIcon

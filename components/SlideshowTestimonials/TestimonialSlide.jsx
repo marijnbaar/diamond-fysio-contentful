@@ -1,8 +1,8 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 const TestimonialSlide = ({ key, name, profession, quote, image }) => {
   return (
-    <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative px-11">
+    <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 dark:from-gray-800 dark:to-gray-700 lg:pb-0 lg:z-10 lg:relative px-11 rounded-2xl">
       <div
         className="py-12 lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8"
         key={key}
@@ -13,10 +13,11 @@ const TestimonialSlide = ({ key, name, profession, quote, image }) => {
               <div className="h-full w-full relative">
                 {image && (
                   <Image
-                    layout="fill"
+                    fill
                     className="z-20 w-full h-full object-cover"
                     src={image.url}
-                    alt={image.description}
+                    alt={image.description || 'Foto van cliënt'}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 )}
               </div>

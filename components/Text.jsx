@@ -1,7 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { useEffect } from 'react';
-import React from 'react';
 
 export default function Text({ title, subtitle, description }) {
   // Debug what's coming in from Contentful
@@ -25,9 +24,9 @@ export default function Text({ title, subtitle, description }) {
         </p>
       ),
       [BLOCKS.HEADING_1]: (node, children) => (
-        <h1 className="text-4xl font-extrabold text-gray-900 mt-10 mb-6 text-center mx-auto animate-fadeIn">
+        <h2 className="text-4xl font-extrabold text-gray-900 mt-10 mb-6 text-center mx-auto animate-fadeIn">
           {children}
-        </h1>
+        </h2>
       ),
       [BLOCKS.HEADING_2]: (node, children) => (
         <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-5 text-center mx-auto animate-fadeIn">
@@ -71,13 +70,13 @@ export default function Text({ title, subtitle, description }) {
       ),
       [BLOCKS.TABLE]: (node, children) => (
         <div className="overflow-x-auto my-10 rounded-lg shadow mx-auto max-w-3xl animate-slideIn">
-          <table className="w-full divide-y divide-gray-200 border text-base">
+          <table className="w-full text-base border border-gray-200">
             <tbody>{children}</tbody>
           </table>
         </div>
       ),
       [BLOCKS.TABLE_ROW]: (node, children) => (
-        <tr className="even:bg-gray-50 hover:bg-teal-50 transition-colors duration-200">
+        <tr className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition-colors duration-200">
           {children}
         </tr>
       ),
@@ -107,7 +106,16 @@ export default function Text({ title, subtitle, description }) {
           <p className="text-center text-gray-700">{description}</p>
         ) : null;
       }
-      return documentToReactComponents(description.json, options);
+      return documentToReactComponents(description.json, {
+        ...options,
+        renderText: (text) =>
+          text
+            .split('\n')
+            .reduce(
+              (children, seg, i) => (i === 0 ? [seg] : [...children, <br key={i} />, seg]),
+              []
+            )
+      });
     } catch (error) {
       console.error('Error rendering rich text:', error);
       return <p className="text-center text-red-600">Error displaying content.</p>;
@@ -124,9 +132,9 @@ export default function Text({ title, subtitle, description }) {
             </h2>
           )}
           {title && (
-            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl mx-auto max-w-4xl animate-fadeIn">
+            <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl mx-auto max-w-4xl animate-fadeIn">
               {title}
-            </h1>
+            </h2>
           )}
         </div>
         <div className="mt-14 animate-slideUp">

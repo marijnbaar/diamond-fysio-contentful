@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 export default function Collaborations({ title, subtitle, logoCollection }) {
   return (
@@ -17,15 +17,15 @@ export default function Collaborations({ title, subtitle, logoCollection }) {
             logoCollection.items.map((logo, id) => (
               <div
                 key={id}
-                className="relative h-24 w-48 bg-white p-4 my-2 mx-auto lg:m-4 bg-cover rounded-lg shadow-xl justify-between ring-1 ring-black ring-opacity-5"
+                className="relative h-24 w-48 bg-white p-4 my-2 mx-auto lg:m-4 bg-cover rounded-lg shadow-xl justify-between ring-1 ring-black ring-opacity-5 overflow-hidden"
               >
                 {logo && (
                   <Image
-                    width={200}
-                    height="auto"
+                    fill
                     className="object-contain m-10 p-4"
                     src={logo.url}
                     alt={logo.description}
+                    sizes="192px"
                   />
                 )}
               </div>

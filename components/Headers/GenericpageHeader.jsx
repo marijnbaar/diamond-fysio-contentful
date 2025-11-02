@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 const GenericpageHeader = ({ image }) => {
   return (
@@ -7,7 +7,7 @@ const GenericpageHeader = ({ image }) => {
         {image && (
           <Image
             className="w-full h-full object-cover"
-            layout="fill"
+            fill
             src={image.url}
             alt={image.description}
           />

@@ -1,4 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 import Button from './Button';
 import createSlug from '../lib/helpers/createSlug';
 import { useState, useEffect } from 'react';
@@ -10,7 +11,7 @@ export default function AboutInformation({ title, subtitle, description, aboutFe
     setIsVisible(true);
   }, []);
   return (
-    <div className="py-16 bg-white overflow-hidden">
+    <div className="py-16 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`text-center transform transition-all duration-700 ${
@@ -24,7 +25,37 @@ export default function AboutInformation({ title, subtitle, description, aboutFe
             {title}
           </p>
           <div className="prose prose-lg mt-6 max-w-prose mx-auto text-xl text-gray-500">
-            {description && documentToReactComponents(description.json)}
+            {description &&
+              (description.json
+                ? documentToReactComponents(description.json, {
+                    renderText: (text) =>
+                      text
+                        .split('\n')
+                        .reduce(
+                          (children, seg, i) =>
+                            i === 0 ? [seg] : [...children, <br key={i} />, seg],
+                          []
+                        ),
+                    renderNode: {
+                      [BLOCKS.UL_LIST]: (node, children) => (
+                        <ul className="list-disc list-outside pl-6 my-4">{children}</ul>
+                      ),
+                      [BLOCKS.OL_LIST]: (node, children) => (
+                        <ol className="list-decimal list-outside pl-6 my-4">{children}</ol>
+                      ),
+                      [BLOCKS.LIST_ITEM]: (node, children) => <li className="mb-1">{children}</li>,
+                      [BLOCKS.PARAGRAPH]: (node, children) => (
+                        <p className="my-4 leading-relaxed">{children}</p>
+                      )
+                    }
+                  })
+                : typeof description === 'string'
+                  ? description.split(/\n\n+/).map((p, i) => (
+                      <p key={i} className="my-4 leading-relaxed">
+                        {p}
+                      </p>
+                    ))
+                  : null)}
           </div>
         </div>
         <div
@@ -37,14 +68,14 @@ export default function AboutInformation({ title, subtitle, description, aboutFe
               aboutFeatureCollection.items.map((feature) => (
                 <div
                   key={feature.title}
-                  className="relative p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center"
+                  className="relative p-6 theme-card hover:shadow-md transition-shadow duration-300 flex flex-col items-center"
                 >
                   <dt>
                     <p className="text-center text-xl leading-6 font-semibold text-gray-900 mb-3">
                       {feature.title}
                     </p>
                   </dt>
-                  <dd className="mt-2 text-center text-base text-gray-600">
+                  <dd className="mt-2 text-center text-base text-gray-600 whitespace-pre-line">
                     {feature.description}
                   </dd>
                   <div className="mt-auto pt-6 w-full flex justify-center">

@@ -1,18 +1,30 @@
 import { ExternalLinkIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import createSlug from '../lib/helpers/createSlug';
 
 export default function CTA({ title, subtitle, description, image, button }) {
+  const { locale } = useRouter();
+  const isEn = (locale || 'nl').toLowerCase() === 'en';
+  const label = (button && button.title) || (isEn ? 'Read more' : 'Lees meer');
+
+  const internalHref =
+    button && button.internalLink
+      ? createSlug(button.internalLink.slug, button.internalLink.pageType)
+      : '/about';
+
   return (
-    <div className="relative bg-gray-900">
+    <div className="relative bg-gradient-to-r from-gray-800 to-gray-900">
       <div className="relative h-56 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
         {image && (
           <Image
             className="object-cover"
             src={image.url}
-            alt={image.description}
-            layout="fill"
+            alt={image.description || 'CTA afbeelding'}
+            fill
             quality={85}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         )}
         <div aria-hidden="true" className="absolute inset-0 mix-blend-multiply" />
@@ -28,22 +40,29 @@ export default function CTA({ title, subtitle, description, image, button }) {
           <p className="mt-3 text-lg text-gray-300">{description && description}</p>
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">
-              <div className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50">
-                {button.externalLink ? (
+              <div className="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-md text-white border-white/30 hover:bg-white/10 transition-colors">
+                {button && button.externalLink ? (
                   <>
-                    <a href={button.externalLink} target="_blank" rel="noopener noreferrer">
-                      Lees meer
+                    <a
+                      href={button.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                    >
+                      {label}
                     </a>
                     <ExternalLinkIcon
-                      className="-mr-1 ml-3 h-5 w-5 text-gray-400"
+                      className="-mr-1 ml-3 h-5 w-5 text-white/70"
                       aria-hidden="true"
                     />
                   </>
                 ) : (
                   <>
-                    <Link href="/about">Lees meer</Link>
+                    <Link href={internalHref} aria-label={label}>
+                      {label}
+                    </Link>
                     <ExternalLinkIcon
-                      className="-mr-1 ml-3 h-5 w-5 text-gray-400"
+                      className="-mr-1 ml-3 h-5 w-5 text-white/70"
                       aria-hidden="true"
                     />
                   </>

@@ -12,6 +12,9 @@ const SlideshowTestimonials = ({ testimonialFeatureCollection }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    lazyLoad: 'ondemand',
+    adaptiveHeight: true,
+    waitForAnimate: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
@@ -42,8 +45,13 @@ const SlideshowTestimonials = ({ testimonialFeatureCollection }) => {
     ]
   };
   return (
-    <div className="relative">
-      <div className="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative px-11">
+    <div
+      className="relative"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Testimonials"
+    >
+      <div className="pb-16 lg:pb-0 lg:z-10 lg:relative px-11">
         <div className="mx-auto">
           <Slider {...settings}>
             {testimonialFeatureCollection.items.map((testimonial, i) => (

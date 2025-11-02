@@ -1,25 +1,38 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Button from './Button';
 import createSlug from '../lib/helpers/createSlug';
+import { useRouter } from 'next/router';
 
 // Premium AppointmentCard component
-const AppointmentCard = ({ appointmentCard, index }) => {
+const AppointmentCard = ({ appointmentCard, index, locale }) => {
   if (!appointmentCard) return null;
 
+  const isEn = (locale || 'nl').toLowerCase() === 'en';
+  const badge =
+    index === 0
+      ? isEn
+        ? 'NEW APPOINTMENT'
+        : 'NIEUWE AFSPRAAK'
+      : isEn
+        ? 'FOLLOW-UP APPOINTMENT'
+        : 'VERVOLGAFSPRAAK';
+
   return (
-    <div className="relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col border border-gray-100 overflow-hidden group">
+    <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-xl hover:shadow-2xl dark:hover:shadow-2xl transition-all duration-500 h-full flex flex-col border border-gray-100 dark:border-gray-700 overflow-hidden group">
       {/* Decoratieve elementen */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-teal-500 opacity-5 rounded-full -mr-6 -mt-6 group-hover:scale-150 transition-transform duration-700"></div>
-      <div className="absolute bottom-0 left-0 w-16 h-16 bg-teal-600 opacity-5 rounded-full -ml-4 -mb-4 group-hover:scale-150 transition-transform duration-700"></div>
+      <div className="absolute top-0 right-0 w-24 h-24 bg-teal-500 dark:bg-teal-600 opacity-5 rounded-full -mr-6 -mt-6 group-hover:scale-150 transition-transform duration-700"></div>
+      <div className="absolute bottom-0 left-0 w-16 h-16 bg-teal-600 dark:bg-teal-500 opacity-5 rounded-full -ml-4 -mb-4 group-hover:scale-150 transition-transform duration-700"></div>
 
       <div className="p-8 flex-grow relative z-10">
-        <span className="inline-block mb-4 text-teal-500 text-sm font-semibold tracking-widest">
-          {index === 0 ? 'NIEUWE AFSPRAAK' : 'VERVOLGAFSPRAAK'}
+        <span className="inline-block mb-4 text-teal-500 dark:text-teal-400 text-sm font-semibold tracking-widest">
+          {badge}
         </span>
-        <h3 className="text-2xl font-bold mb-4 group-hover:text-teal-600 transition-colors duration-300">
+        <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
           {appointmentCard.title}
         </h3>
-        <p className="text-gray-600 leading-relaxed">{appointmentCard.description}</p>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+          {appointmentCard.description}
+        </p>
       </div>
 
       {appointmentCard.button && (
@@ -45,28 +58,16 @@ const AppointmentCard = ({ appointmentCard, index }) => {
 
 // Luxe TherapistCard component
 const TherapistCard = ({ name, index }) => {
-  // Genereer stijlvolle achtergrond gradient per therapeut
-  const gradients = [
-    'from-teal-50 to-cyan-50 border-teal-200',
-    'from-cyan-50 to-blue-50 border-cyan-200',
-    'from-blue-50 to-teal-50 border-blue-200',
-    'from-emerald-50 to-teal-50 border-emerald-200',
-    'from-green-50 to-emerald-50 border-green-200',
-    'from-teal-50 to-green-50 border-teal-200'
-  ];
-
-  const gradientIndex = index % gradients.length;
-  const gradientClass = gradients[gradientIndex];
-
+  // Dark mode compatible styling - use teal colors instead of light gradients
   return (
-    <div
-      className={`px-6 py-4 rounded-lg border bg-gradient-to-br ${gradientClass} transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer flex items-center group relative overflow-hidden`}
-    >
+    <div className="px-6 py-4 rounded-lg border border-teal-500/30 dark:border-teal-400/30 bg-teal-50 dark:bg-gray-800/50 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900/40 cursor-pointer flex items-center group relative overflow-hidden">
       {/* Subtiele animatie-element */}
-      <div className="absolute -right-12 -top-12 w-24 h-24 bg-white opacity-0 rounded-full group-hover:opacity-10 transition-opacity duration-700"></div>
+      <div className="absolute -right-12 -top-12 w-24 h-24 bg-teal-200 dark:bg-teal-800 opacity-0 rounded-full group-hover:opacity-20 dark:group-hover:opacity-10 transition-opacity duration-700"></div>
 
-      <span className="absolute left-0 top-0 w-1 h-full bg-teal-400 transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300"></span>
-      <p className="font-medium text-gray-800">{name}</p>
+      <span className="absolute left-0 top-0 w-1 h-full bg-teal-500 dark:bg-teal-400 transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300"></span>
+      <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">
+        {name}
+      </p>
     </div>
   );
 };
@@ -78,6 +79,9 @@ export default function Appointment({
   alert,
   alertDescription
 }) {
+  const { locale } = useRouter();
+  const isEn = (locale || 'nl').toLowerCase() === 'en';
+
   // Scroll animatie effect
   useEffect(() => {
     const observerOptions = {
@@ -119,6 +123,10 @@ export default function Appointment({
     'Robin Rosa Pennings'
   ];
 
+  const therapistHeading = isEn
+    ? 'For the following therapists you can easily make an online appointment:'
+    : 'Voor de volgende therapeuten kun je gemakkelijk een online afspraak maken:';
+
   return (
     <section className="max-w-7xl mx-auto pt-32 pb-16 px-4 sm:px-6 relative">
       {/* Decoratieve elementen */}
@@ -128,18 +136,22 @@ export default function Appointment({
       {/* Header Section met premium styling */}
       <div className="text-center mb-16 animate-on-scroll opacity-0 transition-all duration-1000">
         {title && (
-          <h2 className="text-4xl font-bold mb-6 relative inline-block">
+          <h2 className="text-4xl font-bold mb-6 relative inline-block text-gray-900 dark:text-gray-100">
             {title}
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-teal-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-teal-500 dark:bg-teal-400 rounded-full"></span>
           </h2>
         )}
         {description && (
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">{description}</p>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            {description}
+          </p>
         )}
 
         {alert && (
-          <div className="bg-white rounded-lg shadow-md p-6 mt-6 transition-all hover:shadow-lg duration-300 border border-gray-100">
-            <p className="text-xl text-gray-500 font-medium">{alertDescription}</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl p-6 mt-6 transition-all hover:shadow-lg duration-300 border border-gray-100 dark:border-gray-700">
+            <p className="text-xl text-gray-500 dark:text-gray-400 font-medium">
+              {alertDescription}
+            </p>
           </div>
         )}
       </div>
@@ -153,20 +165,20 @@ export default function Appointment({
               className="animate-on-scroll opacity-0 transition-all duration-700"
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <AppointmentCard appointmentCard={card} index={index} />
+              <AppointmentCard appointmentCard={card} index={index} locale={locale} />
             </div>
           ))}
         </div>
       )}
 
       {/* Therapeuten Sectie met premium styling */}
-      <div className="bg-white rounded-xl p-10 shadow-lg border border-gray-100 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden">
         {/* Decoratieve elementen */}
-        <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400"></div>
-        <div className="absolute -top-24 -right-24 w-48 h-48 bg-teal-50 opacity-30 rounded-full"></div>
+        <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-teal-50 dark:bg-teal-900/20 opacity-30 rounded-full"></div>
 
-        <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block">
-          Voor de volgende therapeuten kun je gemakkelijk een online afspraak maken:
+        <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block text-gray-900 dark:text-gray-100">
+          {therapistHeading}
         </h3>
 
         <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">

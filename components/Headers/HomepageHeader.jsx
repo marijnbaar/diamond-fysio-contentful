@@ -1,7 +1,7 @@
 import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 const HomepageHeader = ({ title, info, buttonCollection, image }) => {
   return (
@@ -10,20 +10,21 @@ const HomepageHeader = ({ title, info, buttonCollection, image }) => {
         {image && (
           <Image
             className="w-full h-full object-cover"
-            layout="fill"
+            fill
             src={image.url}
-            alt={image.description}
-            priority="true"
+            alt={image.description || 'Hero afbeelding'}
+            sizes="100vw"
+            priority
           />
         )}
         <div
           aria-hidden="true"
-          className="absolute inset-0 mix-blend-multiply bg-gradient-to-r from-gray-500 to-gray-100"
+          className="absolute inset-0 mix-blend-multiply bg-gradient-to-r from-white/0 to-white/50"
         />
       </div>
       <div className="container max-w-8xl relative mx-auto">
         <div className="items-center flex flex-wrap">
-          <div className="bg-gray opacity-90 rounded p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+          <div className="p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
             <div className="sm:text-center lg:text-left">
               {title?.json ? (
                 <h1 className="prose text-4xl tracking-tight font-manrope font-extrabold text-white sm:text-5xl md:text-6xl">
