@@ -8,7 +8,7 @@ export default function Team({ title, description, teamMemberCollection }) {
   const { locale } = useRouter();
   const readMore = locale === 'en' ? 'Read more' : 'Lees meer';
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gray-50 dark:bg-gray-900 pt-28 lg:pt-32">
       <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-16">
         <div className="space-y-12">
           <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl mb-12">
