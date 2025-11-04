@@ -281,11 +281,34 @@ export default async function handler(req, res) {
     // Additional safety: Check if this is an update event (which we should ignore to prevent loops)
     // Contentful sometimes sends Entry.publish for updates too, but we only want initial publishes
     // We can check the revision number - if it's > 1, it's likely an update, not a create
-    if (topic.includes('Entry.publish') && sys?.revision && sys.revision > 1) {
-      console.log(
-        `ℹ️  Entry heeft revision ${sys.revision} - dit is waarschijnlijk een update, niet een create`
-      );
-      // We process it anyway, but log it for debugging
+    // CRITICAL: Als de entry al een publishedVersion heeft EN revision > publishedVersion,
+    // dan is dit een republish (update), niet een nieuwe entry. We moeten dit checken om loops te voorkomen.
+    if (topic.includes('Entry.publish')) {
+      const revision = sys?.revision || 1;
+      const publishedVersion = sys?.publishedVersion;
+
+      // Als er al een publishedVersion bestaat en revision > publishedVersion, dan is dit een republish
+      // Dit gebeurt wanneer we de teamMember entry updaten en publiceren - we moeten dit SKIPPEN
+      if (publishedVersion && revision > publishedVersion) {
+        console.log(
+          `⚠️  Entry heeft revision ${revision} en publishedVersion ${publishedVersion} - dit is een REPUBLISH (update)`
+        );
+        console.log(`   ⚠️  SKIPPEN om webhook loop te voorkomen`);
+        return res.status(200).json({
+          message: 'Republish event skipped to prevent loops',
+          revision: revision,
+          publishedVersion: publishedVersion,
+          reason:
+            'This is a republish event, not an initial publish. Skipping to prevent infinite loops.'
+        });
+      }
+
+      if (revision > 1) {
+        console.log(
+          `ℹ️  Entry heeft revision ${revision} - dit is waarschijnlijk een update, niet een create`
+        );
+        // We process it anyway, but log it for debugging
+      }
     }
 
     const teamMemberId = sys.id;
@@ -389,33 +412,47 @@ export default async function handler(req, res) {
       });
     }
 
-    // CRITICAL: Haal ALLE aboutpages op en filter client-side
+    // CRITICAL: Haal ALLE aboutpages op (zowel published als unpublished) en filter client-side
     // Contentful's nested query syntax werkt niet goed voor 'fields.teamMember.sys.id'
     // We moeten alle pages ophalen en dan filteren op teamMember link
+    // BELANGRIJK: Haal zowel published als unpublished entries op om timing issues te voorkomen
     console.log(`🔍 Ophalen alle Aboutpages met pageType Teammemberpage...`);
-    const allTeamMemberPages = await env.getEntries({
+
+    // Haal ALLE aboutpages op (geen filter op pageType in query, filter client-side)
+    // Dit voorkomt dat we pages missen die net zijn aangemaakt maar nog niet alle fields hebben
+    const allAboutPages = await env.getEntries({
       content_type: 'aboutpage',
-      'fields.pageType': 'Teammemberpage',
-      limit: 100 // Haal meer op om te checken of er duplicates zijn
+      limit: 1000 // Haal veel op om zeker te zijn dat we alles vinden
     });
 
-    // Filter client-side op teamMember link
+    // Filter client-side op pageType EN teamMember link
     const existingPages = {
-      items: allTeamMemberPages.items.filter((page) => {
+      items: allAboutPages.items.filter((page) => {
+        // Check pageType
+        const pageType =
+          page.fields?.pageType?.['nl-NL'] ||
+          page.fields?.pageType?.['nl'] ||
+          page.fields?.pageType?.['en-US'] ||
+          page.fields?.pageType;
+
+        if (pageType !== 'Teammemberpage') {
+          return false;
+        }
+
+        // Check teamMember link - probeer alle mogelijke locale formats
         const pageTeamMemberId =
           page.fields?.teamMember?.['nl-NL']?.sys?.id ||
           page.fields?.teamMember?.['nl']?.sys?.id ||
           page.fields?.teamMember?.['en-US']?.sys?.id ||
           page.fields?.teamMember?.sys?.id;
+
         return pageTeamMemberId === teamMemberId;
       })
     };
 
+    console.log(`📊 ${allAboutPages.items.length} Aboutpages totaal gevonden`);
     console.log(
-      `📊 ${allTeamMemberPages.items.length} Aboutpages met pageType Teammemberpage gevonden`
-    );
-    console.log(
-      `📊 ${existingPages.items.length} bestaande Aboutpage(s) gevonden voor deze team member`
+      `📊 ${existingPages.items.length} bestaande Aboutpage(s) gevonden voor team member ${teamMemberId}`
     );
 
     // SAFETY: Als er meer dan 1 page is, log dit als waarschuwing
@@ -646,17 +683,58 @@ export default async function handler(req, res) {
         console.log(`   teamMember: ${teamMemberPage.fields.teamMember['nl-NL']?.sys?.id}`);
 
         // CRITICAL: Update de entry DIRECT om de fields op te slaan
+        // Contentful slaat fields soms niet correct op bij createEntry, dus we moeten altijd updaten
         console.log(`💾 Updaten nieuwe pagina met geforceerde fields...`);
-        teamMemberPage = await teamMemberPage.update();
-        console.log(
-          `✅ Nieuwe pagina geüpdatet met fields (version: ${teamMemberPage.sys.version})`
-        );
 
-        // Verifieer dat fields zijn opgeslagen
-        console.log(`🔍 Verificatie na update:`);
-        console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
-        console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
-        console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
+        try {
+          teamMemberPage = await teamMemberPage.update();
+          console.log(
+            `✅ Nieuwe pagina geüpdatet met fields (version: ${teamMemberPage.sys.version})`
+          );
+
+          // CRITICAL: Haal entry opnieuw op na update om zeker te zijn dat fields zijn opgeslagen
+          teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
+
+          // Verifieer dat fields zijn opgeslagen
+          console.log(`🔍 Verificatie na update (entry opnieuw opgehaald):`);
+          console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
+          console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
+          console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
+          console.log(
+            `   teamMember: ${teamMemberPage.fields?.teamMember?.['nl-NL']?.sys?.id || 'MISSING!'}`
+          );
+
+          // Als fields nog steeds missing zijn, forceer ze opnieuw
+          if (
+            !teamMemberPage.fields?.slug?.['nl-NL'] ||
+            !teamMemberPage.fields?.pageType?.['nl-NL']
+          ) {
+            console.warn(`⚠️  Fields nog steeds missing na update - forceer opnieuw...`);
+            if (!teamMemberPage.fields) teamMemberPage.fields = {};
+            if (!teamMemberPage.fields.slug) teamMemberPage.fields.slug = {};
+            if (!teamMemberPage.fields.pageType) teamMemberPage.fields.pageType = {};
+            if (!teamMemberPage.fields.title) teamMemberPage.fields.title = {};
+            if (!teamMemberPage.fields.teamMember) teamMemberPage.fields.teamMember = {};
+
+            teamMemberPage.fields.slug['nl-NL'] = fullSlug;
+            teamMemberPage.fields.pageType['nl-NL'] = 'Teammemberpage';
+            teamMemberPage.fields.title['nl-NL'] = teamMemberName;
+            teamMemberPage.fields.teamMember['nl-NL'] = {
+              sys: {
+                type: 'Link',
+                linkType: 'Entry',
+                id: teamMemberId
+              }
+            };
+
+            // Update opnieuw
+            teamMemberPage = await teamMemberPage.update();
+            console.log(`✅ Pagina opnieuw geüpdatet met geforceerde fields`);
+          }
+        } catch (updateError) {
+          console.error(`❌ Kon pagina niet updaten: ${updateError.message}`);
+          throw updateError; // Re-throw omdat we een onvolledige pagina hebben
+        }
       } catch (refreshError) {
         console.warn(`⚠️  Kon nieuwe pagina niet ophalen/updaten: ${refreshError.message}`);
         console.warn(`   Stack: ${refreshError.stack}`);
@@ -911,57 +989,18 @@ export default async function handler(req, res) {
       }
 
       // CRITICAL: Only update and publish if link actually changed
-      // This prevents triggering the webhook unnecessarily
+      // BELANGRIJK: We publiceren NIET opnieuw de teamMember entry om loops te voorkomen!
+      // De link wordt opgeslagen maar niet gepubliceerd. Bij de volgende handmatige publish
+      // van de teamMember wordt de link automatisch gepubliceerd.
       if (linkUpdated) {
         console.log(`💾 Updaten TeamMember entry met nieuwe link...`);
         teamMemberEntry.fields.link = currentLink;
         const updatedTeamMember = await teamMemberEntry.update();
         console.log(`✅ TeamMember entry geüpdatet (version: ${updatedTeamMember.sys.version})`);
-
-        // ALWAYS publish if the team member is already published (which it should be, since webhook triggered on publish)
-        // This ensures the link is available immediately
-        const wasAlreadyPublished = updatedTeamMember.isPublished();
-        console.log(`   TeamMember is gepubliceerd: ${wasAlreadyPublished ? '✅ JA' : '❌ NEE'}`);
-
-        if (wasAlreadyPublished) {
-          try {
-            // Unpublish first, then publish to avoid version conflicts
-            try {
-              await updatedTeamMember.unpublish();
-              console.log(`📤 TeamMember entry ungepubliceerd voor republish`);
-              // Haal opnieuw op na unpublish
-              const unpublishedTeamMember = await env.getEntry(updatedTeamMember.sys.id);
-              await unpublishedTeamMember.publish();
-              console.log(`📢 TeamMember entry gerepubliceerd met link naar Aboutpage`);
-            } catch (unpublishError) {
-              // Als unpublish faalt, probeer direct te publiceren
-              console.log(`  ⚠️  Unpublish gefaald: ${unpublishError.message}`);
-              console.log(`  📢 Probeer direct te publiceren...`);
-              await updatedTeamMember.publish();
-              console.log(`📢 TeamMember entry gepubliceerd met link naar Aboutpage`);
-            }
-          } catch (publishError) {
-            console.error(`❌ Kon TeamMember entry niet publiceren: ${publishError.message}`);
-            console.error(`   Stack: ${publishError.stack}`);
-            // Don't fail - the link update is already saved, just not published yet
-            console.log(
-              `💡 Link is opgeslagen maar niet gepubliceerd - wordt gepubliceerd bij volgende publish van team member`
-            );
-          }
-        } else {
-          // Team member is niet gepubliceerd - dit zou niet moeten gebeuren als webhook op publish triggerde
-          // Maar misschien is de entry unpublished terwijl we bezig waren
-          console.log(`⚠️  TeamMember entry is niet gepubliceerd - probeer te publiceren...`);
-          try {
-            await updatedTeamMember.publish();
-            console.log(`📢 TeamMember entry gepubliceerd met link naar Aboutpage`);
-          } catch (publishError) {
-            console.warn(`⚠️  Kon TeamMember entry niet publiceren: ${publishError.message}`);
-            console.log(
-              `💡 Link is opgeslagen maar niet gepubliceerd - wordt gepubliceerd bij volgende publish van team member`
-            );
-          }
-        }
+        console.log(`   ⚠️  Link wordt NIET opnieuw gepubliceerd om webhook loop te voorkomen`);
+        console.log(
+          `   💡 Link is opgeslagen en wordt gepubliceerd bij volgende handmatige publish van team member`
+        );
       } else {
         console.log(`ℹ️  Link in TeamMember is al correct - geen update nodig`);
       }
