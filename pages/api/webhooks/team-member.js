@@ -2,7 +2,10 @@ import { createClient } from 'contentful-management';
 
 const SPACE_ID = process.env.CTF_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
 const ENV_ID = process.env.CTF_ENV_ID || process.env.ENV_ID || 'master';
-const MGMT_TOKEN = process.env.CTF_MANAGEMENT_TOKEN || process.env.CMAACCESSTOKEN;
+const MGMT_TOKEN =
+  process.env.CTF_MANAGEMENT_TOKEN ||
+  process.env.CMAACCESSTOKEN ||
+  process.env.CONTENTFUL_ACCESS_TOKEN;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
 // Helper om slug te genereren van naam
@@ -223,12 +226,11 @@ export default async function handler(req, res) {
 
     // Check if Management API token is configured
     if (!MGMT_TOKEN) {
-      console.error(
-        '❌ CTF_MANAGEMENT_TOKEN of CMAACCESSTOKEN environment variable niet geconfigureerd!'
-      );
+      console.error('❌ Management API token environment variable niet geconfigureerd!');
       return res.status(500).json({
         error: 'Management API token not configured',
-        details: 'Please set CTF_MANAGEMENT_TOKEN or CMAACCESSTOKEN environment variable in Vercel'
+        details:
+          'Please set one of these environment variables in Vercel: CTF_MANAGEMENT_TOKEN, CMAACCESSTOKEN, or CONTENTFUL_ACCESS_TOKEN'
       });
     }
 
@@ -258,7 +260,7 @@ export default async function handler(req, res) {
         return res.status(500).json({
           error: 'Failed to initialize Contentful client',
           details: clientError.message.includes('accessToken')
-            ? 'Invalid or missing Management API token. Check CTF_MANAGEMENT_TOKEN or CMAACCESSTOKEN.'
+            ? 'Invalid or missing Management API token. Check CTF_MANAGEMENT_TOKEN, CMAACCESSTOKEN, or CONTENTFUL_ACCESS_TOKEN.'
             : clientError.message
         });
       }
