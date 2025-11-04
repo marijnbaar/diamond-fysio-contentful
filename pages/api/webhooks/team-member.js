@@ -64,6 +64,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // 🚨 EMERGENCY KILL SWITCH: Als deze environment variable is ingesteld, stop de webhook
+  // Gebruik dit als laatste redmiddel om loops te stoppen
+  // Set EMERGENCY_STOP_WEBHOOK=true in Vercel environment variables
+  if (process.env.EMERGENCY_STOP_WEBHOOK === 'true') {
+    console.error('🚨 EMERGENCY STOP: Webhook is uitgeschakeld via EMERGENCY_STOP_WEBHOOK');
+    return res.status(503).json({
+      error: 'Webhook temporarily disabled',
+      message: 'EMERGENCY_STOP_WEBHOOK is enabled. Disable this in Vercel to re-enable the webhook.'
+    });
+  }
+
   // Verify webhook
   if (!verifyWebhook(req)) {
     console.error('❌ Webhook verificatie gefaald');
@@ -499,6 +510,16 @@ export default async function handler(req, res) {
       console.log(`🔄 UPDATE: Bestaande pagina wordt bijgewerkt (geen nieuwe pagina aangemaakt)`);
     }
 
+    // Voor nieuwe pagina's: haal entry opnieuw op om zeker te zijn dat fields beschikbaar zijn
+    if (isNewPage) {
+      try {
+        teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
+        console.log(`🔄 Nieuwe pagina opgehaald om fields te verifiëren`);
+      } catch (refreshError) {
+        console.warn(`⚠️  Kon nieuwe pagina niet ophalen: ${refreshError.message}`);
+      }
+    }
+
     // SAFETY: Only update if there are actual changes to prevent unnecessary updates
     // Check if update is needed before calling update()
     let needsUpdate = false;
@@ -506,76 +527,105 @@ export default async function handler(req, res) {
     const currentSlug = createSlugFromName(teamMemberName);
     const fullSlug = `/team/${currentSlug}`;
 
-    if (!teamMemberPage.fields.slug || teamMemberPage.fields.slug['nl-NL'] !== fullSlug) {
-      teamMemberPage.fields.slug = {
-        'nl-NL': fullSlug
-      };
+    // Check en update slug - altijd nodig voor nieuwe pagina's
+    const currentSlugValue = teamMemberPage.fields?.slug?.['nl-NL'];
+    if (!currentSlugValue || currentSlugValue !== fullSlug) {
+      if (!teamMemberPage.fields.slug) {
+        teamMemberPage.fields.slug = {};
+      }
+      teamMemberPage.fields.slug['nl-NL'] = fullSlug;
       needsUpdate = true;
-      console.log(`📝 Slug update nodig: ${fullSlug}`);
+      console.log(`📝 Slug update nodig: ${fullSlug} (huidige: ${currentSlugValue || 'geen'})`);
     }
 
-    if (!teamMemberPage.fields.title || teamMemberPage.fields.title['nl-NL'] !== teamMemberName) {
-      teamMemberPage.fields.title = {
-        'nl-NL': teamMemberName
-      };
+    // Check en update title
+    const currentTitle = teamMemberPage.fields?.title?.['nl-NL'];
+    if (!currentTitle || currentTitle !== teamMemberName) {
+      if (!teamMemberPage.fields.title) {
+        teamMemberPage.fields.title = {};
+      }
+      teamMemberPage.fields.title['nl-NL'] = teamMemberName;
       needsUpdate = true;
-      console.log(`📝 Title update nodig: ${teamMemberName}`);
+      console.log(`📝 Title update nodig: ${teamMemberName} (huidige: ${currentTitle || 'geen'})`);
     }
 
-    if (
-      !teamMemberPage.fields.pageType ||
-      teamMemberPage.fields.pageType['nl-NL'] !== 'Teammemberpage'
-    ) {
-      teamMemberPage.fields.pageType = {
-        'nl-NL': 'Teammemberpage'
-      };
+    // Check en update pageType
+    const currentPageType = teamMemberPage.fields?.pageType?.['nl-NL'];
+    if (!currentPageType || currentPageType !== 'Teammemberpage') {
+      if (!teamMemberPage.fields.pageType) {
+        teamMemberPage.fields.pageType = {};
+      }
+      teamMemberPage.fields.pageType['nl-NL'] = 'Teammemberpage';
       needsUpdate = true;
-      console.log(`📝 PageType update nodig: Teammemberpage`);
+      console.log(
+        `📝 PageType update nodig: Teammemberpage (huidige: ${currentPageType || 'geen'})`
+      );
     }
 
     // Check if teamMember link needs update
     const currentTeamMemberLink = teamMemberPage.fields?.teamMember?.['nl-NL']?.sys?.id;
     if (currentTeamMemberLink !== teamMemberId) {
-      teamMemberPage.fields.teamMember = {
-        'nl-NL': {
-          sys: {
-            type: 'Link',
-            linkType: 'Entry',
-            id: teamMemberId
-          }
+      if (!teamMemberPage.fields.teamMember) {
+        teamMemberPage.fields.teamMember = {};
+      }
+      teamMemberPage.fields.teamMember['nl-NL'] = {
+        sys: {
+          type: 'Link',
+          linkType: 'Entry',
+          id: teamMemberId
         }
       };
       needsUpdate = true;
-      console.log(`📝 TeamMember link update nodig: ${teamMemberId}`);
+      console.log(
+        `📝 TeamMember link update nodig: ${teamMemberId} (huidige: ${currentTeamMemberLink || 'geen'})`
+      );
     }
 
-    // Only update if changes are needed
+    // Update entry als er wijzigingen zijn
     if (needsUpdate) {
       console.log(`💾 Updaten Aboutpage (changes detected)...`);
       teamMemberPage = await teamMemberPage.update();
       console.log(`✅ Aboutpage geüpdatet`);
+    } else if (isNewPage) {
+      // Voor nieuwe pagina's: update altijd (om zeker te zijn dat alles correct is)
+      console.log(`💾 Updaten nieuwe Aboutpage (zonder wijzigingen, maar voor zekerheid)...`);
+      teamMemberPage = await teamMemberPage.update();
+      console.log(`✅ Nieuwe Aboutpage geüpdatet`);
     } else {
       console.log(`ℹ️  Geen updates nodig voor Aboutpage - alles is al correct`);
     }
 
-    // CRITICAL: Only publish if not already published AND we made changes
-    // This prevents unnecessary publishes that could trigger loops
+    // CRITICAL: Publish nieuwe pagina's altijd, bestaande pagina's alleen als er wijzigingen zijn
     const wasAlreadyPublished = teamMemberPage.isPublished();
 
-    if (!wasAlreadyPublished && needsUpdate) {
+    if (!wasAlreadyPublished) {
+      // Nieuwe pagina's moeten altijd gepubliceerd worden
       try {
         teamMemberPage = await teamMemberPage.publish();
         console.log(`📢 Teammemberpage gepubliceerd: ${teamMemberPage.sys.id}`);
       } catch (publishError) {
         console.error(`⚠️  Kon teammemberpage niet publiceren: ${publishError.message}`);
-        // Don't fail - the page will be published on next webhook trigger if needed
+        console.error(`   Stack: ${publishError.stack}`);
+        // Don't fail - maar log het wel
       }
-    } else if (wasAlreadyPublished) {
-      console.log(
-        `ℹ️  Teammemberpage is al gepubliceerd: ${teamMemberPage.sys.id} - geen publish nodig`
-      );
+    } else if (needsUpdate) {
+      // Bestaande pagina's: alleen republiseren als er wijzigingen zijn
+      try {
+        // Unpublish first, then publish to avoid version conflicts
+        try {
+          await teamMemberPage.unpublish();
+        } catch {
+          // Ignore if already unpublished
+        }
+        teamMemberPage = await teamMemberPage.publish();
+        console.log(`📢 Teammemberpage gerepubliceerd na update: ${teamMemberPage.sys.id}`);
+      } catch (publishError) {
+        console.error(`⚠️  Kon teammemberpage niet republiseren: ${publishError.message}`);
+      }
     } else {
-      console.log(`ℹ️  Geen changes gemaakt - skip publish om loop te voorkomen`);
+      console.log(
+        `ℹ️  Teammemberpage is al gepubliceerd: ${teamMemberPage.sys.id} - geen republish nodig`
+      );
     }
 
     // Update TeamMember entry om link naar Aboutpage te zetten
@@ -613,8 +663,8 @@ export default async function handler(req, res) {
         teamMemberEntry.fields.link = currentLink;
         const updatedTeamMember = await teamMemberEntry.update();
 
-        // CRITICAL: Only publish if already published AND link was updated
-        // DO NOT publish if it's not published - that would trigger the webhook again
+        // ALWAYS publish if the team member is already published (which it should be, since webhook triggered on publish)
+        // This ensures the link is available immediately
         const wasAlreadyPublished = updatedTeamMember.isPublished();
 
         if (wasAlreadyPublished) {
@@ -622,21 +672,25 @@ export default async function handler(req, res) {
             // Unpublish first, then publish to avoid version conflicts
             try {
               await updatedTeamMember.unpublish();
-            } catch {
-              // Ignore if already unpublished
+              console.log(`📤 TeamMember entry ungepubliceerd voor republish`);
+            } catch (unpublishError) {
+              // Ignore if already unpublished or other errors
+              console.log(`ℹ️  Unpublish niet nodig of gefaald: ${unpublishError.message}`);
             }
             await updatedTeamMember.publish();
             console.log(`📢 TeamMember entry geüpdatet en gepubliceerd met link naar Aboutpage`);
           } catch (publishError) {
             console.warn(`⚠️  Kon TeamMember entry niet publiceren: ${publishError.message}`);
+            console.warn(`   Stack: ${publishError.stack}`);
             // Don't fail - the link update is already saved, just not published yet
             console.log(
               `💡 Link is opgeslagen maar niet gepubliceerd - wordt gepubliceerd bij volgende publish van team member`
             );
           }
         } else {
+          // Team member is niet gepubliceerd - dit zou niet moeten gebeuren als webhook op publish triggerde
           console.log(
-            `ℹ️  TeamMember entry is niet gepubliceerd - link is opgeslagen maar niet gepubliceerd`
+            `⚠️  TeamMember entry is niet gepubliceerd - link is opgeslagen maar niet gepubliceerd`
           );
           console.log(
             `💡 Link wordt automatisch gepubliceerd wanneer team member wordt gepubliceerd`
