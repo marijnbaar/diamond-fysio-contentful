@@ -2,11 +2,7 @@ import { createClient } from 'contentful-management';
 
 const SPACE_ID = process.env.CTF_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
 const ENV_ID = process.env.CTF_ENV_ID || process.env.ENV_ID || 'master';
-const MGMT_TOKEN =
-  process.env.CTF_MANAGEMENT_TOKEN ||
-  process.env.CMAACCESSTOKEN ||
-  process.env.CONTENTFUL_ACCESS_TOKEN ||
-  process.env.CONTENTFUL_MANAGEMENT_API;
+const MGMT_TOKEN = process.env.CONTENT_MANAGEMENT_TOKEN || process.env.CONTENTFUL_MANAGEMENT_API;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
 // Helper om slug te genereren van naam
@@ -252,12 +248,45 @@ export default async function handler(req, res) {
       console.log('✅ Hergebruik van bestaande Contentful client');
     } else {
       try {
-        client = createClient({ accessToken: MGMT_TOKEN });
+        // Debug: log welke token wordt gebruikt (maar niet de volledige token voor security)
+        console.log('🔍 Management API token check:');
+        console.log('  Token length:', MGMT_TOKEN ? MGMT_TOKEN.length : 0);
+        console.log(
+          '  Token starts with:',
+          MGMT_TOKEN ? MGMT_TOKEN.substring(0, 10) + '...' : 'null'
+        );
+        console.log(
+          '  Token ends with:',
+          MGMT_TOKEN ? '...' + MGMT_TOKEN.substring(MGMT_TOKEN.length - 10) : 'null'
+        );
+        console.log('  Space ID:', SPACE_ID);
+        console.log('  Environment ID:', ENV_ID);
+
+        // Check if token has whitespace (common issue)
+        if (MGMT_TOKEN && MGMT_TOKEN !== MGMT_TOKEN.trim()) {
+          console.warn('⚠️  WARNING: Token bevat whitespace! Dit kan problemen veroorzaken.');
+        }
+
+        client = createClient({ accessToken: MGMT_TOKEN.trim() });
         space = await client.getSpace(SPACE_ID);
         env = await space.getEnvironment(ENV_ID);
         console.log('✅ Nieuwe Contentful client geïnitialiseerd');
       } catch (clientError) {
         console.error('❌ Kon Contentful client niet initialiseren:', clientError.message);
+        console.error('   Error details:', JSON.stringify(clientError, null, 2));
+
+        // Check if it's a 403 error specifically
+        if (
+          (clientError.message && clientError.message.includes('403')) ||
+          (clientError.details && clientError.details.status === 403)
+        ) {
+          return res.status(500).json({
+            error: 'Contentful Management API authentication failed',
+            details:
+              'The access token is invalid or expired. Please verify: 1) The token is a Content Management API token (not Content Delivery), 2) The token is still valid and not revoked, 3) The token has no extra spaces or characters, 4) You have redeployed after adding the environment variable.'
+          });
+        }
+
         return res.status(500).json({
           error: 'Failed to initialize Contentful client',
           details: clientError.message.includes('accessToken')
