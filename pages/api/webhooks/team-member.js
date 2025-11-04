@@ -724,7 +724,6 @@ export default async function handler(req, res) {
             `   teamMember: ${teamMemberPage.fields?.teamMember?.['nl-NL']?.sys?.id || 'MISSING!'}`
           );
 
-          // Als fields nog steeds missing zijn, forceer ze opnieuw
           if (
             !teamMemberPage.fields?.slug?.['nl-NL'] ||
             !teamMemberPage.fields?.pageType?.['nl-NL']
