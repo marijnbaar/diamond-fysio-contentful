@@ -17,17 +17,42 @@ function createSlugFromName(name) {
 
 // Verify webhook signature (Contentful gebruikt X-Contentful-Topic header en body signature)
 function verifyWebhook(req) {
-  // Contentful webhooks hebben geen signature in de body, maar je kunt de secret gebruiken
-  // om te verifiëren via authorization header
+  // Check for authorization header first (if configured in Contentful webhook settings)
   const authHeader = req.headers.authorization || req.headers['x-contentful-webhook-secret'];
 
+  // If WEBHOOK_SECRET is set and authorization header is present, verify it
   if (WEBHOOK_SECRET && authHeader) {
-    return authHeader === `Bearer ${WEBHOOK_SECRET}` || authHeader === WEBHOOK_SECRET;
+    const isValid = authHeader === `Bearer ${WEBHOOK_SECRET}` || authHeader === WEBHOOK_SECRET;
+    if (isValid) {
+      return true;
+    }
+    // If secret doesn't match, reject
+    console.error('❌ Authorization header does not match WEBHOOK_SECRET');
+    return false;
   }
 
-  // Als er geen secret is geconfigureerd, accepteer alle requests (alleen voor development!)
+  // If no WEBHOOK_SECRET is configured, verify it's actually a Contentful webhook
+  // by checking for Contentful-specific headers
   if (!WEBHOOK_SECRET) {
-    console.warn('⚠️  WEBHOOK_SECRET niet geconfigureerd - webhook verificatie wordt overgeslagen');
+    console.warn('⚠️  WEBHOOK_SECRET niet geconfigureerd - verificatie via Contentful headers');
+    const hasContentfulHeaders =
+      req.headers['x-contentful-topic'] || req.headers['x-contentful-webhook-name'];
+    if (hasContentfulHeaders) {
+      console.log('✅ Contentful webhook headers gevonden - request geaccepteerd');
+      return true;
+    }
+    console.error('❌ Geen Contentful headers gevonden en geen authorization header');
+    return false;
+  }
+
+  // If WEBHOOK_SECRET is set but no authorization header, check Contentful headers as fallback
+  // This allows webhooks to work even if authorization header wasn't configured in Contentful
+  const hasContentfulHeaders =
+    req.headers['x-contentful-topic'] || req.headers['x-contentful-webhook-name'];
+  if (hasContentfulHeaders) {
+    console.warn(
+      '⚠️  WEBHOOK_SECRET is geconfigureerd maar geen authorization header - accepteer op basis van Contentful headers'
+    );
     return true;
   }
 
