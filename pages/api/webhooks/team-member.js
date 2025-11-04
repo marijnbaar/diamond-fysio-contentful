@@ -489,7 +489,6 @@ export default async function handler(req, res) {
       } else {
         console.log(`✨ Nieuwe Aboutpage (Teammemberpage) aanmaken met slug: ${slug}`);
 
-        // Zorg dat alle fields correct zijn ingesteld bij creatie
         // CRITICAL: Gebruik de volledige slug met /team/ prefix
         const fullSlugForCreation = `/team/${createSlugFromName(teamMemberName)}`;
 
