@@ -490,10 +490,19 @@ export default async function handler(req, res) {
         console.log(`✨ Nieuwe Aboutpage (Teammemberpage) aanmaken met slug: ${slug}`);
 
         // Zorg dat alle fields correct zijn ingesteld bij creatie
+        // CRITICAL: Gebruik de volledige slug met /team/ prefix
+        const fullSlugForCreation = `/team/${createSlugFromName(teamMemberName)}`;
+
+        console.log(`📝 Aanmaken nieuwe Aboutpage met fields:`);
+        console.log(`   slug: ${fullSlugForCreation}`);
+        console.log(`   pageType: Teammemberpage`);
+        console.log(`   title: ${teamMemberName}`);
+        console.log(`   teamMember: ${teamMemberId}`);
+
         teamMemberPage = await env.createEntry('aboutpage', {
           fields: {
             slug: {
-              'nl-NL': slug
+              'nl-NL': fullSlugForCreation
             },
             pageType: {
               'nl-NL': 'Teammemberpage'
@@ -514,18 +523,18 @@ export default async function handler(req, res) {
         });
 
         console.log(`✅ NIEUWE Aboutpage (Teammemberpage) aangemaakt: ${teamMemberPage.sys.id}`);
-        console.log(`   Slug: ${slug}`);
+        console.log(`   Slug: ${fullSlugForCreation}`);
         console.log(`   PageType: Teammemberpage`);
         console.log(`   Title: ${teamMemberName}`);
         console.log(`   Team member: ${teamMemberName} (${teamMemberId})`);
 
-        // Verifieer dat de fields correct zijn ingesteld
-        console.log(`🔍 Verificatie van aangemaakte pagina fields:`);
-        console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'N/A'}`);
-        console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'N/A'}`);
-        console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'N/A'}`);
+        // Verifieer dat de fields correct zijn ingesteld DIRECT na creatie
+        console.log(`🔍 Verificatie van aangemaakte pagina fields (direct na creatie):`);
+        console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
+        console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
+        console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
         console.log(
-          `   teamMember: ${teamMemberPage.fields?.teamMember?.['nl-NL']?.sys?.id || 'N/A'}`
+          `   teamMember: ${teamMemberPage.fields?.teamMember?.['nl-NL']?.sys?.id || 'MISSING!'}`
         );
       }
     }
@@ -537,11 +546,60 @@ export default async function handler(req, res) {
       console.log(`🔄 UPDATE: Bestaande pagina wordt bijgewerkt (geen nieuwe pagina aangemaakt)`);
     }
 
+    // CRITICAL: Definieer fullSlug VOORDAT we het gebruiken
+    // Dit moet gebeuren voor zowel nieuwe als bestaande pagina's
+    const currentSlug = createSlugFromName(teamMemberName);
+    const fullSlug = `/team/${currentSlug}`;
+    console.log(`🔗 Full slug voor deze team member: ${fullSlug}`);
+
     // Voor nieuwe pagina's: haal entry opnieuw op om zeker te zijn dat fields beschikbaar zijn
+    // EN zorg dat alle fields correct zijn ingesteld
     if (isNewPage) {
       try {
         teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
         console.log(`🔄 Nieuwe pagina opgehaald om fields te verifiëren`);
+
+        // CRITICAL: Zorg dat alle fields correct zijn ingesteld na ophalen
+        // Soms worden fields niet correct opgeslagen bij createEntry, dus we zetten ze opnieuw
+        if (!teamMemberPage.fields) {
+          teamMemberPage.fields = {};
+        }
+
+        // Forceer slug
+        if (!teamMemberPage.fields.slug) {
+          teamMemberPage.fields.slug = {};
+        }
+        teamMemberPage.fields.slug['nl-NL'] = fullSlug;
+
+        // Forceer pageType
+        if (!teamMemberPage.fields.pageType) {
+          teamMemberPage.fields.pageType = {};
+        }
+        teamMemberPage.fields.pageType['nl-NL'] = 'Teammemberpage';
+
+        // Forceer title
+        if (!teamMemberPage.fields.title) {
+          teamMemberPage.fields.title = {};
+        }
+        teamMemberPage.fields.title['nl-NL'] = teamMemberName;
+
+        // Forceer teamMember link
+        if (!teamMemberPage.fields.teamMember) {
+          teamMemberPage.fields.teamMember = {};
+        }
+        teamMemberPage.fields.teamMember['nl-NL'] = {
+          sys: {
+            type: 'Link',
+            linkType: 'Entry',
+            id: teamMemberId
+          }
+        };
+
+        console.log(`✅ Fields geforceerd ingesteld na ophalen:`);
+        console.log(`   slug: ${teamMemberPage.fields.slug['nl-NL']}`);
+        console.log(`   pageType: ${teamMemberPage.fields.pageType['nl-NL']}`);
+        console.log(`   title: ${teamMemberPage.fields.title['nl-NL']}`);
+        console.log(`   teamMember: ${teamMemberPage.fields.teamMember['nl-NL']?.sys?.id}`);
       } catch (refreshError) {
         console.warn(`⚠️  Kon nieuwe pagina niet ophalen: ${refreshError.message}`);
       }
@@ -550,9 +608,6 @@ export default async function handler(req, res) {
     // SAFETY: Only update if there are actual changes to prevent unnecessary updates
     // Check if update is needed before calling update()
     let needsUpdate = false;
-
-    const currentSlug = createSlugFromName(teamMemberName);
-    const fullSlug = `/team/${currentSlug}`;
 
     // Check en update slug - altijd nodig voor nieuwe pagina's
     // Initialize fields object if it doesn't exist
@@ -655,19 +710,69 @@ export default async function handler(req, res) {
 
     // CRITICAL: Publish nieuwe pagina's altijd, bestaande pagina's altijd als er wijzigingen zijn
     // Dit zorgt ervoor dat de fields (slug, pageType) zichtbaar zijn in Contentful UI
+    // BELANGRIJK: Voor nieuwe pagina's moeten we ALTIJD publiceren, ook als needsUpdate false is
+    // omdat de fields mogelijk niet correct zijn ingesteld bij createEntry
     const wasAlreadyPublished = teamMemberPage.isPublished();
+    const shouldPublish = !wasAlreadyPublished || needsUpdate || isNewPage;
 
-    if (!wasAlreadyPublished || needsUpdate || isNewPage) {
+    if (shouldPublish) {
       // Nieuwe pagina's en updates moeten altijd gepubliceerd worden
       try {
         // Haal entry opnieuw op om zeker te zijn dat we de laatste versie hebben
         teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
+
+        // CRITICAL: Zorg dat fields correct zijn ingesteld VOORDAT we publiceren
+        // Dit is belangrijk omdat Contentful soms fields niet correct opslaat bij createEntry
+        if (isNewPage || needsUpdate) {
+          if (!teamMemberPage.fields) {
+            teamMemberPage.fields = {};
+          }
+
+          // Forceer slug
+          if (!teamMemberPage.fields.slug) {
+            teamMemberPage.fields.slug = {};
+          }
+          teamMemberPage.fields.slug['nl-NL'] = fullSlug;
+
+          // Forceer pageType
+          if (!teamMemberPage.fields.pageType) {
+            teamMemberPage.fields.pageType = {};
+          }
+          teamMemberPage.fields.pageType['nl-NL'] = 'Teammemberpage';
+
+          // Forceer title
+          if (!teamMemberPage.fields.title) {
+            teamMemberPage.fields.title = {};
+          }
+          teamMemberPage.fields.title['nl-NL'] = teamMemberName;
+
+          // Forceer teamMember link
+          if (!teamMemberPage.fields.teamMember) {
+            teamMemberPage.fields.teamMember = {};
+          }
+          teamMemberPage.fields.teamMember['nl-NL'] = {
+            sys: {
+              type: 'Link',
+              linkType: 'Entry',
+              id: teamMemberId
+            }
+          };
+
+          // Update entry met geforceerde fields
+          console.log(`💾 Updaten entry met geforceerde fields voor publicatie...`);
+          teamMemberPage = await teamMemberPage.update();
+          console.log(
+            `✅ Entry geüpdatet met geforceerde fields (version: ${teamMemberPage.sys.version})`
+          );
+        }
 
         // Unpublish first als nodig (voor republish)
         if (wasAlreadyPublished) {
           try {
             await teamMemberPage.unpublish();
             console.log(`📤 Aboutpage ungepubliceerd voor republish`);
+            // Haal opnieuw op na unpublish
+            teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
           } catch (unpublishError) {
             // Ignore if already unpublished or other errors
             console.log(`ℹ️  Unpublish niet nodig of gefaald: ${unpublishError.message}`);
@@ -678,11 +783,23 @@ export default async function handler(req, res) {
         console.log(`📢 Teammemberpage gepubliceerd: ${teamMemberPage.sys.id}`);
         console.log(`   Published version: ${teamMemberPage.sys.publishedVersion || 'N/A'}`);
 
-        // Verifieer gepubliceerde fields
-        console.log(`🔍 Verificatie gepubliceerde pagina:`);
-        console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
-        console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
-        console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
+        // Verifieer gepubliceerde fields door entry opnieuw op te halen
+        const finalPage = await env.getEntry(teamMemberPage.sys.id);
+        console.log(`🔍 Verificatie gepubliceerde pagina (entry opnieuw opgehaald):`);
+        console.log(`   slug: ${finalPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
+        console.log(`   pageType: ${finalPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
+        console.log(`   title: ${finalPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
+        console.log(
+          `   teamMember: ${finalPage.fields?.teamMember?.['nl-NL']?.sys?.id || 'MISSING!'}`
+        );
+        console.log(`   Is gepubliceerd: ${finalPage.isPublished() ? '✅ JA' : '❌ NEE'}`);
+
+        if (!finalPage.fields?.slug?.['nl-NL'] || !finalPage.fields?.pageType?.['nl-NL']) {
+          console.error(`❌ CRITICAL: Slug of pageType is nog steeds MISSING na publicatie!`);
+          console.error(
+            `   Dit kan betekenen dat de fields niet correct zijn ingesteld in Contentful`
+          );
+        }
       } catch (publishError) {
         console.error(`❌ Kon teammemberpage niet publiceren: ${publishError.message}`);
         console.error(`   Stack: ${publishError.stack}`);
@@ -1017,55 +1134,110 @@ export default async function handler(req, res) {
 
             const updatedOverview = await freshOverview.update();
             console.log(`  ✅ TeamOverview geüpdatet (version: ${updatedOverview.sys.version})`);
+            console.log(
+              `   Is gepubliceerd: ${updatedOverview.isPublished() ? '✅ JA' : '❌ NEE'}`
+            );
 
             // Publish de updated overview - ALTIJD republiseren als er wijzigingen zijn
             // Dit zorgt ervoor dat de team member zichtbaar is op de homepage en team pagina
+            let publishedOverview = null;
             try {
+              // CRITICAL: Haal entry opnieuw op om zeker te zijn dat we de laatste versie hebben
+              const freshUpdatedOverview = await env.getEntry(updatedOverview.sys.id);
+              console.log(
+                `  🔄 Entry opnieuw opgehaald voor publish (version: ${freshUpdatedOverview.sys.version})`
+              );
+              console.log(
+                `   Is al gepubliceerd: ${freshUpdatedOverview.isPublished() ? '✅ JA' : '❌ NEE'}`
+              );
+
               // Unpublish first if needed, then publish (for republish)
-              if (updatedOverview.isPublished()) {
+              if (freshUpdatedOverview.isPublished()) {
                 try {
-                  await updatedOverview.unpublish();
-                  console.log(`  📤 TeamOverview ungepubliceerd voor republish`);
+                  console.log(`  📤 Unpublishen TeamOverview voor republish...`);
+                  await freshUpdatedOverview.unpublish();
+                  console.log(`  ✅ TeamOverview ungepubliceerd`);
+
+                  // Haal opnieuw op na unpublish om laatste versie te krijgen
+                  const unpublishedOverview = await env.getEntry(freshUpdatedOverview.sys.id);
+                  console.log(
+                    `  🔄 Entry opgehaald na unpublish (version: ${unpublishedOverview.sys.version})`
+                  );
+
+                  // Publiceer nu
+                  publishedOverview = await unpublishedOverview.publish();
+                  console.log(
+                    `📢 TeamOverview ${publishedOverview.sys.id} gerepubliceerd met nieuwe team member`
+                  );
+                  console.log(
+                    `   Published version: ${publishedOverview.sys.publishedVersion || 'N/A'}`
+                  );
                 } catch (unpublishError) {
-                  // Ignore if already unpublished
-                  console.log(`  ℹ️  Unpublish niet nodig: ${unpublishError.message}`);
+                  // Als unpublish faalt, probeer direct te publiceren (misschien is het al unpublished)
+                  console.log(`  ⚠️  Unpublish gefaald: ${unpublishError.message}`);
+                  console.log(`  📢 Probeer direct te publiceren...`);
+                  try {
+                    publishedOverview = await freshUpdatedOverview.publish();
+                    console.log(
+                      `📢 TeamOverview ${publishedOverview.sys.id} gepubliceerd met nieuwe team member`
+                    );
+                    console.log(
+                      `   Published version: ${publishedOverview.sys.publishedVersion || 'N/A'}`
+                    );
+                  } catch (directPublishError) {
+                    console.error(`❌ Direct publish ook gefaald: ${directPublishError.message}`);
+                    throw directPublishError;
+                  }
                 }
+              } else {
+                // Niet gepubliceerd, publiceer direct
+                console.log(`  📢 TeamOverview is niet gepubliceerd, publiceer nu...`);
+                publishedOverview = await freshUpdatedOverview.publish();
+                console.log(
+                  `📢 TeamOverview ${publishedOverview.sys.id} gepubliceerd met nieuwe team member`
+                );
+                console.log(
+                  `   Published version: ${publishedOverview.sys.publishedVersion || 'N/A'}`
+                );
               }
 
-              const publishedOverview = await updatedOverview.publish();
-              console.log(
-                `📢 TeamOverview ${publishedOverview.sys.id} gepubliceerd met nieuwe team member`
-              );
-              console.log(
-                `   Published version: ${publishedOverview.sys.publishedVersion || 'N/A'}`
-              );
-
               // Verifieer dat team member in collectie zit
-              // Check beide veld namen: teamMemberCollection (GraphQL) en teamMember (Management API)
-              const publishedMembers =
-                publishedOverview.fields?.teamMemberCollection?.['nl-NL'] ||
-                publishedOverview.fields?.teamMemberCollection?.['en-US'] ||
-                publishedOverview.fields?.teamMember?.['nl-NL'] ||
-                publishedOverview.fields?.teamMember?.['en-US'] ||
-                publishedOverview.fields?.teamMembers?.['nl-NL'] ||
-                [];
-              const publishedMemberIds = publishedMembers
-                .map((m) => m?.sys?.id || m?.id)
-                .filter(Boolean);
-              console.log(`   Team members in collectie: ${publishedMemberIds.length}`);
-              console.log(
-                `   Nieuwe team member in collectie: ${publishedMemberIds.includes(teamMemberId) ? '✅ JA' : '❌ NEE'}`
-              );
-              if (!publishedMemberIds.includes(teamMemberId)) {
-                console.error(`❌ Team member ${teamMemberId} is NIET toegevoegd aan collectie!`);
-                console.error(`   Published member IDs: ${publishedMemberIds.join(', ')}`);
-                console.error(`   Zoekt ID: ${teamMemberId}`);
-                console.error(
-                  `   Check teamMemberCollection: ${publishedOverview.fields?.teamMemberCollection ? '✅ bestaat' : '❌ bestaat niet'}`
+              // Haal entry opnieuw op om de gepubliceerde versie te krijgen
+              if (publishedOverview) {
+                const finalPublishedOverview = await env.getEntry(publishedOverview.sys.id);
+                console.log(`  🔄 Finale verificatie van gepubliceerde entry...`);
+                console.log(
+                  `   Is gepubliceerd: ${finalPublishedOverview.isPublished() ? '✅ JA' : '❌ NEE'}`
                 );
-                console.error(
-                  `   Check teamMember: ${publishedOverview.fields?.teamMember ? '✅ bestaat' : '❌ bestaat niet'}`
+
+                // Check beide veld namen: teamMemberCollection (GraphQL) en teamMember (Management API)
+                const publishedMembers =
+                  finalPublishedOverview.fields?.teamMemberCollection?.['nl-NL'] ||
+                  finalPublishedOverview.fields?.teamMemberCollection?.['en-US'] ||
+                  finalPublishedOverview.fields?.teamMember?.['nl-NL'] ||
+                  finalPublishedOverview.fields?.teamMember?.['en-US'] ||
+                  finalPublishedOverview.fields?.teamMembers?.['nl-NL'] ||
+                  [];
+                const publishedMemberIds = publishedMembers
+                  .map((m) => m?.sys?.id || m?.id)
+                  .filter(Boolean);
+                console.log(`   Team members in collectie: ${publishedMemberIds.length}`);
+                console.log(
+                  `   Nieuwe team member in collectie: ${publishedMemberIds.includes(teamMemberId) ? '✅ JA' : '❌ NEE'}`
                 );
+                if (!publishedMemberIds.includes(teamMemberId)) {
+                  console.error(`❌ Team member ${teamMemberId} is NIET toegevoegd aan collectie!`);
+                  console.error(`   Published member IDs: ${publishedMemberIds.join(', ')}`);
+                  console.error(`   Zoekt ID: ${teamMemberId}`);
+                  console.error(
+                    `   Check teamMemberCollection: ${finalPublishedOverview.fields?.teamMemberCollection ? '✅ bestaat' : '❌ bestaat niet'}`
+                  );
+                  console.error(
+                    `   Check teamMember: ${finalPublishedOverview.fields?.teamMember ? '✅ bestaat' : '❌ bestaat niet'}`
+                  );
+                }
+              } else {
+                console.error(`❌ Published overview is null - publicatie is gefaald`);
               }
             } catch (publishError) {
               console.error(`❌ Kon TeamOverview niet publiceren: ${publishError.message}`);
