@@ -872,11 +872,17 @@ export default async function handler(req, res) {
           );
 
           // Check of team member al in de collectie zit
-          // Probeer verschillende mogelijke veld namen
+          // BELANGRIJK: Het veld heet 'teamMember' (niet 'teamMemberCollection' in Management API)
+          // GraphQL gebruikt 'teamMemberCollection' maar Management API gebruikt 'teamMember'
+          const teamMemberField = freshOverview.fields?.teamMember;
           const teamMemberCollectionField = freshOverview.fields?.teamMemberCollection;
           const teamMembersField = freshOverview.fields?.teamMembers;
-          const teamMemberField = freshOverview.fields?.teamMember;
 
+          console.log(
+            `📦 teamMember veld gevonden:`,
+            !!teamMemberField,
+            teamMemberField ? `(type: ${typeof teamMemberField})` : ''
+          );
           console.log(
             `📦 teamMemberCollection veld gevonden:`,
             !!teamMemberCollectionField,
@@ -887,22 +893,28 @@ export default async function handler(req, res) {
             !!teamMembersField,
             teamMembersField ? `(type: ${typeof teamMembersField})` : ''
           );
-          console.log(
-            `📦 teamMember veld gevonden:`,
-            !!teamMemberField,
-            teamMemberField ? `(type: ${typeof teamMemberField})` : ''
-          );
 
+          // Gebruik teamMember eerst (dit is de Management API naam)
+          // teamMemberCollection wordt alleen gebruikt in GraphQL queries
           const currentMembers =
-            teamMemberCollectionField || teamMembersField || teamMemberField || {};
+            teamMemberField || teamMemberCollectionField || teamMembersField || {};
 
-          if (!teamMemberCollectionField && !teamMembersField && !teamMemberField) {
+          if (!teamMemberField && !teamMemberCollectionField && !teamMembersField) {
             console.error(`❌ GEEN team member collection veld gevonden!`);
             console.error(
               `   Mogelijke veld namen in Contentful:`,
               allFields.filter((f) => f.toLowerCase().includes('team'))
             );
-            throw new Error(`teamMemberCollection veld bestaat niet op deze entry`);
+            throw new Error(`teamMember veld bestaat niet op deze entry`);
+          }
+
+          // Log welke veld naam wordt gebruikt
+          if (teamMemberField) {
+            console.log(`✅ Gebruik 'teamMember' veld (Management API naam)`);
+          } else if (teamMemberCollectionField) {
+            console.log(`✅ Gebruik 'teamMemberCollection' veld (GraphQL naam)`);
+          } else if (teamMembersField) {
+            console.log(`✅ Gebruik 'teamMembers' veld (alternatieve naam)`);
           }
 
           const localeKeys = Object.keys(currentMembers);
@@ -960,17 +972,48 @@ export default async function handler(req, res) {
           if (needsUpdate) {
             console.log(`💾 Updaten TeamOverview ${freshOverview.sys.id}...`);
 
-            // Gebruik het veld dat bestaat (teamMemberCollection is de GraphQL naam)
-            // In Contentful Management API is dit meestal hetzelfde, maar check eerst
+            // BELANGRIJK: Probeer beide veld namen - teamMemberCollection (GraphQL naam) en teamMember (Management API naam)
+            // In GraphQL queries heet het 'teamMemberCollection', maar in Management API kan het 'teamMember' heten
+            // We proberen eerst teamMemberCollection, en als dat niet werkt, gebruiken we teamMember
+
+            let fieldUpdated = false;
+
+            // Probeer eerst teamMemberCollection (GraphQL naam)
             if (freshOverview.fields.teamMemberCollection !== undefined) {
               freshOverview.fields.teamMemberCollection = updatedMembers;
-            } else if (freshOverview.fields.teamMembers !== undefined) {
-              freshOverview.fields.teamMembers = updatedMembers;
-            } else {
-              // Als veld niet bestaat, probeer teamMemberCollection aan te maken
-              freshOverview.fields.teamMemberCollection = updatedMembers;
-              console.log(`⚠️  teamMemberCollection veld niet gevonden, probeert te creëren...`);
+              console.log(`✅ Gebruik 'teamMemberCollection' veld voor update (GraphQL naam)`);
+              fieldUpdated = true;
             }
+            // Probeer ook teamMember (Management API naam) - dit is waarschijnlijk hetzelfde veld
+            // In Contentful kunnen beide namen werken, afhankelijk van hoe het content type is geconfigureerd
+            if (freshOverview.fields.teamMember !== undefined && !fieldUpdated) {
+              freshOverview.fields.teamMember = updatedMembers;
+              console.log(`✅ Gebruik 'teamMember' veld voor update (Management API naam)`);
+              fieldUpdated = true;
+            } else if (freshOverview.fields.teamMember !== undefined && fieldUpdated) {
+              // Als teamMemberCollection bestaat, update ook teamMember (als het een ander veld is)
+              // Dit kan nodig zijn als beide velden bestaan en beide moeten worden geüpdatet
+              freshOverview.fields.teamMember = updatedMembers;
+              console.log(`✅ Gebruik ook 'teamMember' veld voor update (beide velden geüpdatet)`);
+            }
+
+            if (!fieldUpdated) {
+              // Als laatste redmiddel, probeer teamMember
+              freshOverview.fields.teamMember = updatedMembers;
+              console.log(
+                `⚠️  Geen teamMember/teamMemberCollection veld gevonden, probeert 'teamMember' te gebruiken...`
+              );
+            }
+
+            // Log de velden die we gaan updaten voor debugging
+            console.log(`🔍 Fields die worden geüpdatet:`);
+            console.log(`   teamMember: ${freshOverview.fields.teamMember ? '✅' : '❌'}`);
+            console.log(`   Locales: ${Object.keys(updatedMembers || {}).join(', ')}`);
+            console.log(`   Aantal members per locale:`);
+            Object.keys(updatedMembers || {}).forEach((locale) => {
+              const members = updatedMembers[locale] || [];
+              console.log(`     ${locale}: ${members.length} members`);
+            });
 
             const updatedOverview = await freshOverview.update();
             console.log(`  ✅ TeamOverview geüpdatet (version: ${updatedOverview.sys.version})`);
@@ -998,8 +1041,12 @@ export default async function handler(req, res) {
               );
 
               // Verifieer dat team member in collectie zit
+              // Check beide veld namen: teamMemberCollection (GraphQL) en teamMember (Management API)
               const publishedMembers =
                 publishedOverview.fields?.teamMemberCollection?.['nl-NL'] ||
+                publishedOverview.fields?.teamMemberCollection?.['en-US'] ||
+                publishedOverview.fields?.teamMember?.['nl-NL'] ||
+                publishedOverview.fields?.teamMember?.['en-US'] ||
                 publishedOverview.fields?.teamMembers?.['nl-NL'] ||
                 [];
               const publishedMemberIds = publishedMembers
@@ -1009,6 +1056,17 @@ export default async function handler(req, res) {
               console.log(
                 `   Nieuwe team member in collectie: ${publishedMemberIds.includes(teamMemberId) ? '✅ JA' : '❌ NEE'}`
               );
+              if (!publishedMemberIds.includes(teamMemberId)) {
+                console.error(`❌ Team member ${teamMemberId} is NIET toegevoegd aan collectie!`);
+                console.error(`   Published member IDs: ${publishedMemberIds.join(', ')}`);
+                console.error(`   Zoekt ID: ${teamMemberId}`);
+                console.error(
+                  `   Check teamMemberCollection: ${publishedOverview.fields?.teamMemberCollection ? '✅ bestaat' : '❌ bestaat niet'}`
+                );
+                console.error(
+                  `   Check teamMember: ${publishedOverview.fields?.teamMember ? '✅ bestaat' : '❌ bestaat niet'}`
+                );
+              }
             } catch (publishError) {
               console.error(`❌ Kon TeamOverview niet publiceren: ${publishError.message}`);
               console.error(`   Stack: ${publishError.stack}`);
