@@ -551,8 +551,8 @@ export default async function handler(req, res) {
     const fullSlug = `/team/${currentSlug}`;
     console.log(`🔗 Full slug voor deze team member: ${fullSlug}`);
 
-    // Voor nieuwe pagina's: haal entry opnieuw op om zeker te zijn dat fields beschikbaar zijn
-    // EN zorg dat alle fields correct zijn ingesteld
+    // Voor nieuwe pagina's: haal entry opnieuw op en UPDATE met alle fields
+    // CRITICAL: createEntry slaat soms fields niet correct op, dus we moeten direct updaten
     if (isNewPage) {
       try {
         teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
@@ -599,8 +599,23 @@ export default async function handler(req, res) {
         console.log(`   pageType: ${teamMemberPage.fields.pageType['nl-NL']}`);
         console.log(`   title: ${teamMemberPage.fields.title['nl-NL']}`);
         console.log(`   teamMember: ${teamMemberPage.fields.teamMember['nl-NL']?.sys?.id}`);
+
+        // CRITICAL: Update de entry DIRECT om de fields op te slaan
+        console.log(`💾 Updaten nieuwe pagina met geforceerde fields...`);
+        teamMemberPage = await teamMemberPage.update();
+        console.log(
+          `✅ Nieuwe pagina geüpdatet met fields (version: ${teamMemberPage.sys.version})`
+        );
+
+        // Verifieer dat fields zijn opgeslagen
+        console.log(`🔍 Verificatie na update:`);
+        console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
+        console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
+        console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
       } catch (refreshError) {
-        console.warn(`⚠️  Kon nieuwe pagina niet ophalen: ${refreshError.message}`);
+        console.warn(`⚠️  Kon nieuwe pagina niet ophalen/updaten: ${refreshError.message}`);
+        console.warn(`   Stack: ${refreshError.stack}`);
+        throw refreshError; // Re-throw omdat we een onvolledige pagina hebben
       }
     }
 
@@ -676,15 +691,10 @@ export default async function handler(req, res) {
     }
 
     // Update entry als er wijzigingen zijn
-    // Voor nieuwe pagina's: altijd updaten om zeker te zijn dat alle fields correct zijn
-    if (needsUpdate || isNewPage) {
-      if (isNewPage) {
-        console.log(
-          `💾 Updaten nieuwe Aboutpage (om zeker te zijn dat alle fields correct zijn)...`
-        );
-      } else {
-        console.log(`💾 Updaten Aboutpage (changes detected)...`);
-      }
+    // Voor nieuwe pagina's: skip update hier omdat we dat al hebben gedaan na ophalen
+    // Voor bestaande pagina's: update alleen als er wijzigingen zijn
+    if (needsUpdate && !isNewPage) {
+      console.log(`💾 Updaten Aboutpage (changes detected)...`);
 
       try {
         teamMemberPage = await teamMemberPage.update();
@@ -703,6 +713,9 @@ export default async function handler(req, res) {
         console.error(`   Stack: ${updateError.stack}`);
         throw updateError; // Re-throw om te voorkomen dat we een onvolledige pagina publiceren
       }
+    } else if (isNewPage) {
+      // Voor nieuwe pagina's hebben we al geüpdatet na ophalen
+      console.log(`ℹ️  Nieuwe pagina is al geüpdatet na ophalen - skip extra update`);
     } else {
       console.log(`ℹ️  Geen updates nodig voor Aboutpage - alles is al correct`);
     }
@@ -720,9 +733,13 @@ export default async function handler(req, res) {
         // Haal entry opnieuw op om zeker te zijn dat we de laatste versie hebben
         teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
 
-        // CRITICAL: Zorg dat fields correct zijn ingesteld VOORDAT we publiceren
+        // CRITICAL: Voor nieuwe pagina's moeten we ALTIJD fields forceren voordat we publiceren
         // Dit is belangrijk omdat Contentful soms fields niet correct opslaat bij createEntry
+        // Voor bestaande pagina's: alleen als er wijzigingen zijn
         if (isNewPage || needsUpdate) {
+          // Haal entry opnieuw op om zeker te zijn dat we de laatste versie hebben
+          teamMemberPage = await env.getEntry(teamMemberPage.sys.id);
+
           if (!teamMemberPage.fields) {
             teamMemberPage.fields = {};
           }
@@ -759,10 +776,20 @@ export default async function handler(req, res) {
 
           // Update entry met geforceerde fields
           console.log(`💾 Updaten entry met geforceerde fields voor publicatie...`);
+          console.log(`   Fields voor update:`);
+          console.log(`     slug: ${teamMemberPage.fields.slug['nl-NL']}`);
+          console.log(`     pageType: ${teamMemberPage.fields.pageType['nl-NL']}`);
+          console.log(`     title: ${teamMemberPage.fields.title['nl-NL']}`);
           teamMemberPage = await teamMemberPage.update();
           console.log(
             `✅ Entry geüpdatet met geforceerde fields (version: ${teamMemberPage.sys.version})`
           );
+
+          // Verifieer dat fields zijn opgeslagen
+          console.log(`🔍 Verificatie na update (voor publicatie):`);
+          console.log(`   slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'MISSING!'}`);
+          console.log(`   pageType: ${teamMemberPage.fields?.pageType?.['nl-NL'] || 'MISSING!'}`);
+          console.log(`   title: ${teamMemberPage.fields?.title?.['nl-NL'] || 'MISSING!'}`);
         }
 
         // Unpublish first als nodig (voor republish)
@@ -844,10 +871,12 @@ export default async function handler(req, res) {
         console.log(`💾 Updaten TeamMember entry met nieuwe link...`);
         teamMemberEntry.fields.link = currentLink;
         const updatedTeamMember = await teamMemberEntry.update();
+        console.log(`✅ TeamMember entry geüpdatet (version: ${updatedTeamMember.sys.version})`);
 
         // ALWAYS publish if the team member is already published (which it should be, since webhook triggered on publish)
         // This ensures the link is available immediately
         const wasAlreadyPublished = updatedTeamMember.isPublished();
+        console.log(`   TeamMember is gepubliceerd: ${wasAlreadyPublished ? '✅ JA' : '❌ NEE'}`);
 
         if (wasAlreadyPublished) {
           try {
@@ -855,15 +884,20 @@ export default async function handler(req, res) {
             try {
               await updatedTeamMember.unpublish();
               console.log(`📤 TeamMember entry ungepubliceerd voor republish`);
+              // Haal opnieuw op na unpublish
+              const unpublishedTeamMember = await env.getEntry(updatedTeamMember.sys.id);
+              await unpublishedTeamMember.publish();
+              console.log(`📢 TeamMember entry gerepubliceerd met link naar Aboutpage`);
             } catch (unpublishError) {
-              // Ignore if already unpublished or other errors
-              console.log(`ℹ️  Unpublish niet nodig of gefaald: ${unpublishError.message}`);
+              // Als unpublish faalt, probeer direct te publiceren
+              console.log(`  ⚠️  Unpublish gefaald: ${unpublishError.message}`);
+              console.log(`  📢 Probeer direct te publiceren...`);
+              await updatedTeamMember.publish();
+              console.log(`📢 TeamMember entry gepubliceerd met link naar Aboutpage`);
             }
-            await updatedTeamMember.publish();
-            console.log(`📢 TeamMember entry geüpdatet en gepubliceerd met link naar Aboutpage`);
           } catch (publishError) {
-            console.warn(`⚠️  Kon TeamMember entry niet publiceren: ${publishError.message}`);
-            console.warn(`   Stack: ${publishError.stack}`);
+            console.error(`❌ Kon TeamMember entry niet publiceren: ${publishError.message}`);
+            console.error(`   Stack: ${publishError.stack}`);
             // Don't fail - the link update is already saved, just not published yet
             console.log(
               `💡 Link is opgeslagen maar niet gepubliceerd - wordt gepubliceerd bij volgende publish van team member`
@@ -871,12 +905,17 @@ export default async function handler(req, res) {
           }
         } else {
           // Team member is niet gepubliceerd - dit zou niet moeten gebeuren als webhook op publish triggerde
-          console.log(
-            `⚠️  TeamMember entry is niet gepubliceerd - link is opgeslagen maar niet gepubliceerd`
-          );
-          console.log(
-            `💡 Link wordt automatisch gepubliceerd wanneer team member wordt gepubliceerd`
-          );
+          // Maar misschien is de entry unpublished terwijl we bezig waren
+          console.log(`⚠️  TeamMember entry is niet gepubliceerd - probeer te publiceren...`);
+          try {
+            await updatedTeamMember.publish();
+            console.log(`📢 TeamMember entry gepubliceerd met link naar Aboutpage`);
+          } catch (publishError) {
+            console.warn(`⚠️  Kon TeamMember entry niet publiceren: ${publishError.message}`);
+            console.log(
+              `💡 Link is opgeslagen maar niet gepubliceerd - wordt gepubliceerd bij volgende publish van team member`
+            );
+          }
         }
       } else {
         console.log(`ℹ️  Link in TeamMember is al correct - geen update nodig`);
