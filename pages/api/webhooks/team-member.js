@@ -18,16 +18,31 @@ function createSlugFromName(name) {
 // Verify webhook signature (Contentful gebruikt X-Contentful-Topic header en body signature)
 function verifyWebhook(req) {
   // Check for authorization header first (if configured in Contentful webhook settings)
-  const authHeader = req.headers.authorization || req.headers['x-contentful-webhook-secret'];
+  // Support multiple header formats:
+  // 1. Authorization header (standard): Authorization: Bearer {secret}
+  // 2. Custom secret header: TEAMPAGE_WEBHOOK_SECRET: {secret}
+  // 3. X-Contentful-Webhook-Secret header (alternative)
+  const authHeader =
+    req.headers.authorization ||
+    req.headers['x-contentful-webhook-secret'] ||
+    req.headers['teampage_webhook_secret'] ||
+    req.headers['teampage-webhook-secret'];
 
   // If WEBHOOK_SECRET is set and authorization header is present, verify it
   if (WEBHOOK_SECRET && authHeader) {
-    const isValid = authHeader === `Bearer ${WEBHOOK_SECRET}` || authHeader === WEBHOOK_SECRET;
+    // Check both formats: "Bearer {secret}" and just "{secret}"
+    const isValid =
+      authHeader === `Bearer ${WEBHOOK_SECRET}` ||
+      authHeader === WEBHOOK_SECRET ||
+      authHeader.trim() === WEBHOOK_SECRET.trim();
     if (isValid) {
+      console.log('✅ Webhook secret verified');
       return true;
     }
     // If secret doesn't match, reject
     console.error('❌ Authorization header does not match WEBHOOK_SECRET');
+    console.error(`   Expected: ${WEBHOOK_SECRET.substring(0, 10)}...`);
+    console.error(`   Received: ${authHeader.substring(0, 10)}...`);
     return false;
   }
 
