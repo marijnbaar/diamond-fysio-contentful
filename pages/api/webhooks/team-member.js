@@ -73,12 +73,36 @@ export default async function handler(req, res) {
   try {
     const { sys, fields } = req.body;
 
+    // Debug: log de volledige sys structuur om te zien wat er binnenkomt
+    console.log('🔍 Webhook body received:');
+    console.log('  sys.id:', sys?.id);
+    console.log('  sys.contentType:', JSON.stringify(sys?.contentType, null, 2));
+    console.log('  sys.contentType.sys.id:', sys?.contentType?.sys?.id);
+    console.log('  sys.contentType.sys.linkType:', sys?.contentType?.sys?.linkType);
+    console.log('  Full sys object keys:', Object.keys(sys || {}));
+
     // Check of dit een TeamMember entry is
-    if (sys?.contentType?.sys?.id !== 'teamMember') {
+    // Contentful kan verschillende formaten gebruiken voor contentType
+    const contentTypeId =
+      sys?.contentType?.sys?.id ||
+      sys?.contentType?.id ||
+      (typeof sys?.contentType === 'string' ? sys.contentType : null);
+
+    console.log(`🔍 Detected contentType ID: "${contentTypeId}"`);
+
+    // Normalize content type ID for comparison (case-insensitive)
+    const normalizedContentTypeId = contentTypeId?.toLowerCase();
+    const expectedContentTypeId = 'teamMember'.toLowerCase();
+
+    if (normalizedContentTypeId !== expectedContentTypeId) {
       console.log(
-        `ℹ️  Webhook ontvangen voor ${sys?.contentType?.sys?.id}, geen teamMember - overslaan`
+        `ℹ️  Webhook ontvangen voor content type "${contentTypeId}" (normalized: "${normalizedContentTypeId}"), verwacht "teamMember" - overslaan`
       );
-      return res.status(200).json({ message: 'Not a team member entry, skipping' });
+      return res.status(200).json({
+        message: 'Not a team member entry, skipping',
+        receivedContentType: contentTypeId,
+        normalizedContentType: normalizedContentTypeId
+      });
     }
 
     // Check of dit een create/publish event is
