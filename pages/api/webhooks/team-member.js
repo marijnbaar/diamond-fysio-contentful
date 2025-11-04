@@ -221,16 +221,47 @@ export default async function handler(req, res) {
 
     console.log(`🚀 Team member webhook ontvangen voor: ${teamMemberName} (${teamMemberId})`);
 
+    // Check if Management API token is configured
+    if (!MGMT_TOKEN) {
+      console.error(
+        '❌ CTF_MANAGEMENT_TOKEN of CMAACCESSTOKEN environment variable niet geconfigureerd!'
+      );
+      return res.status(500).json({
+        error: 'Management API token not configured',
+        details: 'Please set CTF_MANAGEMENT_TOKEN or CMAACCESSTOKEN environment variable in Vercel'
+      });
+    }
+
+    if (!SPACE_ID) {
+      console.error(
+        '❌ CTF_SPACE_ID of CONTENTFUL_SPACE_ID environment variable niet geconfigureerd!'
+      );
+      return res.status(500).json({
+        error: 'Space ID not configured',
+        details: 'Please set CTF_SPACE_ID or CONTENTFUL_SPACE_ID environment variable in Vercel'
+      });
+    }
+
     // Initialize Contentful Management API client (hergebruik als al geïnitialiseerd)
     let client, space, env;
     if (req.contentfulClient) {
       ({ client, space, env } = req.contentfulClient);
       console.log('✅ Hergebruik van bestaande Contentful client');
     } else {
-      client = createClient({ accessToken: MGMT_TOKEN });
-      space = await client.getSpace(SPACE_ID);
-      env = await space.getEnvironment(ENV_ID);
-      console.log('✅ Nieuwe Contentful client geïnitialiseerd');
+      try {
+        client = createClient({ accessToken: MGMT_TOKEN });
+        space = await client.getSpace(SPACE_ID);
+        env = await space.getEnvironment(ENV_ID);
+        console.log('✅ Nieuwe Contentful client geïnitialiseerd');
+      } catch (clientError) {
+        console.error('❌ Kon Contentful client niet initialiseren:', clientError.message);
+        return res.status(500).json({
+          error: 'Failed to initialize Contentful client',
+          details: clientError.message.includes('accessToken')
+            ? 'Invalid or missing Management API token. Check CTF_MANAGEMENT_TOKEN or CMAACCESSTOKEN.'
+            : clientError.message
+        });
+      }
     }
 
     // Check of er al een Aboutpage bestaat voor deze team member (met pageType Teammemberpage)
