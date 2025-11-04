@@ -71,22 +71,105 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { sys, fields } = req.body;
+    // Next.js should parse JSON automatically, but let's verify
+    const body = req.body;
+
+    // Debug: log de volledige request body om te zien wat Contentful stuurt
+    console.log('🔍 Full webhook request body:');
+    console.log(JSON.stringify(body, null, 2));
+    console.log('🔍 Request body type:', typeof body);
+    console.log('🔍 Request body keys:', Object.keys(body || {}));
+    console.log('🔍 Webhook headers:');
+    console.log('  X-Contentful-Topic:', req.headers['x-contentful-topic']);
+    console.log('  X-Contentful-Webhook-Name:', req.headers['x-contentful-webhook-name']);
+    console.log('  Content-Type:', req.headers['content-type']);
+
+    // Check if body is properly parsed
+    if (!body || typeof body !== 'object') {
+      console.error('❌ Request body is not a valid object!');
+      return res.status(400).json({
+        error: 'Invalid request body',
+        bodyType: typeof body,
+        body: body
+      });
+    }
+
+    const { sys, fields } = body;
+
+    // Extra check: ensure sys exists
+    if (!sys) {
+      console.error('❌ sys object niet gevonden in request body!');
+      return res.status(400).json({
+        error: 'sys object missing in request body',
+        bodyKeys: Object.keys(req.body || {})
+      });
+    }
 
     // Debug: log de volledige sys structuur om te zien wat er binnenkomt
-    console.log('🔍 Webhook body received:');
+    console.log('🔍 Webhook sys object:');
+    console.log('  sys:', JSON.stringify(sys, null, 2));
     console.log('  sys.id:', sys?.id);
     console.log('  sys.contentType:', JSON.stringify(sys?.contentType, null, 2));
-    console.log('  sys.contentType.sys.id:', sys?.contentType?.sys?.id);
-    console.log('  sys.contentType.sys.linkType:', sys?.contentType?.sys?.linkType);
+    console.log('  sys.contentType?.sys?.id:', sys?.contentType?.sys?.id);
+    console.log('  sys.contentType?.sys?.linkType:', sys?.contentType?.sys?.linkType);
+    console.log('  sys.contentType?.sys?.type:', sys?.contentType?.sys?.type);
     console.log('  Full sys object keys:', Object.keys(sys || {}));
 
     // Check of dit een TeamMember entry is
     // Contentful kan verschillende formaten gebruiken voor contentType
-    const contentTypeId =
-      sys?.contentType?.sys?.id ||
-      sys?.contentType?.id ||
-      (typeof sys?.contentType === 'string' ? sys.contentType : null);
+    // Soms is contentType een Link object, soms een volledige content type object
+    let contentTypeId = null;
+
+    // Debug: check alle mogelijke formaten
+    console.log('🔍 ContentType detection:');
+    console.log('  sys.contentType exists:', !!sys?.contentType);
+    console.log('  sys.contentType type:', typeof sys?.contentType);
+    console.log('  sys.contentType.sys exists:', !!sys?.contentType?.sys);
+    console.log('  sys.contentType.sys.id:', sys?.contentType?.sys?.id);
+    console.log('  sys.contentType.id:', sys?.contentType?.id);
+    console.log('  sys.contentType (full):', JSON.stringify(sys?.contentType, null, 2));
+
+    if (sys?.contentType) {
+      // Probeer verschillende formaten - let op de volgorde!
+      if (sys.contentType.sys?.id) {
+        contentTypeId = sys.contentType.sys.id;
+        console.log('✅ ContentType ID gevonden via sys.contentType.sys.id');
+      } else if (sys.contentType.id) {
+        contentTypeId = sys.contentType.id;
+        console.log('✅ ContentType ID gevonden via sys.contentType.id');
+      } else if (typeof sys.contentType === 'string') {
+        contentTypeId = sys.contentType;
+        console.log('✅ ContentType ID gevonden als string');
+      } else {
+        console.log('⚠️  ContentType bestaat maar ID niet gevonden');
+      }
+    } else {
+      console.log('⚠️  sys.contentType bestaat niet');
+    }
+
+    // Als contentType nog steeds null is, probeer het op te halen via de Management API
+    // Dit kan nodig zijn als Contentful alleen een Link stuurt zonder id
+    // OF als de webhook op alle entries triggert (zonder filter)
+    if (!contentTypeId && sys?.id) {
+      console.log(
+        '⚠️  ContentType ID niet gevonden in webhook body, proberen via Management API...'
+      );
+      try {
+        // Initialize client (hergebruik later als nodig)
+        const client = createClient({ accessToken: MGMT_TOKEN });
+        const space = await client.getSpace(SPACE_ID);
+        const env = await space.getEnvironment(ENV_ID);
+        const entry = await env.getEntry(sys.id);
+        contentTypeId = entry.sys.contentType.sys.id;
+        console.log(`✅ ContentType ID opgehaald via Management API: "${contentTypeId}"`);
+
+        // Store client for later use (avoid re-initialization)
+        req.contentfulClient = { client, space, env };
+      } catch (apiError) {
+        console.error('❌ Kon entry niet ophalen via Management API:', apiError.message);
+        console.error('   Stack:', apiError.stack);
+      }
+    }
 
     console.log(`🔍 Detected contentType ID: "${contentTypeId}"`);
 
@@ -94,14 +177,16 @@ export default async function handler(req, res) {
     const normalizedContentTypeId = contentTypeId?.toLowerCase();
     const expectedContentTypeId = 'teamMember'.toLowerCase();
 
-    if (normalizedContentTypeId !== expectedContentTypeId) {
+    if (!contentTypeId || normalizedContentTypeId !== expectedContentTypeId) {
       console.log(
         `ℹ️  Webhook ontvangen voor content type "${contentTypeId}" (normalized: "${normalizedContentTypeId}"), verwacht "teamMember" - overslaan`
       );
       return res.status(200).json({
         message: 'Not a team member entry, skipping',
         receivedContentType: contentTypeId,
-        normalizedContentType: normalizedContentTypeId
+        normalizedContentType: normalizedContentTypeId,
+        sysId: sys?.id,
+        fullSys: sys
       });
     }
 
@@ -120,10 +205,17 @@ export default async function handler(req, res) {
 
     console.log(`🚀 Team member webhook ontvangen voor: ${teamMemberName} (${teamMemberId})`);
 
-    // Initialize Contentful Management API client
-    const client = createClient({ accessToken: MGMT_TOKEN });
-    const space = await client.getSpace(SPACE_ID);
-    const env = await space.getEnvironment(ENV_ID);
+    // Initialize Contentful Management API client (hergebruik als al geïnitialiseerd)
+    let client, space, env;
+    if (req.contentfulClient) {
+      ({ client, space, env } = req.contentfulClient);
+      console.log('✅ Hergebruik van bestaande Contentful client');
+    } else {
+      client = createClient({ accessToken: MGMT_TOKEN });
+      space = await client.getSpace(SPACE_ID);
+      env = await space.getEnvironment(ENV_ID);
+      console.log('✅ Nieuwe Contentful client geïnitialiseerd');
+    }
 
     // Check of er al een Aboutpage bestaat voor deze team member (met pageType Teammemberpage)
     const existingPages = await env.getEntries({
