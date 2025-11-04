@@ -71,8 +71,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Next.js should parse JSON automatically, but let's verify
-    const body = req.body;
+    // Next.js doesn't auto-parse custom Content-Type headers like Contentful's
+    // application/vnd.contentful.management.v1+json
+    // So we need to manually parse if it's a string
+    let body = req.body;
+
+    // If body is a string, parse it as JSON
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+        console.log('✅ Body parsed from string to JSON');
+      } catch (parseError) {
+        console.error('❌ Failed to parse body as JSON:', parseError.message);
+        return res.status(400).json({
+          error: 'Invalid JSON body',
+          parseError: parseError.message
+        });
+      }
+    }
 
     // Debug: log de volledige request body om te zien wat Contentful stuurt
     console.log('🔍 Full webhook request body:');
