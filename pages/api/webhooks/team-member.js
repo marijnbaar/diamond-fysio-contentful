@@ -374,23 +374,46 @@ export default async function handler(req, res) {
     // Nieuwe pagina's worden ALLEEN aangemaakt als er nog geen pagina bestaat
     console.log(`🔍 Zoeken naar bestaande Aboutpage voor team member ${teamMemberId}...`);
 
-    // Check wanneer de team member entry is aangemaakt (om te bepalen of het een nieuwe entry is)
+    // Haal teamMember entry op om data te gebruiken
+    let teamMemberEntry = null;
     let teamMemberCreatedAt = null;
     try {
-      const teamMemberEntry = await env.getEntry(teamMemberId);
+      teamMemberEntry = await env.getEntry(teamMemberId);
       teamMemberCreatedAt = teamMemberEntry.sys.createdAt;
       console.log(`📅 Team member entry created at: ${teamMemberCreatedAt}`);
     } catch (err) {
-      console.warn(`⚠️  Kon team member entry niet ophalen voor createdAt check: ${err.message}`);
+      console.warn(`⚠️  Kon team member entry niet ophalen: ${err.message}`);
+      return res.status(500).json({
+        error: 'Could not fetch team member entry',
+        details: err.message
+      });
     }
 
-    const existingPages = await env.getEntries({
+    // CRITICAL: Haal ALLE aboutpages op en filter client-side
+    // Contentful's nested query syntax werkt niet goed voor 'fields.teamMember.sys.id'
+    // We moeten alle pages ophalen en dan filteren op teamMember link
+    console.log(`🔍 Ophalen alle Aboutpages met pageType Teammemberpage...`);
+    const allTeamMemberPages = await env.getEntries({
       content_type: 'aboutpage',
       'fields.pageType': 'Teammemberpage',
-      'fields.teamMember.sys.id': teamMemberId,
-      limit: 10 // Haal meer op om te checken of er duplicates zijn
+      limit: 100 // Haal meer op om te checken of er duplicates zijn
     });
 
+    // Filter client-side op teamMember link
+    const existingPages = {
+      items: allTeamMemberPages.items.filter((page) => {
+        const pageTeamMemberId =
+          page.fields?.teamMember?.['nl-NL']?.sys?.id ||
+          page.fields?.teamMember?.['nl']?.sys?.id ||
+          page.fields?.teamMember?.['en-US']?.sys?.id ||
+          page.fields?.teamMember?.sys?.id;
+        return pageTeamMemberId === teamMemberId;
+      })
+    };
+
+    console.log(
+      `📊 ${allTeamMemberPages.items.length} Aboutpages met pageType Teammemberpage gevonden`
+    );
     console.log(
       `📊 ${existingPages.items.length} bestaande Aboutpage(s) gevonden voor deze team member`
     );
@@ -422,6 +445,7 @@ export default async function handler(req, res) {
       });
 
       teamMemberPage = sortedPages[0];
+      isNewPage = false; // CRITICAL: Zet isNewPage expliciet op false
       console.log(`✅ Bestaande Aboutpage (Teammemberpage) gevonden: ${teamMemberPage.sys.id}`);
       console.log(`   Created: ${teamMemberPage.sys.createdAt}`);
       console.log(`   Slug: ${teamMemberPage.fields?.slug?.['nl-NL'] || 'N/A'}`);
@@ -430,8 +454,15 @@ export default async function handler(req, res) {
       // SAFETY: Als er duplicates zijn, log maar gebruik de nieuwste
       if (existingPages.items.length > 1) {
         console.warn(
-          `⚠️  Meerdere pages gevonden - gebruik de nieuwste (${teamMemberPage.sys.id})`
+          `⚠️  WAARSCHUWING: ${existingPages.items.length} pages gevonden voor team member ${teamMemberId}!`
         );
+        console.warn(
+          `   Dit kan duiden op een loop. Gebruik de nieuwste: ${teamMemberPage.sys.id}`
+        );
+        console.warn(`   Andere pages:`);
+        sortedPages.slice(1).forEach((page, index) => {
+          console.warn(`     ${index + 2}. ${page.sys.id} (created: ${page.sys.createdAt})`);
+        });
       }
     } else {
       // ER BESTAAT GEEN PAGINA - MAAK NIEUWE AAN (alleen voor nieuwe team members)
@@ -492,10 +523,23 @@ export default async function handler(req, res) {
         // CRITICAL: Gebruik de volledige slug met /team/ prefix
         const fullSlugForCreation = `/team/${createSlugFromName(teamMemberName)}`;
 
+        // CRITICAL: Haal teamMember entry op om alle data te hebben
+        if (!teamMemberEntry) {
+          teamMemberEntry = await env.getEntry(teamMemberId);
+        }
+
+        // Haal alle beschikbare velden op van teamMember
+        const teamMemberFields = teamMemberEntry.fields || {};
+        const teamMemberNameFromFields =
+          teamMemberFields.name?.['nl-NL'] ||
+          teamMemberFields.name?.['nl'] ||
+          teamMemberFields.name ||
+          teamMemberName;
+
         console.log(`📝 Aanmaken nieuwe Aboutpage met fields:`);
         console.log(`   slug: ${fullSlugForCreation}`);
         console.log(`   pageType: Teammemberpage`);
-        console.log(`   title: ${teamMemberName}`);
+        console.log(`   title: ${teamMemberNameFromFields}`);
         console.log(`   teamMember: ${teamMemberId}`);
 
         teamMemberPage = await env.createEntry('aboutpage', {
@@ -516,16 +560,17 @@ export default async function handler(req, res) {
               }
             },
             title: {
-              'nl-NL': teamMemberName
+              'nl-NL': teamMemberNameFromFields
             }
           }
         });
 
+        isNewPage = true; // CRITICAL: Zet isNewPage expliciet op true
         console.log(`✅ NIEUWE Aboutpage (Teammemberpage) aangemaakt: ${teamMemberPage.sys.id}`);
         console.log(`   Slug: ${fullSlugForCreation}`);
         console.log(`   PageType: Teammemberpage`);
-        console.log(`   Title: ${teamMemberName}`);
-        console.log(`   Team member: ${teamMemberName} (${teamMemberId})`);
+        console.log(`   Title: ${teamMemberNameFromFields}`);
+        console.log(`   Team member: ${teamMemberNameFromFields} (${teamMemberId})`);
 
         // Verifieer dat de fields correct zijn ingesteld DIRECT na creatie
         console.log(`🔍 Verificatie van aangemaakte pagina fields (direct na creatie):`);
