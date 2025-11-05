@@ -6,6 +6,20 @@ const ENV_ID = process.env.CTF_ENV_ID || process.env.ENV_ID || 'master';
 const MGMT_TOKEN = process.env.CONTENT_MANAGEMENT_TOKEN || process.env.CONTENTFUL_MANAGEMENT_API;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
+// optional: precisely name the TeamOverview entry + the collection field id to edit
+const TEAM_OVERVIEW_ENTRY_ID = process.env.TEAM_OVERVIEW_ENTRY_ID || '13d7Cj8GPxuvEb7YSosmHH';
+const TEAM_OVERVIEW_FIELD_ID = process.env.TEAM_OVERVIEW_FIELD_ID || 'teamMember'; // <-- set this!
+
+function log(...args) {
+  console.log('[team-member webhook]', ...args);
+}
+function warn(...args) {
+  console.warn('[team-member webhook]', ...args);
+}
+function err(...args) {
+  console.error('[team-member webhook]', ...args);
+}
+
 function createSlugFromName(name) {
   return String(name || '')
     .toLowerCase()
@@ -22,22 +36,30 @@ function verifyWebhook(req) {
     req.headers['teampage_webhook_secret'] ||
     req.headers['teampage-webhook-secret'];
 
-  if (process.env.EMERGENCY_STOP_WEBHOOK === 'true') return false;
+  if (process.env.EMERGENCY_STOP_WEBHOOK === 'true') {
+    err('EMERGENCY_STOP_WEBHOOK=true — refusing request');
+    return false;
+  }
 
-  if (WEBHOOK_SECRET && authHeader) {
+  if (WEBHOOK_SECRET) {
+    if (!authHeader) {
+      err('Missing authorization header while WEBHOOK_SECRET is set');
+      return false;
+    }
     const s = WEBHOOK_SECRET.trim();
-    return (
+    const ok =
       authHeader === `Bearer ${s}` ||
       authHeader === s ||
-      (typeof authHeader === 'string' && authHeader.trim() === s)
-    );
+      (typeof authHeader === 'string' && authHeader.trim() === s);
+    if (!ok) err('Authorization header does not match WEBHOOK_SECRET');
+    return ok;
   }
 
-  if (!WEBHOOK_SECRET) {
-    return Boolean(req.headers['x-contentful-topic'] || req.headers['x-contentful-webhook-name']);
-  }
-
-  return Boolean(req.headers['x-contentful-topic'] || req.headers['x-contentful-webhook-name']);
+  // If no secret configured, accept only if it looks like Contentful
+  const ok =
+    Boolean(req.headers['x-contentful-topic']) || Boolean(req.headers['x-contentful-webhook-name']);
+  if (!ok) err('No Contentful headers and no secret');
+  return ok;
 }
 
 function getContentTypeId(sys) {
@@ -50,22 +72,21 @@ function getContentTypeId(sys) {
 
 export default async function handler(req, res) {
   try {
-    if (req.method !== 'POST') {
-      return res.status(405).json({ error: 'Method not allowed' });
-    }
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-    if (process.env.EMERGENCY_STOP_WEBHOOK === 'true') {
-      return res.status(503).json({ error: 'Webhook disabled via EMERGENCY_STOP_WEBHOOK' });
-    }
-
-    if (!verifyWebhook(req)) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
+    if (!verifyWebhook(req)) return res.status(401).json({ error: 'Unauthorized' });
 
     if (!SPACE_ID || !MGMT_TOKEN) {
-      return res
-        .status(500)
-        .json({ error: 'Missing SPACE_ID or MGMT_TOKEN environment variable(s)' });
+      return res.status(500).json({ error: 'Missing SPACE_ID or MGMT_TOKEN' });
+    }
+
+    const topic = String(req.headers['x-contentful-topic'] || '');
+    log('Incoming topic:', topic);
+
+    // We’ll act on any Entry.create/publish (don’t try to be too clever)
+    if (!/Entry\.(publish|create)/.test(topic)) {
+      log('Skipping — not Entry.create/publish');
+      return res.status(200).json({ message: 'Skipped: non-handled event' });
     }
 
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
@@ -73,71 +94,46 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid JSON body' });
     }
 
-    const topic = String(req.headers['x-contentful-topic'] || '');
-    if (!/Entry\.(publish|create)/.test(topic)) {
-      return res.status(200).json({ message: 'Skipping: not a publish/create event' });
-    }
-
-    const sys = body.sys || {};
-    const fields = body.fields || {};
-    if (!sys.id) {
-      return res.status(400).json({ error: 'Missing sys.id in webhook body' });
-    }
+    const { sys = {}, fields = {} } = body;
+    const entryId = sys.id;
+    if (!entryId) return res.status(400).json({ error: 'Missing sys.id' });
 
     const ctype = (getContentTypeId(sys) || '').toLowerCase();
     if (ctype !== 'teammember') {
-      return res.status(200).json({ message: 'Skipping: not a teamMember entry' });
+      log('Skipping — contentType is not teamMember:', ctype);
+      return res.status(200).json({ message: 'Skipped non-teamMember' });
     }
 
-    // Skip republishes to avoid loops
-    if (sys.publishedVersion !== undefined && sys.publishedVersion !== null) {
-      return res.status(200).json({ message: 'Skipping republish to prevent loops' });
-    }
-
-    const teamMemberId = sys.id;
+    // Prepare values
     const teamMemberName =
       (fields.name &&
         (fields.name['nl-NL'] || fields.name.nl || fields.name['en-US'] || fields.name)) ||
       'Unknown';
+    const teamMemberId = entryId;
     const teamSlug = `/team/${createSlugFromName(teamMemberName)}`;
+    const aboutId = `aboutpage-team-${teamMemberId}`;
 
+    // CMA client
     const client = createClient({ accessToken: MGMT_TOKEN.trim() });
     const space = await client.getSpace(SPACE_ID);
     const env = await space.getEnvironment(ENV_ID);
 
-    // default locale (write everything here so it "sticks")
+    // Resolve locales
     const locales = await env.getLocales();
-    const defaultLocale =
-      (locales.items.find((l) => l.default) && locales.items.find((l) => l.default).code) ||
-      'en-US';
+    const defaultLocale = (locales.items.find((l) => l.default) || { code: 'en-US' }).code;
+    const nlLocale = locales.items.some((l) => l.code === 'nl-NL') ? 'nl-NL' : null;
+    log('Locales:', { defaultLocale, mirrorNl: nlLocale });
 
-    const tm = await env.getEntry(teamMemberId);
+    // Ensure teamMember exists (we also use it to write back .link)
+    const teamMember = await env.getEntry(teamMemberId);
 
-    // Idempotent Aboutpage entry ID
-    const aboutId = `aboutpage-team-${teamMemberId}`;
-    let about = null;
-
-    // Try deterministic id
+    // Upsert Aboutpage deterministically
+    let about;
     try {
       about = await env.getEntry(aboutId);
+      log('Found existing Aboutpage by deterministic ID:', aboutId);
     } catch {
-      // Entry doesn't exist yet, will create below
-    }
-
-    // Fallback: older page linked to this team member (migrate to deterministic id next time)
-    if (!about) {
-      const byLink = await env.getEntries({
-        content_type: 'aboutpage',
-        links_to_entry: teamMemberId,
-        limit: 2
-      });
-      if (byLink.items.length > 0) {
-        about = byLink.items[0];
-      }
-    }
-
-    // Create deterministically if still missing
-    if (!about) {
+      log('Creating Aboutpage with deterministic ID:', aboutId);
       about = await env.createEntryWithId('aboutpage', aboutId, {
         fields: {
           slug: { [defaultLocale]: teamSlug },
@@ -150,148 +146,138 @@ export default async function handler(req, res) {
       });
     }
 
-    // Ensure fields are set (idempotent write)
-    about.fields = about.fields || {};
-    const want = {
-      slug: teamSlug,
-      pageType: 'Teammemberpage',
-      title: teamMemberName,
-      teamMemberId
-    };
-
-    const haveSlug = about.fields.slug && about.fields.slug[defaultLocale];
-    const havePageType = about.fields.pageType && about.fields.pageType[defaultLocale];
-    const haveTitle = about.fields.title && about.fields.title[defaultLocale];
-    const haveTmId =
-      about.fields.teamMember &&
-      about.fields.teamMember[defaultLocale] &&
-      about.fields.teamMember[defaultLocale].sys &&
-      about.fields.teamMember[defaultLocale].sys.id;
-
-    let changed = false;
-
-    if (haveSlug !== want.slug) {
-      about.fields.slug = about.fields.slug || {};
-      about.fields.slug[defaultLocale] = want.slug;
-      changed = true;
-    }
-    if (havePageType !== want.pageType) {
-      about.fields.pageType = about.fields.pageType || {};
-      about.fields.pageType[defaultLocale] = want.pageType;
-      changed = true;
-    }
-    if (haveTitle !== want.title) {
-      about.fields.title = about.fields.title || {};
-      about.fields.title[defaultLocale] = want.title;
-      changed = true;
-    }
-    if (haveTmId !== want.teamMemberId) {
-      about.fields.teamMember = about.fields.teamMember || {};
-      about.fields.teamMember[defaultLocale] = {
-        sys: { type: 'Link', linkType: 'Entry', id: want.teamMemberId }
-      };
-      changed = true;
-    }
-
-    if (changed) {
-      about = await about.update();
-    }
-
-    const isPublished =
-      about.sys.publishedVersion !== undefined && about.sys.publishedVersion !== null;
-    if (!isPublished || changed) {
-      about = await about.publish();
-    }
-
-    // Update teamMember.link silently (do not publish teamMember)
-    try {
-      const currentLinkId =
-        tm.fields &&
-        tm.fields.link &&
-        tm.fields.link[defaultLocale] &&
-        tm.fields.link[defaultLocale].sys &&
-        tm.fields.link[defaultLocale].sys.id;
-
-      if (currentLinkId !== about.sys.id) {
-        tm.fields = tm.fields || {};
-        tm.fields.link = tm.fields.link || {};
-        tm.fields.link[defaultLocale] = {
-          sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
-        };
-        await tm.update();
-      }
-    } catch (e) {
-      console.warn('Could not set teamMember.link:', e && e.message ? e.message : e);
-    }
-
-    // Optional: add to TeamOverview (idempotent)
-    try {
-      const overviewId = process.env.TEAM_OVERVIEW_ENTRY_ID || '13d7Cj8GPxuvEb7YSosmHH';
-      let overview = null;
-
-      try {
-        overview = await env.getEntry(overviewId);
-      } catch {
-        // Entry not found, try to find by type
-        const search = await env.getEntries({
-          content_type: 'specialisationHomeOverview',
-          'fields.overviewType': 'TeamOverview',
-          limit: 1
-        });
-        overview = search.items[0] || null;
-      }
-
-      if (overview) {
-        const locale = defaultLocale;
-        const arr =
-          (overview.fields &&
-            ((overview.fields.teamMember && overview.fields.teamMember[locale]) ||
-              (overview.fields.teamMemberCollection &&
-                overview.fields.teamMemberCollection[locale]) ||
-              (overview.fields.teamMembers && overview.fields.teamMembers[locale]))) ||
-          [];
-
-        const exists = arr.some((m) => m && m.sys && m.sys.id === teamMemberId);
-        if (!exists) {
-          const newArr = [...arr, { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }];
-
-          overview.fields = overview.fields || {};
-          if (overview.fields.teamMember !== undefined) {
-            overview.fields.teamMember[locale] = newArr;
-          } else if (overview.fields.teamMemberCollection !== undefined) {
-            overview.fields.teamMemberCollection[locale] = newArr;
-          } else if (overview.fields.teamMembers !== undefined) {
-            overview.fields.teamMembers[locale] = newArr;
-          } else {
-            overview.fields.teamMember = { [locale]: newArr };
-          }
-
-          overview = await overview.update();
-          await overview.publish(); // republish is fine; this content type is not "teamMember"
+    // Ensure required fields (write to default; also mirror to nl-NL if present so you see it in UI)
+    const ensureField = (obj, key, valueMap) => {
+      obj.fields = obj.fields || {};
+      obj.fields[key] = obj.fields[key] || {};
+      let changed = false;
+      for (const [loc, val] of Object.entries(valueMap)) {
+        if (val == null) continue;
+        if (!obj.fields[key][loc] || obj.fields[key][loc] !== val) {
+          obj.fields[key][loc] = val;
+          changed = true;
         }
       }
-    } catch (e) {
-      console.warn('Could not update TeamOverview:', e && e.message ? e.message : e);
+      return changed;
+    };
+
+    let changed = false;
+    changed =
+      ensureField(about, 'slug', {
+        [defaultLocale]: teamSlug,
+        ...(nlLocale ? { [nlLocale]: teamSlug } : {})
+      }) || changed;
+    changed =
+      ensureField(about, 'pageType', {
+        [defaultLocale]: 'Teammemberpage',
+        ...(nlLocale ? { [nlLocale]: 'Teammemberpage' } : {})
+      }) || changed;
+    changed =
+      ensureField(about, 'title', {
+        [defaultLocale]: teamMemberName,
+        ...(nlLocale ? { [nlLocale]: teamMemberName } : {})
+      }) || changed;
+    changed =
+      ensureField(about, 'teamMember', {
+        [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } },
+        ...(nlLocale
+          ? { [nlLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } } }
+          : {})
+      }) || changed;
+
+    if (changed) {
+      log('Updating Aboutpage fields…');
+      about = await about.update();
+    } else {
+      log('Aboutpage fields already up-to-date.');
+    }
+
+    // Always publish the Aboutpage (idempotent)
+    try {
+      log('Publishing Aboutpage…');
+      about = await about.publish();
+      log('Aboutpage published:', about.sys.id, 'v', about.sys.publishedVersion);
+    } catch (error) {
+      // If it's already published and version matches, this may throw — try once more via fresh get + publish
+      warn('Publish threw, retrying once:', error?.message || error);
+      const fresh = await env.getEntry(aboutId);
+      about = await fresh.publish();
+      log('Aboutpage published on retry:', about.sys.id, 'v', about.sys.publishedVersion);
+    }
+
+    // Update teamMember.link (do NOT publish teamMember to avoid re-triggering)
+    try {
+      const loc = defaultLocale;
+      const currentId =
+        teamMember.fields &&
+        teamMember.fields.link &&
+        teamMember.fields.link[loc] &&
+        teamMember.fields.link[loc].sys &&
+        teamMember.fields.link[loc].sys.id;
+
+      if (currentId !== about.sys.id) {
+        teamMember.fields = teamMember.fields || {};
+        teamMember.fields.link = teamMember.fields.link || {};
+        teamMember.fields.link[loc] = {
+          sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
+        };
+        if (nlLocale) {
+          teamMember.fields.link[nlLocale] = {
+            sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
+          };
+        }
+        log('Updating teamMember.link →', about.sys.id);
+        await teamMember.update();
+      } else {
+        log('teamMember.link already points to Aboutpage.');
+      }
+    } catch (error) {
+      warn('Could not update teamMember.link:', error?.message || error);
+    }
+
+    // Update TeamOverview collection (single known field)
+    try {
+      const overview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
+      const loc = defaultLocale;
+
+      overview.fields = overview.fields || {};
+      overview.fields[TEAM_OVERVIEW_FIELD_ID] = overview.fields[TEAM_OVERVIEW_FIELD_ID] || {};
+      const arr = overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] || [];
+      const has = Array.isArray(arr) && arr.some((m) => m && m.sys && m.sys.id === teamMemberId);
+
+      if (!has) {
+        const next = [...arr, { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }];
+        overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] = next;
+        if (nlLocale) {
+          const arrNl = overview.fields[TEAM_OVERVIEW_FIELD_ID][nlLocale] || [];
+          const hasNl = Array.isArray(arrNl) && arrNl.some((m) => m?.sys?.id === teamMemberId);
+          if (!hasNl) {
+            overview.fields[TEAM_OVERVIEW_FIELD_ID][nlLocale] = [
+              ...arrNl,
+              { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
+            ];
+          }
+        }
+        log(`Adding ${teamMemberId} to TeamOverview.${TEAM_OVERVIEW_FIELD_ID} and publishing…`);
+        const updated = await overview.update();
+        await updated.publish();
+      } else {
+        log(`TeamOverview already contains ${teamMemberId} in ${TEAM_OVERVIEW_FIELD_ID}.`);
+      }
+    } catch (error) {
+      warn('TeamOverview update skipped/failed:', error?.message || error);
     }
 
     return res.status(200).json({
       success: true,
-      teamMemberId,
-      teamMemberName,
-      slug: teamSlug,
-      aboutpageId: about && about.sys && about.sys.id,
-      published: Boolean(
-        about &&
-          about.sys &&
-          about.sys.publishedVersion !== undefined &&
-          about.sys.publishedVersion !== null
-      )
+      aboutpageId: about?.sys?.id,
+      slug: about?.fields?.slug?.[defaultLocale],
+      publishedVersion: about?.sys?.publishedVersion || null
     });
-  } catch (err) {
-    console.error('Webhook error:', err);
-    return res.status(500).json({
-      error: 'Internal server error',
-      details: err && err.message ? err.message : String(err)
-    });
+  } catch (error) {
+    err('Fatal webhook error:', error?.message || error);
+    return res
+      .status(500)
+      .json({ error: 'Internal server error', details: error?.message || String(error) });
   }
 }
