@@ -1,6 +1,9 @@
 // pages/api/webhooks/contentful-team-member.js
 import { createClient } from 'contentful-management';
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'http://localhost:3000';
+
 const SPACE_ID = process.env.CTF_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
 const ENV_ID = process.env.CTF_ENV_ID || process.env.ENV_ID || 'master';
 const MGMT_TOKEN = process.env.CONTENT_MANAGEMENT_TOKEN || process.env.CONTENTFUL_MANAGEMENT_API;
@@ -28,6 +31,69 @@ function createSlugFromName(name) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+async function translateBatch(texts, targetLang) {
+  if (!texts || texts.length === 0) return [];
+  try {
+    const res = await fetch(`${SITE_URL}/api/translate/batch`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ texts, lang: targetLang })
+    });
+    if (!res.ok) {
+      warn('Translation API failed:', res.status, res.statusText);
+      return texts; // Fallback to original
+    }
+    const json = await res.json();
+    if (!Array.isArray(json.items)) return texts;
+    return json.items.map((s, i) => (typeof s === 'string' && s.trim() ? s : texts[i] || ''));
+  } catch (error) {
+    warn('Translation error:', error?.message || error);
+    return texts; // Fallback to original
+  }
+}
+
+function extractTextFromRichText(value) {
+  if (!value) return [];
+  if (typeof value === 'string') return [{ path: [], text: value }];
+  const doc = value?.json?.nodeType === 'document' ? value.json : value;
+  if (!doc || typeof doc !== 'object') return [];
+
+  const texts = [];
+  function traverse(node, path = []) {
+    if (!node || typeof node !== 'object') return;
+    if (node.nodeType === 'text' && typeof node.value === 'string' && node.value.trim()) {
+      texts.push({ path, text: node.value });
+    }
+    if (Array.isArray(node.content)) {
+      node.content.forEach((child, i) => traverse(child, [...path, 'content', i]));
+    }
+  }
+  traverse(doc);
+  return texts;
+}
+
+function updateRichTextWithTranslations(original, translations) {
+  if (typeof original === 'string') {
+    return translations[0] || original;
+  }
+  const cloned = JSON.parse(JSON.stringify(original));
+  const doc = cloned?.json?.nodeType === 'document' ? cloned.json : cloned;
+  const texts = extractTextFromRichText(original);
+
+  texts.forEach(({ path }, idx) => {
+    if (translations[idx]) {
+      let cur = doc;
+      for (let i = 0; i < path.length - 1; i++) {
+        cur = cur[path[i]];
+      }
+      if (cur && typeof cur === 'object') {
+        cur[path[path.length - 1]] = translations[idx];
+      }
+    }
+  });
+  return cloned;
 }
 
 function verifyWebhook(req) {
@@ -191,7 +257,7 @@ export default async function handler(req, res) {
       log('Creating Aboutpage with deterministic ID:', aboutId);
       log('Aboutpage fields to create:', {
         slug: { [defaultLocale]: teamSlug },
-        pageType: { [defaultLocale]: 'Teammemberpage' },
+        pageType: { [defaultLocale]: 'teampage' },
         title: { [defaultLocale]: teamMemberName },
         teamMember: {
           [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
@@ -201,7 +267,7 @@ export default async function handler(req, res) {
         about = await env.createEntryWithId('aboutpage', aboutId, {
           fields: {
             slug: { [defaultLocale]: teamSlug },
-            pageType: { [defaultLocale]: 'Teammemberpage' },
+            pageType: { [defaultLocale]: 'teampage' },
             title: { [defaultLocale]: teamMemberName },
             teamMember: {
               [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
@@ -262,8 +328,8 @@ export default async function handler(req, res) {
       }) || changed;
     changed =
       ensureField(about, 'pageType', {
-        [defaultLocale]: 'Teammemberpage',
-        ...(nlLocale ? { [nlLocale]: 'Teammemberpage' } : {})
+        [defaultLocale]: 'teampage',
+        ...(nlLocale ? { [nlLocale]: 'teampage' } : {})
       }) || changed;
     changed =
       ensureField(about, 'title', {
@@ -310,7 +376,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // Update teamMember.link (do NOT publish teamMember to avoid re-triggering)
+    // Update teamMember.link and translate NL to EN fields
     try {
       const loc = defaultLocale;
       const currentId =
@@ -320,6 +386,9 @@ export default async function handler(req, res) {
         teamMember.fields.link[loc].sys &&
         teamMember.fields.link[loc].sys.id;
 
+      let teamMemberChanged = false;
+
+      // Update link
       if (currentId !== about.sys.id) {
         teamMember.fields = teamMember.fields || {};
         teamMember.fields.link = teamMember.fields.link || {};
@@ -332,12 +401,84 @@ export default async function handler(req, res) {
           };
         }
         log('Updating teamMember.link →', about.sys.id);
-        await teamMember.update();
+        teamMemberChanged = true;
       } else {
         log('teamMember.link already points to Aboutpage.');
       }
+
+      // Translate NL fields to EN if nlLocale exists and en-US doesn't have values
+      if (nlLocale && loc === 'en-US') {
+        const fieldsToTranslate = [
+          'name',
+          'role',
+          'descriptionHomepage',
+          'descriptionTeampage',
+          'contact'
+        ];
+        const textsToTranslate = [];
+        const fieldConfigs = [];
+
+        for (const fieldId of fieldsToTranslate) {
+          const field = teamMember.fields?.[fieldId];
+          if (!field) continue;
+
+          const nlValue = field[nlLocale];
+          const enValue = field[loc];
+
+          // Only translate if NL has value and EN is empty
+          if (nlValue && (!enValue || enValue === '')) {
+            if (fieldId === 'name' || fieldId === 'role') {
+              // Simple text fields
+              textsToTranslate.push(String(nlValue));
+              fieldConfigs.push({ fieldId, type: 'text', nlValue });
+            } else {
+              // RichText fields
+              const texts = extractTextFromRichText(nlValue);
+              if (texts.length > 0) {
+                texts.forEach(({ text }) => textsToTranslate.push(text));
+                fieldConfigs.push({ fieldId, type: 'richtext', texts, nlValue });
+              }
+            }
+          }
+        }
+
+        if (textsToTranslate.length > 0) {
+          log(`Translating ${textsToTranslate.length} text segments from ${nlLocale} to ${loc}...`);
+          const translated = await translateBatch(textsToTranslate, 'en');
+
+          let translationIdx = 0;
+          for (const config of fieldConfigs) {
+            if (config.type === 'text') {
+              const translatedText = translated[translationIdx++];
+              if (translatedText) {
+                teamMember.fields[config.fieldId] = teamMember.fields[config.fieldId] || {};
+                teamMember.fields[config.fieldId][loc] = translatedText;
+                log(
+                  `Translated ${config.fieldId}: "${config.nlValue.substring(0, 50)}..." → "${translatedText.substring(0, 50)}..."`
+                );
+                teamMemberChanged = true;
+              }
+            } else if (config.type === 'richtext') {
+              const translations = config.texts.map(() => translated[translationIdx++]);
+              const updatedValue = updateRichTextWithTranslations(config.nlValue, translations);
+              teamMember.fields[config.fieldId] = teamMember.fields[config.fieldId] || {};
+              teamMember.fields[config.fieldId][loc] = updatedValue;
+              log(`Translated ${config.fieldId} (RichText)`);
+              teamMemberChanged = true;
+            }
+          }
+        }
+      }
+
+      if (teamMemberChanged) {
+        log('Updating teamMember with translated fields...');
+        await teamMember.update();
+        log('TeamMember updated successfully');
+      } else {
+        log('TeamMember fields already up-to-date, no translation needed.');
+      }
     } catch (error) {
-      warn('Could not update teamMember.link:', error?.message || error);
+      warn('Could not update teamMember:', error?.message || error);
     }
 
     // Update TeamOverview collection (specialisationHomeOverview with teamMemberCollection field)
