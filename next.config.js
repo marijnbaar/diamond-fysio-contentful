@@ -1,8 +1,24 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['www.instagram.com', 'images.ctfassets.net', 'instagram.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.instagram.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net'
+      },
+      {
+        protocol: 'https',
+        hostname: 'instagram.com'
+      }
+    ],
+    qualities: [75, 85, 100]
   },
+  // Note: i18n config is for Pages Router only, not App Router
+  // If using App Router, use different internationalization approach
   i18n: {
     locales: ['nl', 'en'],
     defaultLocale: 'nl',

@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 
 const MyLink = forwardRef(({ href, children, ...rest }, ref) => {
   return (
-    <Link href={href} passHref>
+    <Link href={href}>
       <div ref={ref} role="link" tabIndex={0} {...rest}>
         {children}
       </div>
@@ -32,22 +32,10 @@ function classNames(...classes) {
 }
 
 export default function Navigation({ navigation }) {
-  if (!navigation) {
-    return null;
-  }
+  // Hooks must be called before any early returns
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const router = useRouter();
-  const currentLocale = router?.locale || 'nl';
-  const nextLocale = currentLocale === 'en' ? 'nl' : 'en';
-
-  const t = {
-    openMenu: 'Open menu',
-    closeMenu: 'Close menu',
-    login: 'Login',
-    darkMode: currentLocale === 'en' ? 'Dark mode' : 'Donkere modus',
-    lightMode: currentLocale === 'en' ? 'Light mode' : 'Lichte modus'
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,8 +65,25 @@ export default function Navigation({ navigation }) {
         ? stored === 'dark'
         : window.matchMedia('(prefers-color-scheme: dark)').matches;
       setIsDark(dark);
-    } catch {}
+    } catch {
+      // Ignore errors
+    }
   }, []);
+
+  if (!navigation) {
+    return null;
+  }
+
+  const currentLocale = router?.locale || 'nl';
+  const nextLocale = currentLocale === 'en' ? 'nl' : 'en';
+
+  const t = {
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    login: 'Login',
+    darkMode: currentLocale === 'en' ? 'Dark mode' : 'Donkere modus',
+    lightMode: currentLocale === 'en' ? 'Light mode' : 'Lichte modus'
+  };
 
   const toggleTheme = () => {
     try {
@@ -88,9 +93,13 @@ export default function Navigation({ navigation }) {
       root.classList.toggle('dark', nextDark);
       try {
         document.body.classList.toggle('dark', nextDark);
-      } catch {}
+      } catch {
+        // Ignore errors
+      }
       localStorage.setItem('theme', nextDark ? 'dark' : 'light');
-    } catch {}
+    } catch {
+      // Ignore errors
+    }
   };
 
   return (
@@ -429,7 +438,6 @@ export default function Navigation({ navigation }) {
           </div>
         </div>
       </div>
-
       <Transition
         as={Fragment}
         enter="duration-300 ease-out"

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { kvGet, kvSet, kvMGet } from '../../../../lib/kv';
+import { kvSet, kvMGet } from '../../../../lib/kv';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -50,7 +50,7 @@ async function translateManyWithOpenAI(texts: string[], targetLang: string): Pro
     throw new Error(`OpenAI API error: ${response.status} ${response.statusText} ${errorText}`);
   }
 
-  const json = (await response.json()) as any;
+  const json = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
   const content: string | undefined = json?.choices?.[0]?.message?.content;
   if (!content || typeof content !== 'string') throw new Error('OpenAI response missing content');
 
@@ -59,8 +59,8 @@ async function translateManyWithOpenAI(texts: string[], targetLang: string): Pro
     if (!parsed || !Array.isArray(parsed.items) || parsed.items.length !== texts.length) {
       throw new Error('Invalid JSON shape from OpenAI');
     }
-    return parsed.items.map((s: any) => (typeof s === 'string' ? s.trim() : ''));
-  } catch (e) {
+    return parsed.items.map((s: unknown) => (typeof s === 'string' ? s.trim() : ''));
+  } catch {
     throw new Error('Failed to parse OpenAI JSON response');
   }
 }

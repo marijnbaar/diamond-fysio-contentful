@@ -7,10 +7,8 @@ import { useRouter } from 'next/router';
 
 const MyLink = forwardRef(({ href, children, ...rest }, ref) => {
   return (
-    <Link href={href} legacyBehavior>
-      <a ref={ref} {...rest}>
-        {children}
-      </a>
+    <Link href={href} ref={ref} {...rest}>
+      {children}
     </Link>
   );
 });
@@ -65,7 +63,6 @@ export default function Footer({ footer }) {
           />
         </svg>
       </button>
-
       <h2 id="footer-heading" className="sr-only">
         {t.footerLabel}
       </h2>
@@ -248,10 +245,11 @@ export default function Footer({ footer }) {
               <div className="p-4 bg-gray-100 rounded-md text-sm text-gray-600 shadow-sm">
                 <p>{t.privacyBody}</p>
                 <p className="mt-2">
-                  <Link href="/privacy-policy" legacyBehavior>
-                    <a className="text-teal-600 hover:underline font-medium">
-                      {t.privacyLinkLabel}
-                    </a>
+                  <Link
+                    href="/privacy-policy"
+                    className="text-teal-600 hover:underline font-medium"
+                  >
+                    {t.privacyLinkLabel}
                   </Link>
                 </p>
               </div>

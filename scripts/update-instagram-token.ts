@@ -22,7 +22,7 @@ function getVercelProjectConfig(): { projectId: string; orgId: string } | null {
       if (config.projectId && config.orgId) {
         return { projectId: config.projectId, orgId: config.orgId };
       }
-    } catch (error) {
+    } catch {
       // Ignore parse errors
     }
   }

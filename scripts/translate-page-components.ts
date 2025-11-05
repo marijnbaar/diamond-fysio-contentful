@@ -141,7 +141,7 @@ async function updateEntry(
         paths.map((p) => p.text),
         target
       );
-      let newVal: any = typeof src === 'string' ? translated[0] : JSON.parse(JSON.stringify(src));
+      const newVal: any = typeof src === 'string' ? translated[0] : JSON.parse(JSON.stringify(src));
       if (typeof src !== 'string') {
         const base = newVal?.json?.nodeType === 'document' ? newVal.json : newVal;
         for (let i = 0; i < paths.length; i++) writeAtPath(base, paths[i].path, translated[i]);
@@ -167,7 +167,9 @@ async function updateEntry(
     try {
       await updated.publish();
       published = true;
-    } catch {}
+    } catch {
+      // Ignore publish errors
+    }
   }
   return { updated: true, published } as const;
 }
