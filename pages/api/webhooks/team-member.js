@@ -8,7 +8,8 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
 // optional: precisely name the TeamOverview entry + the collection field id to edit
 const TEAM_OVERVIEW_ENTRY_ID = process.env.TEAM_OVERVIEW_ENTRY_ID || '13d7Cj8GPxuvEb7YSosmHH';
-const TEAM_OVERVIEW_FIELD_ID = process.env.TEAM_OVERVIEW_FIELD_ID || 'teamMember'; // <-- set this!
+const TEAM_OVERVIEW_FIELD_ID = process.env.TEAM_OVERVIEW_FIELD_ID || 'teamMemberCollection'; // Field ID in specialisationHomeOverview
+const TEAM_OVERVIEW_CONTENT_TYPE = 'specialisationHomeOverview'; // Content type ID
 
 function log(...args) {
   console.log('[team-member webhook]', ...args);
@@ -132,18 +133,44 @@ export default async function handler(req, res) {
     try {
       about = await env.getEntry(aboutId);
       log('Found existing Aboutpage by deterministic ID:', aboutId);
-    } catch {
+      log('Existing Aboutpage fields:', JSON.stringify(about.fields, null, 2));
+    } catch (error) {
       log('Creating Aboutpage with deterministic ID:', aboutId);
-      about = await env.createEntryWithId('aboutpage', aboutId, {
-        fields: {
-          slug: { [defaultLocale]: teamSlug },
-          pageType: { [defaultLocale]: 'Teammemberpage' },
-          title: { [defaultLocale]: teamMemberName },
-          teamMember: {
-            [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
-          }
+      log('Aboutpage fields to create:', {
+        slug: { [defaultLocale]: teamSlug },
+        pageType: { [defaultLocale]: 'Teammemberpage' },
+        title: { [defaultLocale]: teamMemberName },
+        teamMember: {
+          [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
         }
       });
+      try {
+        about = await env.createEntryWithId('aboutpage', aboutId, {
+          fields: {
+            slug: { [defaultLocale]: teamSlug },
+            pageType: { [defaultLocale]: 'Teammemberpage' },
+            title: { [defaultLocale]: teamMemberName },
+            teamMember: {
+              [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
+            }
+          }
+        });
+        log('Aboutpage created successfully:', about.sys.id);
+        log('Created Aboutpage sys:', JSON.stringify(about.sys, null, 2));
+        log('Created Aboutpage fields:', JSON.stringify(about.fields, null, 2));
+      } catch (createError) {
+        err('Failed to create Aboutpage:', createError?.message || createError);
+        err('Create error details:', JSON.stringify(createError, null, 2));
+        // Check if content type exists
+        try {
+          const contentType = await env.getContentType('aboutpage');
+          log('Content type "aboutpage" exists:', contentType.sys.id);
+        } catch (ctError) {
+          err('Content type "aboutpage" not found! Error:', ctError?.message || ctError);
+          err('This might be the problem - check the content type ID in Contentful');
+        }
+        throw createError;
+      }
     }
 
     // Ensure required fields (write to default; also mirror to nl-NL if present so you see it in UI)
@@ -153,7 +180,20 @@ export default async function handler(req, res) {
       let changed = false;
       for (const [loc, val] of Object.entries(valueMap)) {
         if (val == null) continue;
-        if (!obj.fields[key][loc] || obj.fields[key][loc] !== val) {
+        const current = obj.fields[key][loc];
+        // For objects/links, compare by id if available, otherwise do deep comparison
+        let needsUpdate = false;
+        if (current == null) {
+          needsUpdate = true;
+        } else if (typeof val === 'object' && val !== null && val.sys?.id) {
+          // For link objects, compare by sys.id
+          needsUpdate = !current.sys || current.sys.id !== val.sys.id;
+        } else {
+          // For primitives, use strict equality
+          needsUpdate = current !== val;
+        }
+        if (needsUpdate) {
+          log(`Updating ${key}[${loc}]:`, current, '→', val);
           obj.fields[key][loc] = val;
           changed = true;
         }
@@ -187,7 +227,14 @@ export default async function handler(req, res) {
 
     if (changed) {
       log('Updating Aboutpage fields…');
-      about = await about.update();
+      try {
+        about = await about.update();
+        log('Aboutpage updated successfully');
+      } catch (updateError) {
+        err('Failed to update Aboutpage:', updateError?.message || updateError);
+        err('Update error details:', JSON.stringify(updateError, null, 2));
+        throw updateError;
+      }
     } else {
       log('Aboutpage fields already up-to-date.');
     }
@@ -200,9 +247,14 @@ export default async function handler(req, res) {
     } catch (error) {
       // If it's already published and version matches, this may throw — try once more via fresh get + publish
       warn('Publish threw, retrying once:', error?.message || error);
-      const fresh = await env.getEntry(aboutId);
-      about = await fresh.publish();
-      log('Aboutpage published on retry:', about.sys.id, 'v', about.sys.publishedVersion);
+      try {
+        const fresh = await env.getEntry(aboutId);
+        about = await fresh.publish();
+        log('Aboutpage published on retry:', about.sys.id, 'v', about.sys.publishedVersion);
+      } catch (retryError) {
+        err('Publish retry also failed:', retryError?.message || retryError);
+        // Don't throw - continue with other operations
+      }
     }
 
     // Update teamMember.link (do NOT publish teamMember to avoid re-triggering)
@@ -235,9 +287,22 @@ export default async function handler(req, res) {
       warn('Could not update teamMember.link:', error?.message || error);
     }
 
-    // Update TeamOverview collection (single known field)
+    // Update TeamOverview collection (specialisationHomeOverview with teamMemberCollection field)
     try {
+      log(`Fetching ${TEAM_OVERVIEW_CONTENT_TYPE} entry: ${TEAM_OVERVIEW_ENTRY_ID}`);
       const overview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
+      log(
+        `Found ${TEAM_OVERVIEW_CONTENT_TYPE} entry, contentType: ${overview.sys?.contentType?.sys?.id}`
+      );
+
+      // Verify it's the correct content type
+      const overviewType = overview.sys?.contentType?.sys?.id || overview.sys?.contentType;
+      if (overviewType && overviewType !== TEAM_OVERVIEW_CONTENT_TYPE) {
+        warn(
+          `Entry ${TEAM_OVERVIEW_ENTRY_ID} is not a ${TEAM_OVERVIEW_CONTENT_TYPE}, it's ${overviewType}`
+        );
+      }
+
       const loc = defaultLocale;
 
       overview.fields = overview.fields || {};
@@ -258,14 +323,20 @@ export default async function handler(req, res) {
             ];
           }
         }
-        log(`Adding ${teamMemberId} to TeamOverview.${TEAM_OVERVIEW_FIELD_ID} and publishing…`);
+        log(
+          `Adding ${teamMemberId} to ${TEAM_OVERVIEW_CONTENT_TYPE}.${TEAM_OVERVIEW_FIELD_ID} and publishing…`
+        );
         const updated = await overview.update();
         await updated.publish();
+        log(`Successfully updated and published ${TEAM_OVERVIEW_CONTENT_TYPE}`);
       } else {
-        log(`TeamOverview already contains ${teamMemberId} in ${TEAM_OVERVIEW_FIELD_ID}.`);
+        log(
+          `${TEAM_OVERVIEW_CONTENT_TYPE} already contains ${teamMemberId} in ${TEAM_OVERVIEW_FIELD_ID}.`
+        );
       }
     } catch (error) {
-      warn('TeamOverview update skipped/failed:', error?.message || error);
+      warn(`${TEAM_OVERVIEW_CONTENT_TYPE} update skipped/failed:`, error?.message || error);
+      warn('Error details:', JSON.stringify(error, null, 2));
     }
 
     return res.status(200).json({
