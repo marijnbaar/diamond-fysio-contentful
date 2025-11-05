@@ -277,6 +277,26 @@ export default async function handler(req, res) {
         log('Aboutpage created successfully:', about.sys.id);
         log('Created Aboutpage sys:', JSON.stringify(about.sys, null, 2));
         log('Created Aboutpage fields:', JSON.stringify(about.fields, null, 2));
+
+        // If this is Entry.create, publish immediately so teamMember can reference it later
+        if (topic.includes('Entry.create')) {
+          try {
+            log('Publishing newly created Aboutpage (Entry.create event)...');
+            about = await about.publish();
+            log(
+              'Aboutpage published immediately after creation:',
+              about.sys.id,
+              'v',
+              about.sys.publishedVersion
+            );
+          } catch (publishError) {
+            warn(
+              'Could not publish Aboutpage immediately after creation:',
+              publishError?.message || publishError
+            );
+            // Continue - will try to publish later
+          }
+        }
       } catch (createError) {
         err('Failed to create Aboutpage:', createError?.message || createError);
         err('Create error details:', JSON.stringify(createError, null, 2));
@@ -358,11 +378,27 @@ export default async function handler(req, res) {
       log('Aboutpage fields already up-to-date.');
     }
 
-    // Always publish the Aboutpage (idempotent)
+    // Always publish the Aboutpage FIRST (idempotent) - this is critical for teamMember to publish successfully
     try {
-      log('Publishing Aboutpage…');
-      about = await about.publish();
-      log('Aboutpage published:', about.sys.id, 'v', about.sys.publishedVersion);
+      log('Publishing Aboutpage (must be published before teamMember can reference it)…');
+
+      // Check if Aboutpage is already published
+      const isPublished = about.sys.publishedVersion != null;
+      if (!isPublished) {
+        about = await about.publish();
+        log('Aboutpage published:', about.sys.id, 'v', about.sys.publishedVersion);
+      } else {
+        log('Aboutpage already published:', about.sys.id, 'v', about.sys.publishedVersion);
+        // Verify it's actually published by checking publishedVersion
+        if (about.sys.publishedVersion === about.sys.version) {
+          log('Aboutpage is up-to-date and published');
+        } else {
+          // Republish to ensure latest version is published
+          const fresh = await env.getEntry(aboutId);
+          about = await fresh.publish();
+          log('Aboutpage republished:', about.sys.id, 'v', about.sys.publishedVersion);
+        }
+      }
     } catch (error) {
       // If it's already published and version matches, this may throw — try once more via fresh get + publish
       warn('Publish threw, retrying once:', error?.message || error);
@@ -372,8 +408,23 @@ export default async function handler(req, res) {
         log('Aboutpage published on retry:', about.sys.id, 'v', about.sys.publishedVersion);
       } catch (retryError) {
         err('Publish retry also failed:', retryError?.message || retryError);
-        // Don't throw - continue with other operations
+        // Don't throw - but log warning that teamMember might fail to publish
+        warn(
+          '⚠️ Aboutpage could not be published - teamMember publish may fail with "missing linked entries"'
+        );
       }
+    }
+
+    // Double-check that Aboutpage is published before continuing
+    try {
+      const verifyAbout = await env.getEntry(aboutId);
+      if (verifyAbout.sys.publishedVersion == null) {
+        warn('⚠️ Aboutpage is NOT published - attempting to publish again...');
+        about = await verifyAbout.publish();
+        log('Aboutpage published after verification:', about.sys.id);
+      }
+    } catch (verifyError) {
+      warn('Could not verify Aboutpage publication:', verifyError?.message || verifyError);
     }
 
     // Update teamMember.link and translate NL to EN fields
