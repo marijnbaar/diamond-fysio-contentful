@@ -9,19 +9,19 @@ const ENV_ID = process.env.CTF_ENV_ID || process.env.ENV_ID || 'master';
 const MGMT_TOKEN = process.env.CONTENT_MANAGEMENT_TOKEN || process.env.CONTENTFUL_MANAGEMENT_API;
 const WEBHOOK_SECRET = process.env.TEAMPAGE_WEBHOOK_SECRET || process.env.WEBHOOK_SECRET;
 
-// optional: precisely name the TeamOverview entry + the collection field id to edit
+// Optional: Team overview list
 const TEAM_OVERVIEW_ENTRY_ID = process.env.TEAM_OVERVIEW_ENTRY_ID || '13d7Cj8GPxuvEb7YSosmHH';
-const TEAM_OVERVIEW_FIELD_ID = process.env.TEAM_OVERVIEW_FIELD_ID || 'teamMemberCollection'; // Field ID in specialisationHomeOverview
-const TEAM_OVERVIEW_CONTENT_TYPE = 'specialisationHomeOverview'; // Content type ID
+const TEAM_OVERVIEW_FIELD_ID = process.env.TEAM_OVERVIEW_FIELD_ID || 'teamMemberCollection';
+const TEAM_OVERVIEW_CONTENT_TYPE = 'specialisationHomeOverview';
 
-function log(...args) {
-  console.log('[team-member webhook]', ...args);
+function log(...a) {
+  console.log('[team-member webhook]', ...a);
 }
-function warn(...args) {
-  console.warn('[team-member webhook]', ...args);
+function warn(...a) {
+  console.warn('[team-member webhook]', ...a);
 }
-function err(...args) {
-  console.error('[team-member webhook]', ...args);
+function err(...a) {
+  console.error('[team-member webhook]', ...a);
 }
 
 function createSlugFromName(name) {
@@ -34,22 +34,19 @@ function createSlugFromName(name) {
 }
 
 async function translateBatch(texts, targetLang) {
-  if (!texts || texts.length === 0) return [];
+  if (!texts?.length) return [];
   try {
     const res = await fetch(`${SITE_URL}/api/translate/batch`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ texts, lang: targetLang })
     });
-    if (!res.ok) {
-      warn('Translation API failed:', res.status, res.statusText);
-      return texts;
-    }
+    if (!res.ok) return texts;
     const json = await res.json();
     if (!Array.isArray(json.items)) return texts;
     return json.items.map((s, i) => (typeof s === 'string' && s.trim() ? s : texts[i] || ''));
-  } catch (error) {
-    warn('Translation error:', error?.message || error);
+  } catch (e) {
+    warn('Translation error:', e?.message || e);
     return texts;
   }
 }
@@ -57,53 +54,45 @@ async function translateBatch(texts, targetLang) {
 function extractTextFromRichText(value) {
   if (!value) return [];
   if (typeof value === 'string') return [{ path: [], text: value }];
-
   const doc = value?.json?.nodeType === 'document' ? value.json : value;
   if (!doc || typeof doc !== 'object') return [];
-
   const texts = [];
-  function traverse(node, path = []) {
+  (function walk(node, path = []) {
     if (!node || typeof node !== 'object') return;
     if (node.nodeType === 'text' && typeof node.value === 'string' && node.value.trim()) {
       texts.push({ path, text: node.value });
     }
     if (Array.isArray(node.content)) {
-      node.content.forEach((child, i) => traverse(child, [...path, 'content', i]));
+      node.content.forEach((child, i) => walk(child, [...path, 'content', i]));
     }
-  }
-  traverse(doc);
+  })(doc);
   return texts;
 }
 
-// ✅ correctly writes back into each text node's .value (does NOT replace the node)
+// write back into text nodes' .value (do not replace nodes)
 function updateRichTextWithTranslations(original, translations) {
-  if (typeof original === 'string') {
-    return translations[0] || original;
-  }
+  if (typeof original === 'string') return translations[0] || original;
   const cloned = JSON.parse(JSON.stringify(original));
   const doc = cloned?.json?.nodeType === 'document' ? cloned.json : cloned;
-
   const texts = extractTextFromRichText(original);
   texts.forEach(({ path }, idx) => {
-    if (!translations[idx]) return;
+    const t = translations[idx];
+    if (!t) return;
     let node = doc;
     for (let i = 0; i < path.length; i++) {
       node = node[path[i]];
       if (!node) return;
     }
-    if (node && node.nodeType === 'text' && typeof node.value === 'string') {
-      node.value = translations[idx];
-    }
+    if (node?.nodeType === 'text' && typeof node.value === 'string') node.value = t;
   });
-
   return cloned;
 }
 
 function verifyWebhook(req) {
-  const hasContentfulHeaders =
-    Boolean(req.headers['x-contentful-topic']) ||
-    Boolean(req.headers['x-contentful-webhook-name']) ||
-    Boolean(req.headers['x-contentful-crn']);
+  const hasCFHeaders =
+    !!req.headers['x-contentful-topic'] ||
+    !!req.headers['x-contentful-webhook-name'] ||
+    !!req.headers['x-contentful-crn'];
 
   if (process.env.EMERGENCY_STOP_WEBHOOK === 'true') {
     err('EMERGENCY_STOP_WEBHOOK=true — refusing request');
@@ -119,103 +108,161 @@ function verifyWebhook(req) {
     req.headers['teampage_webhook_secret'],
     req.headers['teampagewebhooksecret'],
     ...Object.entries(req.headers || {})
-      .map(([key, value]) => {
-        const lowerKey = key.toLowerCase();
-        if (
-          lowerKey.includes('secret') ||
-          lowerKey.includes('auth') ||
-          lowerKey.includes('teampage')
-        ) {
-          return value;
-        }
-        return null;
-      })
+      .map(([k, v]) => (/(secret|auth|teampage)/i.test(k) ? v : null))
       .filter(Boolean)
   ].filter(Boolean);
 
-  log('Checking webhook authentication...');
-  log('Contentful headers present:', hasContentfulHeaders);
-  log('Possible secret headers found:', possibleSecretHeaders.length);
-  log('All request headers:', Object.keys(req.headers || {}));
-
   if (WEBHOOK_SECRET) {
     const secret = WEBHOOK_SECRET.trim();
-    for (const headerValue of possibleSecretHeaders) {
-      const value =
-        typeof headerValue === 'string' ? headerValue.trim() : String(headerValue || '').trim();
-      const normalizedValue = value.replace(/^Bearer\s+/i, '');
-      if (normalizedValue === secret || value === secret || value === `Bearer ${secret}`) {
-        log('✅ Webhook verified via WEBHOOK_SECRET');
-        return true;
-      }
+    for (const hv of possibleSecretHeaders) {
+      const raw = typeof hv === 'string' ? hv.trim() : String(hv || '').trim();
+      const normalized = raw.replace(/^Bearer\s+/i, '');
+      if (normalized === secret || raw === secret || raw === `Bearer ${secret}`) return true;
     }
-    if (hasContentfulHeaders) {
-      log(
-        '⚠️ WEBHOOK_SECRET is configured but no matching secret header found - accepting based on Contentful headers'
-      );
-      return true;
-    }
-    err('Missing or invalid authorization header while WEBHOOK_SECRET is set');
+    if (hasCFHeaders) return true; // allow if coming from Contentful infra
     return false;
   }
 
-  if (!hasContentfulHeaders) {
-    err('No Contentful headers and no secret configured');
-    return false;
-  }
-  log('✅ Webhook verified via Contentful headers');
-  return true;
+  return hasCFHeaders;
 }
 
 function getContentTypeId(sys) {
-  if (!sys || !sys.contentType) return null;
+  if (!sys?.contentType) return null;
   if (typeof sys.contentType === 'string') return sys.contentType;
-  if (sys.contentType.sys && sys.contentType.sys.id) return sys.contentType.sys.id;
-  if (sys.contentType.id) return sys.contentType.id;
-  return null;
+  return sys.contentType.sys?.id || sys.contentType.id || null;
 }
 
-// helpers for publish semantics in Contentful
-async function ensurePublished(entry) {
-  // If never published
-  if (!entry.sys.publishedVersion) {
-    const published = await entry.publish();
-    return published;
+// ---------- graph helpers to find & publish linked refs ----------
+const isLink = (v) =>
+  v?.sys?.type === 'Link' && (v.sys.linkType === 'Entry' || v.sys.linkType === 'Asset');
+
+function collectLinksFromValue(val, acc) {
+  if (!val) return;
+  if (Array.isArray(val)) return val.forEach((x) => collectLinksFromValue(x, acc));
+  if (typeof val === 'object') {
+    if (isLink(val)) {
+      const id = val.sys.id;
+      if (val.sys.linkType === 'Entry') acc.entryIds.add(id);
+      else acc.assetIds.add(id);
+      return;
+    }
+    // RichText embedded links
+    if (val?.nodeType === 'document' || val?.json?.nodeType === 'document') {
+      const doc = val.json?.nodeType === 'document' ? val.json : val;
+      (function walk(node) {
+        if (!node) return;
+        if (node.data?.target?.sys?.type === 'Link') {
+          const t = node.data.target.sys;
+          if (t.linkType === 'Entry') acc.entryIds.add(t.id);
+          if (t.linkType === 'Asset') acc.assetIds.add(t.id);
+        }
+        if (Array.isArray(node.content)) node.content.forEach(walk);
+      })(doc);
+    }
+    // generic object walk
+    for (const k of Object.keys(val)) collectLinksFromValue(val[k], acc);
   }
-  // If version isn't exactly publishedVersion + 1, there are pending changes or stale object; re-fetch latest and publish
+}
+
+function collectLinksFromFields(fields) {
+  const acc = { entryIds: new Set(), assetIds: new Set() };
+  if (!fields) return acc;
+  for (const fieldId of Object.keys(fields)) {
+    const perLocale = fields[fieldId];
+    if (!perLocale || typeof perLocale !== 'object') continue;
+    for (const loc of Object.keys(perLocale)) {
+      collectLinksFromValue(perLocale[loc], acc);
+    }
+  }
+  return acc;
+}
+
+async function ensureEntryPublished(env, entry) {
+  // never published
+  if (!entry.sys.publishedVersion) return entry.publish();
+  // up-to-date is version === publishedVersion + 1
   if (entry.sys.version !== entry.sys.publishedVersion + 1) {
-    const env = await entry.getEnvironment();
     const fresh = await env.getEntry(entry.sys.id);
     if (!fresh.sys.publishedVersion || fresh.sys.version !== fresh.sys.publishedVersion + 1) {
-      const republished = await fresh.publish();
-      return republished;
+      return fresh.publish();
     }
-    return fresh; // already up-to-date
+    return fresh;
   }
-  return entry; // already up-to-date & published
+  return entry;
 }
+
+async function ensureAssetPublished(env, asset) {
+  // Assets might need processing; attempt publish regardless (fails if not processed)
+  if (!asset.sys.publishedVersion) return asset.publish();
+  if (asset.sys.version !== asset.sys.publishedVersion + 1) {
+    const fresh = await env.getAsset(asset.sys.id);
+    if (!fresh.sys.publishedVersion || fresh.sys.version !== fresh.sys.publishedVersion + 1) {
+      return fresh.publish();
+    }
+    return fresh;
+  }
+  return asset;
+}
+
+// Recursively publish graph (entries & assets) up to a sane depth to avoid cycles
+async function publishGraph(env, rootEntry, maxDepth = 3, seen = new Set()) {
+  const queue = [{ entry: rootEntry, depth: 0 }];
+  while (queue.length) {
+    const { entry, depth } = queue.shift();
+    if (!entry || seen.has(entry.sys.id)) continue;
+    seen.add(entry.sys.id);
+
+    // First, ensure all linked assets/entries are published
+    const links = collectLinksFromFields(entry.fields);
+    // assets
+    for (const assetId of links.assetIds) {
+      try {
+        const asset = await env.getAsset(assetId);
+        await ensureAssetPublished(env, asset);
+      } catch (e) {
+        warn(`Asset ${assetId} publish skipped/failed:`, e?.message || e);
+      }
+    }
+    // entries (depth limit)
+    if (depth < maxDepth) {
+      for (const childId of links.entryIds) {
+        if (seen.has(childId)) continue;
+        try {
+          const child = await env.getEntry(childId);
+          queue.push({ entry: child, depth: depth + 1 });
+        } catch (e) {
+          warn(`Entry ${childId} fetch failed:`, e?.message || e);
+        }
+      }
+    }
+
+    // Now (re)publish this entry
+    try {
+      await ensureEntryPublished(env, entry);
+    } catch (e) {
+      warn(`Entry ${entry.sys.id} publish failed:`, e?.message || e);
+    }
+  }
+}
+
+// ---------------------------------------------------------------
 
 export default async function handler(req, res) {
   try {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
     if (!verifyWebhook(req)) return res.status(401).json({ error: 'Unauthorized' });
-    if (!SPACE_ID || !MGMT_TOKEN) {
+    if (!SPACE_ID || !MGMT_TOKEN)
       return res.status(500).json({ error: 'Missing SPACE_ID or MGMT_TOKEN' });
-    }
 
     const topic = String(req.headers['x-contentful-topic'] || '');
     log('Incoming topic:', topic);
-
-    // act on entry create/publish events
     if (!/Entry\.(publish|create)/.test(topic)) {
-      log('Skipping — not Entry.create/publish');
       return res.status(200).json({ message: 'Skipped: non-handled event' });
     }
 
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-    if (!body || typeof body !== 'object') {
+    if (!body || typeof body !== 'object')
       return res.status(400).json({ error: 'Invalid JSON body' });
-    }
 
     const { sys = {}, fields = {} } = body;
     const entryId = sys.id;
@@ -223,11 +270,10 @@ export default async function handler(req, res) {
 
     const ctype = (getContentTypeId(sys) || '').toLowerCase();
     if (ctype !== 'teammember') {
-      log('Skipping — contentType is not teamMember:', ctype);
       return res.status(200).json({ message: 'Skipped non-teamMember' });
     }
 
-    // Prepare values
+    // basics
     const teamMemberName =
       (fields.name &&
         (fields.name['nl-NL'] || fields.name.nl || fields.name['en-US'] || fields.name)) ||
@@ -241,25 +287,31 @@ export default async function handler(req, res) {
     const space = await client.getSpace(SPACE_ID);
     const env = await space.getEnvironment(ENV_ID);
 
-    // resolve locales
+    // locales
     const locales = await env.getLocales();
     const defaultLocale = (locales.items.find((l) => l.default) || { code: 'en-US' }).code;
     const hasNl = locales.items.some((l) => l.code === 'nl-NL');
     const hasEn = locales.items.some((l) => l.code === 'en-US');
     const nlLocale = hasNl ? 'nl-NL' : null;
-    const targetLocale = hasEn ? 'en-US' : defaultLocale; // always try to backfill en-US when possible
-    log('Locales:', { defaultLocale, nlLocale, targetLocale });
 
-    // Ensure teamMember exists (we also use it to write back .link)
-    const teamMember = await env.getEntry(teamMemberId);
+    // Load teamMember (source of truth)
+    let teamMember = await env.getEntry(teamMemberId);
 
-    // Upsert Aboutpage deterministically
+    // --- STEP 1: publish teamMember FIRST (no backlink required) ---
+    try {
+      await publishGraph(env, teamMember, 2); // publish its dependencies first
+      teamMember = await env.getEntry(teamMemberId); // refresh
+      await ensureEntryPublished(env, teamMember);
+      log('Published teamMember first:', teamMemberId);
+    } catch (e) {
+      warn('TeamMember initial publish failed (will continue):', e?.message || e);
+    }
+
+    // --- STEP 2: upsert Aboutpage WITHOUT circular dependency at first ---
     let about;
     try {
       about = await env.getEntry(aboutId);
-      log('Found existing Aboutpage by deterministic ID:', aboutId);
     } catch {
-      log('Creating Aboutpage with deterministic ID:', aboutId);
       about = await env.createEntryWithId('aboutpage', aboutId, {
         fields: {
           slug: { [defaultLocale]: teamSlug, ...(nlLocale ? { [nlLocale]: teamSlug } : {}) },
@@ -270,49 +322,27 @@ export default async function handler(req, res) {
           title: {
             [defaultLocale]: teamMemberName,
             ...(nlLocale ? { [nlLocale]: teamMemberName } : {})
-          },
-          teamMember: {
-            [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } },
-            ...(nlLocale
-              ? { [nlLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } } }
-              : {})
           }
+          // IMPORTANT: do NOT set teamMember link yet (avoid cycle)
         }
       });
-
-      // If the trigger was an Entry.create, attempt immediate publish
-      if (topic.includes('Entry.create')) {
-        try {
-          about = await about.publish();
-          log('Aboutpage published immediately after creation');
-        } catch (e) {
-          warn('Could not publish Aboutpage immediately after creation:', e?.message || e);
-        }
-      }
     }
 
-    // Ensure required fields are present & up-to-date
+    // Ensure core fields are up-to-date (still no backlink)
     const ensureField = (obj, key, valueMap) => {
       obj.fields = obj.fields || {};
       obj.fields[key] = obj.fields[key] || {};
       let changed = false;
       for (const [loc, val] of Object.entries(valueMap)) {
         if (val == null) continue;
-        const current = obj.fields[key][loc];
-
-        let needsUpdate = false;
-        if (current == null) {
-          needsUpdate = true;
-        } else if (typeof val === 'object' && val !== null && val.sys?.id) {
-          needsUpdate = !current?.sys || current.sys.id !== val.sys.id;
-        } else if (typeof val === 'object') {
-          // deep-ish compare for primitives within objects (simple stringify is ok here)
-          needsUpdate = JSON.stringify(current) !== JSON.stringify(val);
-        } else {
-          needsUpdate = current !== val;
-        }
-
-        if (needsUpdate) {
+        const cur = obj.fields[key][loc];
+        const needs =
+          cur == null
+            ? true
+            : typeof val === 'object'
+              ? JSON.stringify(cur) !== JSON.stringify(val)
+              : cur !== val;
+        if (needs) {
           obj.fields[key][loc] = val;
           changed = true;
         }
@@ -320,82 +350,54 @@ export default async function handler(req, res) {
       return changed;
     };
 
-    let changed = false;
-    changed =
+    let aboutChanged = false;
+    aboutChanged =
       ensureField(about, 'slug', {
         [defaultLocale]: teamSlug,
         ...(nlLocale ? { [nlLocale]: teamSlug } : {})
-      }) || changed;
-    changed =
+      }) || aboutChanged;
+    aboutChanged =
       ensureField(about, 'pageType', {
         [defaultLocale]: 'teampage',
         ...(nlLocale ? { [nlLocale]: 'teampage' } : {})
-      }) || changed;
-    changed =
+      }) || aboutChanged;
+    aboutChanged =
       ensureField(about, 'title', {
         [defaultLocale]: teamMemberName,
         ...(nlLocale ? { [nlLocale]: teamMemberName } : {})
-      }) || changed;
-    changed =
-      ensureField(about, 'teamMember', {
-        [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } },
-        ...(nlLocale
-          ? { [nlLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } } }
-          : {})
-      }) || changed;
+      }) || aboutChanged;
 
-    if (changed) {
-      about = await about.update();
-      log('Aboutpage updated');
-    } else {
-      log('Aboutpage fields already up-to-date');
+    if (aboutChanged) about = await about.update();
+
+    // Publish Aboutpage NOW (it has no teamMember link yet, so no cycle)
+    try {
+      await ensureEntryPublished(env, about);
+      log('Published Aboutpage without backlink:', aboutId);
+    } catch (e) {
+      warn('Aboutpage publish failed:', e?.message || e);
     }
 
-    // ✅ publish Aboutpage first (must exist/publish before teamMember references it)
+    // --- STEP 3: add backlink fields safely now that both are published ---
+    // 3a) teamMember.link → Aboutpage (then republish teamMember)
     try {
-      // ensurePublished needs an entry object whose getEnvironment() works; attach a shim:
-      about.getEnvironment = () => Promise.resolve(env);
-      about = await ensurePublished(about);
-      log('Aboutpage ensured published:', about.sys.id, 'pv=', about.sys.publishedVersion);
-    } catch (error) {
-      warn(
-        'Ensuring Aboutpage published failed (teamMember publish may fail):',
-        error?.message || error
-      );
-    }
+      const linkObj = { sys: { type: 'Link', linkType: 'Entry', id: aboutId } };
+      const locsToSet = new Set([defaultLocale]);
+      if (nlLocale) locsToSet.add(nlLocale);
+      if (hasEn) locsToSet.add('en-US');
 
-    // Update teamMember.link and translate nl-NL -> en-US where EN is empty
-    try {
-      const loc = targetLocale;
+      let changed = false;
+      teamMember.fields = teamMember.fields || {};
+      teamMember.fields.link = teamMember.fields.link || {};
 
-      const currentId =
-        teamMember.fields?.link?.[loc]?.sys?.id ||
-        teamMember.fields?.link?.[defaultLocale]?.sys?.id;
-
-      let teamMemberChanged = false;
-
-      // Link to Aboutpage
-      if (currentId !== about.sys.id) {
-        teamMember.fields = teamMember.fields || {};
-        teamMember.fields.link = teamMember.fields.link || {};
-        teamMember.fields.link[defaultLocale] = {
-          sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
-        };
-        if (nlLocale) {
-          teamMember.fields.link[nlLocale] = {
-            sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
-          };
+      for (const loc of locsToSet) {
+        const cur = teamMember.fields.link[loc];
+        if (!cur || cur.sys?.id !== aboutId) {
+          teamMember.fields.link[loc] = linkObj;
+          changed = true;
         }
-        if (loc !== defaultLocale) {
-          teamMember.fields.link[loc] = {
-            sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
-          };
-        }
-        teamMemberChanged = true;
-        log('teamMember.link updated →', about.sys.id);
       }
 
-      // Backfill EN from NL if EN missing and NL exists
+      // Backfill EN from NL if EN is empty
       if (nlLocale && hasEn) {
         const fieldsToTranslate = [
           'name',
@@ -405,130 +407,121 @@ export default async function handler(req, res) {
           'contact'
         ];
         const textsToTranslate = [];
-        const fieldConfigs = [];
-
-        for (const fieldId of fieldsToTranslate) {
-          const field = teamMember.fields?.[fieldId];
-          if (!field) continue;
-
-          const nlValue = field[nlLocale];
-          const enValue = field['en-US'];
-
-          if (
-            nlValue &&
-            (enValue == null || (typeof enValue === 'string' && enValue.trim() === ''))
-          ) {
-            if (fieldId === 'name' || fieldId === 'role') {
-              textsToTranslate.push(String(nlValue));
-              fieldConfigs.push({ fieldId, type: 'text', nlValue });
+        const cfgs = [];
+        for (const fid of fieldsToTranslate) {
+          const f = teamMember.fields?.[fid];
+          if (!f) continue;
+          const nlVal = f[nlLocale];
+          const enVal = f['en-US'];
+          if (nlVal && (enVal == null || (typeof enVal === 'string' && !enVal.trim()))) {
+            if (fid === 'name' || fid === 'role') {
+              textsToTranslate.push(String(nlVal));
+              cfgs.push({ fid, kind: 'text', nlVal });
             } else {
-              const texts = extractTextFromRichText(nlValue);
-              if (texts.length > 0) {
+              const texts = extractTextFromRichText(nlVal);
+              if (texts.length) {
                 texts.forEach(({ text }) => textsToTranslate.push(text));
-                fieldConfigs.push({ fieldId, type: 'richtext', texts, nlValue });
+                cfgs.push({ fid, kind: 'rich', texts, nlVal });
               }
             }
           }
         }
-
-        if (textsToTranslate.length > 0) {
-          log(`Translating ${textsToTranslate.length} text segments nl-NL → en-US ...`);
+        if (textsToTranslate.length) {
           const translated = await translateBatch(textsToTranslate, 'en');
-          let idx = 0;
-
-          for (const cfg of fieldConfigs) {
-            if (cfg.type === 'text') {
-              const t = translated[idx++];
+          let i = 0;
+          for (const c of cfgs) {
+            if (c.kind === 'text') {
+              const t = translated[i++];
               if (t) {
-                teamMember.fields[cfg.fieldId] = teamMember.fields[cfg.fieldId] || {};
-                teamMember.fields[cfg.fieldId]['en-US'] = t;
-                teamMemberChanged = true;
+                teamMember.fields[c.fid] = teamMember.fields[c.fid] || {};
+                teamMember.fields[c.fid]['en-US'] = t;
+                changed = true;
               }
             } else {
-              const pieceTranslations = cfg.texts.map(() => translated[idx++]);
-              const updatedValue = updateRichTextWithTranslations(cfg.nlValue, pieceTranslations);
-              teamMember.fields[cfg.fieldId] = teamMember.fields[cfg.fieldId] || {};
-              teamMember.fields[cfg.fieldId]['en-US'] = updatedValue;
-              teamMemberChanged = true;
+              const segs = c.texts.map(() => translated[i++]);
+              const updated = updateRichTextWithTranslations(c.nlVal, segs);
+              teamMember.fields[c.fid] = teamMember.fields[c.fid] || {};
+              teamMember.fields[c.fid]['en-US'] = updated;
+              changed = true;
             }
           }
         }
       }
 
-      if (teamMemberChanged) {
-        await teamMember.update();
-        log('TeamMember updated (link/translation)');
-      } else {
-        log('TeamMember unchanged');
+      if (changed) {
+        teamMember = await teamMember.update();
       }
-    } catch (error) {
-      warn('Could not update teamMember:', error?.message || error);
-    }
 
-    // Optionally ensure teamMember is published too (so the site updates)
-    try {
-      teamMember.getEnvironment = () => Promise.resolve(env);
-      const publishedTeamMember = await ensurePublished(teamMember);
-      log(
-        'TeamMember ensured published:',
-        publishedTeamMember.sys.id,
-        'pv=',
-        publishedTeamMember.sys.publishedVersion
-      );
+      // publish teamMember again with backlink (and its dependencies)
+      await publishGraph(env, teamMember, 2);
+      teamMember = await env.getEntry(teamMemberId);
+      await ensureEntryPublished(env, teamMember);
+      log('Republished teamMember with backlink to Aboutpage');
     } catch (e) {
-      warn('Could not ensure teamMember published (may be draft intentionally):', e?.message || e);
+      warn('Failed to set/publish teamMember backlink:', e?.message || e);
     }
 
-    // Update TeamOverview collection: add the member if missing and publish the overview
+    // 3b) Now it’s safe to set Aboutpage.teamMember → teamMember (no cycle issues after both are published)
     try {
-      log(`Fetching ${TEAM_OVERVIEW_CONTENT_TYPE} entry: ${TEAM_OVERVIEW_ENTRY_ID}`);
-      let overview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
+      const linkObj = { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } };
+      let changed = false;
+      about.fields = about.fields || {};
+      about.fields.teamMember = about.fields.teamMember || {};
+      const locsToSet = new Set([defaultLocale]);
+      if (nlLocale) locsToSet.add(nlLocale);
 
-      const overviewType = overview.sys?.contentType?.sys?.id || overview.sys?.contentType;
-      if (overviewType && overviewType !== TEAM_OVERVIEW_CONTENT_TYPE) {
+      for (const loc of locsToSet) {
+        const cur = about.fields.teamMember[loc];
+        if (!cur || cur.sys?.id !== teamMemberId) {
+          about.fields.teamMember[loc] = linkObj;
+          changed = true;
+        }
+      }
+
+      if (changed) {
+        about = await about.update();
+        await ensureEntryPublished(env, about);
+        log('Updated & published Aboutpage with teamMember link');
+      }
+    } catch (e) {
+      warn('Failed to set/publish Aboutpage.teamMember:', e?.message || e);
+    }
+
+    // --- STEP 4: ensure team overview contains the member ---
+    try {
+      let overview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
+      const typ = overview.sys?.contentType?.sys?.id || overview.sys?.contentType;
+      if (typ && typ !== TEAM_OVERVIEW_CONTENT_TYPE) {
         warn(
-          `Entry ${TEAM_OVERVIEW_ENTRY_ID} is not a ${TEAM_OVERVIEW_CONTENT_TYPE}, it's ${overviewType}`
+          `Entry ${TEAM_OVERVIEW_ENTRY_ID} is type ${typ}, expected ${TEAM_OVERVIEW_CONTENT_TYPE}`
         );
       }
-
-      const loc = defaultLocale;
-
       overview.fields = overview.fields || {};
       overview.fields[TEAM_OVERVIEW_FIELD_ID] = overview.fields[TEAM_OVERVIEW_FIELD_ID] || {};
-      const arr = overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] || [];
-      const has = Array.isArray(arr) && arr.some((m) => m?.sys?.id === teamMemberId);
-
-      if (!has) {
-        overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] = [
+      const arr = overview.fields[TEAM_OVERVIEW_FIELD_ID][defaultLocale] || [];
+      const present = Array.isArray(arr) && arr.some((m) => m?.sys?.id === teamMemberId);
+      if (!present) {
+        overview.fields[TEAM_OVERVIEW_FIELD_ID][defaultLocale] = [
           ...arr,
           { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
         ];
-
         if (nlLocale) {
           const arrNl = overview.fields[TEAM_OVERVIEW_FIELD_ID][nlLocale] || [];
-          const hasNl = Array.isArray(arrNl) && arrNl.some((m) => m?.sys?.id === teamMemberId);
-          if (!hasNl) {
+          const presentNl = Array.isArray(arrNl) && arrNl.some((m) => m?.sys?.id === teamMemberId);
+          if (!presentNl) {
             overview.fields[TEAM_OVERVIEW_FIELD_ID][nlLocale] = [
               ...arrNl,
               { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
             ];
           }
         }
-
         overview = await overview.update();
-        // publish with fresh fetch to avoid version conflicts
-        const freshOverview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
-        freshOverview.getEnvironment = () => Promise.resolve(env);
-        await ensurePublished(freshOverview);
-        log(`Updated and published ${TEAM_OVERVIEW_CONTENT_TYPE}`);
-      } else {
-        log(
-          `${TEAM_OVERVIEW_CONTENT_TYPE} already contains ${teamMemberId} in ${TEAM_OVERVIEW_FIELD_ID}.`
-        );
+        // publish overview
+        await ensureEntryPublished(env, overview);
+        log('Updated & published team overview');
       }
-    } catch (error) {
-      warn(`${TEAM_OVERVIEW_CONTENT_TYPE} update skipped/failed:`, error?.message || error);
-      warn('Error details:', JSON.stringify(error, null, 2));
+    } catch (e) {
+      warn('Team overview update skipped/failed:', e?.message || e);
     }
 
     return res.status(200).json({
@@ -538,7 +531,7 @@ export default async function handler(req, res) {
         about?.fields?.slug?.[defaultLocale] ||
         (nlLocale ? about?.fields?.slug?.[nlLocale] : null) ||
         teamSlug,
-      publishedVersion: about?.sys?.publishedVersion || null
+      teamMemberId
     });
   } catch (error) {
     err('Fatal webhook error:', error?.message || error);
