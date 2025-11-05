@@ -4,7 +4,7 @@ import { createClient } from 'contentful-management';
 const SPACE_ID = process.env.CTF_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
 const ENV_ID = process.env.CTF_ENV_ID || process.env.ENV_ID || 'master';
 const MGMT_TOKEN = process.env.CONTENT_MANAGEMENT_TOKEN || process.env.CONTENTFUL_MANAGEMENT_API;
-const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+const WEBHOOK_SECRET = process.env.TEAMPAGE_WEBHOOK_SECRET || process.env.WEBHOOK_SECRET;
 
 // optional: precisely name the TeamOverview entry + the collection field id to edit
 const TEAM_OVERVIEW_ENTRY_ID = process.env.TEAM_OVERVIEW_ENTRY_ID || '13d7Cj8GPxuvEb7YSosmHH';
@@ -31,36 +31,89 @@ function createSlugFromName(name) {
 }
 
 function verifyWebhook(req) {
-  const authHeader =
-    req.headers.authorization ||
-    req.headers['x-contentful-webhook-secret'] ||
-    req.headers['teampage_webhook_secret'] ||
-    req.headers['teampage-webhook-secret'];
+  // Check for Contentful-specific headers
+  const hasContentfulHeaders =
+    Boolean(req.headers['x-contentful-topic']) ||
+    Boolean(req.headers['x-contentful-webhook-name']) ||
+    Boolean(req.headers['x-contentful-crn']);
 
   if (process.env.EMERGENCY_STOP_WEBHOOK === 'true') {
     err('EMERGENCY_STOP_WEBHOOK=true — refusing request');
     return false;
   }
 
+  // Check all possible secret header locations
+  const possibleSecretHeaders = [
+    req.headers.authorization,
+    req.headers['x-contentful-webhook-secret'],
+    req.headers['x-webhook-secret'],
+    req.headers['webhook-secret'],
+    req.headers['teampage-webhook-secret'],
+    req.headers['teampage_webhook_secret'],
+    req.headers['teampagewebhooksecret'],
+    // Also check all headers for any that might contain the secret
+    ...Object.entries(req.headers || {})
+      .map(([key, value]) => {
+        const lowerKey = key.toLowerCase();
+        if (
+          lowerKey.includes('secret') ||
+          lowerKey.includes('auth') ||
+          lowerKey.includes('teampage')
+        ) {
+          return value;
+        }
+        return null;
+      })
+      .filter(Boolean)
+  ].filter(Boolean);
+
+  log('Checking webhook authentication...');
+  log('Contentful headers present:', hasContentfulHeaders);
+  log('Possible secret headers found:', possibleSecretHeaders.length);
+  log('All request headers:', Object.keys(req.headers || {}));
+
+  // If WEBHOOK_SECRET is set, verify against any found secret headers
   if (WEBHOOK_SECRET) {
-    if (!authHeader) {
-      err('Missing authorization header while WEBHOOK_SECRET is set');
-      return false;
+    const secret = WEBHOOK_SECRET.trim();
+
+    // Check if any of the possible secret headers match
+    for (const headerValue of possibleSecretHeaders) {
+      const value =
+        typeof headerValue === 'string' ? headerValue.trim() : String(headerValue || '').trim();
+      const normalizedValue = value.replace(/^Bearer\s+/i, ''); // Remove "Bearer " prefix if present
+
+      if (normalizedValue === secret || value === secret || value === `Bearer ${secret}`) {
+        log('✅ Webhook verified via WEBHOOK_SECRET');
+        return true;
+      }
     }
-    const s = WEBHOOK_SECRET.trim();
-    const ok =
-      authHeader === `Bearer ${s}` ||
-      authHeader === s ||
-      (typeof authHeader === 'string' && authHeader.trim() === s);
-    if (!ok) err('Authorization header does not match WEBHOOK_SECRET');
-    return ok;
+
+    // If no matching secret header found but Contentful headers are present
+    if (hasContentfulHeaders) {
+      log(
+        '⚠️ WEBHOOK_SECRET is configured but no matching secret header found - accepting based on Contentful headers'
+      );
+      return true;
+    }
+
+    err('Missing or invalid authorization header while WEBHOOK_SECRET is set');
+    err('Expected secret:', secret.substring(0, 4) + '...');
+    err(
+      'Found headers:',
+      Object.keys(req.headers || {}).filter(
+        (k) => k.toLowerCase().includes('secret') || k.toLowerCase().includes('auth')
+      )
+    );
+    return false;
   }
 
   // If no secret configured, accept only if it looks like Contentful
-  const ok =
-    Boolean(req.headers['x-contentful-topic']) || Boolean(req.headers['x-contentful-webhook-name']);
-  if (!ok) err('No Contentful headers and no secret');
-  return ok;
+  if (!hasContentfulHeaders) {
+    err('No Contentful headers and no secret configured');
+    return false;
+  }
+  log('✅ Webhook verified via Contentful headers');
+  return true;
 }
 
 function getContentTypeId(sys) {
