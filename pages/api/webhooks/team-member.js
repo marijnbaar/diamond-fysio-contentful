@@ -141,8 +141,8 @@ export default async function handler(req, res) {
         fields: {
           slug: { [defaultLocale]: slug, ...(nlLocale ? { [nlLocale]: slug } : {}) },
           pageType: {
-            [defaultLocale]: 'teampage',
-            ...(nlLocale ? { [nlLocale]: 'teampage' } : {})
+            [defaultLocale]: 'Teammemberpage',
+            ...(nlLocale ? { [nlLocale]: 'Teammemberpage' } : {})
           },
           title: { [defaultLocale]: name, ...(nlLocale ? { [nlLocale]: name } : {}) }
         }
@@ -157,8 +157,8 @@ export default async function handler(req, res) {
       }) || changed;
     changed =
       ensureField(about, 'pageType', {
-        [defaultLocale]: 'teampage',
-        ...(nlLocale ? { [nlLocale]: 'teampage' } : {})
+        [defaultLocale]: 'Teammemberpage',
+        ...(nlLocale ? { [nlLocale]: 'Teammemberpage' } : {})
       }) || changed;
     changed =
       ensureField(about, 'title', {
