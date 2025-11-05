@@ -228,7 +228,9 @@ async function updateEntry(
       try {
         await entry.publish();
         return { updated: false, published: true } as const;
-      } catch {}
+      } catch {
+        // Ignore publish errors
+      }
     }
     return { updated: false, published: false } as const;
   }
@@ -239,7 +241,9 @@ async function updateEntry(
       try {
         await updated.publish();
         published = true;
-      } catch {}
+      } catch {
+        // Ignore publish errors
+      }
     }
     return { updated: true, published } as const;
   } catch (err: any) {
@@ -347,7 +351,7 @@ async function main() {
         }
         if (mutated) {
           const upd = await ctToUpdate.update();
-          const published = await upd.publish();
+          await upd.publish();
           console.log(`[translate-all]   ✓ Published ${id}`);
           // Wait a bit for Contentful to propagate changes
           await new Promise((resolve) => setTimeout(resolve, 500));

@@ -36,6 +36,6 @@ export function normalizeLocale(input?: string | null): string | null {
   return ALLOWED_LOCALES.includes(mapped) ? mapped : null;
 }
 
-export async function cfRequest<T>(query: string, variables: Record<string, any>): Promise<T> {
+export async function cfRequest<T>(query: string, variables: Record<string, unknown>): Promise<T> {
   return cfGraphql.request<T>(query, variables);
 }

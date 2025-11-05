@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { createClient } from 'contentful-management';
 import fetch from 'node-fetch';
-import { normalizeLocale, ALLOWED_LOCALES, MASTER_LOCALE } from '../lib/contentful.js';
+import { ALLOWED_LOCALES, MASTER_LOCALE } from '../lib/contentful.js';
 
 type Args = {
   contentType: string; // e.g. 'aboutpage'
@@ -57,20 +57,31 @@ function looksLikeUrlOrCode(s: string): boolean {
 
 type TextPath = { path: (string | number)[]; text: string };
 
-function collectRichText(node: any, basePath: (string | number)[], out: TextPath[]) {
+interface RichTextNode {
+  nodeType?: string;
+  value?: string;
+  content?: RichTextNode[];
+}
+
+function collectRichText(node: unknown, basePath: (string | number)[], out: TextPath[]) {
   if (!node || typeof node !== 'object') return;
-  if (node.nodeType === 'text' && typeof node.value === 'string' && node.value.trim() !== '') {
-    if (!looksLikeUrlOrCode(node.value))
-      out.push({ path: basePath.concat('value'), text: node.value });
+  const richNode = node as RichTextNode;
+  if (
+    richNode.nodeType === 'text' &&
+    typeof richNode.value === 'string' &&
+    richNode.value.trim() !== ''
+  ) {
+    if (!looksLikeUrlOrCode(richNode.value))
+      out.push({ path: basePath.concat('value'), text: richNode.value });
     return;
   }
-  const content = Array.isArray(node.content) ? node.content : [];
+  const content = Array.isArray(richNode.content) ? richNode.content : [];
   for (let i = 0; i < content.length; i++) {
     collectRichText(content[i], basePath.concat('content', i), out);
   }
 }
 
-function collectFieldTexts(value: any): TextPath[] {
+function collectFieldTexts(value: unknown): TextPath[] {
   const out: TextPath[] = [];
   if (typeof value === 'string') {
     if (!looksLikeUrlOrCode(value)) out.push({ path: [], text: value });
@@ -83,17 +94,21 @@ function collectFieldTexts(value: any): TextPath[] {
   return out;
 }
 
-function comparableText(value: any): string {
+function comparableText(value: unknown): string {
   const arr = collectFieldTexts(value).map((p) => p.text);
   return arr.join('\n').replace(/\s+/g, ' ').trim().toLowerCase();
 }
 
-function setAtPath(root: any, path: (string | number)[], newValue: string) {
-  let cur = root;
+function setAtPath(root: Record<string, unknown>, path: (string | number)[], newValue: string) {
+  let cur: unknown = root;
   for (let i = 0; i < path.length - 1; i++) {
-    cur = cur[path[i]];
+    if (typeof cur === 'object' && cur !== null) {
+      cur = (cur as Record<string | number, unknown>)[path[i]];
+    }
   }
-  cur[path[path.length - 1]] = newValue;
+  if (typeof cur === 'object' && cur !== null) {
+    (cur as Record<string | number, unknown>)[path[path.length - 1]] = newValue;
+  }
 }
 
 async function translateBatch(texts: string[], targetLocale: string): Promise<string[]> {
@@ -112,9 +127,26 @@ async function translateBatch(texts: string[], targetLocale: string): Promise<st
   return json.items.map((s, i) => (typeof s === 'string' && s.trim() ? s : texts[i]));
 }
 
+interface ContentfulEntry {
+  sys?: { id?: string; archivedAt?: string };
+  fields?: Record<string, Record<string, unknown>>;
+  update?: () => Promise<ContentfulEntry>;
+  publish?: () => Promise<ContentfulEntry>;
+}
+
+interface ContentfulEnvironment {
+  getEntry: (id: string) => Promise<ContentfulEntry>;
+  getEntries: (params: {
+    content_type: string;
+    limit: number;
+    skip: number;
+    locale: string;
+  }) => Promise<{ items: ContentfulEntry[]; total?: number }>;
+}
+
 async function processEntry(
-  env: any,
-  entry: any,
+  env: ContentfulEnvironment,
+  entry: ContentfulEntry,
   fields: string[],
   targetLocales: string[],
   forceMode: 'same' | 'all' | null,
@@ -166,15 +198,21 @@ async function processEntry(
       const translated = await translateBatch(texts, target);
 
       // Clone source as base and write translated values into a copy
-      let newValue: any;
+      let newValue: string | Record<string, unknown>;
       if (typeof source === 'string') {
         newValue = translated[0];
       } else {
-        newValue = JSON.parse(JSON.stringify(source));
-        const baseDoc = newValue?.json?.nodeType === 'document' ? newValue.json : newValue;
+        const cloned = JSON.parse(JSON.stringify(source)) as Record<string, unknown>;
+        const baseDoc =
+          (cloned?.json as { nodeType?: string } | undefined)?.nodeType === 'document'
+            ? (cloned.json as Record<string, unknown>)
+            : cloned;
         for (let i = 0; i < paths.length; i++) {
-          setAtPath(baseDoc, paths[i].path, translated[i]);
+          if (typeof baseDoc === 'object' && baseDoc !== null) {
+            setAtPath(baseDoc as Record<string, unknown>, paths[i].path, translated[i]);
+          }
         }
+        newValue = cloned;
       }
 
       entry.fields[fieldId][target] = newValue;
@@ -207,8 +245,12 @@ async function main() {
     const ct = await env.getContentType(contentType);
     const textTypes = new Set(['Text', 'Symbol', 'RichText']);
     fieldsList = ct.fields
-      .filter((f: any) => f.localized === true && textTypes.has(f.type))
-      .map((f: any) => f.id);
+      .filter(
+        (f: { localized?: boolean; type?: string }) =>
+          f.localized === true && textTypes.has(f.type ?? '')
+      )
+      .map((f: { id?: string }) => f.id ?? '')
+      .filter(Boolean);
     console.log(`[auto] using all localized text fields for ${contentType}:`, fieldsList);
   }
 

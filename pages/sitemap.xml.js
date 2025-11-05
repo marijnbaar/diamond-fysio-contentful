@@ -1,5 +1,5 @@
 import { getServerSideSitemap } from 'next-sitemap';
-import getClient from '../lib/contentful';
+import getClient from '../lib/contentful.js';
 import queryAllPages from '../lib/query/pages/allDynamicRoot';
 
 export const getServerSideProps = async (ctx) => {

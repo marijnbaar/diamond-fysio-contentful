@@ -33,15 +33,17 @@ function FourOhFour() {
               <p className="mt-1 text-base text-gray-500 dark:text-gray-400">{t.description}</p>
             </div>
             <div className="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
-              <Link href={homeHref}>
-                <a className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 dark:bg-teal-600 hover:bg-teal-400 dark:hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
-                  {t.homeButton}
-                </a>
+              <Link
+                href={homeHref}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-500 dark:bg-teal-600 hover:bg-teal-400 dark:hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors"
+              >
+                {t.homeButton}
               </Link>
-              <Link href={contactHref}>
-                <a className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 dark:bg-gray-700 hover:bg-gray-500 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
-                  {t.contactButton}
-                </a>
+              <Link
+                href={contactHref}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 dark:bg-gray-700 hover:bg-gray-500 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors"
+              >
+                {t.contactButton}
               </Link>
             </div>
           </div>

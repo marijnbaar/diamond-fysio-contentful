@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   // Skip ALL API routes completely - they should not be processed by middleware
@@ -34,3 +34,6 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico).*)'
   ]
 };
+
+// Legacy export for backwards compatibility
+export const middleware = proxy;

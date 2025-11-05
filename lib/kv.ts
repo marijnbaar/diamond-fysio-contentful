@@ -61,8 +61,8 @@ export async function kvSet(key: string, value: string, opts?: { ex?: number }):
 export async function kvMGet(keys: string[]): Promise<(string | null)[]> {
   if (keys.length === 0) return [];
   if (hasVercelKv()) {
-    // @vercel/kv supports mget
-    const vals = await vercelKv.mget<unknown[]>(...(keys as any));
+    // @vercel/kv supports mget - returns array of values
+    const vals = await vercelKv.mget(...keys);
     return (vals as (string | null)[]) || [];
   }
   const client = await getRedisClient();
