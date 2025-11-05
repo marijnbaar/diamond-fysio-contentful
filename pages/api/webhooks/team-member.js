@@ -43,20 +43,21 @@ async function translateBatch(texts, targetLang) {
     });
     if (!res.ok) {
       warn('Translation API failed:', res.status, res.statusText);
-      return texts; // Fallback to original
+      return texts;
     }
     const json = await res.json();
     if (!Array.isArray(json.items)) return texts;
     return json.items.map((s, i) => (typeof s === 'string' && s.trim() ? s : texts[i] || ''));
   } catch (error) {
     warn('Translation error:', error?.message || error);
-    return texts; // Fallback to original
+    return texts;
   }
 }
 
 function extractTextFromRichText(value) {
   if (!value) return [];
   if (typeof value === 'string') return [{ path: [], text: value }];
+
   const doc = value?.json?.nodeType === 'document' ? value.json : value;
   if (!doc || typeof doc !== 'object') return [];
 
@@ -74,30 +75,31 @@ function extractTextFromRichText(value) {
   return texts;
 }
 
+// ✅ FIXED: correctly writes back into each text node's .value (does NOT replace the node)
 function updateRichTextWithTranslations(original, translations) {
   if (typeof original === 'string') {
     return translations[0] || original;
   }
   const cloned = JSON.parse(JSON.stringify(original));
   const doc = cloned?.json?.nodeType === 'document' ? cloned.json : cloned;
-  const texts = extractTextFromRichText(original);
 
+  const texts = extractTextFromRichText(original);
   texts.forEach(({ path }, idx) => {
-    if (translations[idx]) {
-      let cur = doc;
-      for (let i = 0; i < path.length - 1; i++) {
-        cur = cur[path[i]];
-      }
-      if (cur && typeof cur === 'object') {
-        cur[path[path.length - 1]] = translations[idx];
-      }
+    if (!translations[idx]) return;
+    let node = doc;
+    for (let i = 0; i < path.length; i++) {
+      node = node[path[i]];
+      if (!node) return;
+    }
+    if (node && node.nodeType === 'text' && typeof node.value === 'string') {
+      node.value = translations[idx];
     }
   });
+
   return cloned;
 }
 
 function verifyWebhook(req) {
-  // Check for Contentful-specific headers
   const hasContentfulHeaders =
     Boolean(req.headers['x-contentful-topic']) ||
     Boolean(req.headers['x-contentful-webhook-name']) ||
@@ -108,7 +110,6 @@ function verifyWebhook(req) {
     return false;
   }
 
-  // Check all possible secret header locations
   const possibleSecretHeaders = [
     req.headers.authorization,
     req.headers['x-contentful-webhook-secret'],
@@ -117,7 +118,6 @@ function verifyWebhook(req) {
     req.headers['teampage-webhook-secret'],
     req.headers['teampage_webhook_secret'],
     req.headers['teampagewebhooksecret'],
-    // Also check all headers for any that might contain the secret
     ...Object.entries(req.headers || {})
       .map(([key, value]) => {
         const lowerKey = key.toLowerCase();
@@ -138,42 +138,27 @@ function verifyWebhook(req) {
   log('Possible secret headers found:', possibleSecretHeaders.length);
   log('All request headers:', Object.keys(req.headers || {}));
 
-  // If WEBHOOK_SECRET is set, verify against any found secret headers
   if (WEBHOOK_SECRET) {
     const secret = WEBHOOK_SECRET.trim();
-
-    // Check if any of the possible secret headers match
     for (const headerValue of possibleSecretHeaders) {
       const value =
         typeof headerValue === 'string' ? headerValue.trim() : String(headerValue || '').trim();
-      const normalizedValue = value.replace(/^Bearer\s+/i, ''); // Remove "Bearer " prefix if present
-
+      const normalizedValue = value.replace(/^Bearer\s+/i, '');
       if (normalizedValue === secret || value === secret || value === `Bearer ${secret}`) {
         log('✅ Webhook verified via WEBHOOK_SECRET');
         return true;
       }
     }
-
-    // If no matching secret header found but Contentful headers are present
     if (hasContentfulHeaders) {
       log(
         '⚠️ WEBHOOK_SECRET is configured but no matching secret header found - accepting based on Contentful headers'
       );
       return true;
     }
-
     err('Missing or invalid authorization header while WEBHOOK_SECRET is set');
-    err('Expected secret:', secret.substring(0, 4) + '...');
-    err(
-      'Found headers:',
-      Object.keys(req.headers || {}).filter(
-        (k) => k.toLowerCase().includes('secret') || k.toLowerCase().includes('auth')
-      )
-    );
     return false;
   }
 
-  // If no secret configured, accept only if it looks like Contentful
   if (!hasContentfulHeaders) {
     err('No Contentful headers and no secret configured');
     return false;
@@ -190,12 +175,29 @@ function getContentTypeId(sys) {
   return null;
 }
 
+// helpers for publish semantics in Contentful
+async function ensurePublished(entry) {
+  // If never published
+  if (!entry.sys.publishedVersion) {
+    const published = await entry.publish();
+    return published;
+  }
+  // If version isn't exactly publishedVersion + 1, there are pending changes or stale object; re-fetch latest and publish
+  if (entry.sys.version !== entry.sys.publishedVersion + 1) {
+    const fresh = await entry.getEnvironment().then((env) => env.getEntry(entry.sys.id));
+    if (fresh.sys.version !== fresh.sys.publishedVersion + 1) {
+      const republished = await fresh.publish();
+      return republished;
+    }
+    return fresh; // already up-to-date
+  }
+  return entry; // already up-to-date & published
+}
+
 export default async function handler(req, res) {
   try {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-
     if (!verifyWebhook(req)) return res.status(401).json({ error: 'Unauthorized' });
-
     if (!SPACE_ID || !MGMT_TOKEN) {
       return res.status(500).json({ error: 'Missing SPACE_ID or MGMT_TOKEN' });
     }
@@ -203,7 +205,7 @@ export default async function handler(req, res) {
     const topic = String(req.headers['x-contentful-topic'] || '');
     log('Incoming topic:', topic);
 
-    // We’ll act on any Entry.create/publish (don’t try to be too clever)
+    // act on entry create/publish events
     if (!/Entry\.(publish|create)/.test(topic)) {
       log('Skipping — not Entry.create/publish');
       return res.status(200).json({ message: 'Skipped: non-handled event' });
@@ -233,16 +235,19 @@ export default async function handler(req, res) {
     const teamSlug = `/team/${createSlugFromName(teamMemberName)}`;
     const aboutId = `aboutpage-team-${teamMemberId}`;
 
-    // CMA client
+    // CMA
     const client = createClient({ accessToken: MGMT_TOKEN.trim() });
     const space = await client.getSpace(SPACE_ID);
     const env = await space.getEnvironment(ENV_ID);
 
-    // Resolve locales
+    // resolve locales
     const locales = await env.getLocales();
     const defaultLocale = (locales.items.find((l) => l.default) || { code: 'en-US' }).code;
-    const nlLocale = locales.items.some((l) => l.code === 'nl-NL') ? 'nl-NL' : null;
-    log('Locales:', { defaultLocale, mirrorNl: nlLocale });
+    const hasNl = locales.items.some((l) => l.code === 'nl-NL');
+    const hasEn = locales.items.some((l) => l.code === 'en-US');
+    const nlLocale = hasNl ? 'nl-NL' : null;
+    const targetLocale = hasEn ? 'en-US' : defaultLocale; // always try to backfill en-US when possible
+    log('Locales:', { defaultLocale, nlLocale, targetLocale });
 
     // Ensure teamMember exists (we also use it to write back .link)
     const teamMember = await env.getEntry(teamMemberId);
@@ -252,67 +257,40 @@ export default async function handler(req, res) {
     try {
       about = await env.getEntry(aboutId);
       log('Found existing Aboutpage by deterministic ID:', aboutId);
-      log('Existing Aboutpage fields:', JSON.stringify(about.fields, null, 2));
-    } catch (error) {
+    } catch {
       log('Creating Aboutpage with deterministic ID:', aboutId);
-      log('Aboutpage fields to create:', {
-        slug: { [defaultLocale]: teamSlug },
-        pageType: { [defaultLocale]: 'teampage' },
-        title: { [defaultLocale]: teamMemberName },
-        teamMember: {
-          [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
+      about = await env.createEntryWithId('aboutpage', aboutId, {
+        fields: {
+          slug: { [defaultLocale]: teamSlug, ...(nlLocale ? { [nlLocale]: teamSlug } : {}) },
+          pageType: {
+            [defaultLocale]: 'teampage',
+            ...(nlLocale ? { [nlLocale]: 'teampage' } : {})
+          },
+          title: {
+            [defaultLocale]: teamMemberName,
+            ...(nlLocale ? { [nlLocale]: teamMemberName } : {})
+          },
+          teamMember: {
+            [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } },
+            ...(nlLocale
+              ? { [nlLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } } }
+              : {})
+          }
         }
       });
-      try {
-        about = await env.createEntryWithId('aboutpage', aboutId, {
-          fields: {
-            slug: { [defaultLocale]: teamSlug },
-            pageType: { [defaultLocale]: 'teampage' },
-            title: { [defaultLocale]: teamMemberName },
-            teamMember: {
-              [defaultLocale]: { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
-            }
-          }
-        });
-        log('Aboutpage created successfully:', about.sys.id);
-        log('Created Aboutpage sys:', JSON.stringify(about.sys, null, 2));
-        log('Created Aboutpage fields:', JSON.stringify(about.fields, null, 2));
 
-        // If this is Entry.create, publish immediately so teamMember can reference it later
-        if (topic.includes('Entry.create')) {
-          try {
-            log('Publishing newly created Aboutpage (Entry.create event)...');
-            about = await about.publish();
-            log(
-              'Aboutpage published immediately after creation:',
-              about.sys.id,
-              'v',
-              about.sys.publishedVersion
-            );
-          } catch (publishError) {
-            warn(
-              'Could not publish Aboutpage immediately after creation:',
-              publishError?.message || publishError
-            );
-            // Continue - will try to publish later
-          }
-        }
-      } catch (createError) {
-        err('Failed to create Aboutpage:', createError?.message || createError);
-        err('Create error details:', JSON.stringify(createError, null, 2));
-        // Check if content type exists
+      // If the trigger was an Entry.create, attempt immediate publish
+      if (topic.includes('Entry.create')) {
         try {
-          const contentType = await env.getContentType('aboutpage');
-          log('Content type "aboutpage" exists:', contentType.sys.id);
-        } catch (ctError) {
-          err('Content type "aboutpage" not found! Error:', ctError?.message || ctError);
-          err('This might be the problem - check the content type ID in Contentful');
+          about = await about.publish();
+          log('Aboutpage published immediately after creation');
+        } catch (e) {
+          warn('Could not publish Aboutpage immediately after creation:', e?.message || e);
         }
-        throw createError;
       }
     }
 
-    // Ensure required fields (write to default; also mirror to nl-NL if present so you see it in UI)
+    // Ensure required fields are present & up-to-date
     const ensureField = (obj, key, valueMap) => {
       obj.fields = obj.fields || {};
       obj.fields[key] = obj.fields[key] || {};
@@ -320,19 +298,20 @@ export default async function handler(req, res) {
       for (const [loc, val] of Object.entries(valueMap)) {
         if (val == null) continue;
         const current = obj.fields[key][loc];
-        // For objects/links, compare by id if available, otherwise do deep comparison
+
         let needsUpdate = false;
         if (current == null) {
           needsUpdate = true;
         } else if (typeof val === 'object' && val !== null && val.sys?.id) {
-          // For link objects, compare by sys.id
-          needsUpdate = !current.sys || current.sys.id !== val.sys.id;
+          needsUpdate = !current?.sys || current.sys.id !== val.sys.id;
+        } else if (typeof val === 'object') {
+          // deep-ish compare for primitives within objects (simple stringify is ok here)
+          needsUpdate = JSON.stringify(current) !== JSON.stringify(val);
         } else {
-          // For primitives, use strict equality
           needsUpdate = current !== val;
         }
+
         if (needsUpdate) {
-          log(`Updating ${key}[${loc}]:`, current, '→', val);
           obj.fields[key][loc] = val;
           changed = true;
         }
@@ -365,85 +344,40 @@ export default async function handler(req, res) {
       }) || changed;
 
     if (changed) {
-      log('Updating Aboutpage fields…');
-      try {
-        about = await about.update();
-        log('Aboutpage updated successfully');
-      } catch (updateError) {
-        err('Failed to update Aboutpage:', updateError?.message || updateError);
-        err('Update error details:', JSON.stringify(updateError, null, 2));
-        throw updateError;
-      }
+      about = await about.update();
+      log('Aboutpage updated');
     } else {
-      log('Aboutpage fields already up-to-date.');
+      log('Aboutpage fields already up-to-date');
     }
 
-    // Always publish the Aboutpage FIRST (idempotent) - this is critical for teamMember to publish successfully
+    // ✅ publish Aboutpage first (must exist/publish before teamMember references it)
     try {
-      log('Publishing Aboutpage (must be published before teamMember can reference it)…');
-
-      // Check if Aboutpage is already published
-      const isPublished = about.sys.publishedVersion != null;
-      if (!isPublished) {
-        about = await about.publish();
-        log('Aboutpage published:', about.sys.id, 'v', about.sys.publishedVersion);
-      } else {
-        log('Aboutpage already published:', about.sys.id, 'v', about.sys.publishedVersion);
-        // Verify it's actually published by checking publishedVersion
-        if (about.sys.publishedVersion === about.sys.version) {
-          log('Aboutpage is up-to-date and published');
-        } else {
-          // Republish to ensure latest version is published
-          const fresh = await env.getEntry(aboutId);
-          about = await fresh.publish();
-          log('Aboutpage republished:', about.sys.id, 'v', about.sys.publishedVersion);
-        }
-      }
+      // ensurePublished needs an entry object whose getEnvironment() works; attach a shim:
+      about.getEnvironment = () => Promise.resolve(env);
+      about = await ensurePublished(about);
+      log('Aboutpage ensured published:', about.sys.id, 'pv=', about.sys.publishedVersion);
     } catch (error) {
-      // If it's already published and version matches, this may throw — try once more via fresh get + publish
-      warn('Publish threw, retrying once:', error?.message || error);
-      try {
-        const fresh = await env.getEntry(aboutId);
-        about = await fresh.publish();
-        log('Aboutpage published on retry:', about.sys.id, 'v', about.sys.publishedVersion);
-      } catch (retryError) {
-        err('Publish retry also failed:', retryError?.message || retryError);
-        // Don't throw - but log warning that teamMember might fail to publish
-        warn(
-          '⚠️ Aboutpage could not be published - teamMember publish may fail with "missing linked entries"'
-        );
-      }
+      warn(
+        'Ensuring Aboutpage published failed (teamMember publish may fail):',
+        error?.message || error
+      );
     }
 
-    // Double-check that Aboutpage is published before continuing
+    // Update teamMember.link and translate nl-NL -> en-US where EN is empty
     try {
-      const verifyAbout = await env.getEntry(aboutId);
-      if (verifyAbout.sys.publishedVersion == null) {
-        warn('⚠️ Aboutpage is NOT published - attempting to publish again...');
-        about = await verifyAbout.publish();
-        log('Aboutpage published after verification:', about.sys.id);
-      }
-    } catch (verifyError) {
-      warn('Could not verify Aboutpage publication:', verifyError?.message || verifyError);
-    }
+      const loc = targetLocale;
 
-    // Update teamMember.link and translate NL to EN fields
-    try {
-      const loc = defaultLocale;
       const currentId =
-        teamMember.fields &&
-        teamMember.fields.link &&
-        teamMember.fields.link[loc] &&
-        teamMember.fields.link[loc].sys &&
-        teamMember.fields.link[loc].sys.id;
+        teamMember.fields?.link?.[loc]?.sys?.id ||
+        teamMember.fields?.link?.[defaultLocale]?.sys?.id;
 
       let teamMemberChanged = false;
 
-      // Update link
+      // Link to Aboutpage
       if (currentId !== about.sys.id) {
         teamMember.fields = teamMember.fields || {};
         teamMember.fields.link = teamMember.fields.link || {};
-        teamMember.fields.link[loc] = {
+        teamMember.fields.link[defaultLocale] = {
           sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
         };
         if (nlLocale) {
@@ -451,14 +385,17 @@ export default async function handler(req, res) {
             sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
           };
         }
-        log('Updating teamMember.link →', about.sys.id);
+        if (loc !== defaultLocale) {
+          teamMember.fields.link[loc] = {
+            sys: { type: 'Link', linkType: 'Entry', id: about.sys.id }
+          };
+        }
         teamMemberChanged = true;
-      } else {
-        log('teamMember.link already points to Aboutpage.');
+        log('teamMember.link updated →', about.sys.id);
       }
 
-      // Translate NL fields to EN if nlLocale exists and en-US doesn't have values
-      if (nlLocale && loc === 'en-US') {
+      // Backfill EN from NL if EN missing and NL exists
+      if (nlLocale && hasEn) {
         const fieldsToTranslate = [
           'name',
           'role',
@@ -474,16 +411,16 @@ export default async function handler(req, res) {
           if (!field) continue;
 
           const nlValue = field[nlLocale];
-          const enValue = field[loc];
+          const enValue = field['en-US'];
 
-          // Only translate if NL has value and EN is empty
-          if (nlValue && (!enValue || enValue === '')) {
+          if (
+            nlValue &&
+            (enValue == null || (typeof enValue === 'string' && enValue.trim() === ''))
+          ) {
             if (fieldId === 'name' || fieldId === 'role') {
-              // Simple text fields
               textsToTranslate.push(String(nlValue));
               fieldConfigs.push({ fieldId, type: 'text', nlValue });
             } else {
-              // RichText fields
               const texts = extractTextFromRichText(nlValue);
               if (texts.length > 0) {
                 texts.forEach(({ text }) => textsToTranslate.push(text));
@@ -494,27 +431,23 @@ export default async function handler(req, res) {
         }
 
         if (textsToTranslate.length > 0) {
-          log(`Translating ${textsToTranslate.length} text segments from ${nlLocale} to ${loc}...`);
+          log(`Translating ${textsToTranslate.length} text segments nl-NL → en-US ...`);
           const translated = await translateBatch(textsToTranslate, 'en');
+          let idx = 0;
 
-          let translationIdx = 0;
-          for (const config of fieldConfigs) {
-            if (config.type === 'text') {
-              const translatedText = translated[translationIdx++];
-              if (translatedText) {
-                teamMember.fields[config.fieldId] = teamMember.fields[config.fieldId] || {};
-                teamMember.fields[config.fieldId][loc] = translatedText;
-                log(
-                  `Translated ${config.fieldId}: "${config.nlValue.substring(0, 50)}..." → "${translatedText.substring(0, 50)}..."`
-                );
+          for (const cfg of fieldConfigs) {
+            if (cfg.type === 'text') {
+              const t = translated[idx++];
+              if (t) {
+                teamMember.fields[cfg.fieldId] = teamMember.fields[cfg.fieldId] || {};
+                teamMember.fields[cfg.fieldId]['en-US'] = t;
                 teamMemberChanged = true;
               }
-            } else if (config.type === 'richtext') {
-              const translations = config.texts.map(() => translated[translationIdx++]);
-              const updatedValue = updateRichTextWithTranslations(config.nlValue, translations);
-              teamMember.fields[config.fieldId] = teamMember.fields[config.fieldId] || {};
-              teamMember.fields[config.fieldId][loc] = updatedValue;
-              log(`Translated ${config.fieldId} (RichText)`);
+            } else {
+              const pieceTranslations = cfg.texts.map(() => translated[idx++]);
+              const updatedValue = updateRichTextWithTranslations(cfg.nlValue, pieceTranslations);
+              teamMember.fields[cfg.fieldId] = teamMember.fields[cfg.fieldId] || {};
+              teamMember.fields[cfg.fieldId]['en-US'] = updatedValue;
               teamMemberChanged = true;
             }
           }
@@ -522,25 +455,34 @@ export default async function handler(req, res) {
       }
 
       if (teamMemberChanged) {
-        log('Updating teamMember with translated fields...');
         await teamMember.update();
-        log('TeamMember updated successfully');
+        log('TeamMember updated (link/translation)');
       } else {
-        log('TeamMember fields already up-to-date, no translation needed.');
+        log('TeamMember unchanged');
       }
     } catch (error) {
       warn('Could not update teamMember:', error?.message || error);
     }
 
-    // Update TeamOverview collection (specialisationHomeOverview with teamMemberCollection field)
+    // Optionally ensure teamMember is published too (so the site updates)
+    try {
+      teamMember.getEnvironment = () => Promise.resolve(env);
+      const publishedTeamMember = await ensurePublished(teamMember);
+      log(
+        'TeamMember ensured published:',
+        publishedTeamMember.sys.id,
+        'pv=',
+        publishedTeamMember.sys.publishedVersion
+      );
+    } catch (e) {
+      warn('Could not ensure teamMember published (may be draft intentionally):', e?.message || e);
+    }
+
+    // Update TeamOverview collection: add the member if missing and publish the overview
     try {
       log(`Fetching ${TEAM_OVERVIEW_CONTENT_TYPE} entry: ${TEAM_OVERVIEW_ENTRY_ID}`);
-      const overview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
-      log(
-        `Found ${TEAM_OVERVIEW_CONTENT_TYPE} entry, contentType: ${overview.sys?.contentType?.sys?.id}`
-      );
+      let overview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
 
-      // Verify it's the correct content type
       const overviewType = overview.sys?.contentType?.sys?.id || overview.sys?.contentType;
       if (overviewType && overviewType !== TEAM_OVERVIEW_CONTENT_TYPE) {
         warn(
@@ -553,11 +495,14 @@ export default async function handler(req, res) {
       overview.fields = overview.fields || {};
       overview.fields[TEAM_OVERVIEW_FIELD_ID] = overview.fields[TEAM_OVERVIEW_FIELD_ID] || {};
       const arr = overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] || [];
-      const has = Array.isArray(arr) && arr.some((m) => m && m.sys && m.sys.id === teamMemberId);
+      const has = Array.isArray(arr) && arr.some((m) => m?.sys?.id === teamMemberId);
 
       if (!has) {
-        const next = [...arr, { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }];
-        overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] = next;
+        overview.fields[TEAM_OVERVIEW_FIELD_ID][loc] = [
+          ...arr,
+          { sys: { type: 'Link', linkType: 'Entry', id: teamMemberId } }
+        ];
+
         if (nlLocale) {
           const arrNl = overview.fields[TEAM_OVERVIEW_FIELD_ID][nlLocale] || [];
           const hasNl = Array.isArray(arrNl) && arrNl.some((m) => m?.sys?.id === teamMemberId);
@@ -568,12 +513,13 @@ export default async function handler(req, res) {
             ];
           }
         }
-        log(
-          `Adding ${teamMemberId} to ${TEAM_OVERVIEW_CONTENT_TYPE}.${TEAM_OVERVIEW_FIELD_ID} and publishing…`
-        );
-        const updated = await overview.update();
-        await updated.publish();
-        log(`Successfully updated and published ${TEAM_OVERVIEW_CONTENT_TYPE}`);
+
+        overview = await overview.update();
+        // publish with fresh fetch to avoid version conflicts
+        const freshOverview = await env.getEntry(TEAM_OVERVIEW_ENTRY_ID);
+        freshOverview.getEnvironment = () => Promise.resolve(env);
+        await ensurePublished(freshOverview);
+        log(`Updated and published ${TEAM_OVERVIEW_CONTENT_TYPE}`);
       } else {
         log(
           `${TEAM_OVERVIEW_CONTENT_TYPE} already contains ${teamMemberId} in ${TEAM_OVERVIEW_FIELD_ID}.`
@@ -586,8 +532,11 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      aboutpageId: about?.sys?.id,
-      slug: about?.fields?.slug?.[defaultLocale],
+      aboutpageId: about?.sys?.id || aboutId,
+      slug:
+        about?.fields?.slug?.[defaultLocale] ||
+        (nlLocale ? about?.fields?.slug?.[nlLocale] : null) ||
+        teamSlug,
       publishedVersion: about?.sys?.publishedVersion || null
     });
   } catch (error) {
