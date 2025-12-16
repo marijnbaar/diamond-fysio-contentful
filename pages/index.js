@@ -5,7 +5,12 @@ import { loadPosts } from './api/fetchPosts';
 // removed legacy runtime i18n fetches; we use Contentful locales only
 import { normalizeLocale } from '../lib/helpers/normalizeLocale';
 
-export const getServerSideProps = async ({ preview = false, locale = 'nl' }) => {
+export const getServerSideProps = async ({ preview = false, locale = 'nl', res }) => {
+  // Add Cache-Control header to response for 1 hour cache
+  if (res) {
+    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+  }
+
   const cfLocale = normalizeLocale(locale) || undefined;
   const pageData = (await getPage('Homepage', undefined, preview, cfLocale)) ?? [];
   const instagramPosts = await loadPosts();
