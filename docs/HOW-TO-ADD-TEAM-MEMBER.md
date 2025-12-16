@@ -85,6 +85,7 @@ Wanneer je een team member publiceert:
      Met haar achtergrond in dans en sportfysiotherapie combineert Eva technische kennis met
      praktische ervaring om haar patiënten te helpen hun doelen te bereiken.
      ```
+
 - **Tip:** Schrijf in de eerste persoon of derde persoon, maar wees consistent
 
 #### 🏠 **Omschrijving werktijden** (Description Homepage) (Optioneel)
