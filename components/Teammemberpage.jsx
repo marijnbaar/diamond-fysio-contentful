@@ -6,6 +6,23 @@ import { BsWhatsapp } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+const cleanWebsiteUrl = (url) => {
+  if (!url) return url;
+  let cleaned = url.replace(/https?:\/\/localhost:\d+\/?/, '');
+  // Fix double protocol issues if any, e.g. /https://
+  if (cleaned.startsWith('/http')) {
+    cleaned = cleaned.substring(1);
+  }
+  // Ensure absolute URL if it looks like a domain
+  if (
+    !cleaned.startsWith('http') &&
+    (cleaned.startsWith('www.') || cleaned.includes('.com') || cleaned.includes('.nl'))
+  ) {
+    cleaned = 'https://' + cleaned;
+  }
+  return cleaned;
+};
+
 export default function Teammember({
   name,
   role,
@@ -263,7 +280,7 @@ export default function Teammember({
                       style={{ animationDelay: '0.3s' }}
                     >
                       <a
-                        href={website}
+                        href={cleanWebsiteUrl(website)}
                         className="text-web hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
                         target="_blank"
                         rel="noreferrer"

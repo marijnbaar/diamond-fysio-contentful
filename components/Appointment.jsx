@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Button from './Button';
 import createSlug from '../lib/helpers/createSlug';
 import { useRouter } from 'next/router';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 
 // Premium AppointmentCard component
 const AppointmentCard = ({ appointmentCard, index, locale }) => {
@@ -57,10 +58,10 @@ const AppointmentCard = ({ appointmentCard, index, locale }) => {
 };
 
 // Luxe TherapistCard component
-const TherapistCard = ({ name, index }) => {
+const TherapistCard = ({ name, link, isEmail }) => {
   // Dark mode compatible styling - use teal colors instead of light gradients
-  return (
-    <div className="px-6 py-4 rounded-lg border border-teal-500/30 dark:border-teal-400/30 bg-teal-50 dark:bg-gray-800/50 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900/40 cursor-pointer flex items-center group relative overflow-hidden">
+  const CardContent = () => (
+    <div className="px-6 py-4 rounded-lg border border-teal-500/30 dark:border-teal-400/30 bg-teal-50 dark:bg-gray-800/50 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900/40 cursor-pointer flex items-center justify-between group relative overflow-hidden h-full">
       {/* Subtiele animatie-element */}
       <div className="absolute -right-12 -top-12 w-24 h-24 bg-teal-200 dark:bg-teal-800 opacity-0 rounded-full group-hover:opacity-20 dark:group-hover:opacity-10 transition-opacity duration-700"></div>
 
@@ -68,6 +69,36 @@ const TherapistCard = ({ name, index }) => {
       <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">
         {name}
       </p>
+      {link && !isEmail && (
+        <ExternalLinkIcon className="w-5 h-5 text-teal-500 dark:text-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      )}
+    </div>
+  );
+
+  if (link && !isEmail) {
+    return (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full mb-4 last:mb-0"
+      >
+        <CardContent />
+      </a>
+    );
+  }
+
+  if (isEmail) {
+    return (
+      <a href={`mailto:${link || ''}`} className="block w-full mb-4 last:mb-0">
+        <CardContent />
+      </a>
+    );
+  }
+
+  return (
+    <div className="w-full mb-4 last:mb-0">
+      <CardContent />
     </div>
   );
 };
@@ -113,19 +144,45 @@ export default function Appointment({
   // Veilig de collection verwerken
   const cards = appointmentCardsCollection?.items || [];
 
-  // Therapeuten lijst
-  const therapists = [
-    'Iva Lešić',
-    'Laszlo Gèleng',
-    'Menno de Vries',
-    'Regi Severins',
-    'Rutger Klauwers',
-    'Robin Rosa Pennings'
+  const defaultLink = 'https://api.spotonmedics.nl/praktijk/EditAppointment?step=1';
+
+  // Data structure matching the requested column layout
+  // Column 1: Iva, Laszlo, Menno
+  // Column 2: Regi, Robin, Rutger
+  // Column 3: Benjamin
+  const smartfileColumns = [
+    [
+      { name: 'Iva Lešić', link: defaultLink },
+      { name: 'Laszlo Gèleng', link: defaultLink },
+      { name: 'Menno de Vries', link: defaultLink }
+    ],
+    [
+      { name: 'Regi Severins', link: defaultLink },
+      { name: 'Robin Rosa Pennings', link: defaultLink },
+      { name: 'Rutger Klauwers', link: defaultLink }
+    ],
+    [
+      {
+        name: 'Benjamin Soerel',
+        link: 'https://web.smartfile.nl/booking/practise/c0e5560a-eae4-4856-a8a1-fa4b30593a66/public_therapists/b22865ed-730e-4d50-8510-7554cd8adb21'
+      }
+    ]
+  ];
+
+  const emailTherapists = [
+    { name: 'Ton Willemsen', email: 'tonwillemsen@me.com' },
+    { name: 'Lidia Bernabei', email: 'info@mymedidiet.com' },
+    { name: 'Niels', email: 'info@osteopathie-tuijl.nl' },
+    { name: 'Leila', email: 'leilaspilates@gmail.com' }
   ];
 
   const therapistHeading = isEn
-    ? 'For the following therapists you can easily make an online appointment:'
-    : 'Voor de volgende therapeuten kun je gemakkelijk een online afspraak maken:';
+    ? 'Choose your therapist below to make an appointment:'
+    : 'Kies hieronder uw therapeut om vervolgens een afspraak te kunnen maken:';
+
+  const emailHeading = isEn
+    ? 'Mail the following therapists or trainers to make an appointment:'
+    : 'Mail onderstaande therapeuten of trainers om een afspraak te maken:';
 
   return (
     <section className="max-w-7xl mx-auto pt-28 sm:pt-32 lg:pt-40 pb-12 lg:pb-16 px-4 sm:px-6 relative scroll-mt-24">
@@ -156,23 +213,8 @@ export default function Appointment({
         )}
       </div>
 
-      {/* Appointment Cards - premium design */}
-      {cards.length > 0 && (
-        <div className="grid md:grid-cols-2 gap-8 mb-20 max-w-5xl mx-auto">
-          {cards.map((card, index) => (
-            <div
-              key={`appointment-card-${index}`}
-              className="animate-on-scroll opacity-0 transition-all duration-700"
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <AppointmentCard appointmentCard={card} index={index} locale={locale} />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Therapeuten Sectie met premium styling */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden">
+      {/* Therapeuten Sectie - Smartfile */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden mb-12">
         {/* Decoratieve elementen */}
         <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
         <div className="absolute -top-24 -right-24 w-48 h-48 bg-teal-50 dark:bg-teal-900/20 opacity-30 rounded-full"></div>
@@ -181,14 +223,40 @@ export default function Appointment({
           {therapistHeading}
         </h3>
 
-        <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
-          {therapists.map((therapist, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {smartfileColumns.map((column, colIndex) => (
+            <div key={`col-${colIndex}`} className="flex flex-col gap-4">
+              {column.map((therapist, index) => (
+                <div
+                  key={`therapist-${colIndex}-${index}`}
+                  className="animate-on-scroll opacity-0 transition-all duration-500"
+                  style={{ transitionDelay: `${(colIndex * 3 + index) * 100}ms` }}
+                >
+                  <TherapistCard name={therapist.name} link={therapist.link} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Therapeuten Sectie - Email */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden">
+        {/* Decoratieve elementen */}
+        <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
+
+        <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block text-gray-900 dark:text-gray-100">
+          {emailHeading}
+        </h3>
+
+        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+          {emailTherapists.map((therapist, index) => (
             <div
-              key={`therapist-${index}`}
-              className="animate-on-scroll opacity-0 transition-all duration-500"
+              key={`email-therapist-${index}`}
+              className="animate-on-scroll opacity-0 transition-all duration-500 w-full md:w-auto md:min-w-[200px]"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <TherapistCard name={therapist} index={index} />
+              <TherapistCard name={therapist.name} link={therapist.email} isEmail={true} />
             </div>
           ))}
         </div>

@@ -12,6 +12,7 @@ Documentation has been moved to the `docs/` folder:
 - [**AI Alt Text Generation**](./docs/AI-alt-text-guide.md) - Generating alt text for images using AI.
 - [**Adding Team Members**](./docs/HOW-TO-ADD-TEAM-MEMBER.md) - Guide for adding new team members.
 - [**Team Member Auto Page Setup**](./docs/TEAM-MEMBER-AUTO-PAGE-SETUP.md) - Automated page creation for team members.
+- [**Website Popup Guide**](./docs/WEBSITE-POPUP-GUIDE.md) - How to manage the homepage notification popup.
 - [**Testing Guide**](./docs/TESTING-GUIDE.md) - How to run tests.
 
 ## Getting Started

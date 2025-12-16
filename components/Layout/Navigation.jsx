@@ -181,7 +181,7 @@ export default function Navigation({ navigation }) {
                     leaveTo="opacity-0 translate-y-1"
                   >
                     <Popover className="absolute z-20 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2 specialicaties-dropdown">
-                      <div className="rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 overflow-hidden backdrop-blur-xl bg-white/80 dark:bg-gray-800/80">
+                      <div className="rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 overflow-hidden backdrop-blur-xl bg-white/95 dark:bg-gray-800/95">
                         <div className="relative grid gap-6 px-5 py-6 sm:gap-8 sm:p-8">
                           {navigation &&
                             navigation.navigatieSubmenu &&
@@ -298,8 +298,8 @@ export default function Navigation({ navigation }) {
                     leaveTo="opacity-0 translate-y-1"
                   >
                     <Popover className="absolute z-20 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0 over-ons-dropdown">
-                      <div className="rounded-xl shadow-xl border border-gray-100 overflow-hidden backdrop-blur-md">
-                        <div className="relative grid gap-6 bg-white dark:bg-gray-700 bg-opacity-95 dark:bg-opacity-95 px-5 py-6 sm:gap-8 sm:p-8 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg">
+                      <div className="rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 overflow-hidden backdrop-blur-xl bg-white/95 dark:bg-gray-800/95">
+                        <div className="relative grid gap-6 px-5 py-6 sm:gap-8 sm:p-8">
                           {navigation &&
                             navigation.navigatieSubmenu &&
                             navigation.navigatieSubmenu[1] &&
@@ -317,7 +317,7 @@ export default function Navigation({ navigation }) {
                                       : menuItem.externalLink
                                   }
                                 >
-                                  <div className="-m-3 p-3 w-full flex items-start rounded-lg hover:bg-white/5 cursor-pointer">
+                                  <div className="-m-3 p-3 w-full flex items-start rounded-xl hover:bg-teal-50/50 dark:hover:bg-teal-900/20 cursor-pointer transition-all duration-300 group/item">
                                     <div className="ml-4">
                                       <div className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover/item:text-teal-600 dark:group-hover/item:text-teal-400 transition-colors duration-300">
                                         {menuItem.title && menuItem.title}
