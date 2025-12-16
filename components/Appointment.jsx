@@ -144,7 +144,8 @@ export default function Appointment({
   // Veilig de collection verwerken
   const cards = appointmentCardsCollection?.items || [];
 
-  const defaultLink = 'https://api.spotonmedics.nl/praktijk/EditAppointment?step=1';
+  const defaultLink =
+    'https://api.spotonmedics.nl/login/checkpraktijktoken?praktijktoken=IVUhe6t7x9AjnzKBv9rCTevZew2C7M7Q9FiPnMWg1AgGivMHZtZtJKuNCCC4p%2BKKJA4IwDqKwVJPcnu%2BvxaWY2M3d2N%2BQ6v6YPTBrYNtmII%3D';
 
   // Data structure matching the requested column layout
   // Column 1: Iva, Laszlo, Menno
