@@ -28,7 +28,11 @@ async function handleRequest(request: Request) {
   if (shouldCheckBotId) {
     try {
       const botResult = await checkBotId();
-      const { isBot, verifiedBotName, isVerifiedBot } = botResult;
+      const { isBot, isVerifiedBot } = botResult;
+
+      // Access verifiedBotName safely as it might not exist on the returned type
+      const verifiedBotName =
+        'verifiedBotName' in botResult ? botResult.verifiedBotName : undefined;
 
       // Allow verified bots like ChatGPT Operator
       const isOperator = isVerifiedBot && verifiedBotName === 'chatgpt-operator';
