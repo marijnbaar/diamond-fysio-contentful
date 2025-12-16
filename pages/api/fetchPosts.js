@@ -1,4 +1,3 @@
-import { cacheData, getCachedData } from '../../lib/cache.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -105,13 +104,6 @@ export async function sendNewTokentoVercel(longLivedAccessToken) {
 }
 
 export async function loadPosts() {
-  try {
-    const cachedPosts = await getCachedData('instagram_posts');
-    if (cachedPosts) return cachedPosts;
-  } catch (error) {
-    console.error('Failed to get cached posts:', error);
-  }
-
   let secret = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
   if (!secret) {
     console.warn('Instagram API key not found');
@@ -166,12 +158,6 @@ export async function loadPosts() {
               const feed = await retryResponse.json();
 
               if (feed && feed.data && Array.isArray(feed.data)) {
-                try {
-                  await cacheData('instagram_posts', feed, 3600);
-                } catch (cacheError) {
-                  console.error('Failed to cache posts:', cacheError);
-                }
-
                 // Try to update Vercel env variable if credentials are available
                 const vercelConfig = getVercelProjectConfig();
                 if (vercelConfig && process.env.VERCEL_NEWAUTH_TOKEN) {
@@ -210,11 +196,6 @@ export async function loadPosts() {
     }
 
     if (feed && feed.data && Array.isArray(feed.data)) {
-      try {
-        await cacheData('instagram_posts', feed, 3600); // Cache for 1 hour
-      } catch (cacheError) {
-        console.error('Failed to cache posts:', cacheError);
-      }
       return feed;
     }
     return { data: [] };
