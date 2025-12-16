@@ -62,6 +62,11 @@ async function handleRequest(request: Request) {
 }
 
 async function runTokenRefresh(authorization: string | null, webhookSecret: string | undefined) {
+  if (!webhookSecret) {
+    console.error('WEBHOOK_SECRET is not set');
+    return NextResponse.json({ error: 'Server Configuration Error' }, { status: 500 });
+  }
+
   // Double check auth (redundant for step 1, but needed for step 3)
   if (authorization !== `Bearer ${webhookSecret}`) {
     return NextResponse.json(
