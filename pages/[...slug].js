@@ -19,12 +19,14 @@ const Page = (pageProps) => {
   }
 };
 
-export const getServerSideProps = async ({ params, preview = false, locale = 'nl', res }) => {
-  // Add Cache-Control header to response for 1 hour cache
-  if (res) {
-    res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-  }
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking'
+  };
+}
 
+export const getStaticProps = async ({ params, preview = false, locale = 'nl' }) => {
   const slug = Array.isArray(params?.slug) ? `/${params.slug.join('/')}` : '/';
   const modelId = await getTypeName(slug, preview, queryAllPages);
   if (!modelId) {
@@ -47,7 +49,8 @@ export const getServerSideProps = async ({ params, preview = false, locale = 'nl
       slug: slug,
       // Extract meta if it exists in the page data
       meta: translated.meta || translated.meta_data || null
-    }
+    },
+    revalidate: 3600
   };
 };
 

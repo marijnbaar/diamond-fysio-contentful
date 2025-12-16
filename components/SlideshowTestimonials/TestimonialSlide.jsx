@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { optimizeContentfulImage } from '../../lib/helpers/image';
 
 const TestimonialSlide = ({ key, name, profession, quote, image }) => {
   return (
@@ -15,7 +16,7 @@ const TestimonialSlide = ({ key, name, profession, quote, image }) => {
                   <Image
                     fill
                     className="z-20 w-full h-full object-cover"
-                    src={image.url}
+                    src={optimizeContentfulImage(image.url, 800)}
                     alt={
                       image.description ||
                       (name

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { optimizeContentfulImage } from '../../lib/helpers/image';
 
 const GenericpageHeader = ({ image }) => {
   return (
@@ -8,7 +9,7 @@ const GenericpageHeader = ({ image }) => {
           <Image
             className="w-full h-full object-cover"
             fill
-            src={image.url}
+            src={optimizeContentfulImage(image.url, 1600)}
             alt={image.description || 'Pagina header afbeelding - Diamond Fysio Amsterdam'}
           />
         )}

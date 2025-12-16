@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
+import { optimizeContentfulImage } from '../../lib/helpers/image';
+
 const CollaborationSlide = ({ url, description }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -26,7 +28,7 @@ const CollaborationSlide = ({ url, description }) => {
           width={200}
           height={100}
           className="object-contain"
-          src={url}
+          src={optimizeContentfulImage(url, 400)}
           alt={description || 'Samenwerkingspartner logo - Diamond Fysio Amsterdam'}
         />
         {description && (

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { optimizeContentfulImage } from '../lib/helpers/image';
 
 const Specialisation = ({ image, description, subtitle }) => {
   return (
@@ -12,7 +13,7 @@ const Specialisation = ({ image, description, subtitle }) => {
               <div className="z-10 h-64 sm:h-96 lg:h-[28rem] xl:h-[32rem] w-full relative rounded-xl overflow-hidden shadow-lg">
                 {image && (
                   <Image
-                    src={image.url}
+                    src={optimizeContentfulImage(image.url, 800)}
                     alt={
                       image.description ||
                       (subtitle

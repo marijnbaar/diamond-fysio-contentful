@@ -2,6 +2,7 @@ import Button from '../Button';
 import createSlug from '../../lib/helpers/createSlug';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
+import { optimizeContentfulImage } from '../../lib/helpers/image';
 
 const HomepageHeader = ({ title, info, buttonCollection, image }) => {
   return (
@@ -11,7 +12,7 @@ const HomepageHeader = ({ title, info, buttonCollection, image }) => {
           <Image
             className="w-full h-full object-cover"
             fill
-            src={image.url}
+            src={optimizeContentfulImage(image.url, 1600)}
             alt={
               image.description ||
               'Fysiotherapeut helpt patiënt in moderne Diamond Fysio praktijk in Amsterdam'

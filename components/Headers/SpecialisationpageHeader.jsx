@@ -1,6 +1,7 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
+import { optimizeContentfulImage } from '../../lib/helpers/image';
 
 export default function SpecialisationHeader({ title, descriptionRichText, image }) {
   return (
@@ -47,7 +48,7 @@ export default function SpecialisationHeader({ title, descriptionRichText, image
                 <Image
                   className="object-cover"
                   fill
-                  src={image.url}
+                  src={optimizeContentfulImage(image.url, 1600)}
                   alt={
                     image.description ||
                     (title

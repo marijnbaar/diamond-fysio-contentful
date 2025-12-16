@@ -4,6 +4,8 @@ import { ExternalLinkIcon } from '@heroicons/react/solid';
 import createSlug from '../lib/helpers/createSlug';
 import { useRouter } from 'next/router';
 
+import { optimizeContentfulImage } from '../lib/helpers/image';
+
 export default function Team({ title, description, teamMemberCollection }) {
   const { locale } = useRouter();
   const readMore = locale === 'en' ? 'Read more' : 'Lees meer';
@@ -34,7 +36,7 @@ export default function Team({ title, description, teamMemberCollection }) {
                       <div className="space-y-6 mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 relative overflow-hidden bg-gray-100 dark:bg-gray-700 mt-8 group-hover:scale-105 transition-transform duration-300">
                         {person?.image?.url && (
                           <Image
-                            src={person.image.url}
+                            src={optimizeContentfulImage(person.image.url, 800)}
                             alt={
                               person.image?.description ||
                               (person?.firstName && person?.lastName
