@@ -7,10 +7,12 @@ export default function WebsitePopup({ info }) {
 
   useEffect(() => {
     // Korte vertraging zodat de animatie smooth binnenkomt na laden
+    let timer;
     if (info) {
       setIsOpen(true);
-      setTimeout(() => setIsVisible(true), 1000);
+      timer = setTimeout(() => setIsVisible(true), 1000);
     }
+    return () => clearTimeout(timer);
   }, [info]);
 
   if (!isOpen || !info) return null;

@@ -13,11 +13,8 @@ const cleanWebsiteUrl = (url) => {
   if (cleaned.startsWith('/http')) {
     cleaned = cleaned.substring(1);
   }
-  // Ensure absolute URL if it looks like a domain
-  if (
-    !cleaned.startsWith('http') &&
-    (cleaned.startsWith('www.') || cleaned.includes('.com') || cleaned.includes('.nl'))
-  ) {
+  // Ensure absolute URL if it looks like a domain (contains a dot but no path separators)
+  if (!cleaned.startsWith('http') && /^[^/]+\.[^/]+/.test(cleaned)) {
     cleaned = 'https://' + cleaned;
   }
   return cleaned;
