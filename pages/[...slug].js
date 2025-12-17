@@ -39,7 +39,8 @@ export const getStaticProps = async ({ params, preview = false, locale = 'nl' })
   }
   const cfLocale = normalizeLocale(locale) || undefined;
   const translated = (await getPage(modelId, slug, preview, cfLocale)) ?? [];
-  const instagramPosts = await loadPosts();
+  // const instagramPosts = await loadPosts(); // Only needed on homepage
+  const instagramPosts = { data: [] };
 
   return {
     props: {
