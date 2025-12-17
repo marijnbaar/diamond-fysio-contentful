@@ -1,27 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 
 export default function WebsitePopup({ info }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     // Korte vertraging zodat de animatie smooth binnenkomt na laden
     let timer;
     if (info) {
       setIsOpen(true);
-      timer = setTimeout(() => setIsVisible(true), 1000);
+      timer = setTimeout(() => {
+        if (isMounted.current) {
+          setIsVisible(true);
+        }
+      }, 1000);
     }
     return () => clearTimeout(timer);
   }, [info]);
 
-  if (!isOpen || !info) return null;
-
   const handleClose = () => {
     setIsVisible(false);
     // Wacht tot de fade-out klaar is voordat we hem uit de DOM halen
-    setTimeout(() => setIsOpen(false), 500);
+    setTimeout(() => {
+      if (isMounted.current) {
+        setIsOpen(false);
+      }
+    }, 500);
   };
+
+  if (!isOpen || !info) return null;
 
   return (
     <div
