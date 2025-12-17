@@ -13,6 +13,9 @@ import SlideshowCollaborations from './SlideshowCollaborations/SlideShow';
 import OverviewList from './OverviewList';
 
 const ComponentList = (props) => {
+  if (!props.components) {
+    return null;
+  }
   return props.components.map((component) => {
     if (component.sys.id) {
       switch (component.__typename) {

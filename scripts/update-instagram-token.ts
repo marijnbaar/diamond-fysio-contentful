@@ -64,7 +64,7 @@ async function sendNewTokentoVercel(longLivedAccessToken: string) {
   }
 
   const { projectId, orgId } = config;
-  const envName = 'NEXT_PUBLIC_INSTAGRAM_API_KEY';
+  const envName = 'INSTAGRAM_API_KEY';
   const headers = {
     Authorization: `Bearer ${process.env.VERCEL_NEWAUTH_TOKEN}`,
     'Content-Type': 'application/json'
@@ -147,9 +147,9 @@ async function main() {
     await updateTokenInVercel(token);
   } else if (shouldRefresh) {
     // Try to refresh existing token
-    const currentToken = process.env.NEXT_PUBLIC_INSTAGRAM_API_KEY;
+    const currentToken = process.env.INSTAGRAM_API_KEY;
     if (!currentToken) {
-      console.error('❌ NEXT_PUBLIC_INSTAGRAM_API_KEY not found');
+      console.error('❌ INSTAGRAM_API_KEY not found');
       console.error('   Use --token=<NEW_TOKEN> to set a new token directly');
       process.exit(1);
     }
@@ -177,7 +177,7 @@ async function main() {
     console.log('');
     console.log('Environment variables needed:');
     console.log('  - VERCEL_NEWAUTH_TOKEN');
-    console.log('  - NEXT_PUBLIC_INSTAGRAM_API_KEY (for --refresh)');
+    console.log('  - INSTAGRAM_API_KEY (for --refresh)');
     console.log('');
     console.log('Or run "vercel link" to create .vercel/project.json');
     console.log('(which contains VERCEL_PROJECT_ID and VERCEL_ORG_ID)');

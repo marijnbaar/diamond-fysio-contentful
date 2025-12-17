@@ -95,7 +95,7 @@ async function getTokenFromVercel(): Promise<string | null> {
     }
 
     const envContent = fs.readFileSync(envLocalPath, 'utf-8');
-    const match = envContent.match(/^NEXT_PUBLIC_INSTAGRAM_API_KEY=(.+)$/m);
+    const match = envContent.match(/^INSTAGRAM_API_KEY=(.+)$/m);
 
     if (match && match[1]) {
       return match[1].trim();
@@ -105,7 +105,7 @@ async function getTokenFromVercel(): Promise<string | null> {
     const envPath = path.join(process.cwd(), '.env');
     if (fs.existsSync(envPath)) {
       const envContent2 = fs.readFileSync(envPath, 'utf-8');
-      const match2 = envContent2.match(/^NEXT_PUBLIC_INSTAGRAM_API_KEY=(.+)$/m);
+      const match2 = envContent2.match(/^INSTAGRAM_API_KEY=(.+)$/m);
       if (match2 && match2[1]) {
         return match2[1].trim();
       }

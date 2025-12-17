@@ -1,4 +1,4 @@
-import { manualTokenRefresh } from '../../../pages/api/fetchPosts.js';
+import { manualTokenRefresh } from '../../../lib/api/fetchPosts';
 import { checkBotId } from 'botid/server';
 import { NextResponse } from 'next/server';
 

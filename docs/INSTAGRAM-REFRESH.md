@@ -8,11 +8,11 @@ This project includes an automated system to keep the Instagram Long-Lived Acces
 
 1.  **Token Refresh Endpoint (`app/api/refreshToken/route.ts`)**:
     - This API endpoint is designed to be called by a cron job (e.g., GitHub Actions, Vercel Cron, or an external cron service).
-    - It calls `manualTokenRefresh()` from `pages/api/fetchPosts.js`.
+    - It calls `manualTokenRefresh()` from `lib/api/fetchPosts.js`.
 
-2.  **Core Logic (`pages/api/fetchPosts.js`)**:
+2.  **Core Logic (`lib/api/fetchPosts.js`)**:
     - `refreshAccessToken(secret)`: Calls the Instagram Graph API (`refresh_access_token`) to exchange the current token for a new one.
-    - `sendNewTokentoVercel(longLivedAccessToken)`: If hosted on Vercel, this function uses the Vercel API to update the `NEXT_PUBLIC_INSTAGRAM_API_KEY` environment variable with the new token. This ensures the next deployment or server restart picks up the new token.
+    - `sendNewTokentoVercel(longLivedAccessToken)`: If hosted on Vercel, this function uses the Vercel API to update the `INSTAGRAM_API_KEY` environment variable with the new token. This ensures the next deployment or server restart picks up the new token.
 
 3.  **Bot Protection**:
     - The `refreshToken` endpoint is protected by **BotID**.
@@ -22,7 +22,7 @@ This project includes an automated system to keep the Instagram Long-Lived Acces
 ## Setup
 
 1.  **Environment Variables**:
-    - `NEXT_PUBLIC_INSTAGRAM_API_KEY`: The current Instagram Access Token.
+    - `INSTAGRAM_API_KEY`: The current Instagram Access Token.
     - `WEBHOOK_SECRET`: A secret key used to authenticate the cron job.
     - `VERCEL_PROJECT_ID`: (Optional, auto-detected if linked) Vercel Project ID.
     - `VERCEL_ORG_ID`: (Optional, auto-detected if linked) Vercel Org ID.
