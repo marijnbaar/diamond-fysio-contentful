@@ -1,6 +1,6 @@
 import { getPage } from '../lib/query/getData';
 import ComponentList from '../components/ComponentList';
-import { loadPosts } from './api/fetchPosts';
+import { loadPosts } from '../lib/api/fetchPosts';
 // runtime translation removed; we fetch localized content directly from Contentful
 // removed legacy runtime i18n fetches; we use Contentful locales only
 import { normalizeLocale } from '../lib/helpers/normalizeLocale';

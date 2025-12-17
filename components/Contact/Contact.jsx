@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 export default function Contact({
   title,
   description,
+  descriptionText,
   subtitle,
   contactDescription,
   phonenumber,
@@ -18,6 +19,8 @@ export default function Contact({
   const router = useRouter();
   const locale = router?.locale || 'nl';
   const isEn = locale === 'en';
+
+  const desc = descriptionText || description;
 
   // Localized strings
   const t = {
@@ -68,7 +71,7 @@ export default function Contact({
                 </h1>
                 <div className="mt-6">
                   <p className="text-xl text-gray-500 dark:text-gray-300 break-words whitespace-normal overflow-visible">
-                    {description || t.defaultDescription}
+                    {desc || t.defaultDescription}
                   </p>
                 </div>
               </div>

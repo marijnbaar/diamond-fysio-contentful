@@ -4,10 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import createSlug from '../lib/helpers/createSlug';
 
-export default function CTA({ title, subtitle, description, image, button }) {
+export default function CTA({ title, subtitle, description, descriptionText, image, button }) {
   const { locale } = useRouter();
   const isEn = (locale || 'nl').toLowerCase() === 'en';
   const label = (button && button.title) || (isEn ? 'Read more' : 'Lees meer');
+  const desc = descriptionText || description;
 
   const internalHref =
     button && button.internalLink
@@ -37,7 +38,7 @@ export default function CTA({ title, subtitle, description, image, button }) {
           <p className="mt-2 text-white text-3xl font-extrabold tracking-tight sm:text-4xl">
             {subtitle && subtitle}
           </p>
-          <p className="mt-3 text-lg text-gray-300">{description && description}</p>
+          <p className="mt-3 text-lg text-gray-300">{desc && desc}</p>
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">
               <div className="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-md text-white border-white/30 hover:bg-white/10 transition-colors">

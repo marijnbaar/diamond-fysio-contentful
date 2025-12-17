@@ -106,12 +106,14 @@ const TherapistCard = ({ name, link, isEmail }) => {
 export default function Appointment({
   title,
   description,
+  descriptionText,
   appointmentCardsCollection,
   alert,
   alertDescription
 }) {
   const { locale } = useRouter();
   const isEn = (locale || 'nl').toLowerCase() === 'en';
+  const desc = descriptionText || description;
 
   // Scroll animatie effect
   useEffect(() => {
@@ -199,9 +201,9 @@ export default function Appointment({
             <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-teal-500 dark:bg-teal-400 rounded-full"></span>
           </h2>
         )}
-        {description && (
+        {desc && (
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            {description}
+            {desc}
           </p>
         )}
 
