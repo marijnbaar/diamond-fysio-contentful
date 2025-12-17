@@ -35,8 +35,8 @@ export const getStaticProps = async ({ preview = false, locale = 'nl' }) => {
 };
 
 const Home = (props) => {
-  if (!props.components) {
-    return <div>Loading... or No Components Found</div>;
+  if (props.components.length === 0) {
+    return <div>No components found.</div>;
   }
   return (
     <div>
