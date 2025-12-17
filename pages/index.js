@@ -21,7 +21,7 @@ export const getStaticProps = async ({ preview = false, locale = 'nl' }) => {
       // Extract meta if it exists in the page data
       meta: translated.meta || translated.meta_data || null
     },
-    revalidate: 3600
+    revalidate: 86400
   };
 };
 

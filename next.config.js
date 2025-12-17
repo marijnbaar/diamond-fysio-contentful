@@ -15,7 +15,7 @@ module.exports = {
         hostname: 'instagram.com'
       }
     ],
-    qualities: [75, 85, 100]
+    qualities: [75]
   },
   // Note: i18n config is for Pages Router only, not App Router
   // If using App Router, use different internationalization approach
