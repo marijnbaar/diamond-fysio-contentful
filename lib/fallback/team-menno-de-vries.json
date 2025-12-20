@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/logogrijs.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -759,7 +759,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/logogrijs.png",
       "description": null
     },
     "title": "Footer",
