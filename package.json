@@ -101,7 +101,7 @@
     "path-to-regexp": "^6.3.0"
   },
   "engines": {
-    "node": "^18.18.0 || ^19.8.0 || >=20.0.0"
+    "node": "22.x"
   },
   "version": "1.0.0",
   "description": "Diamond fysio",
