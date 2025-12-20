@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -627,7 +627,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/1EUqVPSSeKxcmYCfW30UHZ/99f4f0f0f171f9feae8975f00e39b53a/DSC_0720.jpg"
+        "url": "/images/fallback/99f4f0f0f171f9feae8975f00e39b53a-DSC_0720.jpg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -642,7 +642,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/1EUqVPSSeKxcmYCfW30UHZ/99f4f0f0f171f9feae8975f00e39b53a/DSC_0720.jpg"
+        "url": "/images/fallback/99f4f0f0f171f9feae8975f00e39b53a-DSC_0720.jpg"
       },
       "title": "Oefentherapie",
       "subtitle": null,
@@ -783,7 +783,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

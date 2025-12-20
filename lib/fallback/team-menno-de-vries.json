@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -718,7 +718,7 @@
       "quote": null,
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/4J46ACF9mIjQwBX74jpkwl/f84551ac54bcbac68d2c23617f35e03f/Menno-5-mei-300x300.jpeg.png"
+        "url": "/images/fallback/f84551ac54bcbac68d2c23617f35e03f-Menno-5-mei-300x300.jpeg.png"
       },
       "specialisationTagsCollection": {
         "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -759,7 +759,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

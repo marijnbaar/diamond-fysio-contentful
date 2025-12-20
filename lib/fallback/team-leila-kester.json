@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -588,7 +588,7 @@
       "quote": null,
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/74HnZRg4xkuDVaMzqmVyUm/afaa34a91ad045662545ed15d2f08e72/Leila_Kester_-_crop___Jan_Willem_Kaldenbach.jpg.png"
+        "url": "/images/fallback/afaa34a91ad045662545ed15d2f08e72-Leila_Kester_-_crop___Jan_Willem_Kaldenbach.jpg.png"
       },
       "specialisationTagsCollection": {
         "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -661,7 +661,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

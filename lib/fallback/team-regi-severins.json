@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -748,7 +748,7 @@
       "quote": null,
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/7dqwa9irMhKJT6kTphhLKk/136637ce63a7f9387c38bf2a1185c871/Regi.png"
+        "url": "/images/fallback/136637ce63a7f9387c38bf2a1185c871-Regi.png"
       },
       "specialisationTagsCollection": {
         "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -813,7 +813,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

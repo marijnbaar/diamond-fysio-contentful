@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -639,7 +639,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/6WtAEmUc5Z6qTrnHcYxJnO/d013ced82a6889339350843832a5ec60/DSC_0493.JPG"
+        "url": "/images/fallback/d013ced82a6889339350843832a5ec60-DSC_0493.JPG"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -654,7 +654,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/4wnNYGK2rbhVrYtbyD7aVy/adbee9efb0c5f78683114ad0ab4a5c24/DSC_0473.jpeg"
+        "url": "/images/fallback/adbee9efb0c5f78683114ad0ab4a5c24-DSC_0473.jpeg"
       },
       "title": "Dry needling",
       "subtitle": null,
@@ -903,7 +903,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

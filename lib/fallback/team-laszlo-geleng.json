@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -742,7 +742,7 @@
       "quote": "\"Met concrete instructies bouw ik de belastbaarheid van mijn patiënten snel weer op\"",
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/313QjT97FZqiiQ8DDlvNu0/bcab8d7965af061935bf377396233f5d/laszlo-new-3-150x150.png"
+        "url": "/images/fallback/bcab8d7965af061935bf377396233f5d-laszlo-new-3-150x150.png"
       },
       "specialisationTagsCollection": {
         "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -799,7 +799,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

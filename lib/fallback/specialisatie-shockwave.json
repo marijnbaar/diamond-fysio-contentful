@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -627,7 +627,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/1UZRwO6kPo4TLmDVnBSi94/aa6e9ae83977c88ec215aaf5bbc960ac/DSC_0631.jpg"
+        "url": "/images/fallback/aa6e9ae83977c88ec215aaf5bbc960ac-DSC_0631.jpg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -642,7 +642,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/1MvU5h2vnsuFVQFiwxWwxY/b0ac5ba7dbb44a6acbd37623218d7fc3/DSC_0627.png"
+        "url": "/images/fallback/b0ac5ba7dbb44a6acbd37623218d7fc3-DSC_0627.png"
       },
       "title": "Shockwave",
       "subtitle": null,
@@ -807,7 +807,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

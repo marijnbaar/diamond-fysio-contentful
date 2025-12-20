@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -602,7 +602,7 @@
       "descriptionRichText": null,
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/3kcOaF207nltI0kPb1sHt3/f4e706ea50ce62b86cf9c97b352159b5/IMG_2497.jpeg"
+        "url": "/images/fallback/f4e706ea50ce62b86cf9c97b352159b5-IMG_2497.jpeg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -855,7 +855,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/7jXrwJlub61yaq1Z9v46Oa/a7dd27b431f0a09c33973c90d9e41acb/DSC_0533.JPG",
+              "url": "/images/fallback/a7dd27b431f0a09c33973c90d9e41acb-DSC_0533.JPG",
               "title": "manuele-therapie-nekbehandeling",
               "description": null
             },
@@ -997,7 +997,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/1eV6zLCIrFlmlFWOVkLcwR/76130a94b5a5983d855bc47269f6d9a6/eb4a3340-6c11-4f00-b58d-944f1fd97cdb.jpeg",
+              "url": "/images/fallback/76130a94b5a5983d855bc47269f6d9a6-eb4a3340-6c11-4f00-b58d-944f1fd97cdb.jpeg",
               "title": "dansgerelateerde-oefentherapie-voetcorrectie",
               "description": ""
             },
@@ -1175,7 +1175,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/1MvU5h2vnsuFVQFiwxWwxY/b0ac5ba7dbb44a6acbd37623218d7fc3/DSC_0627.png",
+              "url": "/images/fallback/b0ac5ba7dbb44a6acbd37623218d7fc3-DSC_0627.png",
               "title": "shockwave-therapie-voetbehandeling",
               "description": null
             },
@@ -1437,7 +1437,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/4wnNYGK2rbhVrYtbyD7aVy/adbee9efb0c5f78683114ad0ab4a5c24/DSC_0473.jpeg",
+              "url": "/images/fallback/adbee9efb0c5f78683114ad0ab4a5c24-DSC_0473.jpeg",
               "title": "dry-needling-neck-treatment",
               "description": null
             },
@@ -1591,7 +1591,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/1EUqVPSSeKxcmYCfW30UHZ/99f4f0f0f171f9feae8975f00e39b53a/DSC_0720.jpg",
+              "url": "/images/fallback/99f4f0f0f171f9feae8975f00e39b53a-DSC_0720.jpg",
               "title": "oefentherapie-rug-oefening-begeleiding",
               "description": ""
             },
@@ -1733,7 +1733,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/iRgZVm8KgZk9AVB5IJFnJ/4743be5e6546a3442aa1b7d8c4a48adb/DSC_0574.jpg",
+              "url": "/images/fallback/4743be5e6546a3442aa1b7d8c4a48adb-DSC_0574.jpg",
               "title": "podotherapie-voetbehandeling-handen",
               "description": null
             },
@@ -1935,7 +1935,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/3GCnfbeCzjLrnLefjuPG0M/e5619247ea53ca0b20e14db69157aebb/88B1A438-D575-4A56-8367-B33E14F86441.jpeg",
+              "url": "/images/fallback/e5619247ea53ca0b20e14db69157aebb-88B1A438-D575-4A56-8367-B33E14F86441.jpeg",
               "title": "vocal massage 2",
               "description": null
             },
@@ -2127,7 +2127,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/2AnHl7PMK7bKXytWuROYPJ/5fa066a9e928fc40c1dd07e14ba03f42/werk_Robin_DSC_0059.png",
+              "url": "/images/fallback/5fa066a9e928fc40c1dd07e14ba03f42-werk_Robin_DSC_0059.png",
               "title": "fysio-pilates Robin",
               "description": "Fysiotherapeut begeleidt patiënt met Fysio-pilates oefening bij Diamond Fysio Amsterdam."
             },
@@ -2338,7 +2338,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/313QjT97FZqiiQ8DDlvNu0/bcab8d7965af061935bf377396233f5d/laszlo-new-3-150x150.png"
+              "url": "/images/fallback/bcab8d7965af061935bf377396233f5d-laszlo-new-3-150x150.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -2533,7 +2533,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/y2R5L8uB06DiJTuFgjWsl/28b127889af384609a3875e2976e2531/91b28769-a5da-44f5-8fb6-9569121b6ffd_2.jpg.png"
+              "url": "/images/fallback/28b127889af384609a3875e2976e2531-91b28769-a5da-44f5-8fb6-9569121b6ffd_2.jpg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -2736,7 +2736,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/2uRsiReQSPshhh1POvEnSE/cdde7b0ae0897955b1ba9b2a5342c738/40221.jpeg.png"
+              "url": "/images/fallback/cdde7b0ae0897955b1ba9b2a5342c738-40221.jpeg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -2893,7 +2893,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/6X0XHDVtkofdswXUodNZHD/f2e9244cceece8597a5777ae85a3335d/IMG_9484.jpeg.png"
+              "url": "/images/fallback/f2e9244cceece8597a5777ae85a3335d-IMG_9484.jpeg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -3130,7 +3130,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/7dqwa9irMhKJT6kTphhLKk/136637ce63a7f9387c38bf2a1185c871/Regi.png"
+              "url": "/images/fallback/136637ce63a7f9387c38bf2a1185c871-Regi.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -3337,7 +3337,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/4J46ACF9mIjQwBX74jpkwl/f84551ac54bcbac68d2c23617f35e03f/Menno-5-mei-300x300.jpeg.png"
+              "url": "/images/fallback/f84551ac54bcbac68d2c23617f35e03f-Menno-5-mei-300x300.jpeg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -3532,7 +3532,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/4BTrP08EA7D7eBuOByB8Bj/245617ea03c967caf0642a63a711baff/Iva.jpeg"
+              "url": "/images/fallback/245617ea03c967caf0642a63a711baff-Iva.jpeg"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -3609,7 +3609,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/74HnZRg4xkuDVaMzqmVyUm/afaa34a91ad045662545ed15d2f08e72/Leila_Kester_-_crop___Jan_Willem_Kaldenbach.jpg.png"
+              "url": "/images/fallback/afaa34a91ad045662545ed15d2f08e72-Leila_Kester_-_crop___Jan_Willem_Kaldenbach.jpg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -3830,7 +3830,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/2EeeIDBAYaI2Jb3Yrk90wt/d2a75f9da239677ce7f028e94152eed9/niels.jpg.png"
+              "url": "/images/fallback/d2a75f9da239677ce7f028e94152eed9-niels.jpg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -3883,7 +3883,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/7ghIBSrwBQyqxt9Qx3RpvG/279c20917f86ad97390eaca302d51ea9/_35A3698-zw-lr.jpg.png"
+              "url": "/images/fallback/279c20917f86ad97390eaca302d51ea9-_35A3698-zw-lr.jpg.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -4062,7 +4062,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/45MaJaDcL5pryxmJfBP41k/fe1518cc296274bc5a9366ec835e7ce5/marco-lysen2-150x150.png"
+              "url": "/images/fallback/fe1518cc296274bc5a9366ec835e7ce5-marco-lysen2-150x150.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -4159,7 +4159,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/YtfKypH66CUohnC00qzFQ/6c61a4467a968416959ec7627bb1d0b1/Ton-new-150x150.png"
+              "url": "/images/fallback/6c61a4467a968416959ec7627bb1d0b1-Ton-new-150x150.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -4187,7 +4187,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/7rMOvRpiizob4vF2tJG9QL/5c2cb0748b456494fccaa77facf907e1/michel-new-150x150.png"
+              "url": "/images/fallback/5c2cb0748b456494fccaa77facf907e1-michel-new-150x150.png"
             },
             "specialisationTagsCollection": {
               "__typename": "TeamMemberSpecialisationTagsCollection",
@@ -4233,7 +4233,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/6zvCb54Z0OEIBGjyPOoext/45c9617b4d8bb865abf3fd47157c9513/IMG_2519.jpeg"
+        "url": "/images/fallback/45c9617b4d8bb865abf3fd47157c9513-IMG_2519.jpeg"
       }
     },
     {
@@ -4265,7 +4265,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/3auIyOHZOhxWTsACAAvyRE/1949f24c1b39b129d047d292f1fb3af6/DSC_0714.jpg"
+              "url": "/images/fallback/1949f24c1b39b129d047d292f1fb3af6-DSC_0714.jpg"
             },
             "quote": "Ik kwam binnen met een flinke enkelblessure en kon nauwelijks nog lopen. Door fantastische behandeling en begeleiding stond ik binnen een maand pijnloos en hersteld weer op het toneel. Een dikke aanrader en een prachtige praktijk.",
             "name": "Dewy Vlaardingerbroek",
@@ -4279,7 +4279,7 @@
             },
             "image": {
               "__typename": "Asset",
-              "url": "https://images.ctfassets.net/1evapsw0ox8z/3oxtHaLJcXWDhPQuK1Yftj/3b6de001f88f3e2f4acf6915a3c3d732/DSC_0657.jpg"
+              "url": "/images/fallback/3b6de001f88f3e2f4acf6915a3c3d732-DSC_0657.jpg"
             },
             "quote": "Geweldige praktijk met fantastische behandelaren. Mijn lichaam is mijn instrument en ik heb lang gezocht naar de beste zorg. Ik ben hier altijd razendsnel weer in de running en ik weet waar ik aan kan werken. Ik laat me alleen nog hier behandelen.",
             "name": "Tamara Markus",
@@ -4300,35 +4300,35 @@
         "items": [
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/5DVYPdX8sGsd7f5tqCcOGX/a74a825b60523d3457894732f2e4804e/NL_Logoset_RGB_NL_NationaleBalletacademie_rgb.jpg"
+            "url": "/images/fallback/a74a825b60523d3457894732f2e4804e-NL_Logoset_RGB_NL_NationaleBalletacademie_rgb.jpg"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/3XAjkNB1yYelyFih4xjgHg/5090459537d1e5230eb27ea35dc962bf/NDT_logo.png"
+            "url": "/images/fallback/5090459537d1e5230eb27ea35dc962bf-NDT_logo.png"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/53EnG9z2PGuImORYmlVhBl/dd2f1b10f0f6a1f372919c768cab6f6a/SMCmetJBZ_LOGO_100-.jpg"
+            "url": "/images/fallback/dd2f1b10f0f6a1f372919c768cab6f6a-SMCmetJBZ_LOGO_100-.jpg"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/5GHeWIGezjor3srSLzLGsv/dc274af4a46c505b7426d050d86915b5/9ECC40225CF9492AA32FEF329D2A3507.png"
+            "url": "/images/fallback/dc274af4a46c505b7426d050d86915b5-9ECC40225CF9492AA32FEF329D2A3507.png"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/2h0O1dRT6FQKnfpmP20AsC/f1523d4538d22f7bfcbe0cc0ec8f8ed5/AHK_AvTD-square_logo-NL-RGB.jpg"
+            "url": "/images/fallback/f1523d4538d22f7bfcbe0cc0ec8f8ed5-AHK_AvTD-square_logo-NL-RGB.jpg"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/6MaB0Fjpx6KP0TFhTuzeAg/40ebbe99423c4d9ddd5afd7abc416dbb/Schermafbeelding_2023-01-15_om_11.39.20.png"
+            "url": "/images/fallback/40ebbe99423c4d9ddd5afd7abc416dbb-Schermafbeelding_2023-01-15_om_11.39.20.png"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/1A9ovw3HkN9j97AvP4dKvA/efdb373841efa28f7ca057e085732222/logo.png"
+            "url": "/images/fallback/efdb373841efa28f7ca057e085732222-logo.png"
           },
           {
             "__typename": "Asset",
-            "url": "https://images.ctfassets.net/1evapsw0ox8z/1ZRclTFo2jE8MLrrQEIGIS/67ffb10b39444dfb24e9b058b0ed5c18/logo-adc.png"
+            "url": "/images/fallback/67ffb10b39444dfb24e9b058b0ed5c18-logo-adc.png"
           }
         ]
       }
@@ -4351,7 +4351,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/2zCeYCL7DLL9uN2EApr5wj/89722b74e56f630f08402e02adb9c672/leila.jpeg"
+        "url": "/images/fallback/89722b74e56f630f08402e02adb9c672-leila.jpeg"
       }
     }
   ],
@@ -4363,7 +4363,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

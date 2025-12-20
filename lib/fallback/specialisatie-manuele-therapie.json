@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -627,7 +627,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/1foRTplKaWnfBA6Tj4nCHJ/a0304eaafd98e3338a67f82e18bc73c4/DSC_0645.jpg"
+        "url": "/images/fallback/a0304eaafd98e3338a67f82e18bc73c4-DSC_0645.jpg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -642,7 +642,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/7jXrwJlub61yaq1Z9v46Oa/a7dd27b431f0a09c33973c90d9e41acb/DSC_0533.JPG"
+        "url": "/images/fallback/a7dd27b431f0a09c33973c90d9e41acb-DSC_0533.JPG"
       },
       "title": "Manuele therapie",
       "subtitle": null,
@@ -843,7 +843,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

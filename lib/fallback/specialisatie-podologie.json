@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -627,7 +627,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/4Q17vJ3WJcW0GljZDsxPUC/e22f4920d525d8367f2ab4cef8f5d209/DSC_0574.jpg"
+        "url": "/images/fallback/e22f4920d525d8367f2ab4cef8f5d209-DSC_0574.jpg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -642,7 +642,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/iRgZVm8KgZk9AVB5IJFnJ/4743be5e6546a3442aa1b7d8c4a48adb/DSC_0574.jpg"
+        "url": "/images/fallback/4743be5e6546a3442aa1b7d8c4a48adb-DSC_0574.jpg"
       },
       "title": "Podotherapie",
       "subtitle": null,
@@ -771,7 +771,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",

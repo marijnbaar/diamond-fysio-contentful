@@ -7,7 +7,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "menuTitel": "Menu",
@@ -639,7 +639,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/5WPfd1Gom3mrlkMRsnxz0M/96a0a7a90b58ba0bd881acecf9241ae0/DSC_0666.jpg"
+        "url": "/images/fallback/96a0a7a90b58ba0bd881acecf9241ae0-DSC_0666.jpg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -654,7 +654,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "https://images.ctfassets.net/1evapsw0ox8z/1eV6zLCIrFlmlFWOVkLcwR/76130a94b5a5983d855bc47269f6d9a6/eb4a3340-6c11-4f00-b58d-944f1fd97cdb.jpeg"
+        "url": "/images/fallback/76130a94b5a5983d855bc47269f6d9a6-eb4a3340-6c11-4f00-b58d-944f1fd97cdb.jpeg"
       },
       "title": "Dansgerelateerde oefentherapie",
       "subtitle": null,
@@ -783,7 +783,7 @@
     },
     "logo": {
       "__typename": "Asset",
-      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "url": "/images/fallback/7cbd32dfd3f592b22fbcc936995dc258-Fysio_diamond_grijs_alpha_kopie.png",
       "description": null
     },
     "title": "Footer",
