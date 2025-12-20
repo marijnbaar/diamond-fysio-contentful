@@ -6,7 +6,7 @@ This project includes an automated system to keep the Instagram Long-Lived Acces
 
 ## How It Works
 
-1.  **Token Refresh Endpoint (`app/api/refreshToken/route.ts`)**:
+1.  **Token Refresh Endpoint (`pages/api/refreshToken.ts`)**:
     - This API endpoint is designed to be called by a cron job (e.g., GitHub Actions, Vercel Cron, or an external cron service).
     - It calls `manualTokenRefresh()` from `lib/api/fetchPosts.js`.
 
