@@ -324,7 +324,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "/images/fallback/DSC_0645-manuele-therapie.png"
+        "url": "/images/fallback/DSC_0631-shockwave.png"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
@@ -339,7 +339,7 @@
       },
       "image": {
         "__typename": "Asset",
-        "url": "/images/fallback/a7dd27b431f0a09c33973c90d9e41acb-DSC_0533.JPG"
+        "url": "/images/fallback/DSC_0631-shockwave.png"
       },
       "title": "Vocal massage",
       "subtitle": null,
