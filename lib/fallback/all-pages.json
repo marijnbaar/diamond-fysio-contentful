@@ -37599,25 +37599,289 @@
           "menuItemsCollection": {
             "__typename": "NavigatieSubmenuMenuItemsCollection",
             "items": [
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "5vpPgQvLOWxBaVe0csSxqy" }, "title": "Manuele therapie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/manuele-therapie", "sys": { "__typename": "Sys", "id": "1X0kE90KoqMz6UF5Mgz4D7" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "1T1B0eLKwiBwYkF39F5pC3" }, "title": "Dansgerelateerde oefentherapie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/dans-gerelateerde-oefentherapie", "sys": { "__typename": "Sys", "id": "1PjVmOeI0XNwsSGJSfrVDq" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "4jJNSaHNvG7769l2l18h9m" }, "title": "Shockwave", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/shockwave", "sys": { "__typename": "Sys", "id": "3TCqYOYbReoCBxQaau98fc" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "2dwbBXYUpwPH9cHCMBk1SJ" }, "title": "Dry Needling", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/dry-needling", "sys": { "__typename": "Sys", "id": "6qnXKjR8DIYJdYc3sHdXu5" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "7ozdNUT2v5hMViWNjbpVh7" }, "title": "Oefentherapie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/oefentherapie", "sys": { "__typename": "Sys", "id": "52NsbRSOFccUyuN4DUpgcm" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "71FLINlt5M75GCxoKlhR4Q" }, "title": "Podologie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/podologie", "sys": { "__typename": "Sys", "id": "Bm1nGV1vjutY6QbAWjybQ" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "6wKjBzuP3tgI2HAwyCaan6" }, "title": "Vocal massage", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/vocal-massage", "sys": { "__typename": "Sys", "id": "uYzj5OXA6XM9diNH6DTja" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "7bnkg0TJMQwiii4EqpykG" }, "title": "Fysio-pilates", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/pilates", "sys": { "__typename": "Sys", "id": "4jWTwGWINloMk1fRidHINH" } } }
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "5vpPgQvLOWxBaVe0csSxqy"
+                },
+                "title": "Manuele therapie",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/manuele-therapie",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "1X0kE90KoqMz6UF5Mgz4D7"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "1T1B0eLKwiBwYkF39F5pC3"
+                },
+                "title": "Dansgerelateerde oefentherapie",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/dans-gerelateerde-oefentherapie",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "1PjVmOeI0XNwsSGJSfrVDq"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "4jJNSaHNvG7769l2l18h9m"
+                },
+                "title": "Shockwave",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/shockwave",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "3TCqYOYbReoCBxQaau98fc"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "2dwbBXYUpwPH9cHCMBk1SJ"
+                },
+                "title": "Dry Needling",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/dry-needling",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6qnXKjR8DIYJdYc3sHdXu5"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "7ozdNUT2v5hMViWNjbpVh7"
+                },
+                "title": "Oefentherapie",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/oefentherapie",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "52NsbRSOFccUyuN4DUpgcm"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "71FLINlt5M75GCxoKlhR4Q"
+                },
+                "title": "Podologie",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/podologie",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "Bm1nGV1vjutY6QbAWjybQ"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6wKjBzuP3tgI2HAwyCaan6"
+                },
+                "title": "Vocal massage",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/vocal-massage",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "uYzj5OXA6XM9diNH6DTja"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "7bnkg0TJMQwiii4EqpykG"
+                },
+                "title": "Fysio-pilates",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/specialisatie/pilates",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "4jWTwGWINloMk1fRidHINH"
+                  }
+                }
+              }
             ]
           },
           "menuItems": [
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "5vpPgQvLOWxBaVe0csSxqy" }, "title": "Manuele therapie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/manuele-therapie", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "1X0kE90KoqMz6UF5Mgz4D7" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "1T1B0eLKwiBwYkF39F5pC3" }, "title": "Dansgerelateerde oefentherapie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/dans-gerelateerde-oefentherapie", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "1PjVmOeI0XNwsSGJSfrVDq" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "4jJNSaHNvG7769l2l18h9m" }, "title": "Shockwave", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/shockwave", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "3TCqYOYbReoCBxQaau98fc" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "2dwbBXYUpwPH9cHCMBk1SJ" }, "title": "Dry Needling", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/dry-needling", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "6qnXKjR8DIYJdYc3sHdXu5" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "7ozdNUT2v5hMViWNjbpVh7" }, "title": "Oefentherapie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/oefentherapie", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "52NsbRSOFccUyuN4DUpgcm" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "71FLINlt5M75GCxoKlhR4Q" }, "title": "Podologie", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/podologie", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "Bm1nGV1vjutY6QbAWjybQ" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "6wKjBzuP3tgI2HAwyCaan6" }, "title": "Vocal massage", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/vocal-massage", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "uYzj5OXA6XM9diNH6DTja" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "7bnkg0TJMQwiii4EqpykG" }, "title": "Fysio-pilates", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/specialisatie/pilates", "pageType": "specialisationpage", "sys": { "__typename": "Sys", "id": "4jWTwGWINloMk1fRidHINH" } } }
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "5vpPgQvLOWxBaVe0csSxqy"
+              },
+              "title": "Manuele therapie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/manuele-therapie",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "1X0kE90KoqMz6UF5Mgz4D7"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1T1B0eLKwiBwYkF39F5pC3"
+              },
+              "title": "Dansgerelateerde oefentherapie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/dans-gerelateerde-oefentherapie",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "1PjVmOeI0XNwsSGJSfrVDq"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "4jJNSaHNvG7769l2l18h9m"
+              },
+              "title": "Shockwave",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/shockwave",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3TCqYOYbReoCBxQaau98fc"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "2dwbBXYUpwPH9cHCMBk1SJ"
+              },
+              "title": "Dry Needling",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/dry-needling",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6qnXKjR8DIYJdYc3sHdXu5"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "7ozdNUT2v5hMViWNjbpVh7"
+              },
+              "title": "Oefentherapie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/oefentherapie",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "52NsbRSOFccUyuN4DUpgcm"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "71FLINlt5M75GCxoKlhR4Q"
+              },
+              "title": "Podologie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/podologie",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "Bm1nGV1vjutY6QbAWjybQ"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6wKjBzuP3tgI2HAwyCaan6"
+              },
+              "title": "Vocal massage",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/vocal-massage",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "uYzj5OXA6XM9diNH6DTja"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "7bnkg0TJMQwiii4EqpykG"
+              },
+              "title": "Fysio-pilates",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/pilates",
+                "pageType": "specialisationpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "4jWTwGWINloMk1fRidHINH"
+                }
+              }
+            }
           ]
         },
         {
@@ -37630,17 +37894,149 @@
           "menuItemsCollection": {
             "__typename": "NavigatieSubmenuMenuItemsCollection",
             "items": [
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "HrUocabwipDOt8NbbijJg" }, "title": "Over ons", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/about", "sys": { "__typename": "Sys", "id": "5brKedsSYcB6mhK6jVkyG1" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "3C3OgJ7ONjdH3HLAZTiD7Q" }, "title": "Ons team", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/team", "sys": { "__typename": "Sys", "id": "6kFBG2SPCJYm2kuRYigLBS" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "27PLS5Fd4Y3ECYRAElkmBD" }, "title": "Tarieven en contracten", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/pricing", "sys": { "__typename": "Sys", "id": "6nP2yWIcn88fhnGR6ULtBn" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "3KQr4bgAm71fuJ39JEc2BQ" }, "title": "Huisregels", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/houserules", "sys": { "__typename": "Sys", "id": "6QhjlLjW7MespG5H37aFkX" } } }
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "HrUocabwipDOt8NbbijJg"
+                },
+                "title": "Over ons",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/about",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "5brKedsSYcB6mhK6jVkyG1"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+                },
+                "title": "Ons team",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/team",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6kFBG2SPCJYm2kuRYigLBS"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "27PLS5Fd4Y3ECYRAElkmBD"
+                },
+                "title": "Tarieven en contracten",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/pricing",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6nP2yWIcn88fhnGR6ULtBn"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3KQr4bgAm71fuJ39JEc2BQ"
+                },
+                "title": "Huisregels",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/houserules",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6QhjlLjW7MespG5H37aFkX"
+                  }
+                }
+              }
             ]
           },
           "menuItems": [
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "HrUocabwipDOt8NbbijJg" }, "title": "Over ons", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/about", "pageType": "aboutpage", "sys": { "__typename": "Sys", "id": "5brKedsSYcB6mhK6jVkyG1" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "3C3OgJ7ONjdH3HLAZTiD7Q" }, "title": "Ons team", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/team", "pageType": "teampage", "sys": { "__typename": "Sys", "id": "6kFBG2SPCJYm2kuRYigLBS" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "27PLS5Fd4Y3ECYRAElkmBD" }, "title": "Tarieven en contracten", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/pricing", "pageType": "pricingpage", "sys": { "__typename": "Sys", "id": "6nP2yWIcn88fhnGR6ULtBn" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "3KQr4bgAm71fuJ39JEc2BQ" }, "title": "Huisregels", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/houserules", "pageType": "houserulespage", "sys": { "__typename": "Sys", "id": "6QhjlLjW7MespG5H37aFkX" } } }
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "HrUocabwipDOt8NbbijJg"
+              },
+              "title": "Over ons",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/about",
+                "pageType": "aboutpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "5brKedsSYcB6mhK6jVkyG1"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+              },
+              "title": "Ons team",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/team",
+                "pageType": "teampage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6kFBG2SPCJYm2kuRYigLBS"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "27PLS5Fd4Y3ECYRAElkmBD"
+              },
+              "title": "Tarieven en contracten",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/pricing",
+                "pageType": "pricingpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6nP2yWIcn88fhnGR6ULtBn"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3KQr4bgAm71fuJ39JEc2BQ"
+              },
+              "title": "Huisregels",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/houserules",
+                "pageType": "houserulespage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6QhjlLjW7MespG5H37aFkX"
+                }
+              }
+            }
           ]
         }
       ]
@@ -37798,7 +38194,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Je hebt het recht op inzage, rectificatie, beperking en verwijdering van persoonsgegevens. Ook heb je recht op bezwaar en gegevensoverdraagbaarheid. Wil je één van deze rechten uitoefenen? Stuur ons dan een e-mail via info@fysiodiamondfactory.nl.",
+                    "value": "Je hebt het recht op inzage, rectificatie, beperking en verwijdering van persoonsgegevens. Ook heb je recht op bezwaar en gegevensoverdraagbaarheid. Wil je één van deze rechten uitoefenen? Stuur ons dan een e-mail via info@fysiodiamondfactory.nl. Ter verificatie kunnen we vragen om een bewijs van identiteit. Wanneer je inzage wilt in gegevens gekoppeld aan een cookie, stuur dan ook een kopie van het betreffende cookie mee. Je kunt dit vinden in de instellingen van je browser.",
                     "marks": [],
                     "data": {}
                   }
@@ -37822,9 +38218,141 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Je kunt cookies te allen tijde eenvoudig zelf blokkeren en verwijderen via je internetbrowser.",
+                    "value": "Je kunt cookies te allen tijde eenvoudig zelf blokkeren en verwijderen via je internetbrowser. Ook kun je je internetbrowser zodanig instellen dat je een bericht ontvangt als er een cookie wordt geplaatst. Je kunt ook aangeven dat bepaalde cookies niet geplaatst mogen worden. Bekijk voor deze mogelijkheid de helpfunctie van je browser. Als je de cookies in je browser verwijdert, kan dat gevolgen hebben voor het prettige gebruik van deze website.",
                     "marks": [],
                     "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Sommige tracking cookies worden geplaatst door derden die onder meer via onze website advertenties aan je vertonen. Deze cookies kan je centraal verwijderen via youronlinechoices.com.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Wees je er wel van bewust dat als je geen cookies wilt, wij niet meer kunnen garanderen dat onze website helemaal goed werkt. Het kan zijn dat enkele functies van de site verloren gaan of zelfs dat je de website helemaal niet meer kunt bezoeken. Daarnaast betekent het weigeren van cookies ook niet dat je helemaal geen advertenties meer te zien krijgt. De advertenties zijn dan alleen niet meer toegesneden op jouw interesses en kunnen daardoor vaker worden herhaald.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Hoe je je instellingen kunt aanpassen, verschilt per browser. Raadpleeg indien nodig de helpfunctie van jouw browser, of klik op één van de onderstaande links om direct naar de handleiding van je browser te gaan.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "unordered-list",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Firefox",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Google Chrome",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Internet Explorer",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Safari op smartphone",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Safari op Mac",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -37846,7 +38374,31 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "De teksten van onze website kunnen op ieder moment worden aangepast door voortdurende ontwikkelingen. Dit geldt ook voor onze cookieverklaring.",
+                    "value": "De teksten van onze website kunnen op ieder moment worden aangepast door voortdurende ontwikkelingen. Dit geldt ook voor onze cookieverklaring. Neem deze verklaring daarom regelmatig door om op de hoogte te blijven van eventuele wijzigingen.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "In blogartikelen kan gebruik worden gemaakt van content die op andere sites wordt gehost en op Fysiotherapie Diamond Fysio wordt ontsloten door middel van bepaalde codes (embedded content). Denk hierbij aan bijvoorbeeld YouTube video's. Deze codes maken vaak gebruik van cookies. Wij hebben echter geen controle op wat deze derde partijen met hun cookies doen.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Het kan ook voorkomen dat via onze websites cookies worden geplaatst door anderen, waarvan wijzelf niet altijd op de hoogte zijn. Kom je op onze website onvoorziene cookies tegen die je niet kunt terugvinden in ons overzicht? Laat het ons weten via info@fysiodiamondfactory.nl. Je kan ook rechtstreeks contact opnemen met de derde partij en vraag welke cookies ze plaatsten, wat de reden daarvoor is, wat de levensduur van de cookie is en op welke manier ze je privacy gewaarborgd hebben.",
                     "marks": [],
                     "data": {}
                   }
@@ -37859,6 +38411,18 @@
                   {
                     "nodeType": "text",
                     "value": "6. Slotopmerkingen",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Wij zullen deze verklaringen af en toe aan moeten passen, bijvoorbeeld wanneer we onze website aanpassen of de regels rondom cookies wijzigen. Je kunt deze webpagina raadplegen voor de laatste versie.",
                     "marks": [],
                     "data": {}
                   }
@@ -37902,45 +38466,261 @@
       "navigationSubmenuCollection": {
         "__typename": "FooterNavigationSubmenuCollection",
         "items": [
-          { "__typename": "NavigatieSubmenu", "sys": { "__typename": "Sys", "id": "3HRRm2FBJ4vyELW7jugeOn" } },
-          { "__typename": "NavigatieSubmenu", "sys": { "__typename": "Sys", "id": "Pm60l8VIXonMhKXNbuXt7" } }
+          {
+            "__typename": "NavigatieSubmenu",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3HRRm2FBJ4vyELW7jugeOn"
+            }
+          },
+          {
+            "__typename": "NavigatieSubmenu",
+            "sys": {
+              "__typename": "Sys",
+              "id": "Pm60l8VIXonMhKXNbuXt7"
+            }
+          }
         ]
       },
       "footerSubmenu": [
         {
           "__typename": "NavigatieSubmenu",
-          "sys": { "__typename": "Sys", "id": "3HRRm2FBJ4vyELW7jugeOn" },
+          "sys": {
+            "__typename": "Sys",
+            "id": "3HRRm2FBJ4vyELW7jugeOn"
+          },
           "title": "Onze praktijk",
           "menuItemsCollection": {
             "__typename": "NavigatieSubmenuMenuItemsCollection",
             "items": [
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "HrUocabwipDOt8NbbijJg" }, "title": "Over ons", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/about", "sys": { "__typename": "Sys", "id": "5brKedsSYcB6mhK6jVkyG1" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "3C3OgJ7ONjdH3HLAZTiD7Q" }, "title": "Ons team", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/team", "sys": { "__typename": "Sys", "id": "6kFBG2SPCJYm2kuRYigLBS" } } }
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "HrUocabwipDOt8NbbijJg"
+                },
+                "title": "Over ons",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/about",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "5brKedsSYcB6mhK6jVkyG1"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+                },
+                "title": "Ons team",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/team",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6kFBG2SPCJYm2kuRYigLBS"
+                  }
+                }
+              }
             ]
           },
           "menuItems": [
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "HrUocabwipDOt8NbbijJg" }, "title": "Over ons", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/about", "pageType": "aboutpage", "sys": { "__typename": "Sys", "id": "5brKedsSYcB6mhK6jVkyG1" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "3C3OgJ7ONjdH3HLAZTiD7Q" }, "title": "Ons team", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/team", "pageType": "teampage", "sys": { "__typename": "Sys", "id": "6kFBG2SPCJYm2kuRYigLBS" } } }
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "HrUocabwipDOt8NbbijJg"
+              },
+              "title": "Over ons",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/about",
+                "pageType": "aboutpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "5brKedsSYcB6mhK6jVkyG1"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+              },
+              "title": "Ons team",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/team",
+                "pageType": "teampage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6kFBG2SPCJYm2kuRYigLBS"
+                }
+              }
+            }
           ]
         },
         {
           "__typename": "NavigatieSubmenu",
-          "sys": { "__typename": "Sys", "id": "Pm60l8VIXonMhKXNbuXt7" },
+          "sys": {
+            "__typename": "Sys",
+            "id": "Pm60l8VIXonMhKXNbuXt7"
+          },
           "title": "Support",
           "menuItemsCollection": {
             "__typename": "NavigatieSubmenuMenuItemsCollection",
             "items": [
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "1jh4RWWgjhdsIi2vzrv0J7" }, "title": "Contact", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/contact", "sys": { "__typename": "Sys", "id": "3kxSgMVpw3IFObORkq4wBX" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "27PLS5Fd4Y3ECYRAElkmBD" }, "title": "Tarieven en contracten", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/pricing", "sys": { "__typename": "Sys", "id": "6nP2yWIcn88fhnGR6ULtBn" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "7GB2h8pZyDvylbNSpq7FAE" }, "title": "Huisregels", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/houserules", "sys": { "__typename": "Sys", "id": "6QhjlLjW7MespG5H37aFkX" } } },
-              { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "4xPrQvMnK8LfWjHtZy2eBc" }, "title": "Privacy & Cookies", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/privacy-policy", "sys": { "__typename": "Sys", "id": "7pRvCyKxM2NfQwHjLmT8eZ" } } }
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "1jh4RWWgjhdsIi2vzrv0J7"
+                },
+                "title": "Contact",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/contact",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "3kxSgMVpw3IFObORkq4wBX"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "27PLS5Fd4Y3ECYRAElkmBD"
+                },
+                "title": "Tarieven en contracten",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/pricing",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6nP2yWIcn88fhnGR6ULtBn"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "7GB2h8pZyDvylbNSpq7FAE"
+                },
+                "title": "Huisregels",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/houserules",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "6QhjlLjW7MespG5H37aFkX"
+                  }
+                }
+              },
+              {
+                "__typename": "MenuItem",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "4xPrQvMnK8LfWjHtZy2eBc"
+                },
+                "title": "Privacy & Cookies",
+                "externalLink": null,
+                "internalLink": {
+                  "__typename": "Aboutpage",
+                  "slug": "/privacy-policy",
+                  "sys": {
+                    "__typename": "Sys",
+                    "id": "7pRvCyKxM2NfQwHjLmT8eZ"
+                  }
+                }
+              }
             ]
           },
           "menuItems": [
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "1jh4RWWgjhdsIi2vzrv0J7" }, "title": "Contact", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/contact", "pageType": "contactpage", "sys": { "__typename": "Sys", "id": "3kxSgMVpw3IFObORkq4wBX" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "27PLS5Fd4Y3ECYRAElkmBD" }, "title": "Tarieven en contracten", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/pricing", "pageType": "pricingpage", "sys": { "__typename": "Sys", "id": "6nP2yWIcn88fhnGR6ULtBn" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "7GB2h8pZyDvylbNSpq7FAE" }, "title": "Huisregels", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/houserules", "pageType": "houserulespage", "sys": { "__typename": "Sys", "id": "6QhjlLjW7MespG5H37aFkX" } } },
-            { "__typename": "MenuItem", "sys": { "__typename": "Sys", "id": "4xPrQvMnK8LfWjHtZy2eBc" }, "title": "Privacy & Cookies", "externalLink": null, "internalLink": { "__typename": "Aboutpage", "slug": "/privacy-policy", "pageType": "houserulespage", "sys": { "__typename": "Sys", "id": "7pRvCyKxM2NfQwHjLmT8eZ" } } }
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1jh4RWWgjhdsIi2vzrv0J7"
+              },
+              "title": "Contact",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/contact",
+                "pageType": "contactpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3kxSgMVpw3IFObORkq4wBX"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "27PLS5Fd4Y3ECYRAElkmBD"
+              },
+              "title": "Tarieven en contracten",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/pricing",
+                "pageType": "pricingpage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6nP2yWIcn88fhnGR6ULtBn"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "7GB2h8pZyDvylbNSpq7FAE"
+              },
+              "title": "Huisregels",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/houserules",
+                "pageType": "houserulespage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6QhjlLjW7MespG5H37aFkX"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "4xPrQvMnK8LfWjHtZy2eBc"
+              },
+              "title": "Privacy & Cookies",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/privacy-policy",
+                "pageType": "houserulespage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "7pRvCyKxM2NfQwHjLmT8eZ"
+                }
+              }
+            }
           ]
         }
       ]
