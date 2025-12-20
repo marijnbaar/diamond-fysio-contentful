@@ -583,7 +583,7 @@
       "descriptionRichText": null,
       "image": {
         "__typename": "Asset",
-        "url": "/images/fallback/7ebf318ee1f869ec2bae9a3151a4780b-IMG_2497.jpeg"
+        "url": "/images/fallback/f4e706ea50ce62b86cf9c97b352159b5-IMG_2497.jpeg"
       },
       "buttonCollection": {
         "__typename": "HeaderPricingpageButtonCollection",
