@@ -2128,7 +2128,7 @@
               },
               "image": {
                 "__typename": "Asset",
-                "url": "/images/fallback/5fa066a9e928fc40c1dd07e14ba03f42-werk_Robin_DSC_0059.png",
+                "url": "/images/fallback/werk_Robin_DSC_0059.webp",
                 "title": "fysio-pilates Robin",
                 "description": "Fysiotherapeut begeleidt patiënt met Fysio-pilates oefening bij Diamond Fysio Amsterdam."
               },
@@ -4325,11 +4325,11 @@
             },
             {
               "__typename": "Asset",
-              "url": "/images/fallback/efdb373841efa28f7ca057e085732222-logo.png"
+              "url": "/images/fallback/logo.webp"
             },
             {
               "__typename": "Asset",
-              "url": "/images/fallback/67ffb10b39444dfb24e9b058b0ed5c18-logo-adc.png"
+              "url": "/images/fallback/logo-adc.webp"
             }
           ]
         }
