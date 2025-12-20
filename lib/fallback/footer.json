@@ -1,0 +1,244 @@
+{
+  "__typename": "Footer",
+  "sys": {
+    "__typename": "Sys",
+    "id": "VZlrzFwrIJ1nAjREEz9sH"
+  },
+  "logo": {
+    "__typename": "Asset",
+    "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+    "description": null
+  },
+  "title": "Footer",
+  "description": "Onze therapeuten helpen je bij klachten die je hinderen bij dagelijkse activiteiten.",
+  "socialTitle": "Volg ons op social media",
+  "facebookLink": "https://www.facebook.com/fysiodiamondfactory/",
+  "instagramLink": "https://www.instagram.com/fysiodiamondfactory/",
+  "linkedInLink": "https://www.linkedin.com/company/fysiotherapie-diamond-factory/",
+  "navigationSubmenuCollection": {
+    "__typename": "FooterNavigationSubmenuCollection",
+    "items": [
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "3HRRm2FBJ4vyELW7jugeOn"
+        }
+      },
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "Pm60l8VIXonMhKXNbuXt7"
+        }
+      }
+    ]
+  },
+  "footerSubmenu": [
+    {
+      "__typename": "NavigatieSubmenu",
+      "sys": {
+        "__typename": "Sys",
+        "id": "3HRRm2FBJ4vyELW7jugeOn"
+      },
+      "title": "Onze praktijk",
+      "menuItemsCollection": {
+        "__typename": "NavigatieSubmenuMenuItemsCollection",
+        "items": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "HrUocabwipDOt8NbbijJg"
+            },
+            "title": "Over ons",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/about",
+              "sys": {
+                "__typename": "Sys",
+                "id": "5brKedsSYcB6mhK6jVkyG1"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+            },
+            "title": "Ons team",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/team",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6kFBG2SPCJYm2kuRYigLBS"
+              }
+            }
+          }
+        ]
+      },
+      "menuItems": [
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "HrUocabwipDOt8NbbijJg"
+          },
+          "title": "Over ons",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/about",
+            "pageType": "aboutpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "5brKedsSYcB6mhK6jVkyG1"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+          },
+          "title": "Ons team",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/team",
+            "pageType": "teampage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6kFBG2SPCJYm2kuRYigLBS"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "__typename": "NavigatieSubmenu",
+      "sys": {
+        "__typename": "Sys",
+        "id": "Pm60l8VIXonMhKXNbuXt7"
+      },
+      "title": "Support",
+      "menuItemsCollection": {
+        "__typename": "NavigatieSubmenuMenuItemsCollection",
+        "items": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "1jh4RWWgjhdsIi2vzrv0J7"
+            },
+            "title": "Contact",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/contact",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3kxSgMVpw3IFObORkq4wBX"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "27PLS5Fd4Y3ECYRAElkmBD"
+            },
+            "title": "Tarieven en contracten",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/pricing",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6nP2yWIcn88fhnGR6ULtBn"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "7GB2h8pZyDvylbNSpq7FAE"
+            },
+            "title": "Huisregels",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/houserules",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6QhjlLjW7MespG5H37aFkX"
+              }
+            }
+          }
+        ]
+      },
+      "menuItems": [
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "1jh4RWWgjhdsIi2vzrv0J7"
+          },
+          "title": "Contact",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/contact",
+            "pageType": "contactpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3kxSgMVpw3IFObORkq4wBX"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "27PLS5Fd4Y3ECYRAElkmBD"
+          },
+          "title": "Tarieven en contracten",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/pricing",
+            "pageType": "pricingpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6nP2yWIcn88fhnGR6ULtBn"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "7GB2h8pZyDvylbNSpq7FAE"
+          },
+          "title": "Huisregels",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/houserules",
+            "pageType": "houserulespage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6QhjlLjW7MespG5H37aFkX"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

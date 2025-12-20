@@ -5,10 +5,19 @@ import Image from 'next/image';
 import { optimizeContentfulImage } from '../../lib/helpers/image';
 import WebsitePopup from '../WebsitePopup';
 
+// TIJDELIJK: Hardcoded feestdagen popup (verwijder na 2 januari 2025)
+const HARDCODED_POPUP_ENABLED = true;
+const HARDCODED_POPUP_TEXT =
+  'Door de feestdagen en drukte is online inboeken tijdelijk niet mogelijk. Vanaf 2 januari kunt u weer online afspraken maken. Tot die tijd kunt u de receptie bellen.';
+
 const HomepageHeader = ({ title, info, buttonCollection, image, showPopup, popupText }) => {
+  // Use hardcoded popup if enabled, otherwise fall back to Contentful
+  const shouldShowPopup = HARDCODED_POPUP_ENABLED || (showPopup && popupText);
+  const popupMessage = HARDCODED_POPUP_ENABLED ? HARDCODED_POPUP_TEXT : popupText;
+
   return (
     <>
-      {showPopup && popupText && <WebsitePopup info={popupText} />}
+      {shouldShowPopup && <WebsitePopup info={popupMessage} />}
       <div className="relative mt-20 lg:mt-0 pt-16 pb-11 lg:p-0 flex content-center items-center justify-center h-5/6 lg:h-screen">
         <div className="bg-cover bg-center absolute top-0 w-full h-full">
           {image && (

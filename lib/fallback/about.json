@@ -1,0 +1,1297 @@
+{
+  "navigation": {
+    "__typename": "Navigatie",
+    "sys": {
+      "__typename": "Sys",
+      "id": "6MHQ24IUXiEG4cIHfS8qXM"
+    },
+    "logo": {
+      "__typename": "Asset",
+      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "description": null
+    },
+    "menuTitel": "Menu",
+    "menuItemsCollection": {
+      "__typename": "NavigatieMenuItemsCollection",
+      "items": [
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "1jh4RWWgjhdsIi2vzrv0J7"
+          },
+          "title": "Contact",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/contact",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3kxSgMVpw3IFObORkq4wBX"
+            }
+          }
+        }
+      ]
+    },
+    "navigatieSubmenusCollection": {
+      "__typename": "NavigatieNavigatieSubmenusCollection",
+      "items": [
+        {
+          "__typename": "NavigatieSubmenu",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3p38MXPBWKO25CORofvHO9"
+          }
+        },
+        {
+          "__typename": "NavigatieSubmenu",
+          "sys": {
+            "__typename": "Sys",
+            "id": "1dObPGCrdM1bXiE3B7seRS"
+          }
+        }
+      ]
+    },
+    "knop": {
+      "__typename": "Button",
+      "title": "Afspraak maken",
+      "internalLink": {
+        "__typename": "Aboutpage",
+        "slug": "/afspraak-maken",
+        "pageType": "appointmentpage",
+        "sys": {
+          "__typename": "Sys",
+          "id": "2D6xAnry91JcKvx006BjyM"
+        }
+      },
+      "externalLink": null,
+      "type": true
+    },
+    "menuItems": [
+      {
+        "__typename": "MenuItem",
+        "sys": {
+          "__typename": "Sys",
+          "id": "1jh4RWWgjhdsIi2vzrv0J7"
+        },
+        "title": "Contact",
+        "externalLink": null,
+        "internalLink": {
+          "__typename": "Aboutpage",
+          "slug": "/contact",
+          "pageType": "contactpage",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3kxSgMVpw3IFObORkq4wBX"
+          }
+        }
+      }
+    ],
+    "navigatieSubmenu": [
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "3p38MXPBWKO25CORofvHO9"
+        },
+        "title": "Specialisaties",
+        "menuItemsCollection": {
+          "__typename": "NavigatieSubmenuMenuItemsCollection",
+          "items": [
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "5vpPgQvLOWxBaVe0csSxqy"
+              },
+              "title": "Manuele therapie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/manuele-therapie",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "1X0kE90KoqMz6UF5Mgz4D7"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1T1B0eLKwiBwYkF39F5pC3"
+              },
+              "title": "Dansgerelateerde oefentherapie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/dans-gerelateerde-oefentherapie",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "1PjVmOeI0XNwsSGJSfrVDq"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "4jJNSaHNvG7769l2l18h9m"
+              },
+              "title": "Shockwave",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/shockwave",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3TCqYOYbReoCBxQaau98fc"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "2dwbBXYUpwPH9cHCMBk1SJ"
+              },
+              "title": "Dry Needling",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/dry-needling",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6qnXKjR8DIYJdYc3sHdXu5"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "7ozdNUT2v5hMViWNjbpVh7"
+              },
+              "title": "Oefentherapie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/oefentherapie",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "52NsbRSOFccUyuN4DUpgcm"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "71FLINlt5M75GCxoKlhR4Q"
+              },
+              "title": "Podologie",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/podologie",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "Bm1nGV1vjutY6QbAWjybQ"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6wKjBzuP3tgI2HAwyCaan6"
+              },
+              "title": "Vocal massage",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/vocal-massage",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "uYzj5OXA6XM9diNH6DTja"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "7bnkg0TJMQwiii4EqpykG"
+              },
+              "title": "Fysio-pilates",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/specialisatie/pilates",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "4jWTwGWINloMk1fRidHINH"
+                }
+              }
+            }
+          ]
+        },
+        "menuItems": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "5vpPgQvLOWxBaVe0csSxqy"
+            },
+            "title": "Manuele therapie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/manuele-therapie",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1X0kE90KoqMz6UF5Mgz4D7"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "1T1B0eLKwiBwYkF39F5pC3"
+            },
+            "title": "Dansgerelateerde oefentherapie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/dans-gerelateerde-oefentherapie",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1PjVmOeI0XNwsSGJSfrVDq"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "4jJNSaHNvG7769l2l18h9m"
+            },
+            "title": "Shockwave",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/shockwave",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3TCqYOYbReoCBxQaau98fc"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "2dwbBXYUpwPH9cHCMBk1SJ"
+            },
+            "title": "Dry Needling",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/dry-needling",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6qnXKjR8DIYJdYc3sHdXu5"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "7ozdNUT2v5hMViWNjbpVh7"
+            },
+            "title": "Oefentherapie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/oefentherapie",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "52NsbRSOFccUyuN4DUpgcm"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "71FLINlt5M75GCxoKlhR4Q"
+            },
+            "title": "Podologie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/podologie",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "Bm1nGV1vjutY6QbAWjybQ"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6wKjBzuP3tgI2HAwyCaan6"
+            },
+            "title": "Vocal massage",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/vocal-massage",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "uYzj5OXA6XM9diNH6DTja"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "7bnkg0TJMQwiii4EqpykG"
+            },
+            "title": "Fysio-pilates",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/pilates",
+              "pageType": "specialisationpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "4jWTwGWINloMk1fRidHINH"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "1dObPGCrdM1bXiE3B7seRS"
+        },
+        "title": "Over ons",
+        "menuItemsCollection": {
+          "__typename": "NavigatieSubmenuMenuItemsCollection",
+          "items": [
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "HrUocabwipDOt8NbbijJg"
+              },
+              "title": "Over ons",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/about",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "5brKedsSYcB6mhK6jVkyG1"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+              },
+              "title": "Ons team",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/team",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6kFBG2SPCJYm2kuRYigLBS"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "27PLS5Fd4Y3ECYRAElkmBD"
+              },
+              "title": "Tarieven en contracten",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/pricing",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6nP2yWIcn88fhnGR6ULtBn"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3KQr4bgAm71fuJ39JEc2BQ"
+              },
+              "title": "Huisregels",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/houserules",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6QhjlLjW7MespG5H37aFkX"
+                }
+              }
+            }
+          ]
+        },
+        "menuItems": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "HrUocabwipDOt8NbbijJg"
+            },
+            "title": "Over ons",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/about",
+              "pageType": "aboutpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "5brKedsSYcB6mhK6jVkyG1"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+            },
+            "title": "Ons team",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/team",
+              "pageType": "teampage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6kFBG2SPCJYm2kuRYigLBS"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "27PLS5Fd4Y3ECYRAElkmBD"
+            },
+            "title": "Tarieven en contracten",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/pricing",
+              "pageType": "pricingpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6nP2yWIcn88fhnGR6ULtBn"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3KQr4bgAm71fuJ39JEc2BQ"
+            },
+            "title": "Huisregels",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/houserules",
+              "pageType": "houserulespage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6QhjlLjW7MespG5H37aFkX"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "__typename": "Aboutpage",
+  "sys": {
+    "__typename": "Sys",
+    "id": "5brKedsSYcB6mhK6jVkyG1"
+  },
+  "slug": "/about",
+  "title": "About",
+  "pageType": "aboutpage",
+  "components": [
+    {
+      "__typename": "HeaderPricingpage",
+      "headerType": "HeaderPricingpage",
+      "showPopup": null,
+      "popupText": null,
+      "sys": {
+        "__typename": "Sys",
+        "id": "7ipfr7dNoyTObOeWIJfy0I"
+      },
+      "title": {
+        "__typename": "HeaderPricingpageTitle",
+        "json": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Over ons",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "info": null,
+      "descriptionRichText": null,
+      "image": {
+        "__typename": "Asset",
+        "url": "https://images.ctfassets.net/1evapsw0ox8z/6dOpXJHKRY9mOpevWkOkdk/520453983d4773ff479e0d40e4376ed9/IMG_2484.jpeg"
+      },
+      "buttonCollection": {
+        "__typename": "HeaderPricingpageButtonCollection",
+        "items": []
+      }
+    },
+    {
+      "__typename": "Text",
+      "sys": {
+        "__typename": "Sys",
+        "id": "4qvNjl2wwx5gpwAaDaKvOE"
+      },
+      "title": "Fysiotherapie praktijk in Amsterdam",
+      "description": {
+        "__typename": "TextDescription",
+        "json": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Fysio Diamond Factory is een praktijk in het centrum van Amsterdam. Gevestigd in een monumentaal pand, voormalig diamantslijperij aan de Nieuwe Achtergracht. We bieden patiënten state-of-the-art zorg en kijken graag ",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Fysio Diamond Factory is een fysiotherapiepraktijk in het hart van Amsterdam, gevestigd in een karakteristiek pand aan de Nieuwe Achtergracht, in de voormalige Diamantfabriek. Wij bieden hoogwaardige, doelgerichte zorg en denken graag met je mee om jouw herstel en prestaties te optimaliseren.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Ons team bestaat uit therapeuten met diverse specialisaties die nauw samenwerken. Ons behandelconcept is hands-on, persoonlijk en volledig afgestemd op jouw situatie en doelen.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Dansmedische expertise",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "heading-3"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Naast reguliere fysiotherapie zijn wij gespecialiseerd in dansmedische zorg. Onze therapeuten hebben jarenlang ervaring bij professionele dansgezelschappen en opleidingen, en beschikken over uitgebreide kennis van de fysieke belasting die dansers ervaren.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Wij zijn experts in het diagnosticeren en behandelen van dansblessures en maken gebruik van de nieuwste wetenschappelijke inzichten en behandelmethodes. Samen met jou zoeken we naar de oorzaak van de klacht en werken we gericht aan herstel en preventie.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Daarnaast helpen wij dansers bij het optimaliseren van techniek en fysieke vaardigheden, zoals:",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Uitdraaicapaciteit",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Lenigheid",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Kracht en stabiliteit",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Alignment en controle",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                }
+              ],
+              "nodeType": "unordered-list"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Ook kun je bij ons terecht voor een ",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "spitzenkeuring",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": ".",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Pilates & samenwerking",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "heading-3"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "In onze praktijk bieden wij daarnaast dansspecifieke Pilates-lessen aan. We werken nauw samen met ",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {
+                    "uri": "https://leilaspilates.nl/"
+                  },
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Leila’s Pilates",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "hyperlink"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": ", gevestigd in hetzelfde gebouw.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        }
+      },
+      "subtitle": "Wie zijn wij?"
+    }
+  ],
+  "footer": {
+    "__typename": "Footer",
+    "sys": {
+      "__typename": "Sys",
+      "id": "VZlrzFwrIJ1nAjREEz9sH"
+    },
+    "logo": {
+      "__typename": "Asset",
+      "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+      "description": null
+    },
+    "title": "Footer",
+    "description": "Onze therapeuten helpen je bij klachten die je hinderen bij dagelijkse activiteiten.",
+    "socialTitle": "Volg ons op social media",
+    "facebookLink": "https://www.facebook.com/fysiodiamondfactory/",
+    "instagramLink": "https://www.instagram.com/fysiodiamondfactory/",
+    "linkedInLink": "https://www.linkedin.com/company/fysiotherapie-diamond-factory/",
+    "navigationSubmenuCollection": {
+      "__typename": "FooterNavigationSubmenuCollection",
+      "items": [
+        {
+          "__typename": "NavigatieSubmenu",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3HRRm2FBJ4vyELW7jugeOn"
+          }
+        },
+        {
+          "__typename": "NavigatieSubmenu",
+          "sys": {
+            "__typename": "Sys",
+            "id": "Pm60l8VIXonMhKXNbuXt7"
+          }
+        }
+      ]
+    },
+    "footerSubmenu": [
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "3HRRm2FBJ4vyELW7jugeOn"
+        },
+        "title": "Onze praktijk",
+        "menuItemsCollection": {
+          "__typename": "NavigatieSubmenuMenuItemsCollection",
+          "items": [
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "HrUocabwipDOt8NbbijJg"
+              },
+              "title": "Over ons",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/about",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "5brKedsSYcB6mhK6jVkyG1"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+              },
+              "title": "Ons team",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/team",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6kFBG2SPCJYm2kuRYigLBS"
+                }
+              }
+            }
+          ]
+        },
+        "menuItems": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "HrUocabwipDOt8NbbijJg"
+            },
+            "title": "Over ons",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/about",
+              "pageType": "aboutpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "5brKedsSYcB6mhK6jVkyG1"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+            },
+            "title": "Ons team",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/team",
+              "pageType": "teampage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6kFBG2SPCJYm2kuRYigLBS"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "Pm60l8VIXonMhKXNbuXt7"
+        },
+        "title": "Support",
+        "menuItemsCollection": {
+          "__typename": "NavigatieSubmenuMenuItemsCollection",
+          "items": [
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1jh4RWWgjhdsIi2vzrv0J7"
+              },
+              "title": "Contact",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/contact",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "3kxSgMVpw3IFObORkq4wBX"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "27PLS5Fd4Y3ECYRAElkmBD"
+              },
+              "title": "Tarieven en contracten",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/pricing",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6nP2yWIcn88fhnGR6ULtBn"
+                }
+              }
+            },
+            {
+              "__typename": "MenuItem",
+              "sys": {
+                "__typename": "Sys",
+                "id": "7GB2h8pZyDvylbNSpq7FAE"
+              },
+              "title": "Huisregels",
+              "externalLink": null,
+              "internalLink": {
+                "__typename": "Aboutpage",
+                "slug": "/houserules",
+                "sys": {
+                  "__typename": "Sys",
+                  "id": "6QhjlLjW7MespG5H37aFkX"
+                }
+              }
+            }
+          ]
+        },
+        "menuItems": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "1jh4RWWgjhdsIi2vzrv0J7"
+            },
+            "title": "Contact",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/contact",
+              "pageType": "contactpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3kxSgMVpw3IFObORkq4wBX"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "27PLS5Fd4Y3ECYRAElkmBD"
+            },
+            "title": "Tarieven en contracten",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/pricing",
+              "pageType": "pricingpage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6nP2yWIcn88fhnGR6ULtBn"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "7GB2h8pZyDvylbNSpq7FAE"
+            },
+            "title": "Huisregels",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/houserules",
+              "pageType": "houserulespage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6QhjlLjW7MespG5H37aFkX"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "preview": false,
+  "instagramPosts": {
+    "data": [
+      {
+        "id": "18035580293640751",
+        "caption": "Met Laszlo gericht gewerkt aan kracht en opbouw — hét verschil! Blessurevrij en in toptijd de marathon van Rotterdam gelopen. Topbegeleiding van Fysio Diamond Factory",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.75761-15/495231932_18267688438285838_3576345414924582339_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=DLpWS_OApK8Q7kNvwFjpE-y&_nc_oc=AdlEJxVzJIYX88gIeuegNuD5hdfVhT0_hGZmjhDyqWqHTcgOTgVotBdt-bPYj0vVJuE&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_AflBo906LaVAL7LXhd5MGoF73UuEpCUFpQl83CI4tjtUgw&oe=694848F2",
+        "timestamp": "2025-05-05T09:35:43+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/DJRF4ZTowBk/"
+      },
+      {
+        "id": "18074183566702876",
+        "caption": "“Training for Hyrox is no joke. Heavy lifts, high-intensity runs, and a whole lot of sweat. But with Laszlo in my corner, making sure my body is moving the way it should, I’m feeling stronger, faster, and ready to take on the challenge.” Bjorn\n\n#happypatient #fysiodiamondfactory #amsterdam #physiotherapy #fysiotherapie #hyrox #hyroxtraining #hyroxworkout #hyroxworld",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.75761-15/483160484_18261397999285838_923099345198719702_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=ShZJz2VXB6oQ7kNvwFP5ceC&_nc_oc=AdlxgvBoYF51SZaNz0YmWxA6kXxJhHc3mb2oka9w54rwjXYb33pFvnqgv61UmIDlx4k&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_Afnor4hjI-m0yeq_DM4rgKpkaMpamIEtlcP-x_uGO8x1sQ&oe=69485071",
+        "timestamp": "2025-03-09T10:37:53+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/DG-brw9Ie5l/"
+      },
+      {
+        "id": "18030206677519539",
+        "caption": "We ❤️ pilates! Boek een afspraak voor een persoonlijk pilates programma door een fysiotherapeut. #pilates #pilatesfysio #bewegen #fysiodiamondfactory #amsterdam",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.29350-15/352836521_6303232279754967_3980177575306824957_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=DommVmwKFjcQ7kNvwFYtXzD&_nc_oc=Adn0dkiflsOpU4IzqEqgPdRw6V-S6avK62ZlFS55N36Zojvm7QTehnfqH3kF2U1xyU4&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_Afkk7zCQg5y_UJEXFSL_o_oK4RjrrX_CfDmqNuSFKN6JSw&oe=69486BD4",
+        "timestamp": "2023-06-11T18:31:26+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CtXDgzCoLY-/"
+      },
+      {
+        "id": "18055203073372736",
+        "caption": "Onze therapeuten werken naast hun werkzaamheden in de praktijk, bij dansopleidingen, gezelschappen en theaterproducties. \nZo begeleiden ze dansers op weg naar en tijdens hun carrière.\n\n#gezonddansen #ndt #academievoortheaterendans #nationaleballetacademie #circuscarré #theaterfysio",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/o1/v/t2/f2/m82/AQOraxDq3pKc_inWMnuK4ZIcA8kHVFNFiLMVfzZvmeV9KThJR9F3HAF5-KoEKsy_mHlfHJKk2iMlen6zGXI5DV3P9q7oS4-igQUoa2U.mp4?_nc_cat=107&_nc_sid=5e9851&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=fHGuTkREBr8Q7kNvwGqlkbA&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6ODc4MTQ0NTA2ODU4ODMwLCJhc3NldF9hZ2VfZGF5cyI6MTA3MCwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjEzLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&edm=ANo9K5cEAAAA&_nc_zt=28&_nc_tpa=Q5bMBQHp235pOyQ10CWt9yR-69rCU9lVOV__efw6a5sQBwvTsOedxIdaCJv3siJfE9q9NO0QLfYh0VLnXg&vs=11d8439ec25fc551&_nc_vs=HBksFQIYT2lnX3hwdl9yZWVsc19wZXJtYW5lbnRfcHJvZC9GMTQzRUI2NEYxRTdBMjczMkMxMDBENENCNzg2OTZCQV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HRGwwU1JQTkhPbDdwQzREQUtmbjV2NEk2blJXYnFfRUFBQUYVAgLIARIAKAAYABsCiAd1c2Vfb2lsATEScHJvZ3Jlc3NpdmVfcmVjaXBlATEVAAAmnLWktt6qjwMVAigCQzMsF0ArEOVgQYk3GBJkYXNoX2Jhc2VsaW5lXzFfdjERAHX-B2XmnQEA&oh=00_AflJOD2a1SibfaMI-HqLUVJ1Sobqft6HL7M_P1ZVWy1SGg&oe=69447C28",
+        "timestamp": "2023-01-12T06:44:17+0000",
+        "media_type": "VIDEO",
+        "permalink": "https://www.instagram.com/reel/CnTiT1XAdaM/"
+      },
+      {
+        "id": "17979312610860065",
+        "caption": "Menno is geïnterviewd voor het NDT magazine 2022-2023!",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.29350-15/321142587_546534850703184_7590489660842048758_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=B0zGS06EGmsQ7kNvwFnuucm&_nc_oc=Adl1ZlYcuYGEM8XBZNw5YnJLOG2grmcwhYPtPLNcYd-0rGqxJHm6vbUj3DS26Sdcv8I&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_AflPmf3SWp-VrxgFgMSU6iUBcEmtDzDJLOCCRvEcT63PeQ&oe=69486F25",
+        "timestamp": "2022-12-23T14:56:54+0000",
+        "media_type": "CAROUSEL_ALBUM",
+        "permalink": "https://www.instagram.com/p/Cmg70wUoHnY/"
+      },
+      {
+        "id": "17856789263809322",
+        "caption": "Dit is onze collega Robin Rosa!\n“Hi! Ik ben Robin Rosa en ik mag jullie vol enthousiasme vertellen dat ik sinds september werkzaam ben bij Fysio Diamond Factory! Misschien heb je mij al wel vaker rond zien lopen op de praktijk, want hiervoor heb ik een half jaar als stagiair alle kneepjes van het vak mogen leren van mijn nu collega's.\nIk besteed mijn vrije tijd graag aan dansen. Tijdens mijn dansopleiding vond ik de interesse en liefde voor het bewegen van het lichaam, wat ik nu kwijt kan in het geven van therapie. \nJe kan bij mij terecht voor alle problemen en specifiek voor (pilates) revalidatie; houding- en spanning gerelateerde klachten; voet-training en dans/sport klachten. Voel je welkom om online een afspraak bij mij te maken voor de maandag of donderdag! En voor tips en leuke oefeningen volg mij op mijn werk account @robin_rosa_fysiotherapie.”\n#fysiotherapie #dansfysio #dansfysiotherapie\n#injurypreventionfordancers #fysiodiamondfactory #amsterdam #onlineafspraak #pilates @robin_rosa_fysiotherapie",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.29350-15/312976581_539020551383510_3338967687508697605_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=FGK7ZUBhafsQ7kNvwHBL0R2&_nc_oc=AdkcY4aluKMEScQoKZNXGKK4vOSurOZHwWi9Mc7rWwbHHMebKKb9c6sme4mHkv2MPss&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_AfkugvelDrmS0M_cuIGXs-ijFZX7ly5KXhQGTx98aRE9ww&oe=69487140",
+        "timestamp": "2022-10-28T18:47:58+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CkRJwMroZ9X/"
+      },
+      {
+        "id": "17971094209833798",
+        "caption": "FysioDiamondFactory is on tour met NDT2 in Italië. Teatro Romolo Valli, Reggio Emilia.\n\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio \n#fysiotherapie #dansfysio #dansfysiotherapie\n#dancemedicinephysicaltherapy #dancephysio #dancemedicine #dancedpt #regioemilia #ndtdance",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.29350-15/310054418_159121906735208_8305560434368364530_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=orIO_1JHIEUQ7kNvwGHrlCf&_nc_oc=AdnipqcGrmG0jf9SeL9Jaa3SfoLQL8GRv7B2NQ496eXh7EqL0VPvRjztPBAylfXWnbE&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_AfkyEUt4KXhAYXvkaNITqknwz5J3lEbnOaUybjY6o7kvfQ&oe=69486449",
+        "timestamp": "2022-10-03T09:31:38+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CjPyNjTIzW1/"
+      },
+      {
+        "id": "17949347252100797",
+        "caption": "Met trots kunnen we vertellen dat onze website is vernieuwd! Wist je dat je bij ons makkelijk zelf online een afspraak kunt inboeken? \nwww.fysiodiamondfactory.nl\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #zorggoedvoorjezelf #onlineafspraak",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.29350-15/298026191_173159668548253_7835976251330062167_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wraf2tjJHPkQ7kNvwF2T7EE&_nc_oc=AdlOCCMkC9dBMYDspjs7wrW0KgDZ0KKFuio6Fd4rq_1Y24SkUZA1wFUJ9Sgqm676lD0&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_Aflb1YUDiyuxKfpFiVAtdJwsTGUDBecRYb5UZXKuY2p-Xg&oe=6948588B",
+        "timestamp": "2022-08-08T12:21:36+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/Cg_5JZcIPfB/"
+      },
+      {
+        "id": "17915411972217734",
+        "caption": "Nu er weer gespeeld mag worden, mag onze therapeut Regi ook weer met haar behandelbank op pad.\n\n#fysiodiamondfactory #physiotherapy #fysiotherapie#vollezalen #ontheroadagain #musical #musicaltitanic",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.29350-15/275060612_1029696350970211_7366615579295543106_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=Zg1k9vCCEvoQ7kNvwENTKKu&_nc_oc=AdkRxQ7zpY3tm_xOZwSM8Ehm3sK2DdnSXf_LanD5UzGzuGwO8VjyCJRa2n0rP20UHv4&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_AfmUYGBi2JqILG-RbOz876d0D9OcKnLG-XJKlrDIvEdB1Q&oe=69486CC4",
+        "timestamp": "2022-03-03T21:59:37+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CaqFsvWIHjc/"
+      },
+      {
+        "id": "17971069486473589",
+        "caption": "Via de website: www.fysiodiamondfactory.nl\nVia telefoon: 020-8204458\nVia email: info@fysiodiamondfactory.nl\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #zorggoedvoorjezelf #onlineafspraak #joostspijkers #rug #herstel #revalidatie #rugpijnweg",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/o1/v/t16/f2/m84/AQMKB7FYmA-h1h11ly_IVCHlUewgPMTdAGhedjlZVY_bFmrP2aysYgYLQGj8qFCibhNnuy666293kiJyvdDVCGJWSziceoO3Cysl994.mp4?_nc_cat=109&_nc_sid=5e9851&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=FzfYIqhPDAoQ7kNvwHkaCEq&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uRkVFRC5DMy4xMjgwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTA0ODI5MTg5NjU5OTU4NywiYXNzZXRfYWdlX2RheXMiOjE0NjgsInZpX3VzZWNhc2VfaWQiOjEwMTQ2LCJkdXJhdGlvbl9zIjoyNiwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=665ae8c3e103cb17&_nc_vs=HBksFQIYTGlnX2JhY2tmaWxsX3RpbWVsaW5lX3ZvZC9EMzRCQzIxODFFREZFMkUxQTdCQzNCRjVFNERDMTE5Ml92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HSkhNZ3hlQmtZUER1RjBDQUJtSFhyVFY0Z2dYYnBrd0FBQUYVAgLIARIAKAAYABsCiAd1c2Vfb2lsATEScHJvZ3Jlc3NpdmVfcmVjaXBlATEVAAAmxpDxoc_a3AMVAigCQzMsF0A67tkWhysCGBJkYXNoX2Jhc2VsaW5lXzFfdjERAHXqB2XEngEA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&edm=ANo9K5cEAAAA&_nc_zt=28&_nc_tpa=Q5bMBQG1eKDqou93EuXTWHyeMPoVZutkuhKGtYAw1X827Yy0cUNaJ8IYTZVjU6o6cPQysnnF_ReJdfRxxQ&oh=00_Afmp5WoiPkO2OkgZjFpJPD4_tBwmoQM7vNf22hEG2WiT_w&oe=694463DB",
+        "timestamp": "2021-12-10T06:00:35+0000",
+        "media_type": "VIDEO",
+        "permalink": "https://www.instagram.com/p/CXSp7_GKsSA/"
+      },
+      {
+        "id": "17919934313034517",
+        "caption": "This is how we roll, vol. 1\nMobiliserende oefening voor de bovenrug. \nProbeer deze oefeningen ook een keer!\n\n#thoracicmobility #feelgoodfriday #mobility #spinehealth #movetoimprove #foamrollerfriday  #foamroller #fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #joostspijkers",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/o1/v/t16/f2/m84/AQMYGL7aqwicxjWmWO-Jt3Ocz5C8lqgDNB0OPSh5YotS513dl6QlHFniFR1Z2ZRLzlmS_v3Ya-xxGM3h3DQZ31p9OTRltLoeZ8_t3sU.mp4?_nc_cat=108&_nc_sid=5e9851&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=ks7dzKMzFZ0Q7kNvwGLILYE&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uRkVFRC5DMy4xMjgwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MjcwMzQyNjU1OTY0NTg2LCJhc3NldF9hZ2VfZGF5cyI6MTQ4MiwidmlfdXNlY2FzZV9pZCI6MTAxNDYsImR1cmF0aW9uX3MiOjE3LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&edm=ANo9K5cEAAAA&_nc_zt=28&_nc_tpa=Q5bMBQFWWqK-lH2jPyU7QWuMTGdUGi5t41HHpcPrQT0WhnWUxu7Rpz4mSORbVPIXk7OM3aGWYiicP6UJIg&vs=701c1ba767bf17c5&_nc_vs=HBksFQIYTGlnX2JhY2tmaWxsX3RpbWVsaW5lX3ZvZC9BQzQ3M0Q5QkI4NEMwNkVCRkQwMjRDRTg4ODUxNTM4QV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HS3Ezc2haRmkwMTVNR0VDQU9lTWItQnRjR3NlYnBrd0FBQUYVAgLIARIAKAAYABsCiAd1c2Vfb2lsATEScHJvZ3Jlc3NpdmVfcmVjaXBlATEVAAAm1NbP34H4ehUCKAJDMywXQDEiDEm6XjUYEmRhc2hfYmFzZWxpbmVfMV92MREAdeoHZcSeAQA&oh=00_AfkVVB1J0JVmAuFHUUnR4DHfFLYq6vlbMu5S6E71FpG4hA&oe=69445564",
+        "timestamp": "2021-11-26T06:00:18+0000",
+        "media_type": "VIDEO",
+        "permalink": "https://www.instagram.com/p/CWumy6Ar_fq/"
+      },
+      {
+        "id": "17904604484172348",
+        "caption": "Welkom.\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #zorggoedvoorjezelf #wachtkamer #mondkapje #joostspijkers",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/o1/v/t16/f2/m84/AQOqoQHKLwBsxlICkhdE8f9CO5vJsT-4_Yq_bQmJK2ZXyxqAd8yuOGyF4X-aFOthShlDoQY7b-vUCJxd7dl2wdoToPv-RSCZsKplvXo.mp4?_nc_cat=100&_nc_sid=5e9851&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_ohc=HWcAhvnDopUQ7kNvwGMZeTd&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uRkVFRC5DMy45NjAuZGFzaF9iYXNlbGluZV8xX3YxIiwieHB2X2Fzc2V0X2lkIjo5OTE2MDM2Mjg2MjI3ODUsImFzc2V0X2FnZV9kYXlzIjoxNDk5LCJ2aV91c2VjYXNlX2lkIjoxMDE0NiwiZHVyYXRpb25fcyI6MjUsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&edm=ANo9K5cEAAAA&_nc_zt=28&_nc_tpa=Q5bMBQFHlNHJZUGbcrUi7skZO9X7tLOq0_hZT1fH67W43EQlyqDbG5HZCZ_FzpTGB025DEqoTXJy0gJt3g&vs=f91602cfc6fd4bdd&_nc_vs=HBksFQIYTGlnX2JhY2tmaWxsX3RpbWVsaW5lX3ZvZC8wQzQxQUU4MEUxQ0M2MzBBREU3QjEzRThBOEJFM0VBOF92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HQmxfbEJlV1BEUlZ6TDhFQUNXZ3BpTW5pT2tRYnBrd0FBQUYVAgLIARIAKAAYABsCiAd1c2Vfb2lsATEScHJvZ3Jlc3NpdmVfcmVjaXBlATEVAAAmgo_W4Pb2wgMVAigCQzMsF0A53bItDlYEGBJkYXNoX2Jhc2VsaW5lXzFfdjERAHXqB2XEngEA&oh=00_Afl9CqhPgz-vi5JNYDRzX6-a2oQ4gMyzShThWNkhuj6zvQ&oe=6944776C",
+        "timestamp": "2021-11-09T09:35:19+0000",
+        "media_type": "VIDEO",
+        "permalink": "https://www.instagram.com/p/CWDN4S7KxJ5/"
+      },
+      {
+        "id": "17870767217603457",
+        "caption": "Een nieuwe week met nieuwe kansen. \nNeem gerust contact met ons op!\nVia telefoon: 020-8204458\nVia email: info@fysiodiamondfactory.nl\nVia de website: www.fysiodiamondfactory.nl \nVoor een afspraak met Menno, Regis, Laszlo of Iva kunt u eenvoudig zelf een afspraak inplannen via onze website. \n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #zorggoedvoorjezelf #HappyMonday",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/248751615_919967701978780_1877657766230249891_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=gvDLKseqlDsQ7kNvwHzQT-1&_nc_oc=AdmXQbJKVyOSsGZX9-GNDosiNYutiOWZ5sovfF3rTcVzZNXrD3N_rPxIlNCJYlvjEZE&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfnUnvGOAtJPfEwA6oeta45EOAbs3tHW54z_VwbBJIuzKw&oe=694847E1",
+        "timestamp": "2021-10-25T05:00:58+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CVcGlEGo5sI/"
+      },
+      {
+        "id": "18106468123260814",
+        "caption": "www.fysiodiamondfactory.nl\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #zorggoedvoorjezelf #onlineafspraak",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/244573482_857317468262286_4403910656245954381_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=VsBh78uehRYQ7kNvwHZDPm0&_nc_oc=AdkbgxSr3-dah9gOfFB9uHpKtXPZ7-6_Wa8ETz77-_wB0vDwJjHfml0iEHELPTRg_m0&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Afk14BpkNOKg_OuuHWiCSkyfKiFvQeEW4flIdfXx0kj4Xg&oe=69484333",
+        "timestamp": "2021-10-08T16:40:26+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CUxlHOTKeLS/"
+      },
+      {
+        "id": "17872405538561674",
+        "caption": "Één van de specialisaties op onze praktijk is podologie. Ton Willemsen werkt o.a. aan houdingscorrectie door aanpassingen/orthesen in schoeisel.\nVanuit zijn achtergrond (fysiotherapie en sport/fitness) is hij gespecialiseerd in het herkennen van houdingsproblemen in relatie tot voetproblemen.\n\nAfspraken met Ton kunt u maken via de receptie van onze praktijk of door een e-mail te versturen naar: tonwillemsen@me.com\n\n#voetanalyse #podologie  #begeleiding #adviezen #informeren #therapy #fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/242375486_295594741901752_4158039998416322712_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=UEhlHKzp0kgQ7kNvwHQZIkD&_nc_oc=AdlrTd8SqNdigrwcR0v59-Cx0EPPyj93_9uVnkOD_N0p6noIbErb6-rKTtIgMCkkJxU&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfnfGns4J0QS5BBHNsqtkQfIek796g0AWX1G3V8tlVdoJw&oe=69486DC7",
+        "timestamp": "2021-09-21T10:15:07+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CUFHgJhKDi1/"
+      },
+      {
+        "id": "17942237587529364",
+        "caption": "Gefeliciteerd!\n\nPatrick heeft hard gewerkt aan zijn revalidatie en heeft de Alpenbrevet Goldtour daardoor toch kunnen fietsen!\n\nVanuit Andermatt (Zwitserland) over 4 bergpassen van de buitencategorie, 212 km, 5100 hoogtemeters, in 9 uur en 9 minuten.\n\nWat een prestatie!\n\n#happypatient #fysiodiamondfactory #amsterdam #physiotherapy #fysiotherapie #fysio #cycling #fietsen  #doorzettingsvermogen #strijd #alpenbrevet2021 #swisscycling #alpenbrevetgoldtour",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/241797100_854196695078464_467265061638718062_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=vE-ykEbY4jMQ7kNvwFPX5Y_&_nc_oc=AdmB3Zduoka62P9VYALPeYS9ADb7d6_G5djYSqvWfM6NbZDyCOv4MgZ7LZCrkwAHQHs&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfkZ33n-zjus6KYzrnLK8lK_e8OcGAkukIwbXtiscq3vCw&oe=6948428E",
+        "timestamp": "2021-09-14T13:18:31+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CTza7XGqVaB/"
+      },
+      {
+        "id": "18101811142260107",
+        "caption": "Naast reguliere fysiotherapie zij wij gespecialiseerd in de revalidatie en preventie van dansgerelateerde blessures. \nDoor de jarenlange ervaring als therapeuten bij diverse dansgezelschappen en -opleidingen zijn wij experts in het diagnosticeren en behandelen van dansers. Wij hebben kennis van de specifieke belasting die dansers ondergaan. Onze therapeuten zijn op de hoogte van de nieuwste wetenschappelijke inzichten en behandelmethodes voor dansblessures. Zo kunnen we, samen met de danser op zoek naar de oorzaak van de klacht en doelgericht werken aan een oplossing.\nWij kunnen dansers ook helpen bij het optimaliseren van de technische aspecten van de verschillende danstechnieken. Denk hierbij aan het verbeteren van de uitdraaimogelijkheid, lenigheid, kracht, stabiliteit en alignment. Bij ons kunt u ook terecht voor een spitzenkeuring. \nWij  beschikken over een groot netwerk aan specialisten binnen de danswereld (huisartsen, orthopedisch chirurgen, sportartsen, podologen, mensendieck therapeuten enz.).\nTevens behoort het volgen dansspecifieke Pilates-lessen tot de mogelijkheden op onze praktijk.\n\nNaast zorg voor individuele dansers verzorgen we lezingen voor dansers, dansdocenten en dansorganisaties ten behoeve van blessurepreventie. Al met al kunnen wij dansers een compleet pakket aanbieden.\n#fysiotherapie #dansfysio #dansfysiotherapie\n#dancemedicinephysicaltherapy #dancephysio #dancemedicine #dancedpt #dancespecifictraining #dancescience #physicaltherapy #dancemotivation #dancespecifictraining #danceinjuryprevention #danceconditioning #injurypreventionfordancers #dancestronger #fysiodiamondfactory #amsterdam",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/241313984_1209711322868264_2633311530979496045_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=fTX98DQFgyoQ7kNvwH6rTN3&_nc_oc=AdlxHFOs_eAhH9D1LgfJrG9VnJkjLzkcUD-n65iC_0B4x4woPYK2dDwrPN0EaBI8WSQ&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfkSeT9IQvITtRh_vBRKYOnol4G1S0AwMQDU7ONq5YYpmQ&oe=69487539",
+        "timestamp": "2021-09-04T15:40:41+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CTZ7PyCKx1x/"
+      },
+      {
+        "id": "17932292560642563",
+        "caption": "FysioDiamondFactory bevindt zich op een unieke locatie  in een voormalige diamantslijperij op de nieuwe Achtergracht in hartje Amsterdam. De toenmalige “stoomdiamantslijperij de Eendracht” van Coëlho was te vinden op de nummers 104-104a. \nHet pand werd in opdracht van JW en GW Meijer gebouwd in 1887. De slijperij had 167 molens. Wanneer we langs de façade lopen zien we de meest kenmerkende elementen van een diamantfabriek. Ten eerste het groot aantal ramen in de vijf verdiepingen tellende gevel. Bij het slijpen is optimaal gebruik van daglicht een must. De arbeiders zaten zij aan zij aan weerszijde van een werkruimte met hun rug naar het raam. Tussen de twee rijen met werktafels liepen de aandrijfassen. \nOp de Nieuwe Achtergracht 102 was het bedrijf van D. H. Lobe. Hij verkocht benodigdheden voor het diamantbedrijf en zat, handig, naast de diamantslijperij van Coëlho.\nHet pand is in 1921 verkocht en had daarna meerdere functies. Zo was Drukkerij 't Koggeschip in de jaren 30  in het pand te vinden. In april 2021 zijn wij verhuisd naar dit mooie pand op de Nieuwe Achtergracht en dragen we met trots de nieuwe naam: FysioDiamondFactory.\n\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam\n#diamant #diamond #diamantslijperij #diamantbuurt #cityscape #architecture #nieuweachtergracht",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/240876547_4197136880334364_5050105052108074298_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=AkEuaKUwj_kQ7kNvwEc7o24&_nc_oc=AdlKrDzPv9VTJLoPblEuQ8U1sqE_pGNBai5u-bgDm7HaW3hiiaseLQ5n58jevt-EZjo&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Afl_EiInURYywNe-Hu7b9C3VsR1QTFTsu7_Bu5zN-cWb7Q&oe=69485B10",
+        "timestamp": "2021-08-29T06:19:55+0000",
+        "media_type": "CAROUSEL_ALBUM",
+        "permalink": "https://www.instagram.com/p/CTJeTauqj25/"
+      },
+      {
+        "id": "17944872970526826",
+        "caption": "FysioDiamondFactory was deze week bij De Dutch Summer Dance Course in Den Haag. Onze therapeut Laszlo bood de dansers paramedische begeleiding.\n@de_dutch_dont_dance_division @korzotheater \n#dutchsummerdancecourse #korzo #fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #dansfysiotherapie\n#dancemedicinephysicaltherapy #dancephysio #dancemedicine #dancedpt #dancespecifictraining #dancescience #danceinjuryprevention",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/240571983_2965273477058725_5096833813299597092_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-fZPhS-JDPcQ7kNvwEIs5Jt&_nc_oc=Adm6VTKtf-hGAgOlU9B7B91_3Od6cgxA0ezRcEKRccvUfNNOdQrcZbGLyQ3Pl3il_VU&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Afl0ov59OGzCpu-pzOQybdwj9_FkOdhDA9tY7JrERfbXPg&oe=69484A91",
+        "timestamp": "2021-08-26T07:28:51+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CTB3zogKsOV/"
+      },
+      {
+        "id": "17907949346044113",
+        "caption": "Good evening Europe! #throwback Eurovisie Songfestival 2021. Onze Marco was erbij voor de paramedische begeleiding. Wat een feestje!\n\nOpening Rotterdam Ahoy, 18 May 2021 — EBU / THOMAS HANSES\n@eurovision \n#eurovision2021 #eurovisionsongcontest2021 \n#throwbackeurovision #eurovisionbackstage #fysiodiamondfactory #physiotherapy #fysiotherapie #fysio",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.29350-15/240517530_982678579176488_3002395707919935420_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=4E93TmdPeUwQ7kNvwEJPN29&_nc_oc=Adn6TOHmD5VAgSPuW8v4pHUwdHjqC7qoMbxKQiJ08ixHNEzko4WV0Q-Szb1ZLgndjJA&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_Afn7xpdN5VT3KvpegKjzsf6j4GXLZ4PxdeRNJi0YjUGAZw&oe=69486F80",
+        "timestamp": "2021-08-22T19:49:24+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CS45YJlIk1W/"
+      },
+      {
+        "id": "17889676043267028",
+        "caption": "ONS TEAM!\nSinds 1 april 2021 zijn Regi Severins en Menno de Vries in nauwe samenwerking met het voltallige team een nieuwe fysiopraktijk gestart op de Nieuwe Achtergracht 102 in Amsterdam.\n\nNaast fysiotherapie bieden we nog veel meer diensten aan, kijk op onze website voor meer informatie en een impressie van onze locatie.\nwww.fysiodiamondfactory.nl\n\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.29350-15/236183830_998221444268359_821638480570301390_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=tV4F4Q9B3zUQ7kNvwHB5N5g&_nc_oc=AdmWQGvKQDxgQKotK1CmseXWDqv47UC40SouiVPy9-MohZAsog-0PWRkQat5yXwfmYk&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=DfxpEKuhrAzQmKIe8dh0cg&oh=00_Afnj_TmY2L0l5KoFCIrBFtQH_dB-ui-9e9yxd9sp9u3bnw&oe=69484793",
+        "timestamp": "2021-08-13T07:29:27+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CSgZisDof-D/"
+      },
+      {
+        "id": "18098138494268598",
+        "caption": "Onze therapeuten zijn gespecialiseerd in het screenen van dansers. Dat houdt in dat we het fysiek profiel van een danser in kaart brengen.Tijdens de screenings wordt er door een fysiotherapeut gekeken naar de bouw, de stabiliteit van de banden, de bewegingsuitslag, de stevigheid in de gewrichten en de lengte van de spieren. Daarnaast wordt er ook gekeken naar de voorgeschiedenis; de trainingsachtergrond en eventuele klachten en blessures. Dit is bedoeld om van meet af aan inzicht te geven in de individuele fysieke mogelijkheden en beperkingen van een danser. \nOnze therapeuten Menno en Laszlo screenen jaarlijks de nieuwe dansers van het Nederlands Dans Theater 2 en onze therapeut Iva verzorgt de screenings van de dansstudenten van de Academie voor Theater en Dans. \n@ndtdance  @atdamsterdam @laszlogeleng @iva.dans.fysio \n#throwback 2001 Menno de Vries bij NDT- FNV magazine\nFoto Chris de Bode\n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #NDTdance #atdamsterdam #dansfysiotherapie\n#dancemedicinephysicaltherapy #dancephysio #dancemedicine #dancedpt #dancespecifictraining #dancescience #danceinjuryprevention",
+        "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-15/234370255_574768827267381_1495773833870897841_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=RKaTEMfhdFUQ7kNvwEbz-_U&_nc_oc=AdlZbi_UVfRK3Rmuc2yCulUgFHQR4gFL156SzUyzOiw3XmA2KFJfYc1opZc0Wxp6bBw&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfnqL5o_RpwAe3xcPhEHAwlIHdjfyOeACF2bT9T0rtdiFg&oe=694871AA",
+        "timestamp": "2021-08-11T06:05:02+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CSbGSoqqDSD/"
+      },
+      {
+        "id": "17877044339453654",
+        "caption": "Wisten jullie dat we een hechte relatie hebben met Leila’s Pilates? Haar studio bevindt zich ook in het prachtige pand aan de Nieuwe Achtergracht. Leila is een autoriteit op het fysieke fitness- en trainingssysteem Pilates. Wij zijn trots op de samenwerking met Leila en haar bekwame en bevlogen team van docenten. Meer informatie over de pilates lessen kan je vinden op leilaspilates.nl\n@leilaspilates \n#pilates  #pilatesamsterdam #pilatesnederland #fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/234829694_570994717645955_1905668600324136665_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=dRqy5GOp00QQ7kNvwG_1uNI&_nc_oc=AdmSDa-lKMcXSivwZ9DqNDhUWkQ0zVorBkHbF7lbVCncgY_hv7uDvel7MAF3Owv0KnA&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AflaU-0JzujcJtq_Dx27t-HSOQbrbFojbpuypfveAofWCQ&oe=69486CDF",
+        "timestamp": "2021-08-09T06:52:21+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CSWCHeOKOxv/"
+      },
+      {
+        "id": "17936457388586620",
+        "caption": "Onze therapeuten zijn veelzijdig. Gisteren in Het Parool een artikel over het kunstwerk van onze therapeut Laszlo. Wij zijn trots op hem. @laszlogeleng  Het Parool \n#fysiodiamondfactory #physiotherapy #fysiotherapie #fysio #amsterdam #kunst #kuntswerk #beeldendekunst",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/229368258_361176525381843_436070500855577085_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=ZFU7FiT_VucQ7kNvwG4AeQB&_nc_oc=Adld2sx9CVC-3sVY8hVz_LIqVN6YrBDN77bA88pXaZ28-_OzOUrwtOJuMXI5Iyd1BLw&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfmZaGgeHOxqClbZZFYsk0HlGuO5qfqsGA6uEF4IWEb01w&oe=69486809",
+        "timestamp": "2021-08-02T18:32:00+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CSFQnrgs5lf/"
+      },
+      {
+        "id": "17845549049625128",
+        "caption": "Gastles van onze therapeut Regi. Redcord total body workout. Doe je mee? Op 19 juli om 10:30! @amsterdamdancecentre @reegje.s \n#amsterdam #dance #redcord #amsterdamdancecentre #fysiodiamondfactory #dancestudio #dancetraining #fysio",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/218702483_510741420037027_7046097828754337606_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=gzgLG1_fUMoQ7kNvwHc0_-6&_nc_oc=AdmutUhcyudWAXVA5KS6V3KykdrhtU_2eviUMGdyuR1UFHFOkBw6D3u4Zad11ESHOjs&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_AfkqQOZJpTILRB7-UJVT83xRwLyt_lmFfx8tAZwROPKmDQ&oe=6948623B",
+        "timestamp": "2021-07-16T07:14:26+0000",
+        "media_type": "IMAGE",
+        "permalink": "https://www.instagram.com/p/CRYRkK6KbI2/"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "QVFIU3cyZAXVWVHYtU3BublVqWTlOQVdhUXNQd0JKM3QzSmxudHhJUERNVkxCRlB6Y3FXRTFOZAGdieTMtN0FzQXN0LVVYZAG9jYlppV3RkTDlBa3hNMkhoZAHR3",
+        "after": "QVFIU0M0bEplckdvR3ZADS0stanltbTBsU0JBWlFSWHc0Yk9SM2J6V3VmcGxCV09Va2dVZAmYtelNoNWRXRktaTU1aM1JBUWNhd1lnLVJwRHd4OW84Y0JjeUNB"
+      },
+      "next": "https://graph.instagram.com/v22.0/17841408575122288/media?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=***REMOVED***&limit=25&after=QVFIU0M0bEplckdvR3ZADS0stanltbTBsU0JBWlFSWHc0Yk9SM2J6V3VmcGxCV09Va2dVZAmYtelNoNWRXRktaTU1aM1JBUWNhd1lnLVJwRHd4OW84Y0JjeUNB"
+    }
+  },
+  "meta": null
+}

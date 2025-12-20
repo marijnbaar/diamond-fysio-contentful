@@ -1,0 +1,541 @@
+{
+  "__typename": "Navigatie",
+  "sys": {
+    "__typename": "Sys",
+    "id": "6MHQ24IUXiEG4cIHfS8qXM"
+  },
+  "logo": {
+    "__typename": "Asset",
+    "url": "https://images.ctfassets.net/1evapsw0ox8z/3O8spFsKwNEM8BqNMC08ys/7cbd32dfd3f592b22fbcc936995dc258/Fysio_diamond_grijs_alpha_kopie.png",
+    "description": null
+  },
+  "menuTitel": "Menu",
+  "menuItemsCollection": {
+    "__typename": "NavigatieMenuItemsCollection",
+    "items": [
+      {
+        "__typename": "MenuItem",
+        "sys": {
+          "__typename": "Sys",
+          "id": "1jh4RWWgjhdsIi2vzrv0J7"
+        },
+        "title": "Contact",
+        "externalLink": null,
+        "internalLink": {
+          "__typename": "Aboutpage",
+          "slug": "/contact",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3kxSgMVpw3IFObORkq4wBX"
+          }
+        }
+      }
+    ]
+  },
+  "navigatieSubmenusCollection": {
+    "__typename": "NavigatieNavigatieSubmenusCollection",
+    "items": [
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "3p38MXPBWKO25CORofvHO9"
+        }
+      },
+      {
+        "__typename": "NavigatieSubmenu",
+        "sys": {
+          "__typename": "Sys",
+          "id": "1dObPGCrdM1bXiE3B7seRS"
+        }
+      }
+    ]
+  },
+  "knop": {
+    "__typename": "Button",
+    "title": "Afspraak maken",
+    "internalLink": {
+      "__typename": "Aboutpage",
+      "slug": "/afspraak-maken",
+      "pageType": "appointmentpage",
+      "sys": {
+        "__typename": "Sys",
+        "id": "2D6xAnry91JcKvx006BjyM"
+      }
+    },
+    "externalLink": null,
+    "type": true
+  },
+  "menuItems": [
+    {
+      "__typename": "MenuItem",
+      "sys": {
+        "__typename": "Sys",
+        "id": "1jh4RWWgjhdsIi2vzrv0J7"
+      },
+      "title": "Contact",
+      "externalLink": null,
+      "internalLink": {
+        "__typename": "Aboutpage",
+        "slug": "/contact",
+        "pageType": "contactpage",
+        "sys": {
+          "__typename": "Sys",
+          "id": "3kxSgMVpw3IFObORkq4wBX"
+        }
+      }
+    }
+  ],
+  "navigatieSubmenu": [
+    {
+      "__typename": "NavigatieSubmenu",
+      "sys": {
+        "__typename": "Sys",
+        "id": "3p38MXPBWKO25CORofvHO9"
+      },
+      "title": "Specialisaties",
+      "menuItemsCollection": {
+        "__typename": "NavigatieSubmenuMenuItemsCollection",
+        "items": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "5vpPgQvLOWxBaVe0csSxqy"
+            },
+            "title": "Manuele therapie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/manuele-therapie",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1X0kE90KoqMz6UF5Mgz4D7"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "1T1B0eLKwiBwYkF39F5pC3"
+            },
+            "title": "Dansgerelateerde oefentherapie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/dans-gerelateerde-oefentherapie",
+              "sys": {
+                "__typename": "Sys",
+                "id": "1PjVmOeI0XNwsSGJSfrVDq"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "4jJNSaHNvG7769l2l18h9m"
+            },
+            "title": "Shockwave",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/shockwave",
+              "sys": {
+                "__typename": "Sys",
+                "id": "3TCqYOYbReoCBxQaau98fc"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "2dwbBXYUpwPH9cHCMBk1SJ"
+            },
+            "title": "Dry Needling",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/dry-needling",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6qnXKjR8DIYJdYc3sHdXu5"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "7ozdNUT2v5hMViWNjbpVh7"
+            },
+            "title": "Oefentherapie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/oefentherapie",
+              "sys": {
+                "__typename": "Sys",
+                "id": "52NsbRSOFccUyuN4DUpgcm"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "71FLINlt5M75GCxoKlhR4Q"
+            },
+            "title": "Podologie",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/podologie",
+              "sys": {
+                "__typename": "Sys",
+                "id": "Bm1nGV1vjutY6QbAWjybQ"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6wKjBzuP3tgI2HAwyCaan6"
+            },
+            "title": "Vocal massage",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/vocal-massage",
+              "sys": {
+                "__typename": "Sys",
+                "id": "uYzj5OXA6XM9diNH6DTja"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "7bnkg0TJMQwiii4EqpykG"
+            },
+            "title": "Fysio-pilates",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/specialisatie/pilates",
+              "sys": {
+                "__typename": "Sys",
+                "id": "4jWTwGWINloMk1fRidHINH"
+              }
+            }
+          }
+        ]
+      },
+      "menuItems": [
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "5vpPgQvLOWxBaVe0csSxqy"
+          },
+          "title": "Manuele therapie",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/manuele-therapie",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "1X0kE90KoqMz6UF5Mgz4D7"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "1T1B0eLKwiBwYkF39F5pC3"
+          },
+          "title": "Dansgerelateerde oefentherapie",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/dans-gerelateerde-oefentherapie",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "1PjVmOeI0XNwsSGJSfrVDq"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "4jJNSaHNvG7769l2l18h9m"
+          },
+          "title": "Shockwave",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/shockwave",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3TCqYOYbReoCBxQaau98fc"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "2dwbBXYUpwPH9cHCMBk1SJ"
+          },
+          "title": "Dry Needling",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/dry-needling",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6qnXKjR8DIYJdYc3sHdXu5"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "7ozdNUT2v5hMViWNjbpVh7"
+          },
+          "title": "Oefentherapie",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/oefentherapie",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "52NsbRSOFccUyuN4DUpgcm"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "71FLINlt5M75GCxoKlhR4Q"
+          },
+          "title": "Podologie",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/podologie",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "Bm1nGV1vjutY6QbAWjybQ"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "6wKjBzuP3tgI2HAwyCaan6"
+          },
+          "title": "Vocal massage",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/vocal-massage",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "uYzj5OXA6XM9diNH6DTja"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "7bnkg0TJMQwiii4EqpykG"
+          },
+          "title": "Fysio-pilates",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/specialisatie/pilates",
+            "pageType": "specialisationpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "4jWTwGWINloMk1fRidHINH"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "__typename": "NavigatieSubmenu",
+      "sys": {
+        "__typename": "Sys",
+        "id": "1dObPGCrdM1bXiE3B7seRS"
+      },
+      "title": "Over ons",
+      "menuItemsCollection": {
+        "__typename": "NavigatieSubmenuMenuItemsCollection",
+        "items": [
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "HrUocabwipDOt8NbbijJg"
+            },
+            "title": "Over ons",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/about",
+              "sys": {
+                "__typename": "Sys",
+                "id": "5brKedsSYcB6mhK6jVkyG1"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+            },
+            "title": "Ons team",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/team",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6kFBG2SPCJYm2kuRYigLBS"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "27PLS5Fd4Y3ECYRAElkmBD"
+            },
+            "title": "Tarieven en contracten",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/pricing",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6nP2yWIcn88fhnGR6ULtBn"
+              }
+            }
+          },
+          {
+            "__typename": "MenuItem",
+            "sys": {
+              "__typename": "Sys",
+              "id": "3KQr4bgAm71fuJ39JEc2BQ"
+            },
+            "title": "Huisregels",
+            "externalLink": null,
+            "internalLink": {
+              "__typename": "Aboutpage",
+              "slug": "/houserules",
+              "sys": {
+                "__typename": "Sys",
+                "id": "6QhjlLjW7MespG5H37aFkX"
+              }
+            }
+          }
+        ]
+      },
+      "menuItems": [
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "HrUocabwipDOt8NbbijJg"
+          },
+          "title": "Over ons",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/about",
+            "pageType": "aboutpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "5brKedsSYcB6mhK6jVkyG1"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3C3OgJ7ONjdH3HLAZTiD7Q"
+          },
+          "title": "Ons team",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/team",
+            "pageType": "teampage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6kFBG2SPCJYm2kuRYigLBS"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "27PLS5Fd4Y3ECYRAElkmBD"
+          },
+          "title": "Tarieven en contracten",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/pricing",
+            "pageType": "pricingpage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6nP2yWIcn88fhnGR6ULtBn"
+            }
+          }
+        },
+        {
+          "__typename": "MenuItem",
+          "sys": {
+            "__typename": "Sys",
+            "id": "3KQr4bgAm71fuJ39JEc2BQ"
+          },
+          "title": "Huisregels",
+          "externalLink": null,
+          "internalLink": {
+            "__typename": "Aboutpage",
+            "slug": "/houserules",
+            "pageType": "houserulespage",
+            "sys": {
+              "__typename": "Sys",
+              "id": "6QhjlLjW7MespG5H37aFkX"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

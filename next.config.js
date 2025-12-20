@@ -1,6 +1,12 @@
+// Disable image optimization when SKIP_CONTENTFUL is enabled
+// This allows images to be served directly (potentially from Vercel edge cache)
+const skipContentful = process.env.SKIP_CONTENTFUL === 'true';
+
 module.exports = {
   reactStrictMode: true,
   images: {
+    // When Contentful is blocked, skip optimization so images load directly
+    unoptimized: skipContentful,
     remotePatterns: [
       {
         protocol: 'https',
