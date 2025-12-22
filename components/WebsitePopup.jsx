@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 
-export default function WebsitePopup({ info }) {
+export default function WebsitePopup({ info, email }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -54,6 +54,17 @@ export default function WebsitePopup({ info }) {
 
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
                 {info}
+                {email && (
+                  <>
+                    {' '}
+                    <a
+                      href={`mailto:${email}`}
+                      className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 hover:underline font-medium"
+                    >
+                      {email}
+                    </a>
+                  </>
+                )}
               </p>
 
               <button
