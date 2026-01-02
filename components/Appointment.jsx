@@ -108,6 +108,7 @@ export default function Appointment({
   description,
   descriptionText,
   appointmentCardsCollection,
+  therapistsCollection,
   alert,
   alertDescription
 }) {
@@ -146,38 +147,30 @@ export default function Appointment({
   // Veilig de collection verwerken
   const cards = appointmentCardsCollection?.items || [];
 
-  const defaultLink =
-    'https://api.spotonmedics.nl/login/checkpraktijktoken?praktijktoken=IVUhe6t7x9AjnzKBv9rCTevZew2C7M7Q9FiPnMWg1AgGivMHZtZtJKuNCCC4p%2BKKJA4IwDqKwVJPcnu%2BvxaWY2M3d2N%2BQ6v6YPTBrYNtmII%3D';
+  // Process therapists from Contentful
+  const therapists = therapistsCollection?.items || [];
 
-  // Data structure matching the requested column layout
-  // Column 1: Iva, Laszlo, Menno
-  // Column 2: Regi, Robin, Rutger
-  // Column 3: Benjamin
-  const smartfileColumns = [
-    [
-      { name: 'Iva Lešić', link: defaultLink },
-      { name: 'Laszlo Gèleng', link: defaultLink },
-      { name: 'Menno de Vries', link: defaultLink }
-    ],
-    [
-      { name: 'Regi Severins', link: defaultLink },
-      { name: 'Robin Rosa Pennings', link: defaultLink },
-      { name: 'Rutger Klauwers', link: defaultLink }
-    ],
-    [
-      {
-        name: 'Benjamin Soerel',
-        link: 'https://web.smartfile.nl/booking/practise/c0e5560a-eae4-4856-a8a1-fa4b30593a66/public_therapists/b22865ed-730e-4d50-8510-7554cd8adb21'
-      }
-    ]
-  ];
+  // Filter smartfile therapists
+  const smartfileTherapists = therapists.filter(
+    (t) => t.bookingType === 'smartfile' && t.bookingLink
+  );
 
-  const emailTherapists = [
-    { name: 'Ton Willemsen', email: 'tonwillemsen@me.com' },
-    { name: 'Lidia Bernabei', email: 'info@mymedidiet.com' },
-    { name: 'Niels', email: 'info@osteopathie-tuijl.nl' },
-    { name: 'Leila', email: 'leilaspilates@gmail.com' }
-  ];
+  // Filter email therapists
+  const emailTherapists = therapists
+    .filter((t) => t.bookingType === 'email' && t.bookingLink)
+    .map((t) => ({
+      name: t.name,
+      email: t.bookingLink
+    }));
+
+  // Distribute smartfile therapists into 3 columns
+  const smartfileColumns = [[], [], []];
+  smartfileTherapists.forEach((therapist, index) => {
+    smartfileColumns[index % 3].push({
+      name: therapist.name,
+      link: therapist.bookingLink
+    });
+  });
 
   const therapistHeading = isEn
     ? 'Choose your therapist below to make an appointment:'

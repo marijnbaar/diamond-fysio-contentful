@@ -27,7 +27,10 @@
     "alt:titles:all": "tsx scripts/generate-alt-texts.ts --titles --force",
     "alt:multilang": "tsx scripts/generate-alt-texts.ts --allLocales",
     "alt:multilang:all": "tsx scripts/generate-alt-texts.ts --allLocales --titles --force",
-    "check:specialisation": "tsx scripts/check-specialisation-entry.ts"
+    "check:specialisation": "tsx scripts/check-specialisation-entry.ts",
+    "booking:setup": "node scripts/setup-booking-fields.js",
+    "booking:import": "node scripts/import-therapists-data.js",
+    "booking:setup-all": "node scripts/setup-booking-fields.js && node scripts/import-therapists-data.js"
   },
   "dependencies": {
     "@apollo/client": "3.13.5",
