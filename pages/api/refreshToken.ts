@@ -8,15 +8,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const authorization = req.headers.authorization;
+  const cronSecret = process.env.CRON_SECRET;
   const webhookSecret = process.env.WEBHOOK_SECRET;
 
-  // Authorization check - requires valid Bearer token
-  if (!webhookSecret) {
-    console.error('WEBHOOK_SECRET is not set');
-    return res.status(500).json({ error: 'Server Configuration Error' });
-  }
+  // Authorization check - accepts either CRON_SECRET (for Vercel Cron) or WEBHOOK_SECRET (for external services)
+  const validCronAuth = cronSecret && authorization === `Bearer ${cronSecret}`;
+  const validWebhookAuth = webhookSecret && authorization === `Bearer ${webhookSecret}`;
 
-  if (authorization !== `Bearer ${webhookSecret}`) {
+  if (!validCronAuth && !validWebhookAuth) {
+    console.error('Authorization failed - invalid or missing token');
     return res.status(401).json({
       error: 'Unauthorized',
       receivedAuth: authorization ? '***' : null
