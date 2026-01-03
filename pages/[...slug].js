@@ -3,6 +3,7 @@ import { getPage } from '../lib/query/getData';
 import { getTypeName } from '../lib/query/getData';
 import { normalizeLocale } from '../lib/helpers/normalizeLocale';
 import { loadPosts } from '../lib/api/fetchPosts';
+import queryPageTypeBySlug from '../lib/query/pages/pageTypeBySlug';
 
 const Page = (pageProps) => {
   switch (pageProps.__typename) {
@@ -27,7 +28,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params, preview = false, locale = 'nl' }) => {
   const slug = Array.isArray(params?.slug) ? `/${params.slug.join('/')}` : '/';
-  const modelId = await getTypeName(slug, preview);
+  const modelId = await getTypeName(slug, preview, queryPageTypeBySlug);
   if (!modelId) {
     // For 404, we need to ensure Next.js uses our custom 404 page
     // Return 404 status but don't pass props - Next.js will render 404.js
