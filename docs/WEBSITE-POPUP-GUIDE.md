@@ -25,6 +25,9 @@ The popup settings are part of the **Homepage Header** content model.
 - **Popup Text** (Text):
   - Enter the message you want to display (e.g., _"Fijne feestdagen! De praktijk is gesloten van..."_).
   - Keep it concise for the best look, but it can handle longer text.
+- **Popup Email** (Text, optional):
+  - Add an email address that will be displayed as a clickable mailto link in the popup.
+  - Leave empty if no email link is needed.
 
 ### Publishing
 
@@ -33,8 +36,19 @@ After changing the settings:
 1.  Click the green **Publish** button in the sidebar.
 2.  The changes will be live on the website immediately (or within a few minutes depending on caching).
 
+## How to Disable the Popup
+
+To temporarily or permanently hide the popup:
+
+1. Open the **Homepage Header** entry in Contentful
+2. **Uncheck** the **Show Popup** checkbox
+3. Click **Publish**
+
+The popup will immediately disappear from the website (or within a few minutes depending on caching).
+
 ## Technical Details
 
 - **Component**: `components/WebsitePopup.jsx`
-- **Logic**: The `HomepageHeader.jsx` component checks for the `showPopup` flag. If true, it renders the `WebsitePopup` component with the provided `popupText`.
+- **Logic**: The `HomepageHeader.jsx` component checks for the `showPopup` flag. If true and `popupText` is provided, it renders the `WebsitePopup` component with the provided content and optional email link.
 - **Styling**: The popup uses a fixed position (`bottom-4 right-4`), z-index `50`, and includes an entrance animation.
+- **Note**: As of January 2026, all popup content is managed through Contentful. Previous hardcoded popup configurations have been removed.
