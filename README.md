@@ -17,28 +17,38 @@ Documentation has been moved to the `docs/` folder:
 
 ## Getting Started
 
+### Prerequisites
+
+This project uses [Bun](https://bun.sh) as its package manager. Install Bun first:
+
+```bash
+# macOS/Linux
+curl -fsSL https://bun.sh/install | bash
+
+# or via Homebrew
+brew install oven-sh/bun/bun
+```
+
+### Setup
+
 1.  **Install dependencies**:
 
     ```bash
-    yarn install
-    # or
-    npm install
+    bun install
     ```
 
 2.  **Run development server**:
 
     ```bash
-    yarn dev
-    # or
-    npm run dev
+    bun run dev
     ```
 
 3.  **Build for production**:
     ```bash
-    yarn build
-    # or
-    npm run build
+    bun run build
     ```
+
+> See [.claude/bun.md](./.claude/bun.md) for detailed Bun usage and commands.
 
 ## Project Structure
 

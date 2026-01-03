@@ -2,13 +2,19 @@
   "permissions": {
     "allow": [
       "Bash(cat:*)",
-      "Bash(npm install:*)",
+      "Bash(bun install:*)",
+      "Bash(bun run:*)",
+      "Bash(bun build:*)",
+      "Bash(bun test:*)",
+      "Bash(bun --env-file:*)",
+      "Bash(bunx:*)",
       "Bash(vercel env pull:*)",
       "Bash(vercel project:*)",
       "Bash(vercel whoami:*)",
       "Bash(vercel inspect:*)",
       "Bash(vercel env ls:*)",
-      "Bash(yarn build:*)"
+      "Bash(grep:*)",
+      "Bash(find:*)"
     ]
   }
 }
