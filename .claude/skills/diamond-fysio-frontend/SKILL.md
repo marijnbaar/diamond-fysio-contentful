@@ -224,6 +224,13 @@ const Button = ({ title, link }) => {
 - Validate form submissions
 - Test with Contentful data (staging and production)
 
+## Deployment & Testing URLs
+
+- **Live URL**: https://fysiodiamondfactory.nl
+- **Recent deployments**: Check fysiodiamondfactory.nl for the latest production version
+
+When testing features, always verify on the live site to ensure proper deployment.
+
 ## Resources
 
 - Tailwind config: `/tailwind.config.js`

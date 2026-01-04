@@ -3,6 +3,7 @@ import Button from './Button';
 import createSlug from '../lib/helpers/createSlug';
 import { useRouter } from 'next/router';
 import { ExternalLinkIcon } from '@heroicons/react/solid';
+import WebsitePopup from './WebsitePopup';
 
 // Premium AppointmentCard component
 const AppointmentCard = ({ appointmentCard, index, locale }) => {
@@ -110,7 +111,10 @@ export default function Appointment({
   appointmentCardsCollection,
   therapistsCollection,
   alert,
-  alertDescription
+  alertDescription,
+  showPopup,
+  popupText,
+  popupEmail
 }) {
   const { locale } = useRouter();
   const isEn = (locale || 'nl').toLowerCase() === 'en';
@@ -181,100 +185,103 @@ export default function Appointment({
     : 'Mail onderstaande therapeuten of trainers om een afspraak te maken:';
 
   return (
-    <section className="max-w-7xl mx-auto pt-28 sm:pt-32 lg:pt-40 pb-12 lg:pb-16 px-4 sm:px-6 relative scroll-mt-24">
-      {/* Decoratieve elementen */}
-      <div className="absolute top-20 right-10 w-64 h-64 bg-teal-100 rounded-full opacity-10 blur-3xl"></div>
-      <div className="absolute bottom-20 left-10 w-72 h-72 bg-cyan-100 rounded-full opacity-10 blur-3xl"></div>
+    <>
+      {showPopup && popupText && <WebsitePopup info={popupText} email={popupEmail} />}
+      <section className="max-w-7xl mx-auto pt-28 sm:pt-32 lg:pt-40 pb-12 lg:pb-16 px-4 sm:px-6 relative scroll-mt-24">
+        {/* Decoratieve elementen */}
+        <div className="absolute top-20 right-10 w-64 h-64 bg-teal-100 rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-72 h-72 bg-cyan-100 rounded-full opacity-10 blur-3xl"></div>
 
-      {/* Header Section met premium styling */}
-      <div className="text-center mb-16 animate-on-scroll opacity-0 transition-all duration-1000">
-        {title && (
-          <h2 className="text-4xl font-bold mb-6 relative inline-block text-gray-900 dark:text-gray-100">
-            {title}
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-teal-500 dark:bg-teal-400 rounded-full"></span>
-          </h2>
-        )}
-        {desc && (
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            {desc}
-          </p>
-        )}
-
-        {alert && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl p-6 mt-6 transition-all hover:shadow-lg duration-300 border border-gray-100 dark:border-gray-700">
-            <p className="text-xl text-gray-500 dark:text-gray-400 font-medium">
-              {alertDescription}
+        {/* Header Section met premium styling */}
+        <div className="text-center mb-16 animate-on-scroll opacity-0 transition-all duration-1000">
+          {title && (
+            <h2 className="text-4xl font-bold mb-6 relative inline-block text-gray-900 dark:text-gray-100">
+              {title}
+              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-teal-500 dark:bg-teal-400 rounded-full"></span>
+            </h2>
+          )}
+          {desc && (
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              {desc}
             </p>
+          )}
+
+          {alert && (
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl p-6 mt-6 transition-all hover:shadow-lg duration-300 border border-gray-100 dark:border-gray-700">
+              <p className="text-xl text-gray-500 dark:text-gray-400 font-medium">
+                {alertDescription}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Therapeuten Sectie - Smartfile */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden mb-12">
+          {/* Decoratieve elementen */}
+          <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
+          <div className="absolute -top-24 -right-24 w-48 h-48 bg-teal-50 dark:bg-teal-900/20 opacity-30 rounded-full"></div>
+
+          <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block text-gray-900 dark:text-gray-100">
+            {therapistHeading}
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {smartfileColumns.map((column, colIndex) => (
+              <div key={`col-${colIndex}`} className="flex flex-col gap-4">
+                {column.map((therapist, index) => (
+                  <div
+                    key={`therapist-${colIndex}-${index}`}
+                    className="animate-on-scroll opacity-0 transition-all duration-500"
+                    style={{ transitionDelay: `${(colIndex * 3 + index) * 100}ms` }}
+                  >
+                    <TherapistCard name={therapist.name} link={therapist.link} />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
-        )}
-      </div>
-
-      {/* Therapeuten Sectie - Smartfile */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden mb-12">
-        {/* Decoratieve elementen */}
-        <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
-        <div className="absolute -top-24 -right-24 w-48 h-48 bg-teal-50 dark:bg-teal-900/20 opacity-30 rounded-full"></div>
-
-        <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block text-gray-900 dark:text-gray-100">
-          {therapistHeading}
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {smartfileColumns.map((column, colIndex) => (
-            <div key={`col-${colIndex}`} className="flex flex-col gap-4">
-              {column.map((therapist, index) => (
-                <div
-                  key={`therapist-${colIndex}-${index}`}
-                  className="animate-on-scroll opacity-0 transition-all duration-500"
-                  style={{ transitionDelay: `${(colIndex * 3 + index) * 100}ms` }}
-                >
-                  <TherapistCard name={therapist.name} link={therapist.link} />
-                </div>
-              ))}
-            </div>
-          ))}
         </div>
-      </div>
 
-      {/* Therapeuten Sectie - Email */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden">
-        {/* Decoratieve elementen */}
-        <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
+        {/* Therapeuten Sectie - Email */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-10 shadow-lg dark:shadow-xl border border-gray-100 dark:border-gray-700 animate-on-scroll opacity-0 transition-all duration-700 relative overflow-hidden">
+          {/* Decoratieve elementen */}
+          <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500"></div>
 
-        <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block text-gray-900 dark:text-gray-100">
-          {emailHeading}
-        </h3>
+          <h3 className="text-2xl font-semibold mb-8 text-center relative inline-block text-gray-900 dark:text-gray-100">
+            {emailHeading}
+          </h3>
 
-        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-          {emailTherapists.map((therapist, index) => (
-            <div
-              key={`email-therapist-${index}`}
-              className="animate-on-scroll opacity-0 transition-all duration-500 w-full md:w-auto md:min-w-[200px]"
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <TherapistCard name={therapist.name} link={therapist.email} isEmail={true} />
-            </div>
-          ))}
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            {emailTherapists.map((therapist, index) => (
+              <div
+                key={`email-therapist-${index}`}
+                className="animate-on-scroll opacity-0 transition-all duration-500 w-full md:w-auto md:min-w-[200px]"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <TherapistCard name={therapist.name} link={therapist.email} isEmail={true} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* CSS voor geavanceerde animaties */}
-      <style jsx>{`
-        @keyframes fadeScale {
-          from {
-            opacity: 0;
-            transform: scale(0.95);
+        {/* CSS voor geavanceerde animaties */}
+        <style jsx>{`
+          @keyframes fadeScale {
+            from {
+              opacity: 0;
+              transform: scale(0.95);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
           }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
 
-        .animate-on-scroll.animate-in {
-          animation: fadeScale 0.7s ease-out forwards;
-        }
-      `}</style>
-    </section>
+          .animate-on-scroll.animate-in {
+            animation: fadeScale 0.7s ease-out forwards;
+          }
+        `}</style>
+      </section>
+    </>
   );
 }

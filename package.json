@@ -31,6 +31,8 @@
     "booking:setup": "bun scripts/setup-booking-fields.cjs",
     "booking:import": "bun scripts/import-therapists-data.cjs",
     "booking:setup-all": "bun scripts/setup-booking-fields.cjs && bun scripts/import-therapists-data.cjs",
+    "pdf": "node generate-pdf.js",
+    "pdf:any": "node generate-any-pdf.js",
     "test:cache": "bun --env-file=.env.local tests/cache.test.mjs",
     "test:kv": "bun --env-file=.env.local tests/kv-direct.test.mjs"
   },

@@ -14,7 +14,26 @@
       "Bash(vercel inspect:*)",
       "Bash(vercel env ls:*)",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npx next dev:*)",
+      "Bash(lsof:*)",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_snapshot",
+      "Bash(curl:*)",
+      "Bash(node test-homepage-query.js:*)",
+      "Bash(node:*)",
+      "Bash(xargs ls:*)",
+      "Bash(npm run dev:*)",
+      "Bash(/Users/marijnbaar/.bun/bin/bun:*)",
+      "Bash(~/.bun/bin/bun install:*)",
+      "Bash(~/.bun/bin/bun run dev)",
+      "Bash(pandoc:*)",
+      "Bash(~/.bun/bin/bun add:*)",
+      "Bash(vercel logs:*)",
+      "Bash(python3:*)",
+      "Bash(timeout 10 vercel logs:*)",
+      "Bash(xargs kill:*)"
     ]
   }
 }
