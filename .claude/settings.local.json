@@ -33,7 +33,14 @@
       "Bash(vercel logs:*)",
       "Bash(python3:*)",
       "Bash(timeout 10 vercel logs:*)",
-      "Bash(xargs kill:*)"
+      "Bash(xargs kill:*)",
+      "Bash(~/.bun/bin/bun run build:*)",
+      "mcp__chrome-devtools__list_console_messages",
+      "mcp__chrome-devtools__take_screenshot",
+      "Bash(pkill:*)",
+      "mcp__chrome-devtools__evaluate_script",
+      "Bash(echo:*)",
+      "Bash(~/.bun/bin/bun:*)"
     ]
   }
 }

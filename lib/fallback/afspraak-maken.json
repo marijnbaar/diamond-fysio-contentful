@@ -548,219 +548,229 @@
   "slug": "/afspraak-maken",
   "title": "Afspraak maken",
   "pageType": "appointmentpage",
-  "components": [
-    {
-      "__typename": "AppointmentCardOverview",
-      "sys": {
-        "__typename": "Sys",
-        "id": "7dDfk6jtso0MB7VFclFvEK"
-      },
-      "title": "Maak een afspraak",
-      "description": "Een afspraak maken doe je makkelijk online. Vul je gegevens in, selecteer een fysiotherapeut en we zien je binnenkort in de praktijk!",
-      "longDescription": {
-        "__typename": "AppointmentCardOverviewLongDescription",
-        "json": {
-          "nodeType": "document",
-          "data": {},
-          "content": [
+  "components": {
+    "__typename": "AboutpageComponentsCollection",
+    "items": [
+      {
+        "__typename": "AppointmentCardOverview",
+        "sys": {
+          "__typename": "Sys",
+          "id": "7dDfk6jtso0MB7VFclFvEK"
+        },
+        "title": "Maak een afspraak",
+        "description": "Een afspraak maken doe je makkelijk online. Vul je gegevens in, selecteer een fysiotherapeut en we zien je binnenkort in de praktijk!",
+        "longDescription": {
+          "__typename": "AppointmentCardOverviewLongDescription",
+          "json": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Voor de volgende therapeuten kun je gemakkelijk een online afspraak maken:",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "unordered-list",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Iva Lešić",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Laszlo Gèleng",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Menno de Vries",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Regi Severins",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Rutger Klauwers",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Robin Rosa Pennings",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": " ",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "alert": false,
+        "alertDescription": "Let op: helaas is SpotonMedics, de site waarmee online afspraken bij onze praktijk kunnen worden ingepland, op dit moment niet bereikbaar. Voor het maken van een afspraak kun je contact opnemen met de praktijk.",
+        "appointmentCardsCollection": {
+          "__typename": "AppointmentCardOverviewAppointmentCardsCollection",
+          "items": [
             {
-              "nodeType": "paragraph",
-              "data": {},
-              "content": [
-                {
-                  "nodeType": "text",
-                  "value": "Voor de volgende therapeuten kun je gemakkelijk een online afspraak maken:",
-                  "marks": [],
-                  "data": {}
-                }
-              ]
+              "__typename": "AppointmentCard",
+              "title": "Wil je een eerste afspraak maken of een nieuw behandeltraject aanmaken?",
+              "description": "Kies dan je therapeut uit om een afspraak mee in te plannen, op een tijd die jou uitkomt.",
+              "button": {
+                "__typename": "Button",
+                "title": "Maak een eerste afspraak",
+                "internalLink": null,
+                "externalLink": "https://api.spotonmedics.nl/login/checkpraktijktoken?praktijktoken=IVUhe6t7x9AjnzKBv9rCTevZew2C7M7Q9FiPnMWg1AgGivMHZtZtJKuNCCC4p%2BKKJA4IwDqKwVJPcnu%2BvxaWY2M3d2N%2BQ6v6YPTBrYNtmII%3D",
+                "type": true
+              }
             },
             {
-              "nodeType": "unordered-list",
-              "data": {},
-              "content": [
-                {
-                  "nodeType": "list-item",
-                  "data": {},
-                  "content": [
-                    {
-                      "nodeType": "paragraph",
-                      "data": {},
-                      "content": [
-                        {
-                          "nodeType": "text",
-                          "value": "Iva Lešić",
-                          "marks": [
-                            {
-                              "type": "bold"
-                            }
-                          ],
-                          "data": {}
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "nodeType": "list-item",
-                  "data": {},
-                  "content": [
-                    {
-                      "nodeType": "paragraph",
-                      "data": {},
-                      "content": [
-                        {
-                          "nodeType": "text",
-                          "value": "Laszlo Gèleng",
-                          "marks": [
-                            {
-                              "type": "bold"
-                            }
-                          ],
-                          "data": {}
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "nodeType": "list-item",
-                  "data": {},
-                  "content": [
-                    {
-                      "nodeType": "paragraph",
-                      "data": {},
-                      "content": [
-                        {
-                          "nodeType": "text",
-                          "value": "Menno de Vries",
-                          "marks": [
-                            {
-                              "type": "bold"
-                            }
-                          ],
-                          "data": {}
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "nodeType": "list-item",
-                  "data": {},
-                  "content": [
-                    {
-                      "nodeType": "paragraph",
-                      "data": {},
-                      "content": [
-                        {
-                          "nodeType": "text",
-                          "value": "Regi Severins",
-                          "marks": [
-                            {
-                              "type": "bold"
-                            }
-                          ],
-                          "data": {}
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "nodeType": "list-item",
-                  "data": {},
-                  "content": [
-                    {
-                      "nodeType": "paragraph",
-                      "data": {},
-                      "content": [
-                        {
-                          "nodeType": "text",
-                          "value": "Rutger Klauwers",
-                          "marks": [
-                            {
-                              "type": "bold"
-                            }
-                          ],
-                          "data": {}
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "nodeType": "list-item",
-                  "data": {},
-                  "content": [
-                    {
-                      "nodeType": "paragraph",
-                      "data": {},
-                      "content": [
-                        {
-                          "nodeType": "text",
-                          "value": "Robin Rosa Pennings",
-                          "marks": [
-                            {
-                              "type": "bold"
-                            }
-                          ],
-                          "data": {}
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "nodeType": "paragraph",
-              "data": {},
-              "content": [
-                {
-                  "nodeType": "text",
-                  "value": " ",
-                  "marks": [],
-                  "data": {}
-                }
-              ]
+              "__typename": "AppointmentCard",
+              "title": "Wil je een vervolgafspraak maken?",
+              "description": "Heb je op dit moment een lopend behandeltraject (laatste behandeling korter dan 3 maanden geleden)?  Log dan in in de portal en plan een vervolgafspraak.",
+              "button": {
+                "__typename": "Button",
+                "title": "Maak een vervolgafspraak",
+                "internalLink": null,
+                "externalLink": "http://fysiodiamondfactory.mijnzorgepd.nl",
+                "type": true
+              }
             }
           ]
+        },
+        "showPopup": true,
+        "popupText": "Door de overgang naar een nieuw boekingssysteem zijn nog niet alle therapeuten online te boeken. Voor afspraken kunt u mailen naar",
+        "popupEmail": "info@diamondfysio.nl",
+        "therapistsCollection": {
+          "__typename": "AppointmentCardOverviewTherapistsCollection",
+          "items": []
         }
-      },
-      "alert": false,
-      "alertDescription": "Let op: helaas is SpotonMedics, de site waarmee online afspraken bij onze praktijk kunnen worden ingepland, op dit moment niet bereikbaar. Voor het maken van een afspraak kun je contact opnemen met de praktijk.",
-      "appointmentCardsCollection": {
-        "__typename": "AppointmentCardOverviewAppointmentCardsCollection",
-        "items": [
-          {
-            "__typename": "AppointmentCard",
-            "title": "Wil je een eerste afspraak maken of een nieuw behandeltraject aanmaken?",
-            "description": "Kies dan je therapeut uit om een afspraak mee in te plannen, op een tijd die jou uitkomt.",
-            "button": {
-              "__typename": "Button",
-              "title": "Maak een eerste afspraak",
-              "internalLink": null,
-              "externalLink": "https://api.spotonmedics.nl/login/checkpraktijktoken?praktijktoken=IVUhe6t7x9AjnzKBv9rCTevZew2C7M7Q9FiPnMWg1AgGivMHZtZtJKuNCCC4p%2BKKJA4IwDqKwVJPcnu%2BvxaWY2M3d2N%2BQ6v6YPTBrYNtmII%3D",
-              "type": true
-            }
-          },
-          {
-            "__typename": "AppointmentCard",
-            "title": "Wil je een vervolgafspraak maken?",
-            "description": "Heb je op dit moment een lopend behandeltraject (laatste behandeling korter dan 3 maanden geleden)?  Log dan in in de portal en plan een vervolgafspraak.",
-            "button": {
-              "__typename": "Button",
-              "title": "Maak een vervolgafspraak",
-              "internalLink": null,
-              "externalLink": "http://fysiodiamondfactory.mijnzorgepd.nl",
-              "type": true
-            }
-          }
-        ]
       }
-    }
-  ],
+    ]
+  },
   "footer": {
     "__typename": "Footer",
     "sys": {
