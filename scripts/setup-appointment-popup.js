@@ -142,18 +142,19 @@ async function setupAppointmentPopup() {
 
     // Update the popup fields
     appointmentEntry.fields.showPopup = {
-      nl: true,
+      'nl-NL': true,
       'en-US': true
     };
 
     appointmentEntry.fields.popupText = {
-      nl: 'Door de overgang naar een nieuw boekingssysteem zijn nog niet alle therapeuten online te boeken. Voor afspraken kunt u mailen naar',
+      'nl-NL':
+        'Door de overgang naar een nieuw boekingssysteem zijn nog niet alle therapeuten online te boeken. Voor afspraken kunt u mailen naar',
       'en-US':
         'Due to the transition to a new booking system, not all therapists can be booked online yet. For appointments, please email'
     };
 
     appointmentEntry.fields.popupEmail = {
-      nl: 'info@diamondfysio.nl',
+      'nl-NL': 'info@diamondfysio.nl',
       'en-US': 'info@diamondfysio.nl'
     };
 
