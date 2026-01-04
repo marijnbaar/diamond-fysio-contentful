@@ -1,9 +1,30 @@
 import { useState, useEffect } from 'react';
 import { XIcon } from '@heroicons/react/outline';
+import { useRouter } from 'next/router';
 
 export default function WebsitePopup({ info, email }) {
+  const router = useRouter();
+  const locale = router?.locale || 'nl';
+  const isEn = locale === 'en';
+
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+
+  // Translations
+  const translations = {
+    nl: {
+      title: 'Mededeling',
+      close: 'Sluiten',
+      ariaClose: 'Sluiten'
+    },
+    en: {
+      title: 'Announcement',
+      close: 'Close',
+      ariaClose: 'Close'
+    }
+  };
+
+  const t = translations[isEn ? 'en' : 'nl'];
 
   useEffect(() => {
     // Korte vertraging zodat de animatie smooth binnenkomt na laden
@@ -37,7 +58,7 @@ export default function WebsitePopup({ info, email }) {
           <button
             onClick={handleClose}
             className="absolute top-2 right-2 p-1.5 rounded-full text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none"
-            aria-label="Sluiten"
+            aria-label={t.ariaClose}
           >
             <XIcon className="h-4 w-4" />
           </button>
@@ -45,12 +66,12 @@ export default function WebsitePopup({ info, email }) {
           <div className="flex gap-4">
             <div className="flex-shrink-0">
               <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900/50 rounded-full flex items-center justify-center animate-bounce-slow">
-                <span className="text-lg">🎄</span>
+                <span className="text-lg">ℹ️</span>
               </div>
             </div>
 
             <div className="flex-1 pt-1">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Mededeling</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t.title}</h3>
 
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
                 {info}
@@ -71,7 +92,7 @@ export default function WebsitePopup({ info, email }) {
                 onClick={handleClose}
                 className="text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 hover:underline transition-colors"
               >
-                Sluiten
+                {t.close}
               </button>
             </div>
           </div>
