@@ -2,7 +2,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { useEffect } from 'react';
 
-export default function Text({ title, subtitle, description }) {
+export default function Text({ title, subtitle, description, id }) {
   // Debug what's coming in from Contentful
   useEffect(() => {
     if (description && !description.json) {
@@ -10,7 +10,27 @@ export default function Text({ title, subtitle, description }) {
     }
   }, [description]);
 
-  // Rich text renderer options
+  // Check if this is a highlight-style text (no title, just description)
+  const isHighlightStyle = !title && !subtitle && description;
+
+  // Rich text renderer options - different styling for highlight vs regular text
+  const highlightOptions = {
+    renderMark: {
+      [MARKS.BOLD]: (text) => (
+        <strong className="font-bold text-gray-900 dark:text-gray-100">{text}</strong>
+      ),
+      [MARKS.ITALIC]: (text) => <em className="italic text-gray-600 dark:text-gray-300">{text}</em>,
+      [MARKS.UNDERLINE]: (text) => <span className="underline decoration-teal-400">{text}</span>
+    },
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className="text-lg md:text-xl font-medium leading-loose tracking-wide text-gray-600 dark:text-gray-300">
+          {children}
+        </p>
+      )
+    }
+  };
+
   const options = {
     renderMark: {
       [MARKS.BOLD]: (text) => <strong className="font-bold text-gray-900">{text}</strong>,
@@ -106,8 +126,10 @@ export default function Text({ title, subtitle, description }) {
           <p className="text-center text-gray-700">{description}</p>
         ) : null;
       }
+      // Use highlight options for highlight style, regular options otherwise
+      const renderOptions = isHighlightStyle ? highlightOptions : options;
       return documentToReactComponents(description.json, {
-        ...options,
+        ...renderOptions,
         renderText: (text) =>
           text
             .split('\n')
@@ -122,6 +144,47 @@ export default function Text({ title, subtitle, description }) {
     }
   };
 
+  // If this is a highlight-style text (no title/subtitle), use Highlight component styling
+  if (isHighlightStyle) {
+    return (
+      <div className="bg-gray-50 dark:bg-gray-900 py-12 lg:py-16">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 lg:-mt-44 mb-0">
+          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-teal-500/10 ring-1 ring-black/5 relative theme-card flex transition-transform hover:-translate-y-1 duration-700 ease-out">
+            {/* Left accent bar with soft gradient */}
+            <div className="w-1.5 bg-gradient-to-b from-teal-400 via-cyan-400 to-teal-400 opacity-80" />
+
+            <div className="flex-1 py-10 px-8 lg:px-16 relative">
+              {/* Soft background decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none" />
+
+              <div className="relative">
+                <blockquote className="text-gray-600 dark:text-gray-300">
+                  <div className="animate-fade-in-up">{renderRichText()}</div>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+        <style jsx>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(15px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .animate-fade-in-up {
+            animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // Default Text component styling
   return (
     <div className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
