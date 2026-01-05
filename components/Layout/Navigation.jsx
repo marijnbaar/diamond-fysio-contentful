@@ -4,14 +4,7 @@ import createSlug from '../../lib/helpers/createSlug';
 import { forwardRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  MenuIcon,
-  PhoneIcon,
-  XIcon,
-  UserCircleIcon,
-  SunIcon,
-  MoonIcon
-} from '@heroicons/react/outline';
+import { MenuIcon, PhoneIcon, XIcon, SunIcon, MoonIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 
@@ -80,7 +73,6 @@ export default function Navigation({ navigation }) {
   const t = {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
-    login: 'Login',
     darkMode: currentLocale === 'en' ? 'Dark mode' : 'Donkere modus',
     lightMode: currentLocale === 'en' ? 'Light mode' : 'Lichte modus'
   };
@@ -387,20 +379,6 @@ export default function Navigation({ navigation }) {
               </div>
             )}
 
-            {/* Login Button */}
-            <div className="flow-root flex-shrink-0">
-              <MyLink
-                href="https://login.spotonmedics.nl/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="flex items-center justify-center space-x-2 h-9 text-sm font-medium text-white bg-gray-800/90 dark:bg-gray-700/90 backdrop-blur-sm hover:bg-gray-700 dark:hover:bg-gray-600 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg whitespace-nowrap hover:scale-105 active:scale-95">
-                  <UserCircleIcon className="h-4 w-4" aria-hidden="true" />
-                  <span>{t.login}</span>
-                </div>
-              </MyLink>
-            </div>
-
             {/* Language & Theme group - on the right */}
             <div className="flex items-center space-x-2 pl-3 border-l border-gray-200/60 dark:border-gray-600/60 flex-shrink-0">
               {/* Locale toggle */}
@@ -600,20 +578,6 @@ export default function Navigation({ navigation }) {
                     </div>
                   </div>
                 )}
-
-                {/* Login Button for Mobile Menu */}
-                <div className="flow-root">
-                  <MyLink
-                    href="https://login.spotonmedics.nl/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <div className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
-                      <UserCircleIcon className="h-5 w-5 mr-2" aria-hidden="true" />
-                      <span>{t.login}</span>
-                    </div>
-                  </MyLink>
-                </div>
               </div>
             </div>
           </div>
