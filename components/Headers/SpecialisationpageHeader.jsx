@@ -48,7 +48,7 @@ export default function SpecialisationHeader({ title, descriptionRichText, image
                 <Image
                   className="object-cover"
                   fill
-                  src={optimizeContentfulImage(image.url, 1600)}
+                  src={image.url}
                   alt={
                     image.description ||
                     (title
@@ -57,6 +57,7 @@ export default function SpecialisationHeader({ title, descriptionRichText, image
                   }
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
+                  quality={80}
                 />
               )}
               <div

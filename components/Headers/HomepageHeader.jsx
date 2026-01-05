@@ -28,13 +28,14 @@ const HomepageHeader = ({
             <Image
               className="w-full h-full object-cover"
               fill
-              src={optimizeContentfulImage(image.url, 1600)}
+              src={image.url}
               alt={
                 image.description ||
                 'Fysiotherapeut helpt patiënt in moderne Diamond Fysio praktijk in Amsterdam'
               }
               sizes="100vw"
               priority
+              quality={80}
             />
           )}
           <div

@@ -9,8 +9,10 @@ const GenericpageHeader = ({ image }) => {
           <Image
             className="w-full h-full object-cover"
             fill
-            src={optimizeContentfulImage(image.url, 1600)}
+            src={image.url}
             alt={image.description || 'Pagina header afbeelding - Diamond Fysio Amsterdam'}
+            sizes="100vw"
+            quality={80}
           />
         )}
       </div>

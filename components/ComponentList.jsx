@@ -1,5 +1,4 @@
 import HeaderList from './Headers/Headerlist';
-import Highlight from './Highlight';
 import Info from './Info';
 import CTA from './CTA';
 import Specialisation from './Specialisation';
@@ -31,9 +30,6 @@ const ComponentList = (props) => {
         case 'TestimonialHomeOverview':
         case 'SpecialisationHomeOverview': {
           return <OverviewList key={component.sys.id} id={component.sys.id} overview={component} />;
-        }
-        case 'Highlight': {
-          return <Highlight key={component.sys.id} id={component.sys.id} {...component} />;
         }
         case 'Info': {
           return (
