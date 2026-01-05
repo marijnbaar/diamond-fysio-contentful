@@ -161,7 +161,7 @@ export default function Appointment({
 
   // Filter email therapists
   const emailTherapists = therapists
-    .filter((t) => t.bookingType === 'email' && t.bookingLink)
+    .filter((t) => t.bookingType === 'Email' && t.bookingLink)
     .map((t) => ({
       name: t.name,
       email: t.bookingLink
