@@ -156,7 +156,7 @@ export default function Appointment({
 
   // Filter smartfile therapists
   const smartfileTherapists = therapists.filter(
-    (t) => t.bookingType === 'smartfile' && t.bookingLink
+    (t) => t.bookingType === 'Smartfile' && t.bookingLink
   );
 
   // Filter email therapists
