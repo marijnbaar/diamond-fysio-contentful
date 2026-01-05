@@ -7,13 +7,18 @@ import WebsitePopup from '../WebsitePopup';
 
 const HomepageHeader = ({
   title,
+  headerTitle,
   info,
+  headerInfo,
   buttonCollection,
   image,
   showPopup,
   popupText,
   popupEmail
 }) => {
+  // Use headerTitle/headerInfo if available, otherwise fall back to title/info
+  const displayTitle = headerTitle || title;
+  const displayInfo = headerInfo || info;
   return (
     <>
       {showPopup && popupText && <WebsitePopup info={popupText} email={popupEmail} />}
@@ -41,14 +46,14 @@ const HomepageHeader = ({
           <div className="items-center flex flex-wrap">
             <div className="p-10 w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
               <div className="sm:text-center lg:text-left">
-                {title?.json ? (
+                {displayTitle?.json ? (
                   <h1 className="prose text-4xl tracking-tight font-manrope font-extrabold text-white sm:text-5xl md:text-6xl">
-                    {documentToReactComponents(title.json)}
+                    {documentToReactComponents(displayTitle.json)}
                   </h1>
                 ) : null}
-                {info?.json ? (
+                {displayInfo?.json ? (
                   <div className="prose mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    {documentToReactComponents(info.json)}
+                    {documentToReactComponents(displayInfo.json)}
                   </div>
                 ) : null}
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-3">

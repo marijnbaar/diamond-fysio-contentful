@@ -40,7 +40,8 @@
       "Bash(pkill:*)",
       "mcp__chrome-devtools__evaluate_script",
       "Bash(echo:*)",
-      "Bash(~/.bun/bin/bun:*)"
+      "Bash(~/.bun/bin/bun:*)",
+      "mcp__chrome-devtools__wait_for"
     ]
   }
 }
