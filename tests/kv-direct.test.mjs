@@ -5,8 +5,8 @@
 import { createClient } from '@vercel/kv';
 
 console.log('Environment check:');
-console.log('URL:', process.env.STORAGE_KV_REST_API_URL);
-console.log('Token:', process.env.STORAGE_KV_REST_API_TOKEN?.substring(0, 15) + '...\n');
+console.log('KV URL configured:', Boolean(process.env.STORAGE_KV_REST_API_URL));
+console.log('KV token configured:', Boolean(process.env.STORAGE_KV_REST_API_TOKEN), '\n');
 
 const kv = createClient({
   url: process.env.STORAGE_KV_REST_API_URL,
