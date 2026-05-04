@@ -59,7 +59,7 @@
     "graphql-request": "^7.0.1",
     "graphql-tag": "^2.12.6",
     "html-react-parser": "^5.2.2",
-    "next": "16.2.2",
+    "next": "16.2.3",
     "next-connect": "^1.0.0",
     "next-sitemap": "^4.2.3",
     "react": "^19.0.0",
